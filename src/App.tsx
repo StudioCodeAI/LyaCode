@@ -2,9 +2,15 @@ import { Terminal } from './components/terminal/Terminal';
 import { CommandPalette, PaletteMode } from './components/terminal/CommandPalette';
 import { AIChatOverlay } from './components/terminal/AIChatOverlay';
 import { FirstRunPanel } from './components/lyacodex/FirstRunPanel';
-import { TerminalSquare, Settings, Box, Play, Cpu } from 'lucide-react';
+import { TerminalSquare, Settings, Box, Play, Cpu, Palette } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useConfigStore } from './store/configStore';
+import {
+  applyTheme,
+  initializeTheme,
+  LYA_THEMES,
+  LyaThemeId,
+} from './core/theme/themeManager';
 import './index.css';
 
 function App() {
@@ -13,16 +19,23 @@ function App() {
   const [paletteMode, setPaletteMode] = useState<PaletteMode>('commands');
   const [isLogsOpen, setIsLogsOpen] = useState(false);
   const [activeSidebar, setActiveSidebar] = useState<string>('terminal');
+  const [theme, setTheme] = useState<LyaThemeId>('lya-deep-dark');
   const activeProvider = useConfigStore((state) => state.activeProvider);
   const loadFromVault = useConfigStore((state) => state.loadFromVault);
 
   const slogans = [
-    "Se você pensa, você executa.",
-    "Se você executa, você indexa.",
-    "Se você indexa, você evolui."
+    'Se você pensa, você executa.',
+    'Se você executa, você indexa.',
+    'Se você indexa, você evolui.',
   ];
+
   const [sloganIndex, setSloganIndex] = useState(0);
   const [fadeState, setFadeState] = useState<'in' | 'out'>('in');
+
+  useEffect(() => {
+    const currentTheme = initializeTheme();
+    setTheme(currentTheme);
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -32,6 +45,7 @@ function App() {
         setFadeState('in');
       }, 500);
     }, 8000);
+
     return () => clearInterval(interval);
   }, []);
 
@@ -49,7 +63,7 @@ function App() {
 
       if (e.ctrlKey && e.key.toLowerCase() === 'l') {
         e.preventDefault();
-        setIsLogsOpen(prev => !prev);
+        setIsLogsOpen((prev) => !prev);
       }
 
       if (e.ctrlKey && e.key.toLowerCase() === 'o') {
@@ -69,27 +83,44 @@ function App() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
+  const changeTheme = (themeId: LyaThemeId) => {
+    applyTheme(themeId);
+    setTheme(themeId);
+  };
+
   return (
     <div className="app-container">
       <div className="sidebar" data-tauri-drag-region>
         <div
           className={`sidebar-icon ${activeSidebar === 'terminal' ? 'active' : ''}`}
           title="Terminal"
-          onClick={() => { setActiveSidebar('terminal'); setIsLogsOpen(false); setIsPaletteOpen(false); }}
+          onClick={() => {
+            setActiveSidebar('terminal');
+            setIsLogsOpen(false);
+            setIsPaletteOpen(false);
+          }}
         >
           <TerminalSquare size={22} strokeWidth={1.5} />
         </div>
+
         <div
           className={`sidebar-icon ${activeSidebar === 'skills' ? 'active' : ''}`}
           title="Extensions / MCP Store"
-          onClick={() => { setActiveSidebar('skills'); setPaletteMode('skills'); setIsPaletteOpen(true); }}
+          onClick={() => {
+            setActiveSidebar('skills');
+            setPaletteMode('skills');
+            setIsPaletteOpen(true);
+          }}
         >
           <Box size={22} strokeWidth={1.5} />
         </div>
+
         <div
           className={`sidebar-icon ${isLogsOpen ? 'active' : ''}`}
           title="Run / Debug (Logs)"
-          onClick={() => { setIsLogsOpen(!isLogsOpen); }}
+          onClick={() => {
+            setIsLogsOpen(!isLogsOpen);
+          }}
         >
           <Play size={22} strokeWidth={1.5} />
         </div>
@@ -99,14 +130,29 @@ function App() {
         <div
           className={`sidebar-icon ${activeSidebar === 'engines' ? 'active' : ''}`}
           title="AI Engines"
-          onClick={() => { setActiveSidebar('engines'); }}
+          onClick={() => {
+            setActiveSidebar('engines');
+          }}
         >
           <Cpu size={22} strokeWidth={1.5} />
         </div>
+
+        <div
+          className={`sidebar-icon ${activeSidebar === 'themes' ? 'active' : ''}`}
+          title="Themes"
+          onClick={() => {
+            setActiveSidebar('themes');
+          }}
+        >
+          <Palette size={22} strokeWidth={1.5} />
+        </div>
+
         <div
           className="sidebar-icon"
           title="Settings"
-          onClick={() => { alert('Settings overlay coming soon!'); }}
+          onClick={() => {
+            alert('Settings overlay coming soon!');
+          }}
         >
           <Settings size={22} strokeWidth={1.5} />
         </div>
@@ -120,6 +166,7 @@ function App() {
               "{slogans[sloganIndex]}"
             </span>
           </div>
+
           <div className="ai-badge" style={{ textTransform: 'capitalize' }}>
             <div className="pulse-dot"></div>
             {activeProvider} Ready
@@ -129,6 +176,45 @@ function App() {
         <div className="terminal-wrapper" style={{ display: 'flex', flexDirection: 'column' }}>
           {activeSidebar === 'engines' ? (
             <FirstRunPanel />
+          ) : activeSidebar === 'themes' ? (
+            <div className="first-run-panel">
+              <div className="first-run-header">
+                <div className="first-run-whisper">
+                  A aparência também faz parte da experiência.
+                </div>
+
+                <h1>Escolha como a LyaCodex II respira visualmente.</h1>
+
+                <div className="first-run-philosophy">
+                  O que agrada os olhos, agrada o coração.
+                </div>
+              </div>
+
+              <div className="first-run-options">
+                {LYA_THEMES.map((item) => (
+                  <div
+                    key={item.id}
+                    className={`first-run-option ${theme === item.id ? 'recommended' : ''}`}
+                    onClick={() => changeTheme(item.id)}
+                  >
+                    <div className="first-run-option-title">
+                      <Palette size={18} />
+                      <span>{item.name}</span>
+                    </div>
+
+                    <div className="first-run-option-subtitle">
+                      {item.description}
+                    </div>
+
+                    <div className="first-run-option-flags">
+                      <span className="flag">
+                        {theme === item.id ? 'active' : 'available'}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           ) : (
             <>
               {isLogsOpen && (
