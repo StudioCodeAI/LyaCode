@@ -1,20 +1,28 @@
 import React, { useState, useRef, useEffect } from 'react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import rehypeHighlight from 'rehype-highlight';
+import 'highlight.js/styles/github-dark.css';
 import './aichat.css';
 import { useConfigStore } from '../../store/configStore';
-import { fetchLLMResponse } from '../../core/llm/api';
+import { fetchLLMResponse, ChatMessage } from '../../core/llm/api';
 import { LYA_CORE_PROMPT } from '../../core/prompt';
-import { Cpu, Send, X, Copy, CheckCircle, ChevronUp } from 'lucide-react';
+import { Cpu, Send, X, Copy, CheckCircle, ChevronUp, Trash2 } from 'lucide-react';
 
 interface Message {
   role: 'user' | 'ai';
   content: string;
 }
 
-export function AIChatOverlay({ isOpen, onClose, onOpenPalette }: { isOpen: boolean; onClose: () => void; onOpenPalette?: (mode?: 'commands' | 'models' | 'skills' | 'agents' | 'providers') => void }) {
+export function AIChatOverlay({ isOpen, onClose, onOpenPalette }: {
+  isOpen: boolean;
+  onClose: () => void;
+  onOpenPalette?: (mode?: 'commands' | 'models' | 'skills' | 'agents' | 'providers') => void;
+}) {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
-  const [copied, setCopied] = useState(false);
+  const [copiedIdx, setCopiedIdx] = useState<number | null>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const config = useConfigStore();
@@ -32,19 +40,31 @@ export function AIChatOverlay({ isOpen, onClose, onOpenPalette }: { isOpen: bool
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
+  // Converter messages UI para o formato da API (histórico real)
+  const buildHistory = (msgs: Message[]): ChatMessage[] => {
+    return msgs.map(m => ({
+      role: m.role === 'ai' ? 'assistant' : 'user',
+      content: m.content,
+    }));
+  };
+
   const handleSubmit = async () => {
     if (!input.trim() || loading) return;
 
     const userQuery = input.trim();
     setInput('');
-    setMessages(prev => [...prev, { role: 'user', content: userQuery }]);
+
+    const newMessages: Message[] = [...messages, { role: 'user', content: userQuery }];
+    setMessages(newMessages);
     setLoading(true);
 
     try {
-      const response = await fetchLLMResponse(userQuery, activeProv, LYA_CORE_PROMPT);
+      // Passa o histórico completo (excluindo a mensagem atual que já está em prompt)
+      const history = buildHistory(messages);
+      const response = await fetchLLMResponse(userQuery, activeProv, LYA_CORE_PROMPT, history);
       setMessages(prev => [...prev, { role: 'ai', content: response }]);
     } catch (err: any) {
-      setMessages(prev => [...prev, { role: 'ai', content: `[Erro]: ${err.message}` }]);
+      setMessages(prev => [...prev, { role: 'ai', content: `**[Erro]:** ${err.message}` }]);
     } finally {
       setLoading(false);
     }
@@ -55,9 +75,7 @@ export function AIChatOverlay({ isOpen, onClose, onOpenPalette }: { isOpen: bool
       e.preventDefault();
       handleSubmit();
     }
-    if (e.key === 'Escape') {
-      onClose();
-    }
+    if (e.key === 'Escape') onClose();
     if (e.ctrlKey && e.key.toLowerCase() === 'p') {
       e.preventDefault();
       if (onOpenPalette) onOpenPalette('commands');
@@ -80,22 +98,30 @@ export function AIChatOverlay({ isOpen, onClose, onOpenPalette }: { isOpen: bool
     e.target.style.height = Math.min(e.target.scrollHeight, 150) + 'px';
   };
 
-  const copyToClipboard = (text: string) => {
+  const copyToClipboard = (text: string, idx: number) => {
     navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    setCopiedIdx(idx);
+    setTimeout(() => setCopiedIdx(null), 2000);
   };
+
+  const clearHistory = () => setMessages([]);
 
   if (!isOpen) return null;
 
   return (
     <div className="aichat-overlay" onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}>
       <div className="aichat-container">
-        
+
         <div className="aichat-header">
-          <div className="aichat-brand">
+          <div className="aichat-brand"></div>
+          <div style={{ display: 'flex', gap: '8px' }}>
+            {messages.length > 0 && (
+              <button className="aichat-close" onClick={clearHistory} title="Clear conversation">
+                <Trash2 size={15} />
+              </button>
+            )}
+            <button className="aichat-close" onClick={onClose}><X size={16} /></button>
           </div>
-          <button className="aichat-close" onClick={onClose}><X size={16} /></button>
         </div>
 
         <div className="aichat-messages">
@@ -115,11 +141,25 @@ export function AIChatOverlay({ isOpen, onClose, onOpenPalette }: { isOpen: bool
             messages.map((msg, idx) => (
               <div key={idx} className={`message-row ${msg.role}`}>
                 <div className="message-bubble">
-                  <div className="message-content">{msg.content}</div>
+                  <div className="message-content markdown-body">
+                    <ReactMarkdown
+                      remarkPlugins={[remarkGfm]}
+                      rehypePlugins={[rehypeHighlight]}
+                    >
+                      {msg.content}
+                    </ReactMarkdown>
+                  </div>
                   {msg.role === 'ai' && (
                     <div className="message-actions-bottom">
-                      <button onClick={() => copyToClipboard(msg.content)} title="Copy text" className="copy-btn">
-                        {copied ? <><CheckCircle size={14} /> Copied</> : <><Copy size={14} /> Copy</>}
+                      <button
+                        onClick={() => copyToClipboard(msg.content, idx)}
+                        title="Copy text"
+                        className="copy-btn"
+                      >
+                        {copiedIdx === idx
+                          ? <><CheckCircle size={14} /> Copied</>
+                          : <><Copy size={14} /> Copy</>
+                        }
                       </button>
                     </div>
                   )}
@@ -151,22 +191,22 @@ export function AIChatOverlay({ isOpen, onClose, onOpenPalette }: { isOpen: bool
             <Send size={16} />
           </button>
         </div>
-        
+
         <div className="aichat-footer">
           <Cpu size={12} />
-          <span 
-            className="engine-switcher" 
+          <span
+            className="engine-switcher"
             onClick={() => onOpenPalette && onOpenPalette('models')}
             title="Click to change model"
           >
-            Active Engine: <strong>{modelName}</strong> ({config.activeProvider}) <ChevronUp size={12} style={{marginLeft: '4px'}}/>
+            Active Engine: <strong>{modelName}</strong> ({config.activeProvider}) <ChevronUp size={12} style={{ marginLeft: '4px' }} />
           </span>
-          <span style={{flex: 1}}></span>
+          <span style={{ flex: 1 }}></span>
           <div className="footer-hints">
             <span><strong>tab</strong> agents</span>
             <span><strong>ctrl+p</strong> commands</span>
           </div>
-          <span style={{marginLeft: '16px'}}><kbd>↵</kbd> send, <kbd>esc</kbd> close</span>
+          <span style={{ marginLeft: '16px' }}><kbd>↵</kbd> send, <kbd>esc</kbd> close</span>
         </div>
       </div>
     </div>

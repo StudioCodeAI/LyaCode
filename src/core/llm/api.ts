@@ -1,13 +1,21 @@
-export async function fetchLLMResponse(prompt: string, providerInfo: any, systemPrompt: string): Promise<string> {
-  // Se for WebLLM Embedded e não tivermos o motor carregado, voltamos uma msg amigável.
+export interface ChatMessage {
+  role: 'user' | 'assistant';
+  content: string;
+}
+
+export async function fetchLLMResponse(
+  prompt: string,
+  providerInfo: any,
+  systemPrompt: string,
+  history: ChatMessage[] = []
+): Promise<string> {
+  // WebLLM Embedded — offline nesta versão
   if (providerInfo.apiKey === 'embedded') {
     return "[WebLLM] O modelo experimental WebGPU está offline nesta versão. Mude para o OpenRouter (Free) via /connect para testar a nuvem.";
   }
 
-  // OpenRouter Fallback
+  // Sem chave configurada
   if (providerInfo.apiKey === '' || !providerInfo.apiKey) {
-    // Usar a rota livre do OpenRouter sem apiKey pode falhar dependendo do CORS, 
-    // mas o OpenRouter requer pelo menos um referer. Vamos simular se não houver chave para MVP.
     return "Você ativou a LYA, mas a sua chave de API do OpenRouter não foi configurada! Digite /connect para configurar.";
   }
 
@@ -17,16 +25,16 @@ export async function fetchLLMResponse(prompt: string, providerInfo: any, system
     let headers: Record<string, string> = {
       "Content-Type": "application/json"
     };
-    
-    // Determine the endpoint and headers based on the provider
+
+    // Determinar endpoint e headers baseado no provider
     if (providerInfo.baseUrl && (providerInfo.baseUrl.includes('11434') || providerInfo.apiKey === 'local')) {
-      // Ollama or LMStudio local
+      // Ollama ou LMStudio local
       endpoint = `${providerInfo.baseUrl.replace(/\/$/, '')}/v1/chat/completions`;
       if (providerInfo.apiKey !== 'local') {
         headers["Authorization"] = `Bearer ${providerInfo.apiKey}`;
       }
     } else if (activeModel.includes('gemini') || providerInfo.apiKey.startsWith('AIza')) {
-      // Google Gemini directly
+      // Google Gemini direto
       endpoint = `https://generativelanguage.googleapis.com/v1beta/openai/chat/completions`;
       headers["Authorization"] = `Bearer ${providerInfo.apiKey}`;
     } else if (providerInfo.apiKey && providerInfo.apiKey.startsWith('gsk_')) {
@@ -34,19 +42,20 @@ export async function fetchLLMResponse(prompt: string, providerInfo: any, system
       endpoint = `https://api.groq.com/openai/v1/chat/completions`;
       headers["Authorization"] = `Bearer ${providerInfo.apiKey}`;
     } else {
-      // Default to OpenRouter/OpenAI structure
+      // OpenRouter / OpenAI padrão
       headers["Authorization"] = `Bearer ${providerInfo.apiKey}`;
       headers["HTTP-Referer"] = "https://github.com/LuisCard/LyaCode";
       headers["X-Title"] = "LyaCode Studio";
     }
 
-    const payload = {
-      model: activeModel,
-      messages: [
-        { role: "system", content: systemPrompt },
-        { role: "user", content: prompt }
-      ]
-    };
+    // Montar histórico completo: system + history + mensagem atual
+    const messages = [
+      { role: "system", content: systemPrompt },
+      ...history.map(m => ({ role: m.role, content: m.content })),
+      { role: "user", content: prompt }
+    ];
+
+    const payload = { model: activeModel, messages };
 
     const res = await fetch(endpoint, {
       method: "POST",
