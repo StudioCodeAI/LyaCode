@@ -30,28 +30,24 @@ Se algum provedor oferecer plano gratuito, free tier, trial ou modelo local/open
 
 ---
 
-# Estratégia OpenAI Local Engine
+# Estratégia OpenAI GPT Local
 
 ## Conceito
 
-A primeira experiência do usuário pode destacar um motor local open-weight da OpenAI, quando disponível, como forma de sentir a estabilidade e a identidade da experiência OpenAI sem começar pela API paga.
+A primeira experiência do usuário pode destacar um motor local open-weight da OpenAI, quando disponível, como forma de sentir a estabilidade e a identidade da experiência GPT/OpenAI sem começar pela API paga.
 
-Nome sugerido:
+Nome oficial sugerido:
+
+```text
+OpenAI GPT Local
+```
+
+Nomes secundários aceitáveis:
 
 ```text
 OpenAI Local Engine
-```
-
-ou:
-
-```text
 OpenAI Foundation Engine
-```
-
-ou:
-
-```text
-Lya OpenAI Local Engine
+Lya OpenAI GPT Local
 ```
 
 Evitar chamar essa experiência de apenas `starter`, porque um modelo local forte não deve parecer uma amostra fraca. Ele é a fundação local da experiência.
@@ -61,7 +57,7 @@ Evitar chamar essa experiência de apenas `starter`, porque um modelo local fort
 Este caminho deve ser apresentado como:
 
 ```text
-Modelo local/open-weight da OpenAI para experimentar a LyaCodex II offline com estabilidade real.
+Motor GPT/OpenAI local/open-weight para experimentar a LyaCodex II offline com estabilidade real.
 ```
 
 E não como:
@@ -78,7 +74,7 @@ LyaCodex II acorda
 Antes de executar, a Lya precisa respirar um motor
 ↓
 Escolha uma opção:
-  1. Baixar OpenAI Local Engine
+  1. Baixar OpenAI GPT Local
   2. Usar Ollama/LM Studio já instalado
   3. Conectar OpenAI API Key
   4. Conectar outro provedor
@@ -92,7 +88,7 @@ Este é um modelo open-weight/local. Ele não é o mesmo que usar modelos premiu
 
 ## Estratégia de produto
 
-Se o usuário experimentar primeiro um motor com identidade OpenAI, a opção natural de upgrade premium passa a ser conectar uma OpenAI Key.
+Se o usuário experimentar primeiro um motor com identidade GPT/OpenAI, a opção natural de upgrade premium passa a ser conectar uma OpenAI Key.
 
 Fluxo comercial honesto:
 
@@ -121,7 +117,7 @@ Conecte OpenAI API Key para modelos premium e maior capacidade
 
 Primeira opção sugerida:
 
-- OpenAI Local Engine, se disponível no catálogo configurado;
+- OpenAI GPT Local, se disponível no catálogo configurado;
 - Ollama;
 - LM Studio;
 - vLLM local;
@@ -205,7 +201,7 @@ Não prometer acesso gratuito da OpenAI sem parceria oficial.
 LyaCodex II acorda
 ↓
 Mostra opções:
-  1. Baixar OpenAI Local Engine
+  1. Baixar OpenAI GPT Local
   2. Usar modelo local já instalado
   3. Conectar minha OpenAI Key
   4. Conectar outro provider
