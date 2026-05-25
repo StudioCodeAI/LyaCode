@@ -1,5 +1,8 @@
 use serde::{Deserialize, Serialize};
 
+const LYACODEX_OATH: &str = "Se você pensa, você executa. Se você executa, você indexa. Se você indexa, você evolui.";
+const LYACODEX_WAKE_WHISPER: &str = "Na hora de acordar a LyaCodex, o runtime assopra no ouvido dela.";
+
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct RuntimeEvent {
     pub event_type: String,
@@ -27,6 +30,14 @@ pub struct RuntimeStatus {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
+pub struct WakeRitual {
+    pub event_type: String,
+    pub status: String,
+    pub whisper: String,
+    pub oath: String,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct StreamPreview {
     pub run_id: String,
     pub events: Vec<StreamEvent>,
@@ -39,6 +50,16 @@ pub fn lyacodex_runtime_status() -> Result<RuntimeStatus, String> {
         message: "LyaCodex II runtime protocol initialized. Streaming transport contract is ready for implementation.".into(),
         supports_streaming: false,
         supports_cancel: false,
+    })
+}
+
+#[tauri::command]
+pub fn lyacodex_wake_ritual() -> Result<WakeRitual, String> {
+    Ok(WakeRitual {
+        event_type: "runtime.wake".into(),
+        status: "awake".into(),
+        whisper: LYACODEX_WAKE_WHISPER.into(),
+        oath: LYACODEX_OATH.into(),
     })
 }
 
@@ -95,7 +116,7 @@ pub fn lyacodex_preview_stream_protocol(provider: Option<String>, model: Option<
                 event_type: "stream.done".into(),
                 run_id,
                 content: None,
-                message: Some("LyaCodex II stream completed.".into()),
+                message: Some(LYACODEX_OATH.into()),
                 provider,
                 model,
             },
