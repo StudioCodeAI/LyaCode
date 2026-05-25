@@ -15,6 +15,25 @@ function App() {
   const activeProvider = useConfigStore((state) => state.activeProvider);
   const loadFromVault = useConfigStore((state) => state.loadFromVault);
 
+  const slogans = [
+    "Se você pensa, você executa.",
+    "Se você executa, você indexa.",
+    "Se você indexa, você evolui."
+  ];
+  const [sloganIndex, setSloganIndex] = useState(0);
+  const [fadeState, setFadeState] = useState<'in' | 'out'>('in');
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setFadeState('out');
+      setTimeout(() => {
+        setSloganIndex((prev) => (prev + 1) % slogans.length);
+        setFadeState('in');
+      }, 500); // 500ms transition time
+    }, 8000); // 8 seconds per slogan
+    return () => clearInterval(interval);
+  }, []);
+
   useEffect(() => {
     loadFromVault();
   }, [loadFromVault]);
@@ -97,8 +116,11 @@ function App() {
       {/* Main Workspace */}
       <div className="main-content">
         <div className="glass-header">
-          <div className="header-title">
-            LyaCode <span style={{ opacity: 0.6, fontWeight: 300, fontSize: '0.72rem', marginLeft: '10px', fontStyle: 'italic' }}>"Se você pensa, você executa. Se você executa, você indexa. Se você indexa, você evolui."</span>
+          <div className="header-title" style={{ display: 'flex', alignItems: 'center' }}>
+            <span className="lyacode-breathing">LyaCode</span>
+            <span className={`slogan-text fade-${fadeState}`}>
+              "{slogans[sloganIndex]}"
+            </span>
           </div>
           <div className="ai-badge" style={{textTransform: 'capitalize'}}>
             <div className="pulse-dot"></div>
