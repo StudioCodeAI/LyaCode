@@ -1,6 +1,9 @@
 use crate::lyacodex_keychain::resolve_secret;
 use serde::{Deserialize, Serialize};
 use serde_json::json;
+use std::time::Duration;
+
+const TRANSPORT_TIMEOUT_SECS: u64 = 60;
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct ChatMessage {
@@ -33,13 +36,36 @@ pub struct TransportStatus {
     pub message: String,
 }
 
+#[derive(Serialize, Deserialize, Debug, Clone)]
+pub struct TransportRunState {
+    pub state: String,
+    pub message: String,
+}
+
+fn http_client() -> Result<reqwest::Client, String> {
+    reqwest::Client::builder()
+        .timeout(Duration::from_secs(TRANSPORT_TIMEOUT_SECS))
+        .build()
+        .map_err(|e| format!("Failed to create HTTP client: {}", e))
+}
+
 fn chat_completions_url(base_url: &str) -> String {
     format!("{}/chat/completions", base_url.trim_end_matches('/'))
 }
 
+fn sanitized_provider_error(status: reqwest::StatusCode) -> String {
+    match status.as_u16() {
+        401 | 403 => "Provider rejected the request. Check your keyRef, provider account or permissions.".into(),
+        404 => "Provider endpoint or model was not found. Check base URL and model name.".into(),
+        408 | 429 => "Provider is busy or rate limited. Try again later or switch model/provider.".into(),
+        500..=599 => "Provider returned a server error. Try again later or switch provider.".into(),
+        code => format!("Provider returned HTTP {}.", code),
+    }
+}
+
 #[tauri::command]
 pub async fn lyacodex_transport_ping(provider: String, base_url: String) -> Result<TransportStatus, String> {
-    let client = reqwest::Client::new();
+    let client = http_client()?;
 
     let response = client
         .get(&base_url)
@@ -63,8 +89,18 @@ pub async fn lyacodex_transport_ping(provider: String, base_url: String) -> Resu
 }
 
 #[tauri::command]
+pub fn lyacodex_transport_states() -> Result<Vec<TransportRunState>, String> {
+    Ok(vec![
+        TransportRunState { state: "started".into(), message: "Request accepted by LyaCodex transport.".into() },
+        TransportRunState { state: "running".into(), message: "Provider request is in progress.".into() },
+        TransportRunState { state: "done".into(), message: "Provider returned a valid response.".into() },
+        TransportRunState { state: "error".into(), message: "Provider or transport failed safely.".into() },
+    ])
+}
+
+#[tauri::command]
 pub async fn lyacodex_chat_once(request: ChatRequest) -> Result<ChatResponse, String> {
-    let client = reqwest::Client::new();
+    let client = http_client()?;
     let endpoint = chat_completions_url(&request.base_url);
 
     let payload = json!({
@@ -98,9 +134,7 @@ pub async fn lyacodex_chat_once(request: ChatRequest) -> Result<ChatResponse, St
         .map_err(|e| format!("Transport error: {}", e))?;
 
     if !response.status().is_success() {
-        let status = response.status();
-        let text = response.text().await.unwrap_or_else(|_| "<empty error body>".into());
-        return Err(format!("Provider returned HTTP {}: {}", status, text));
+        return Err(sanitized_provider_error(response.status()));
     }
 
     let value: serde_json::Value = response
@@ -118,7 +152,7 @@ pub async fn lyacodex_chat_once(request: ChatRequest) -> Result<ChatResponse, St
         .to_string();
 
     if content.trim().is_empty() {
-        return Err("Provider response did not include choices[0].message.content".into());
+        return Err("Provider response did not include a usable message.".into());
     }
 
     Ok(ChatResponse {
