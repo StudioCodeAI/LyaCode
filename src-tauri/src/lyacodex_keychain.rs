@@ -18,6 +18,15 @@ fn build_key_ref(provider: &str, label: &str) -> String {
     )
 }
 
+pub fn resolve_secret(key_ref: &str) -> Result<String, String> {
+    let entry = Entry::new(SERVICE_NAME, key_ref)
+        .map_err(|e| format!("Keychain init error: {}", e))?;
+
+    entry
+        .get_password()
+        .map_err(|e| format!("Failed to resolve keyRef: {}", e))
+}
+
 #[tauri::command]
 pub fn save_secret(provider: String, label: String, secret: String) -> Result<KeyMetadata, String> {
     let key_ref = build_key_ref(&provider, &label);
