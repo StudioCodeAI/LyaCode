@@ -47,6 +47,7 @@ pub fn run() {
             lyacodex_transport::lyacodex_transport_ping,
             lyacodex_transport::lyacodex_transport_states,
             lyacodex_transport::lyacodex_chat_once,
+            lyacodex_transport::lyacodex_chat_stream_collect,
             lyacodex_transport::lyacodex_preview_chat_request
         ])
         .run(tauri::generate_context!())
