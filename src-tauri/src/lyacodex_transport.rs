@@ -1,4 +1,5 @@
 use crate::lyacodex_keychain::resolve_secret;
+use futures_util::StreamExt;
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 use std::time::Duration;
@@ -26,6 +27,21 @@ pub struct ChatResponse {
     pub provider: String,
     pub model: String,
     pub content: String,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone)]
+pub struct StreamChunk {
+    pub event_type: String,
+    pub content: Option<String>,
+    pub message: Option<String>,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone)]
+pub struct StreamResponse {
+    pub provider: String,
+    pub model: String,
+    pub chunks: Vec<StreamChunk>,
+    pub full_content: String,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
@@ -63,6 +79,36 @@ fn sanitized_provider_error(status: reqwest::StatusCode) -> String {
     }
 }
 
+fn extract_openai_stream_delta(data: &str) -> Option<String> {
+    let value: serde_json::Value = serde_json::from_str(data).ok()?;
+
+    value
+        .get("choices")
+        .and_then(|choices| choices.get(0))
+        .and_then(|choice| choice.get("delta"))
+        .and_then(|delta| delta.get("content"))
+        .and_then(|content| content.as_str())
+        .map(|s| s.to_string())
+}
+
+fn apply_auth_headers(mut builder: reqwest::RequestBuilder, request: &ChatRequest) -> Result<reqwest::RequestBuilder, String> {
+    if let Some(key_ref) = request.key_ref.as_deref() {
+        let secret = resolve_secret(key_ref)?;
+
+        if !secret.trim().is_empty() && secret != "local" {
+            builder = builder.header("Authorization", format!("Bearer {}", secret));
+        }
+    }
+
+    if request.provider == "openrouter" {
+        builder = builder
+            .header("HTTP-Referer", "https://github.com/StudioCodeAI/LyaCode")
+            .header("X-Title", "LyaCode Studio");
+    }
+
+    Ok(builder)
+}
+
 #[tauri::command]
 pub async fn lyacodex_transport_ping(provider: String, base_url: String) -> Result<TransportStatus, String> {
     let client = http_client()?;
@@ -93,6 +139,7 @@ pub fn lyacodex_transport_states() -> Result<Vec<TransportRunState>, String> {
     Ok(vec![
         TransportRunState { state: "started".into(), message: "Request accepted by LyaCodex transport.".into() },
         TransportRunState { state: "running".into(), message: "Provider request is in progress.".into() },
+        TransportRunState { state: "streaming".into(), message: "Provider is streaming tokens.".into() },
         TransportRunState { state: "done".into(), message: "Provider returned a valid response.".into() },
         TransportRunState { state: "error".into(), message: "Provider or transport failed safely.".into() },
     ])
@@ -109,24 +156,12 @@ pub async fn lyacodex_chat_once(request: ChatRequest) -> Result<ChatResponse, St
         "stream": false
     });
 
-    let mut builder = client
+    let builder = client
         .post(endpoint)
         .header("Content-Type", "application/json")
         .json(&payload);
 
-    if let Some(key_ref) = request.key_ref.as_deref() {
-        let secret = resolve_secret(key_ref)?;
-
-        if !secret.trim().is_empty() && secret != "local" {
-            builder = builder.header("Authorization", format!("Bearer {}", secret));
-        }
-    }
-
-    if request.provider == "openrouter" {
-        builder = builder
-            .header("HTTP-Referer", "https://github.com/StudioCodeAI/LyaCode")
-            .header("X-Title", "LyaCode Studio");
-    }
+    let builder = apply_auth_headers(builder, &request)?;
 
     let response = builder
         .send()
@@ -159,6 +194,92 @@ pub async fn lyacodex_chat_once(request: ChatRequest) -> Result<ChatResponse, St
         provider: request.provider,
         model: request.model,
         content,
+    })
+}
+
+#[tauri::command]
+pub async fn lyacodex_chat_stream_collect(request: ChatRequest) -> Result<StreamResponse, String> {
+    let client = http_client()?;
+    let endpoint = chat_completions_url(&request.base_url);
+
+    let payload = json!({
+        "model": request.model,
+        "messages": request.messages,
+        "stream": true
+    });
+
+    let builder = client
+        .post(endpoint)
+        .header("Content-Type", "application/json")
+        .header("Accept", "text/event-stream")
+        .json(&payload);
+
+    let builder = apply_auth_headers(builder, &request)?;
+
+    let response = builder
+        .send()
+        .await
+        .map_err(|e| format!("Transport error: {}", e))?;
+
+    if !response.status().is_success() {
+        return Err(sanitized_provider_error(response.status()));
+    }
+
+    let mut chunks = vec![StreamChunk {
+        event_type: "stream.start".into(),
+        content: None,
+        message: Some("LyaCodex stream started.".into()),
+    }];
+    let mut full_content = String::new();
+    let mut stream = response.bytes_stream();
+
+    while let Some(item) = stream.next().await {
+        let bytes = item.map_err(|e| format!("Stream transport error: {}", e))?;
+        let text = String::from_utf8_lossy(&bytes);
+
+        for line in text.lines() {
+            let line = line.trim();
+            if !line.starts_with("data:") {
+                continue;
+            }
+
+            let data = line.trim_start_matches("data:").trim();
+            if data == "[DONE]" {
+                chunks.push(StreamChunk {
+                    event_type: "stream.done".into(),
+                    content: None,
+                    message: Some("LyaCodex stream completed.".into()),
+                });
+                return Ok(StreamResponse {
+                    provider: request.provider,
+                    model: request.model,
+                    chunks,
+                    full_content,
+                });
+            }
+
+            if let Some(delta) = extract_openai_stream_delta(data) {
+                full_content.push_str(&delta);
+                chunks.push(StreamChunk {
+                    event_type: "stream.token".into(),
+                    content: Some(delta),
+                    message: None,
+                });
+            }
+        }
+    }
+
+    chunks.push(StreamChunk {
+        event_type: "stream.done".into(),
+        content: None,
+        message: Some("LyaCodex stream ended without explicit [DONE].".into()),
+    });
+
+    Ok(StreamResponse {
+        provider: request.provider,
+        model: request.model,
+        chunks,
+        full_content,
     })
 }
 
