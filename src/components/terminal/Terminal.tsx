@@ -5,7 +5,7 @@ import { invoke } from '@tauri-apps/api/core';
 import { listen, UnlistenFn } from '@tauri-apps/api/event';
 import '@xterm/xterm/css/xterm.css';
 
-export function Terminal({ onOpenPalette, onOpenAIChat }: { onOpenPalette?: () => void, onOpenAIChat?: () => void }) {
+export function Terminal({ onOpenAIChat }: { onOpenAIChat?: () => void }) {
   const terminalRef = useRef<HTMLDivElement>(null);
   const xtermRef = useRef<XTerm | null>(null);
   const fitAddonRef = useRef<FitAddon | null>(null);
@@ -73,14 +73,6 @@ export function Terminal({ onOpenPalette, onOpenAIChat }: { onOpenPalette?: () =
       });
     }).catch(console.error);
 
-    term.onKey(({ key, domEvent }) => {
-      const ev = domEvent as KeyboardEvent;
-      if (ev.key === '/' || key === '/') {
-        if (onOpenPalette) {
-          onOpenPalette();
-        }
-      }
-    });
 
     xtermRef.current = term;
     fitAddonRef.current = fitAddon;

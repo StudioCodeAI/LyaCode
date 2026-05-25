@@ -137,7 +137,6 @@ function App() {
             </div>
           )}
           <Terminal 
-            onOpenPalette={() => { setPaletteMode('commands'); setIsPaletteOpen(true); }} 
             onOpenAIChat={() => setIsAiChatOpen(true)}
           />
           <CommandPalette 

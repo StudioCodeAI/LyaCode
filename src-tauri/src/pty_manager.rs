@@ -24,23 +24,42 @@ pub fn spawn_pty(app: AppHandle, state: State<'_, PtyState>) -> Result<(), Strin
         })
         .map_err(|e| e.to_string())?;
 
+    // Windows: try PowerShell 7 (pwsh.exe) first, fallback to built-in powershell.exe
     #[cfg(target_os = "windows")]
-    let mut cmd = CommandBuilder::new("powershell.exe");
+    let shell = {
+        let pwsh = std::path::PathBuf::from(
+            std::env::var("PROGRAMFILES").unwrap_or_else(|_| "C:\\Program Files".into())
+        ).join("PowerShell\\7\\pwsh.exe");
+        if pwsh.exists() {
+            pwsh.to_string_lossy().to_string()
+        } else {
+            "powershell.exe".to_string()
+        }
+    };
+
     #[cfg(target_os = "windows")]
-    cmd.args(["-NoExit", "-Command", "\
+    let mut cmd = CommandBuilder::new(&shell);
+
+    // Register lyacode/lya/lcode as trigger words that open the AI chat overlay
+    #[cfg(target_os = "windows")]
+    cmd.args(["-NoExit", "-NoLogo", "-Command", "\
 $trigger = { Write-Host '[[LYA_UI_TRIGGER]]' }; \
 Set-Item -Path function:lyacode -Value $trigger; \
 Set-Item -Path function:LyaCode -Value $trigger; \
-Set-Item -Path function:lcode -Value $trigger; \
-Set-Item -Path function:lya -Value $trigger; \
-Set-Item -Path function:Lya -Value $trigger\
+Set-Item -Path function:lcode   -Value $trigger; \
+Set-Item -Path function:lya     -Value $trigger; \
+Set-Item -Path function:Lya     -Value $trigger; \
+Write-Host ''; \
+Write-Host '  LyaCode Studio' -ForegroundColor Green; \
+Write-Host '  Type lyacode, lya or lcode to open AI chat.' -ForegroundColor DarkGray; \
+Write-Host ''\
 "]);
-    
+
     #[cfg(not(target_os = "windows"))]
     let mut cmd = CommandBuilder::new("bash");
 
-    // Clear PROMPT to avoid weird artifacts if needed, or set TERM
     cmd.env("TERM", "xterm-256color");
+
 
     let mut child = pair.slave.spawn_command(cmd).map_err(|e| e.to_string())?;
     drop(pair.slave);
