@@ -6,6 +6,7 @@ pub mod lyacodex_models;
 pub mod lyacodex_tools;
 pub mod lyacodex_runtime;
 pub mod lyacodex_engines;
+pub mod lyacodex_transport;
 
 use std::sync::{Arc, Mutex};
 #[tauri::command]
@@ -42,7 +43,9 @@ pub fn run() {
             lyacodex_runtime::lyacodex_preview_stream_protocol,
             lyacodex_engines::lyacodex_list_local_engines,
             lyacodex_engines::lyacodex_first_run_plan,
-            lyacodex_engines::lyacodex_philosophy
+            lyacodex_engines::lyacodex_philosophy,
+            lyacodex_transport::lyacodex_transport_ping,
+            lyacodex_transport::lyacodex_preview_chat_request
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
