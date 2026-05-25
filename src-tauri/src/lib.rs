@@ -41,6 +41,7 @@ pub fn run() {
             lyacodex_runtime::lyacodex_preview_runtime_event,
             lyacodex_runtime::lyacodex_preview_stream_protocol,
             lyacodex_engines::lyacodex_list_local_engines,
+            lyacodex_engines::lyacodex_first_run_plan,
             lyacodex_engines::lyacodex_philosophy
         ])
         .run(tauri::generate_context!())
