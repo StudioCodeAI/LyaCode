@@ -217,3 +217,150 @@ body {
     opacity: 0.85;
   }
 }
+
+/* === LYACODEX II FIRST RUN === */
+.first-run-panel {
+  flex: 1;
+  height: 100%;
+  overflow: auto;
+  padding: 34px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(circle at 20% 0%, rgba(124, 58, 237, 0.18), transparent 34%),
+    radial-gradient(circle at 82% 18%, rgba(34, 197, 94, 0.10), transparent 32%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0.005)),
+    var(--bg-secondary);
+  box-shadow: var(--shadow-md);
+}
+
+.first-run-loading {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+  letter-spacing: 0.4px;
+}
+
+.first-run-header {
+  max-width: 980px;
+  margin: 0 auto 28px;
+  padding: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: var(--radius-lg);
+  background: rgba(13, 13, 15, 0.58);
+  backdrop-filter: blur(14px);
+}
+
+.first-run-whisper {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--color-green);
+  opacity: 0.86;
+  margin-bottom: 12px;
+}
+
+.first-run-header h1 {
+  font-size: clamp(1.65rem, 3vw, 3.1rem);
+  line-height: 1.08;
+  letter-spacing: -0.055em;
+  font-weight: 600;
+  max-width: 760px;
+}
+
+.first-run-philosophy {
+  margin-top: 18px;
+  max-width: 780px;
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  opacity: 0.78;
+}
+
+.first-run-options {
+  max-width: 980px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.first-run-option {
+  min-height: 168px;
+  padding: 18px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  background: rgba(17, 17, 20, 0.78);
+  cursor: default;
+  transition: transform 0.16s ease, border-color 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+}
+
+.first-run-option:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-hover);
+  background: rgba(26, 26, 31, 0.92);
+}
+
+.first-run-option.recommended {
+  border-color: rgba(34, 197, 94, 0.38);
+  background:
+    linear-gradient(180deg, rgba(34, 197, 94, 0.105), rgba(17, 17, 20, 0.82)),
+    rgba(17, 17, 20, 0.88);
+  box-shadow: 0 0 34px rgba(34, 197, 94, 0.08);
+}
+
+.first-run-option-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.first-run-option-title {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 0.96rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.first-run-star {
+  color: var(--color-yellow);
+  filter: drop-shadow(0 0 8px rgba(234, 179, 8, 0.36));
+}
+
+.first-run-option-subtitle {
+  margin-top: 12px;
+  color: var(--text-secondary);
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
+.first-run-option-flags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
+.flag {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-muted);
+  border-radius: 999px;
+  padding: 4px 8px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.first-run-option.recommended .flag {
+  color: rgba(220, 252, 231, 0.72);
+  border-color: rgba(34, 197, 94, 0.18);
+  background: rgba(34, 197, 94, 0.06);
+}
