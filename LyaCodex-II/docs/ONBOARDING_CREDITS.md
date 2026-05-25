@@ -1,10 +1,10 @@
-# Onboarding Credits & First-Run Providers
+# Onboarding & First-Run Engines
 
 ## Ideia
 
-O LyaCodex II deve acordar com uma experiência inicial simples.
+O LyaCodex II deve acordar com uma experiência inicial simples, forte e honesta.
 
-O usuário não deve abrir o app e encontrar apenas uma tela vazia pedindo chave.
+O usuário não deve abrir o app e encontrar apenas uma tela vazia pedindo chave. Ele precisa sentir, logo na primeira execução, que o terminal tem estabilidade, inteligência e potencial real.
 
 A proposta é criar um fluxo chamado:
 
@@ -15,7 +15,7 @@ Lya First Run
 ou:
 
 ```text
-Lya Starter Engine
+Lya Engine Selection
 ```
 
 ## Objetivo
@@ -26,34 +26,42 @@ Oferecer ao usuário uma primeira experiência guiada com IA sem comprometer seg
 
 O LyaCode/LyaCodex II não deve prometer créditos gratuitos de terceiros sem acordo oficial.
 
-Se algum provedor oferecer plano gratuito, free tier, trial ou modelo local, o app pode facilitar o uso, mas sempre com transparência.
+Se algum provedor oferecer plano gratuito, free tier, trial ou modelo local/open-weight, o app pode facilitar o uso, mas sempre com transparência.
 
 ---
 
-# Estratégia OpenAI Starter
+# Estratégia OpenAI Local Engine
 
 ## Conceito
 
-A primeira experiência do usuário pode destacar um motor local open-weight da OpenAI, quando disponível, como forma de sentir o sabor da experiência OpenAI sem começar pela API paga.
+A primeira experiência do usuário pode destacar um motor local open-weight da OpenAI, quando disponível, como forma de sentir a estabilidade e a identidade da experiência OpenAI sem começar pela API paga.
 
 Nome sugerido:
 
 ```text
-OpenAI Local Starter
+OpenAI Local Engine
 ```
 
 ou:
 
 ```text
-Lya Starter Engine — OpenAI open-weight
+OpenAI Foundation Engine
 ```
+
+ou:
+
+```text
+Lya OpenAI Local Engine
+```
+
+Evitar chamar essa experiência de apenas `starter`, porque um modelo local forte não deve parecer uma amostra fraca. Ele é a fundação local da experiência.
 
 ## Posicionamento
 
 Este caminho deve ser apresentado como:
 
 ```text
-Modelo local/open-weight da OpenAI para experimentar a LyaCodex II offline.
+Modelo local/open-weight da OpenAI para experimentar a LyaCodex II offline com estabilidade real.
 ```
 
 E não como:
@@ -70,7 +78,7 @@ LyaCodex II acorda
 Antes de executar, a Lya precisa respirar um motor
 ↓
 Escolha uma opção:
-  1. Baixar OpenAI Local Starter
+  1. Baixar OpenAI Local Engine
   2. Usar Ollama/LM Studio já instalado
   3. Conectar OpenAI API Key
   4. Conectar outro provedor
@@ -79,7 +87,7 @@ Escolha uma opção:
 ## Mensagem de transparência
 
 ```text
-Este é um modelo open-weight/local. Ele não é o mesmo que usar modelos premium pela API da OpenAI. Velocidade e qualidade dependem do seu computador.
+Este é um modelo open-weight/local. Ele não é o mesmo que usar modelos premium pela API da OpenAI. Velocidade, qualidade e contexto dependem do seu computador.
 ```
 
 ## Estratégia de produto
@@ -93,7 +101,7 @@ Experimente local
 ↓
 Entenda o poder do terminal com IA
 ↓
-Conecte OpenAI API Key para modelos premium
+Conecte OpenAI API Key para modelos premium e maior capacidade
 ```
 
 ## Regras
@@ -103,6 +111,7 @@ Conecte OpenAI API Key para modelos premium
 3. Sempre diferenciar modelo local/open-weight de API premium.
 4. Sempre permitir alternativas locais e outros providers.
 5. Sempre mostrar requisitos de hardware antes de baixar.
+6. Nunca diminuir o valor do motor local chamando-o de amostra fraca.
 
 ---
 
@@ -112,7 +121,7 @@ Conecte OpenAI API Key para modelos premium
 
 Primeira opção sugerida:
 
-- OpenAI open-weight/local starter, se disponível no catálogo configurado;
+- OpenAI Local Engine, se disponível no catálogo configurado;
 - Ollama;
 - LM Studio;
 - vLLM local;
@@ -125,7 +134,7 @@ Detectar engine local
 ↓
 Listar modelos disponíveis
 ↓
-Sugerir instalação de modelo leve
+Sugerir instalação de motor compatível
 ↓
 Rodar primeiro prompt local
 ```
@@ -156,13 +165,13 @@ O LyaCodex II pode listar provedores que tenham modelos gratuitos ou planos de t
 No futuro, caso exista acordo oficial com algum provedor, o app pode oferecer:
 
 ```text
-Lya Starter Credits
+Lya Evaluation Credits
 ```
 
 Exemplo conceitual:
 
 ```text
-Use 100 mensagens iniciais para testar a LyaCodex II.
+Use mensagens iniciais para testar a LyaCodex II com um provider patrocinado.
 ```
 
 Isso deve ser implementado apenas com backend próprio, controle de abuso, política de privacidade e termos claros.
@@ -177,7 +186,7 @@ Possível UX:
 OpenAI
 Status: não conectado
 Ação: adicionar OpenAI Key ao Lya Keychain
-Uso: raciocínio forte, código, agentes e tool calling
+Uso: raciocínio forte, código, agentes, tool calling e modelos premium
 ```
 
 Não prometer acesso gratuito da OpenAI sem parceria oficial.
@@ -196,7 +205,7 @@ Não prometer acesso gratuito da OpenAI sem parceria oficial.
 LyaCodex II acorda
 ↓
 Mostra opções:
-  1. Baixar OpenAI Local Starter
+  1. Baixar OpenAI Local Engine
   2. Usar modelo local já instalado
   3. Conectar minha OpenAI Key
   4. Conectar outro provider
@@ -213,5 +222,5 @@ Primeiro prompt guiado
 
 ```text
 Antes de executar, a Lya precisa respirar um motor.
-Escolha um modelo local, conecte uma chave ou explore provedores compatíveis.
+Escolha um motor local, conecte uma chave ou explore provedores compatíveis.
 ```
