@@ -97,7 +97,9 @@ function App() {
       {/* Main Workspace */}
       <div className="main-content">
         <div className="glass-header">
-          <div className="header-title">LyaCode Studio</div>
+          <div className="header-title">
+            LyaCode <span style={{ opacity: 0.6, fontWeight: 300, fontSize: '0.72rem', marginLeft: '10px', fontStyle: 'italic' }}>"Se você pensa, você executa. Se você executa, você indexa. Se você indexa, você evolui."</span>
+          </div>
           <div className="ai-badge" style={{textTransform: 'capitalize'}}>
             <div className="pulse-dot"></div>
             {activeProvider} Ready
