@@ -5,6 +5,7 @@ pub mod lyacodex_keychain;
 pub mod lyacodex_models;
 pub mod lyacodex_tools;
 pub mod lyacodex_runtime;
+pub mod lyacodex_engines;
 
 use std::sync::{Arc, Mutex};
 #[tauri::command]
@@ -38,7 +39,9 @@ pub fn run() {
             lyacodex_runtime::lyacodex_runtime_status,
             lyacodex_runtime::lyacodex_wake_ritual,
             lyacodex_runtime::lyacodex_preview_runtime_event,
-            lyacodex_runtime::lyacodex_preview_stream_protocol
+            lyacodex_runtime::lyacodex_preview_stream_protocol,
+            lyacodex_engines::lyacodex_list_local_engines,
+            lyacodex_engines::lyacodex_philosophy
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
