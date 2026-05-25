@@ -1,6 +1,7 @@
 pub mod skills_manager;
 pub mod pty_manager;
 pub mod vault_manager;
+pub mod lyacodex_keychain;
 
 use std::sync::{Arc, Mutex};
 #[tauri::command]
@@ -24,7 +25,10 @@ pub fn run() {
             pty_manager::write_to_pty,
             pty_manager::resize_pty,
             vault_manager::save_vault_keys,
-            vault_manager::load_vault_keys
+            vault_manager::load_vault_keys,
+            lyacodex_keychain::save_secret,
+            lyacodex_keychain::delete_secret,
+            lyacodex_keychain::test_secret
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
