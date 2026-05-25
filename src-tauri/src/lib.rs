@@ -36,7 +36,8 @@ pub fn run() {
             lyacodex_models::lyacodex_check_provider,
             lyacodex_tools::lyacodex_list_tool_providers,
             lyacodex_runtime::lyacodex_runtime_status,
-            lyacodex_runtime::lyacodex_preview_runtime_event
+            lyacodex_runtime::lyacodex_preview_runtime_event,
+            lyacodex_runtime::lyacodex_preview_stream_protocol
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
