@@ -4,6 +4,7 @@ pub mod vault_manager;
 pub mod lyacodex_keychain;
 pub mod lyacodex_models;
 pub mod lyacodex_tools;
+pub mod lyacodex_runtime;
 
 use std::sync::{Arc, Mutex};
 #[tauri::command]
@@ -33,7 +34,9 @@ pub fn run() {
             lyacodex_keychain::test_secret,
             lyacodex_models::lyacodex_list_providers,
             lyacodex_models::lyacodex_check_provider,
-            lyacodex_tools::lyacodex_list_tool_providers
+            lyacodex_tools::lyacodex_list_tool_providers,
+            lyacodex_runtime::lyacodex_runtime_status,
+            lyacodex_runtime::lyacodex_preview_runtime_event
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
