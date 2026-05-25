@@ -45,6 +45,7 @@ pub fn run() {
             lyacodex_engines::lyacodex_first_run_plan,
             lyacodex_engines::lyacodex_philosophy,
             lyacodex_transport::lyacodex_transport_ping,
+            lyacodex_transport::lyacodex_transport_states,
             lyacodex_transport::lyacodex_chat_once,
             lyacodex_transport::lyacodex_preview_chat_request
         ])
