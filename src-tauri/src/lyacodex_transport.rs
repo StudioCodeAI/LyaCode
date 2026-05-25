@@ -1,3 +1,4 @@
+use crate::lyacodex_keychain::resolve_secret;
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 
@@ -14,6 +15,7 @@ pub struct ChatRequest {
     pub base_url: String,
     pub messages: Vec<ChatMessage>,
     pub stream: bool,
+    pub key_ref: Option<String>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
@@ -61,7 +63,7 @@ pub async fn lyacodex_transport_ping(provider: String, base_url: String) -> Resu
 }
 
 #[tauri::command]
-pub async fn lyacodex_chat_once(request: ChatRequest, api_key: Option<String>) -> Result<ChatResponse, String> {
+pub async fn lyacodex_chat_once(request: ChatRequest) -> Result<ChatResponse, String> {
     let client = reqwest::Client::new();
     let endpoint = chat_completions_url(&request.base_url);
 
@@ -76,9 +78,11 @@ pub async fn lyacodex_chat_once(request: ChatRequest, api_key: Option<String>) -
         .header("Content-Type", "application/json")
         .json(&payload);
 
-    if let Some(key) = api_key.as_deref() {
-        if !key.trim().is_empty() && key != "local" {
-            builder = builder.header("Authorization", format!("Bearer {}", key));
+    if let Some(key_ref) = request.key_ref.as_deref() {
+        let secret = resolve_secret(key_ref)?;
+
+        if !secret.trim().is_empty() && secret != "local" {
+            builder = builder.header("Authorization", format!("Bearer {}", secret));
         }
     }
 
@@ -131,6 +135,7 @@ pub fn lyacodex_preview_chat_request() -> Result<ChatRequest, String> {
         model: "openai/gpt-4.1-mini".into(),
         base_url: "https://openrouter.ai/api/v1".into(),
         stream: true,
+        key_ref: Some("secret://provider/openrouter/main".into()),
         messages: vec![
             ChatMessage {
                 role: "system".into(),
