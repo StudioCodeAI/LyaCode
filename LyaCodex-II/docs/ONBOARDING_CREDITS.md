@@ -28,16 +28,95 @@ O LyaCode/LyaCodex II não deve prometer créditos gratuitos de terceiros sem ac
 
 Se algum provedor oferecer plano gratuito, free tier, trial ou modelo local, o app pode facilitar o uso, mas sempre com transparência.
 
+---
+
+# Estratégia OpenAI Starter
+
+## Conceito
+
+A primeira experiência do usuário pode destacar um motor local open-weight da OpenAI, quando disponível, como forma de sentir o sabor da experiência OpenAI sem começar pela API paga.
+
+Nome sugerido:
+
+```text
+OpenAI Local Starter
+```
+
+ou:
+
+```text
+Lya Starter Engine — OpenAI open-weight
+```
+
+## Posicionamento
+
+Este caminho deve ser apresentado como:
+
+```text
+Modelo local/open-weight da OpenAI para experimentar a LyaCodex II offline.
+```
+
+E não como:
+
+```text
+API OpenAI grátis.
+```
+
+## Fluxo sugerido
+
+```text
+LyaCodex II acorda
+↓
+Antes de executar, a Lya precisa respirar um motor
+↓
+Escolha uma opção:
+  1. Baixar OpenAI Local Starter
+  2. Usar Ollama/LM Studio já instalado
+  3. Conectar OpenAI API Key
+  4. Conectar outro provedor
+```
+
+## Mensagem de transparência
+
+```text
+Este é um modelo open-weight/local. Ele não é o mesmo que usar modelos premium pela API da OpenAI. Velocidade e qualidade dependem do seu computador.
+```
+
+## Estratégia de produto
+
+Se o usuário experimentar primeiro um motor com identidade OpenAI, a opção natural de upgrade premium passa a ser conectar uma OpenAI Key.
+
+Fluxo comercial honesto:
+
+```text
+Experimente local
+↓
+Entenda o poder do terminal com IA
+↓
+Conecte OpenAI API Key para modelos premium
+```
+
+## Regras
+
+1. Nunca embutir chave OpenAI global no app.
+2. Nunca prometer gratuidade de API sem acordo oficial.
+3. Sempre diferenciar modelo local/open-weight de API premium.
+4. Sempre permitir alternativas locais e outros providers.
+5. Sempre mostrar requisitos de hardware antes de baixar.
+
+---
+
 ## Estratégias possíveis
 
 ### 1. Local-first onboarding
 
 Primeira opção sugerida:
 
-- Ollama
-- LM Studio
-- vLLM local
-- llama.cpp server
+- OpenAI open-weight/local starter, se disponível no catálogo configurado;
+- Ollama;
+- LM Studio;
+- vLLM local;
+- llama.cpp server.
 
 Fluxo:
 
@@ -117,9 +196,11 @@ Não prometer acesso gratuito da OpenAI sem parceria oficial.
 LyaCodex II acorda
 ↓
 Mostra opções:
-  1. Usar modelo local
-  2. Conectar minha chave
-  3. Ver provedores com free tier
+  1. Baixar OpenAI Local Starter
+  2. Usar modelo local já instalado
+  3. Conectar minha OpenAI Key
+  4. Conectar outro provider
+  5. Ver provedores com free tier
 ↓
 Usuário escolhe
 ↓
