@@ -26,6 +26,16 @@ pub fn spawn_pty(app: AppHandle, state: State<'_, PtyState>) -> Result<(), Strin
 
     #[cfg(target_os = "windows")]
     let mut cmd = CommandBuilder::new("powershell.exe");
+    #[cfg(target_os = "windows")]
+    cmd.args(["-NoExit", "-Command", "\
+$trigger = { Write-Host '[[LYA_UI_TRIGGER]]' }; \
+Set-Item -Path function:lyacode -Value $trigger; \
+Set-Item -Path function:LyaCode -Value $trigger; \
+Set-Item -Path function:lcode -Value $trigger; \
+Set-Item -Path function:lya -Value $trigger; \
+Set-Item -Path function:Lya -Value $trigger\
+"]);
+    
     #[cfg(not(target_os = "windows"))]
     let mut cmd = CommandBuilder::new("bash");
 

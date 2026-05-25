@@ -1,5 +1,6 @@
 pub mod skills_manager;
 pub mod pty_manager;
+pub mod vault_manager;
 
 use std::sync::{Arc, Mutex};
 #[tauri::command]
@@ -21,7 +22,9 @@ pub fn run() {
             skills_manager::get_skills,
             pty_manager::spawn_pty,
             pty_manager::write_to_pty,
-            pty_manager::resize_pty
+            pty_manager::resize_pty,
+            vault_manager::save_vault_keys,
+            vault_manager::load_vault_keys
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

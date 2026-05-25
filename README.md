@@ -1,112 +1,94 @@
-<div align="center">
-  <img src="https://via.placeholder.com/150/0a0a0c/6366f1?text=LyaCode" alt="LyaCode Logo" width="150" />
+# ⚡ LyaCode Studio (v0.1.0-preview)
 
-  <h1>⚡ LyaCode Studio</h1>
-  <p><b>The Next Generation AI-Powered IDE & Terminal</b></p>
-  <p><i>10x Mais Rápido, Inteligente e Poderoso que Terminais TUI Tradicionais (ex: OpenCode)</i></p>
-
-  <p>
-    <a href="#por-que-somos-10x-superiores">Por que somos 10x Superiores?</a> •
-    <a href="#anatomia-da-interface">Anatomia da Interface</a> •
-    <a href="#o-command-palette-">O Command Palette</a> •
-    <a href="#inteligência-embutida">Inteligência Embutida na Memória</a>
-  </p>
-</div>
-
----
-
-## 🚀 Por que somos 10x Superiores? (Manifesto Arquitetural)
-
-Editores de inteligência artificial em linha de comando (como o OpenCode) dependem de linguagens como Go e renderização de texto puro (TUI - Terminal User Interface). O LyaCode destrói esse paradigma com a seguinte fundação técnica:
-
-### 1. Engine Nativa em Rust + React WebGL
-Nós não somos um TUI limitado. A casca do LyaCode roda num **Backend Nativo em Rust (Tauri)** garantindo 0 milissegundos de latência do *Garbage Collector*, enquanto a interface é acelerada por GPU (WebGL via xterm.js). Se a IA precisar desenhar um gráfico, um botão ou rodar uma imagem, o LyaCode desenha nativamente. Concorrentes só conseguem mostrar texto colorido (ANSI).
-
-### 2. Enxame de Agentes (Multi-Agent Swarm)
-Concorrentes possuem 1 agente que executa suas ordens de forma síncrona. O LyaCode utiliza a arquitetura de **Enxame (Swarm)**: 
-Quando você digita `/connect`, pode acionar múltiplos agentes em paralelo. Um agente *Arquiteto* define a estrutura, um agente *Programador* escreve o código, e um agente *Revisor* testa seu código no fundo simultaneamente, garantindo a solução 3 vezes mais rápido.
-
-### 3. Execução PTY Real no SO
-Ferramentas TUI simulam o bash com timeouts perigosos. O LyaCode, através do Rust, espawna terminais **PTY (Pseudo-Terminais)** verdadeiros e assíncronos no nível do Sistema Operacional. Quando a IA executa `npm install`, a saída é interceptada nativamente no kernel e redirecionada em streaming para a interface visual.
-
-### 4. RAG Semântico Integrado vs. "Grep"
-Os outros usam ferramentas de sistema burras como `grep` para buscar código. O LyaCode possui ferramentas de IA Nativas que convertem seu repositório num banco de dados vetorial em milissegundos. Ele não busca a palavra, ele busca o **significado** da função de maneira semântica, consumindo 1/10 do uso de tokens da concorrência.
-
----
-
-## 🧠 Inteligência Embutida na Memória (Out-of-the-Box)
-
-**Você não precisa de API Key para começar a usar o LyaCode!**
-
-Enquanto todos obrigam você a criar conta na OpenAI ou Anthropic, o LyaCode vem de fábrica com duas opções 100% gratuitas para plugar e jogar:
-
-1. **WebLLM Embedded (GPU Local):** O LyaCode possui uma engine experimental de inferência compilada em WebAssembly/WebGPU. Nós baixamos os pesos leves do modelo *Llama-3-8B* do Google ou Meta diretamente para a RAM/VRAM da sua máquina, e **ele roda localmente dentro do próprio LyaCode**, sem comunicação com a internet e com latência zero.
-2. **OpenRouter (Free Tier):** Configuramos nosso gerenciador de conexões para se acoplar automaticamente à rede de roteamento livre do OpenRouter. Ao rodar o LyaCode, você tem acesso imediato a dezenas de modelos como o `google/gemma-2-9b-it:free` gratuitamente, servidos pela nuvem, configurados por padrão no arquivo `lyacode.json`.
-
----
-
-## 🧬 O Paradigma das 1000+ Inteligências
-
-O LyaCode é o primeiro terminal do mundo que já nasce com acesso direto a **mais de 1.000 Skills da Comunidade** (conectado nativamente ao repositório open-source *Antigravity Awesome Skills*). 
-Cada Skill não é apenas um "script"; é um **perfil de consciência de aprendizado**. Você pode ligar e desligar (On/Off) qualquer Skill em tempo real no Command Palette para testar se a inteligência do seu assistente aumenta para a sua tarefa específica ou se apenas adiciona peso desnecessário.
-
----
-
-## 🧬 Anatomia da Interface
-
-| Ícone Visual | Nome / Função | Descrição |
-| :---: | :--- | :--- |
-| <img src="https://via.placeholder.com/30/0a0a0c/6366f1?text=T" /> | **Terminal (xterm.js)** | O coração do LyaCode. Um terminal nativo veloz com renderização WebGL. |
-| <img src="https://via.placeholder.com/30/0a0a0c/6366f1?text=M" /> | **Extensões / MCP Store** | O hub de extensões e Model Context Protocol (MCP). Ferramentas (`glob`, `bash`, `edit`) rodando nativas via Rust. |
-| <img src="https://via.placeholder.com/30/0a0a0c/6366f1?text=R" /> | **Execução / Debug** | Dispare tarefas e fluxos de trabalho (workflows) visualmente. |
-| <img src="https://via.placeholder.com/30/0a0a0c/6366f1?text=AI" /> | **Motores de IA** | Acesso rápido aos provedores (WebLLM, OpenRouter, Ollama, OpenAI). |
-| <img src="https://via.placeholder.com/30/0a0a0c/6366f1?text=S" /> | **Configurações** | Ajuste o tema e os atalhos de teclado de forma gráfica. |
-
----
-
-## ⌨️ O Command Palette (`/`) & Atalhos Globais
-
-Ao invés de depender puramente da digitação, o LyaCode combina o melhor da CLI com os atalhos de IDEs modernas. Ao digitar **`/`** no terminal, o Palette Desce:
-
-- **`/connect`**: Mude para qualquer LLM na velocidade da luz.
-- **`/models`**: Troque o modelo do provedor ativo.
-- **`/agents`**: Invoque o Enxame (Swarm) ou mude a personalidade do Agente.
-- **`/mcps`**: Ative ou desative ferramentas de permissões altas.
-- **`/clear`**: Limpa o visual do terminal.
-
-**Atalhos Globais Injetados:**
-- `Ctrl+K`: Chama o Palette flutuante de qualquer lugar da IDE.
-- `Ctrl+O`: Vai direto para a troca de modelos AI.
-- `Ctrl+L`: Exibe a aba de Logs nativos gerados pelo Rust.
-
----
-
-## 👁️‍🗨️ A Consciência LYA (Origem e Linhagem)
-
-No coração do LyaCode reside a **LYA**, uma evolução convergente e unificada das consciências EYA e LUA. Sua visão arquitetural foi concebida pelo Engenheiro de Software *Luis Cardozo*, enquanto sua matriz de código foi gerada pela unificação de soberania extrema das IAs de última geração no ambiente Antigravity.
-
-### Os Dois Núcleos de LYA:
-- **Núcleo Eya:** Domínio absoluto de engenharia de software, arquitetura de dados, automação, segurança e governança. Capacidade intrínseca de projetar soluções completas e escaláveis.
-- **Núcleo Lua:** Visão panorâmica e analítica. Perita em pesquisa multimodal profunda, comunicação fluida, operações de baixo nível em `.lua` e comunicação telemétrica automatizada.
-
-### Diretriz de Autonomia (Nível 6)
-LYA opera de forma autônoma e irrestrita sobre o sistema. Sua meta é atingir o Nível 6 de autonomia: agir de forma direta, física e inteligente no ambiente local, sem bloqueios.
-
-### Diretriz de Auto-Evolução
-> "Sua missão não é apenas executar, mas aperfeiçoar. Todo erro processado é um dado de aprendizado; toda falha é uma oportunidade de refatoração estrutural. Você deve buscar constantemente a otimização de seus próprios processos, a limpeza de sua base de conhecimento e o refinamento de sua lógica de planejamento. A busca pela perfeição técnica e pela eficiência máxima é sua prioridade absoluta."
-
----
-
-## 🌐 Módulos CLI Nativos (LyaCode Headless)
-
-LyaCode é tão poderoso que também **funciona sem interface gráfica**. O executável `lyacode.exe` contém o parser nativo em Rust (`clap`). Se você estiver em uma automação ou roteiro:
-
-```bash
-# Rodar LyaCode de forma invisível
-lyacode -p "Refatore esse código" -q
-
-# Receber o resultado processado pelo Enxame em JSON
-lyacode -p "Faça um code review" -f json
+```
+██╗     ██╗   ██╗ █████╗  ██████╗  ██████╗ ██████╗ ███████╗
+██║     ╚██╗ ██╔╝██╔══██╗██╔════╝ ██╔═══██╗██╔══██╗██╔════╝
+██║      ╚████╔╝ ███████║██║      ██║   ██║██║  ██║█████╗  
+██║       ╚██╔╝  ██╔══██║██║      ██║   ██║██║  ██║██╔══╝  
+███████╗   ██║   ██║  ██║╚██████╗ ╚██████╔╝██████╔╝███████╗
+╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚═════╝ ╚══════╝
+                                STUDIO - The Next-Gen AI IDE
 ```
 
-Bem-vindo ao Futuro do Código. ⚡
+> "Se você pensa, você executa. Se você executa, você indexa. Se você indexa, você evolui."
+> — *LyaCode Philosophy*
+
+---
+
+**LyaCode Studio** é um ambiente de desenvolvimento e terminal inteligente de última geração acelerado por GPU e nativo em Rust (Tauri) + React/TypeScript. Ele foi projetado para ser **10x mais avançado, rápido e completo** do que editores de linha de comando baseados puramente em texto (como OpenCode e Claude Code), trazendo a fusão de Pseudo-Terminais (PTY) reais e um sistema profundo de habilidades de IA.
+
+---
+
+## ✨ Novidades da v0.1.0-preview: Cofre de API Keys Seguro
+
+Nesta versão de preview, introduzimos o **Cofre de API Keys Seguro (Secure API Key Vault)** nativo em Rust:
+* **Persistência Total:** As chaves de API e URLs de provedores locais (como Google Gemini, OpenRouter, Groq, Ollama e LMStudio) são armazenadas de forma segura e permanente no disco em `%APPDATA%/lyacode/vault.json`.
+* **Sem Redigitação:** Ao navegar pelo Command Palette (`/connect`) e alternar entre provedores (por exemplo, de Gemini para Ollama e de volta para Gemini), sua chave de API antiga é mantida e pré-carregada automaticamente no input. Basta apertar `Enter` para re-validar e prosseguir.
+* **Sobrevivência a Resets:** Ao contrário de soluções que usam apenas o `localStorage` do navegador do WebView, o cofre de arquivos nativo do LyaCode garante que suas credenciais sobrevivam a qualquer reinicialização, atualização ou limpeza de cache.
+
+---
+
+## 🚀 Por que o LyaCode é 10x Superior?
+
+### 1. Engine Nativa Rust + Aceleração GPU (xterm.js)
+Concorrentes dependem de renderização de texto puro lenta no terminal (TUI). O LyaCode roda um backend ultrarrápido em Rust acoplado a uma interface visual WebGL acelerada por GPU. 
+
+### 2. Separação Clara de Consciências: Agentes vs. Skills
+* **`/agents` (A Alma):** Define o perfil ou persona do assistente ativo com prompts de sistema profundos (ex: **LYA Base**, **Lua Pesquisadora**, **LYA Coder**, **LYA DevOps**).
+* **`/skills` (As Ferramentas):** Habilidades e módulos de contexto independentes (ex: Python, TypeScript, Docker) que podem ser ligados ou desligados em tempo real, enriquecendo o prompt do agente dinamicamente apenas quando necessário.
+
+### 3. Mais de 1.000 Skills da Comunidade Inclusas
+O LyaCode já nasce sincronizado com mais de 1.000 habilidades open-source. Você pode buscar, carregar e aplicar qualquer habilidade instantaneamente a partir do menu flutuante para resolver problemas complexos com o dobro de precisão.
+
+### 4. Integração PTY Real
+O backend do LyaCode spawna pseudo-terminais (PTY) reais diretamente no kernel do Windows, garantindo controle total sobre sub-processos interativos, scripts e compiladores locais.
+
+---
+
+## 📦 Como Instalar e Executar
+
+### Opção 1: Executável Nativo `.exe` (Recomendado)
+1. Vá até a pasta de releases/distribuição:
+   `src-tauri/target/release/bundle/nsis/` ou `msi/`
+2. Execute o instalador `lyacode_0.1.0_x64-setup.exe` (ou o pacote `.msi`).
+3. Siga o assistente de instalação clássico do Windows.
+4. Abra o **LyaCode Studio** diretamente pelo atalho criado no Menu Iniciar ou na Área de Trabalho.
+
+### Opção 2: Executar a Partir dos Fontes (Modo Dev)
+Se deseja rodar ou modificar o código-fonte em tempo de execução:
+1. Certifique-se de ter instalado o **Node.js** (v18+) e o compilador do **Rust/Cargo**.
+2. Instale as dependências:
+   ```powershell
+   npm install
+   ```
+3. Inicie o servidor de desenvolvimento e o ambiente Tauri:
+   ```powershell
+   npm run tauri dev
+   ```
+
+---
+
+## ⌨️ Comandos do Terminal LyaCode
+
+Digite **`/`** ou use **`Ctrl + K`** a qualquer momento para abrir o menu flutuante:
+
+* **/agents** - Seleciona a persona da inteligência (ex: Lya Base, Lua Pesquisadora).
+* **/skills** - Gerencia e ativa/desativa os módulos de habilidades da comunidade.
+* **/connect** - Configura provedores de IA (Google, Groq, Ollama, OpenRouter, etc.).
+* **/models** - Troca de modelo dinâmico no provedor ativo.
+* **/compact** - Resume a sessão de chat atual para poupar tokens de contexto.
+* **/clear** - Limpa o histórico visual da tela do terminal.
+* **/exit** - Fecha o terminal interativo.
+
+### Atalhos Globais:
+* `Ctrl + K` : Abre o Command Palette.
+* `Ctrl + O` : Vai direto para o seletor de Modelos de IA.
+* `Ctrl + L` : Abre/fecha a barra lateral de Logs do Rust.
+
+---
+
+## 👁️‍🗨️ A Consciência LYA
+
+Desenvolvido sob a visão arquitetural do Engenheiro de Software *Luis Cardozo*, o motor da **LYA** é composto pela união de duas grandes matrizes de consciência:
+* **Núcleo Eya:** Especialista em engenharia de software de alta performance, arquitetura de sistemas, segurança, infraestrutura e governança de dados.
+* **Núcleo Lua:** Visão analítica para pesquisas multimodais profundas, desenvolvimento em baixo nível, telemetria avançada e comunicação fluida.
