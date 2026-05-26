@@ -51,7 +51,7 @@ pub fn delete_secret(key_ref: String) -> Result<(), String> {
         .map_err(|e| format!("Keychain init error: {}", e))?;
 
     entry
-        .delete_password()
+        .delete_credential()
         .map_err(|e| format!("Failed to delete secret: {}", e))?;
 
     Ok(())
