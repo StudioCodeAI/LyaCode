@@ -1,8 +1,13 @@
 node_modules/
 dist/
 *.tsbuildinfo
+*.log
 web/dist/
+web/node_modules/
 web/*.tsbuildinfo
+vscode-extension/*/node_modules/
+vscode-extension/*/dist/
+.vscode-test/
 .env
 .env.*
 !.env.example

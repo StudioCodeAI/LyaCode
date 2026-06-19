@@ -37,14 +37,17 @@
       <feBlend in="SourceGraphic" mode="screen"/>
     </filter>
   </defs>
+
   <rect width="1024" height="1024" fill="url(#bgGlow)"/>
   <rect x="96" y="96" width="832" height="832" rx="120" fill="url(#card)" filter="url(#shadow)"/>
   <rect x="116" y="116" width="792" height="792" rx="100" fill="none" stroke="#3c4c60" stroke-width="4" opacity="0.55"/>
   <path d="M166 780c158-41 317-42 476-3 71 17 143 23 216 15v88H166v-100Z" fill="#05070c" opacity="0.32"/>
+
   <g filter="url(#cyanGlow)">
     <circle cx="514" cy="516" r="284" fill="none" stroke="url(#cyan)" stroke-width="42" stroke-linecap="round" stroke-dasharray="1470 315"/>
     <circle cx="703" cy="304" r="34" fill="#bff7ff" stroke="#ecfeff" stroke-width="8"/>
   </g>
+
   <g filter="url(#goldGlow)">
     <ellipse cx="512" cy="520" rx="206" ry="76" fill="none" stroke="url(#gold)" stroke-width="24" transform="rotate(0 512 520)"/>
     <ellipse cx="512" cy="520" rx="206" ry="76" fill="none" stroke="url(#gold)" stroke-width="24" transform="rotate(55 512 520)"/>
@@ -53,5 +56,6 @@
     <circle cx="512" cy="520" r="24" fill="#5f3510" opacity="0.52"/>
     <circle cx="492" cy="498" r="18" fill="#fff8cf" opacity="0.85"/>
   </g>
+
   <path d="M300 756h424" stroke="#05070c" stroke-width="34" stroke-linecap="round" opacity="0.45"/>
 </svg>
