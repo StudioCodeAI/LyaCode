@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lyacloud.gitlawb.com/sitemap-index.xml
