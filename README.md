@@ -44,54 +44,15 @@ O objetivo é que Lya Cloud possa funcionar sozinha no terminal e também servir
 - Site/documentação em `web/`.
 - Identidade visual própria do Lya Cloud em `assets/brand/`.
 
-## Requisitos
+## Requisitos para Testar a CLI
 
 - Node.js `>=22.0.0`
-- Bun `>=1.3.13`
 - Git
 - ripgrep recomendado para melhor busca em projetos
 
-## Instalar Dependências
+## Instalar Para Teste
 
-Na raiz do projeto:
-
-```bash
-bun install
-```
-
-Para o site:
-
-```bash
-bun install --cwd web
-```
-
-## Rodar em Desenvolvimento
-
-Build da CLI:
-
-```bash
-bun run build
-```
-
-Executar a CLI pela raiz:
-
-```bash
-node bin/lyacloud
-```
-
-Verificar versão:
-
-```bash
-node bin/lyacloud --version
-```
-
-Resultado esperado:
-
-```text
-0.1.0 (Lya Cloud)
-```
-
-## Instalar Como Pacote Local
+Enquanto não existe release pública nem pacote npm oficial, o caminho de teste é instalar um pacote local `.tgz`.
 
 Gerar pacote local:
 
@@ -116,6 +77,48 @@ Remover depois do teste:
 
 ```bash
 npm uninstall -g @studiocodeai/lyacloud
+```
+
+## Desenvolver a Partir do Código-Fonte
+
+Esta seção é para quem vai mexer no repositório.
+
+O projeto usa **Bun** como gerenciador de dependências, executor de scripts e ferramenta de build. Por isso aparecem comandos como `bun install`, `bun run build` e `bun test`.
+
+Instalar dependências da CLI:
+
+```bash
+bun install
+```
+
+Instalar dependências do site:
+
+```bash
+bun install --cwd web
+```
+
+Build da CLI:
+
+```bash
+bun run build
+```
+
+Executar a CLI pela raiz:
+
+```bash
+node bin/lyacloud
+```
+
+Verificar versão:
+
+```bash
+node bin/lyacloud --version
+```
+
+Resultado esperado:
+
+```text
+0.1.0 (Lya Cloud)
 ```
 
 ## Comandos de Validação
