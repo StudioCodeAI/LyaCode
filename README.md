@@ -8,6 +8,12 @@ Lya Cloud is a local-first agentic terminal for software development. It connect
 
 Lya Cloud is part of the **Studio CodeAI** family.
 
+## Project Lineage
+
+The previous Studio CodeAI project, `StudioCodeAI/LyaCode`, is now discontinued. Its product direction has migrated to **Lya Cloud**, the new active CLI-first agentic terminal in the Studio CodeAI family.
+
+LyaCode remains a historical reference only. Lya Cloud is the current product line, repository foundation, and release path.
+
 ## Why Lya Cloud
 
 Most AI coding tools are either locked to one provider or shaped around a single hosted experience. Lya Cloud is designed as a provider-flexible CLI: local when you want sovereignty, cloud when you want scale, and extensible when your workflow needs tools, memory, tasks, or agents.
