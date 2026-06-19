@@ -4,120 +4,143 @@
 
 ![Lya Cloud brand preview](docs/assets/lyacloud-readme-hero.png)
 
-Lya Cloud is a local-first agentic terminal for software development. It connects cloud and local AI providers to a real project workspace, giving developers a terminal-native assistant that can inspect code, edit files, run commands, use tools, work with MCP servers, and help move a project from idea to implementation.
+Lya Cloud é uma CLI agentic para desenvolvimento de software. A proposta é abrir um projeto real no terminal e trabalhar com uma IA capaz de ler código, editar arquivos, executar comandos, usar ferramentas, alternar provedores de modelo e apoiar tarefas de engenharia.
 
-Lya Cloud is part of the **Studio CodeAI** family.
+Este projeto faz parte da família **Studio CodeAI**.
 
-## Project Lineage
+## Status
 
-The previous Studio CodeAI project, `StudioCodeAI/LyaCode`, is now discontinued. Its product direction has migrated to **Lya Cloud**, the new active CLI-first agentic terminal in the Studio CodeAI family.
+Lya Cloud está em fase de fundação.
 
-LyaCode remains a historical reference only. Lya Cloud is the current product line, repository foundation, and release path.
+O repositório atual é privado e ainda não deve ser tratado como release público, pacote npm oficial ou projeto open source final. A prioridade agora é consolidar identidade, build, instalação local, provedores, segurança e licenciamento.
 
-## Why Lya Cloud
+## Linhagem do Projeto
 
-Most AI coding tools are either locked to one provider or shaped around a single hosted experience. Lya Cloud is designed as a provider-flexible CLI: local when you want sovereignty, cloud when you want scale, and extensible when your workflow needs tools, memory, tasks, or agents.
+O projeto anterior da Studio CodeAI, `StudioCodeAI/LyaCode`, foi descontinuado. Sua evolução oficial migrou para **Lya Cloud**, o novo terminal CLI agentic da família Studio CodeAI.
 
-The goal is simple: open a project, start `lyacloud`, and work with an AI engineering partner inside the terminal.
+LyaCode permanece como referência histórica e visual. Lya Cloud é a linha de produto atual, a base deste repositório e o caminho de lançamento.
 
-## What It Does
+## O Que Já Existe
 
-- Interactive React/Ink terminal UI.
-- File read, write, edit, grep, glob, and project inspection tools.
-- Shell and PowerShell execution with permission flow.
-- Provider profiles for local and cloud models.
-- OpenAI-compatible APIs, Ollama, Gemini, Codex, Anthropic-family routes, and additional provider integrations.
-- MCP support for external tools and services.
-- Agent, task, memory, workflow, and session primitives.
-- VS Code companion extension source.
-- Documentation website source in `web/`.
+- CLI em TypeScript com runtime Node.js.
+- Interface terminal com React/Ink.
+- Ferramentas de leitura, busca, edição e inspeção de arquivos.
+- Execução de shell/PowerShell com fluxo de permissão.
+- Perfis de provedores locais e cloud.
+- Suporte a rotas OpenAI-compatible, Ollama, Gemini, Codex e provedores Anthropic-family.
+- MCP, agentes, tarefas, memória, workflow e sessões.
+- Extensão VS Code em `vscode-extension/lyacloud-vscode`.
+- Site/documentação em `web/`.
+- Identidade visual própria do Lya Cloud em `assets/brand/`.
 
-## Current Status
-
-Lya Cloud is in the **foundation phase**.
-
-The current work focuses on:
-
-- product identity;
-- clean Git foundation;
-- provider configuration;
-- terminal startup experience;
-- documentation;
-- website and partner/provider pages;
-- Studio CodeAI release path.
-
-## Requirements
+## Requisitos
 
 - Node.js `>=22.0.0`
 - Bun `>=1.3.13`
 - Git
-- ripgrep recommended for best project search behavior
+- ripgrep recomendado para melhor busca em projetos
 
-## Quick Start
+## Instalar Dependências
 
-Install dependencies:
+Na raiz do projeto:
 
 ```bash
 bun install
 ```
 
-Build the CLI:
+Para o site:
+
+```bash
+bun install --cwd web
+```
+
+## Rodar em Desenvolvimento
+
+Build da CLI:
 
 ```bash
 bun run build
 ```
 
-Run Lya Cloud:
+Executar a CLI pela raiz:
 
 ```bash
 node bin/lyacloud
 ```
 
-Check the version:
+Verificar versão:
 
 ```bash
 node bin/lyacloud --version
 ```
 
-Expected result:
+Resultado esperado:
 
 ```text
 0.1.0 (Lya Cloud)
 ```
 
-## Development Commands
+## Instalar Como Pacote Local
+
+Gerar pacote local:
 
 ```bash
-bun run build
+npm pack
+```
+
+Instalar globalmente a partir do pacote gerado:
+
+```bash
+npm install -g ./studiocodeai-lyacloud-0.1.0.tgz
+```
+
+Testar:
+
+```bash
+lyacloud --version
+lyacloud
+```
+
+Remover depois do teste:
+
+```bash
+npm uninstall -g @studiocodeai/lyacloud
+```
+
+## Comandos de Validação
+
+CLI:
+
+```bash
 bun run smoke
 bun run typecheck
 bun test
 ```
 
-For the website:
+Site:
 
 ```bash
-bun run web:dev
 bun run web:build
 bun run web:typecheck
 ```
 
-For the VS Code extension:
+Extensão VS Code:
 
 ```bash
 cd vscode-extension/lyacloud-vscode
+bun install
 bun test src
 ```
 
-## Provider Setup
+## Provedores
 
-Inside the CLI, run:
+Dentro da CLI:
 
 ```text
 /provider
 ```
 
-Local Ollama can be used through the OpenAI-compatible route:
+Exemplo com Ollama via rota OpenAI-compatible no PowerShell:
 
 ```powershell
 $env:CLAUDE_CODE_USE_OPENAI="1"
@@ -127,17 +150,17 @@ $env:OPENAI_API_KEY="local"
 node bin/lyacloud
 ```
 
-`CLAUDE_CODE_*` variables may remain when they are technical compatibility switches. They are not the Lya Cloud product identity.
+Variáveis `CLAUDE_CODE_*` ainda podem aparecer por compatibilidade técnica com partes herdadas da base. Elas não são identidade de produto do Lya Cloud.
 
-## Windows Helpers
+## Atalhos Windows
 
-PowerShell aliases are available in:
+Aliases PowerShell:
 
 ```text
 scripts/windows/lyacloud-aliases.ps1
 ```
 
-Documented aliases:
+Aliases documentados:
 
 - `lc`
 - `lya`
@@ -145,102 +168,100 @@ Documented aliases:
 - `lyacloud-provider`
 - `lyacloud-help`
 
-See:
+Guia:
 
 ```text
 docs/windows-aliases-and-launchers.md
 ```
 
-## Project Structure
+## Estrutura
 
 ```text
-bin/                 CLI launcher
-src/                 TypeScript source
-scripts/             Build, validation, provider, and helper scripts
-docs/                Product and technical documentation
-web/                 Documentation/product website
-vscode-extension/    VS Code companion extension
-tests/               SDK and build tests
-python/              Legacy/local provider helpers
+bin/                 launcher da CLI
+src/                 código TypeScript
+scripts/             build, validação, provedores e utilitários
+docs/                documentação técnica e produto
+web/                 site/documentação
+vscode-extension/    extensão companion para VS Code
+tests/               testes de SDK e build
+python/              helpers legados/locais existentes
+assets/brand/        identidade visual do Lya Cloud
 ```
 
-## Git Hygiene
+## Identidade
 
-This repository should not commit:
-
-- `node_modules/`
-- `dist/`
-- `.env`
-- local credentials
-- provider secrets
-- `.lyacloud/`
-- local profile files
-- local agent/Codex runtime folders
-
-The `.gitignore` is prepared for those rules.
-
-## Product Identity
-
-Product name:
+Nome do produto:
 
 ```text
 Lya Cloud
 ```
 
-Package and CLI:
+Pacote e comando:
 
 ```text
 @studiocodeai/lyacloud
 lyacloud
 ```
 
-Configuration direction:
+Configuração:
 
 ```text
 .lyacloud
 LYACLOUD_*
 ```
 
-Code identifier convention:
+Identificadores de código:
 
 ```text
 lyaCloud
 LyaCloud
 ```
 
+## Git e Segurança
+
+Não commitar:
+
+- `node_modules/`
+- `dist/`
+- `.env`
+- chaves de API
+- credenciais locais
+- perfis locais de provedor
+- `.lyacloud/`
+- logs, relatórios e artefatos de build
+
+Repositório remoto:
+
+```text
+https://github.com/StudioCodeAI/lyacloud
+```
+
+Por enquanto, manter como privado.
+
 ## Roadmap
 
-See:
+Documentos principais:
 
 ```text
 docs/LYA_CLOUD_ROADMAP.md
 docs/LYA_IDENTITY.md
+docs/BRAND_ASSETS.md
 ```
 
-Near-term priorities:
+Próximas frentes:
 
-- finish provider onboarding;
-- create product website pages;
-- create provider/partner program pages;
-- prepare GitHub repository metadata;
-- define first public release package;
-- validate local and cloud model paths.
+- finalizar onboarding de provedores;
+- validar caminhos local e cloud;
+- revisar segurança e permissões;
+- preparar primeira release privada;
+- criar página pública do produto;
+- decidir estratégia de licença e distribuição;
+- planejar se `lyacode` será alias, marca futura ou produto legado.
 
-## Partner Direction
+## Licença e Distribuição
 
-Lya Cloud is designed to work with partner providers. Good first targets include:
+Este projeto contém código derivado de uma base de coding-agent CLI herdada. A licença ainda está em revisão.
 
-- Atlas Cloud;
-- Groq;
-- Together AI;
-- Fireworks AI;
-- Google Cloud AI;
-- MongoDB Atlas and Voyage AI.
+Não publicar como open source nem distribuir publicamente antes da revisão legal/técnica. As modificações da Studio CodeAI podem receber uma licença própria quando for seguro separar o que é nosso do que é herdado.
 
-The ideal partnership model is simple: provider visibility inside Lya Cloud, docs and onboarding support, and starter credits or coupons for Studio CodeAI users.
-
-## License
-
-License review is part of the foundation phase because this project starts from a derived open-source coding-agent base.
-
-Do not publish secrets, private partner terms, or credentials in this repository.
+Não publicar secrets, termos privados de parceiros ou credenciais neste repositório.
