@@ -1,5 +1,5 @@
 /**
- * Lya Cloud startup screen — filled-block text logo with Studio CodeAI gradient.
+ * Lya Cloud startup screen — single-line title-case wordmark with Studio CodeAI gradient.
  * Called once at CLI startup before the Ink UI renders.
  */
 
@@ -25,6 +25,7 @@ declare const MACRO: { VERSION: string; DISPLAY_VERSION?: string }
 
 const RESET = ANSI_RESET
 const DIM = ANSI_DIM
+const BOLD = '\x1b[1m'
 
 function lerp(a: RGB, b: RGB, t: number): RGB {
   return [
@@ -52,25 +53,9 @@ export function paintLine(text: string, stops: readonly RGB[], lineT: number): s
   return out + RESET
 }
 
-// ─── Filled Block Text Logo ───────────────────────────────────────────────────
+// ─── Single-line Wordmark ─────────────────────────────────────────────────────
 
-const LOGO_LYA = [
-  `  ██╗     ██╗   ██╗ █████╗ `,
-  `  ██║     ╚██╗ ██╔╝██╔══██╗`,
-  `  ██║      ╚████╔╝ ███████║`,
-  `  ██║       ╚██╔╝  ██╔══██║`,
-  `  ███████╗   ██║   ██║  ██║`,
-  `  ╚══════╝   ╚═╝   ╚═╝  ╚═╝`,
-]
-
-const LOGO_CLOUD = [
-  `   ██████╗██╗      ██████╗ ██╗   ██╗██████╗ `,
-  `  ██╔════╝██║     ██╔═══██╗██║   ██║██╔══██╗`,
-  `  ██║     ██║     ██║   ██║██║   ██║██║  ██║`,
-  `  ██║     ██║     ██║   ██║██║   ██║██║  ██║`,
-  `  ╚██████╗███████╗╚██████╔╝╚██████╔╝██████╔╝`,
-  `   ╚═════╝╚══════╝ ╚═════╝  ╚═════╝ ╚═════╝ `,
-]
+const LOGO_WORDMARK = '  Lya Cloud'
 
 // ─── Provider detection ───────────────────────────────────────────────────────
 
@@ -194,16 +179,7 @@ export function printStartupScreen(modelOverride?: string): void {
   out.push('')
 
   // Gradient logo
-  const allLogo = [...LOGO_LYA, '', ...LOGO_CLOUD]
-  const total = allLogo.length
-  for (let i = 0; i < total; i++) {
-    const t = total > 1 ? i / (total - 1) : 0
-    if (allLogo[i] === '') {
-      out.push('')
-    } else {
-      out.push(paintLine(allLogo[i], GRAD, t))
-    }
-  }
+  out.push(`${BOLD}${paintLine(LOGO_WORDMARK, GRAD, 0.45)}`)
 
   out.push('')
 
