@@ -32,7 +32,7 @@ lyacode
 
 ## Decisao De Arquitetura
 
-A base principal do novo produto e o projeto na raiz. A pasta antiga `LyaCode/` fica como referencia historica e visual, nao como arquitetura principal. Ela pode inspirar temas, linguagem de produto, command palette, providers, skills e conceitos de seguranca, mas a CLI atual deve evoluir a partir do motor terminal-first existente.
+A base principal do novo produto e o projeto na raiz. O projeto antigo `StudioCodeAI/LyaCode` fica como legado historico e sera aposentado apos a consolidacao do Lya Cloud. Ele pode inspirar temas, linguagem de produto, command palette, providers, skills e conceitos de seguranca, mas nao e produto paralelo nem arquitetura principal. A CLI atual deve evoluir a partir do motor terminal-first existente.
 
 ## Regra De Identidade
 

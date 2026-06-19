@@ -2,29 +2,41 @@
 
 Lya Cloud is a Studio CodeAI product. Its visual identity must be independent from older Studio CodeAI projects while keeping a recognizable family feeling.
 
-## Official Mark
+## Official Mark System
 
-The current Lya Cloud mark combines three ideas:
+The Lya Cloud mark system combines three ideas:
 
-- Cloud runtime: provider-flexible AI execution across local and cloud models.
-- Terminal workflow: a command-line assistant built for real development projects.
-- Agent graph: connected tool use, memory, MCP, and task orchestration.
+- Atomic intelligence: the central gold nucleus and orbit system.
+- Cloud/runtime presence: the cyan living orbit around the core.
+- Terminal workflow: compact recognition for CLI, docs, extension, and release surfaces.
 
 Official files:
 
-- `assets/brand/lyacloud-icon.svg`
-- `assets/brand/lyacloud-icon-1024.png`
-- `assets/brand/lyacloud-icon-512.png`
+- `assets/brand/lyacloud-logo.svg` - clean main logo for CLI, favicon, npm, and compact identity.
+- `assets/brand/lyacloud-app-icon.svg` - framed app/extension icon.
+- `assets/brand/lyacloud-favicon-thinking.svg` - animated thinking/startup favicon.
+- `assets/brand/lyacloud-logo-1024.png`
+- `assets/brand/lyacloud-logo-512.png`
+- `assets/brand/lyacloud-app-icon-1024.png`
+- `assets/brand/lyacloud-app-icon-512.png`
 - `docs/assets/lyacloud-readme-hero.png`
 - `web/public/lyacloud-logo.svg`
+- `web/public/lyacloud-app-icon.svg`
+- `web/public/favicon-thinking.svg`
 - `web/public/lyacloud.png`
 - `vscode-extension/lyacloud-vscode/media/lyacloud.svg`
+
+Usage:
+
+- Main CLI logo and favicon: use the clean logo.
+- App stores, extension icons, social cards, and README hero: use the framed app icon.
+- Startup, waiting, thinking, or loading browser states: use the animated thinking favicon.
 
 ## Legacy Reference Assets
 
 The asset folder `E:\GitHub\LyaCode\assets` contains visuals from another Studio CodeAI project. Those files can guide color, energy, and family language, but they must not be copied into Lya Cloud unchanged.
 
-The first small alternative mark from `lya-brand.jpg` is the approved direction for the CLI icon. The Lya Cloud production icon is a cleaned vector derivative of that direction, not a direct copy of the older project export.
+The first small alternative mark from `lya-brand.jpg` is the approved direction for the CLI icon. The Lya Cloud production icons are cleaned vector derivatives of that direction, not direct copies of the older project export.
 
 Do not reuse these older marks directly:
 
