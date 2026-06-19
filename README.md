@@ -16,7 +16,7 @@ O repositório atual é privado e ainda não deve ser tratado como release públ
 
 ## Linhagem do Projeto
 
-O projeto anterior da Studio CodeAI, `StudioCodeAI/LyaCode`, foi descontinuado. Sua evolução oficial migrou para **Lya Cloud**, o novo terminal CLI agentic da família Studio CodeAI.
+O projeto anterior em `StudioCodeAI/LyaCode` foi descontinuado. Sua evolução oficial migrou para **Lya Cloud**, o novo terminal CLI agentic da família Studio CodeAI.
 
 LyaCode permanece como referência histórica e visual. Lya Cloud é a linha de produto atual, a base deste repositório e o caminho de lançamento.
 
