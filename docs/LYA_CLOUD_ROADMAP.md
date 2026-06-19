@@ -174,9 +174,12 @@ Objetivo: fazer a CLI parecer nossa, nao apenas renomeada.
 
 Entregas:
 - Ajustar system prompt e identidade operacional da Lya.
+- Definir personalidade operacional da Star 1 em modo solo e modo COSMOS.
+- Criar documento de orquestracao COSMOS/Star 1.
 - Revisar comandos essenciais: `/help`, `/provider`, `/model`, `/status`, `/memory`, `/agents`, `/tasks`.
 - Adicionar comando `/studio` ou `/about` mostrando Studio CodeAI.
 - Definir contrato inicial para Lya Studio Coder chamar Lya Cloud como CLI de apoio.
+- Mapear skills iniciais: Project Scout, Root Cause Hunter, Patch Executor, Test Runner, Provider Operator, Memory Scribe e Studio Bridge.
 - Padronizar linguagem do produto em pt-BR e ingles conforme tela.
 
 Validacao:

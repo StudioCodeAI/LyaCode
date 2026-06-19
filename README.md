@@ -257,12 +257,14 @@ Documentos principais:
 docs/LYA_CLOUD_ROADMAP.md
 docs/LYA_IDENTITY.md
 docs/BRAND_ASSETS.md
+docs/COSMOS_STAR1_ORCHESTRATION.md
 ```
 
 Próximas frentes:
 
 - finalizar onboarding de provedores;
 - definir integração e contratos com Lya Studio Coder;
+- desenvolver skills Star 1 para análise, patch, teste, provider, memória e ponte com a IDE;
 - validar caminhos local e cloud;
 - revisar segurança e permissões;
 - preparar primeira release privada;
