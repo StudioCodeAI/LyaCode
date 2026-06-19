@@ -3,12 +3,15 @@
 Produto: Lya Cloud
 Familia: Studio CodeAI
 Categoria: CLI agentic terminal para desenvolvimento local
+Papel no ecossistema: CLI Star 1 e camada terminal da Lya Studio Coder
 Base inicial: coding-agent CLI herdada
 Status: fundacao
 
 ## Visao
 
-Lya Cloud sera uma CLI agentic terminal da familia Studio CodeAI. O produto deve manter o que a base atual ja entrega bem: terminal interativo, ferramentas de arquivos, shell, provedores, agentes, memoria, MCP, tarefas e extensao VS Code. A primeira etapa nao e reescrever o motor. A primeira etapa e transformar identidade, distribuicao e governanca sem quebrar a base funcional.
+Lya Cloud sera uma CLI agentic terminal da familia Studio CodeAI. Ela nasce como Star 1: a camada CLI que pode operar sozinha no terminal e tambem servir a irma mais velha, `StudioCodeAI/Lya-Studio-Coder`, como base terminal-first para tarefas agentic em projetos reais.
+
+O produto deve manter o que a base atual ja entrega bem: terminal interativo, ferramentas de arquivos, shell, provedores, agentes, memoria, MCP, tarefas e extensao VS Code. A primeira etapa nao e reescrever o motor. A primeira etapa e transformar identidade, distribuicao e governanca sem quebrar a base funcional.
 
 Na tela inicial, o alvo e consolidar a identidade:
 
@@ -33,6 +36,8 @@ lyacode
 ## Decisao De Arquitetura
 
 A base principal do novo produto e o projeto na raiz. O projeto antigo `StudioCodeAI/LyaCode` foi descontinuado, e sua evolucao oficial migrou para o Lya Cloud. Ele fica como legado historico e referencia de inspiracao, mas nao e produto paralelo nem arquitetura principal. A CLI atual deve evoluir a partir do motor terminal-first existente.
+
+`StudioCodeAI/Lya-Studio-Coder` e a irma mais velha do ecossistema: cockpit/IDE visual, multi-IA e local-first. Lya Cloud nao substitui essa aplicacao. Lya Cloud fornece a CLI Star 1: uma camada menor, instalavel, scriptavel e terminal-first que pode ser usada de forma independente ou integrada a fluxos da Lya Studio Coder.
 
 ## Regra De Identidade
 
@@ -171,6 +176,7 @@ Entregas:
 - Ajustar system prompt e identidade operacional da Lya.
 - Revisar comandos essenciais: `/help`, `/provider`, `/model`, `/status`, `/memory`, `/agents`, `/tasks`.
 - Adicionar comando `/studio` ou `/about` mostrando Studio CodeAI.
+- Definir contrato inicial para Lya Studio Coder chamar Lya Cloud como CLI de apoio.
 - Padronizar linguagem do produto em pt-BR e ingles conforme tela.
 
 Validacao:

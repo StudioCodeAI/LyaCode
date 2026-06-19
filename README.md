@@ -6,7 +6,7 @@
 
 Lya Cloud é uma CLI agentic para desenvolvimento de software. A proposta é abrir um projeto real no terminal e trabalhar com uma IA capaz de ler código, editar arquivos, executar comandos, usar ferramentas, alternar provedores de modelo e apoiar tarefas de engenharia.
 
-Este projeto faz parte da família **Studio CodeAI**.
+Este projeto faz parte da família **Studio CodeAI** e nasce como a **CLI Star 1** do ecossistema: a camada terminal agentic que serve a irmã mais velha, [Lya Studio Coder](https://github.com/StudioCodeAI/Lya-Studio-Coder).
 
 ## Status
 
@@ -19,6 +19,17 @@ O repositório atual é privado e ainda não deve ser tratado como release públ
 O projeto anterior em `StudioCodeAI/LyaCode` foi descontinuado. Sua evolução oficial migrou para **Lya Cloud**, o novo terminal CLI agentic da família Studio CodeAI.
 
 LyaCode permanece como referência histórica e visual. Lya Cloud é a linha de produto atual, a base deste repositório e o caminho de lançamento.
+
+## Papel no Ecossistema Studio CodeAI
+
+Lya Studio Coder é o cockpit/IDE maior da família Studio CodeAI. Lya Cloud é a camada CLI: mais leve, terminal-first, instalável em projetos reais e preparada para executar tarefas agentic diretamente no workspace.
+
+Em termos de produto:
+
+- **Lya Studio Coder**: experiência visual completa, cockpit multi-IA, editor, automações e orquestração.
+- **Lya Cloud**: CLI Star 1, terminal agentic, base de execução local/cloud e ponte operacional para projetos de código.
+
+O objetivo é que Lya Cloud possa funcionar sozinha no terminal e também servir como fundação CLI para fluxos do Lya Studio Coder.
 
 ## O Que Já Existe
 
@@ -251,6 +262,7 @@ docs/BRAND_ASSETS.md
 Próximas frentes:
 
 - finalizar onboarding de provedores;
+- definir integração e contratos com Lya Studio Coder;
 - validar caminhos local e cloud;
 - revisar segurança e permissões;
 - preparar primeira release privada;
