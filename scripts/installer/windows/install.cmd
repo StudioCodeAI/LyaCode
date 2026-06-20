@@ -1,6 +1,6 @@
 @echo off
 REM Lya Code Windows Installer launcher
-REM Luis Cardozo Ã‚Â· studiocoder.ai@gmail.com Ã‚Â· Studio CodeAI
+REM Luis Cardozo Ãƒâ€šÃ‚Â· studiocoder.ai@gmail.com Ãƒâ€šÃ‚Â· Studio CodeAI
 REM
 REM Usage: install.cmd [/D] [/T:<tarball>] [/Y]
 REM   /D           Dry run (nao instala, so mostra)
@@ -8,7 +8,7 @@ REM   /T:<tgz>     Caminho do tarball (default: .\studiocodeai-lyacode-1.0.1.tgz
 REM   /Y           Suprime atalhos no Menu Iniciar
 REM
 REM Para buildar um .exe auto-extraivel:
-REM   iexpress /N:lyacode-setup-x64.sed /O:..\..\..\dist\installer\lyacode-setup-x64-1.0.6.exe
+REM   iexpress /N:lyacode-setup-x64.sed /O:..\..\..\dist\installer\lyacode-setup-x64-1.0.7.exe
 
 setlocal
 
@@ -31,10 +31,10 @@ shift & goto :parse
 
 :end_parse
 
-if "%TARBALL%"=="" set "TARBALL=%~dp0studiocodeai-lyacode-1.0.6.tgz"
+if "%TARBALL%"=="" set "TARBALL=%~dp0studiocodeai-lyacode-1.0.7.tgz"
 
 echo.
-echo  Lya Code v1.0.6 - Installer Windows
+echo  Lya Code v1.0.7 - Installer Windows
 echo  Familia Studio CodeAI
 echo.
 echo  Requisitos: Node.js 22 LTS ou superior

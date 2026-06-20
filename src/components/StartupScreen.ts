@@ -56,11 +56,11 @@ export function paintLine(text: string, stops: readonly RGB[], lineT: number): s
 // ─── Wordmark (ANSI Shadow style) ───────────────────────────────────────────
 // Hardcoded "LYA CODE" in ANSI Regular font, to match Open Claude but smaller.
 const WORDMARK_ANSI_SHADOW = [
-  '██      ██    ██  █████       ██████  ██████  ██████  ███████ ',
-  '██       ██  ██  ██   ██     ██    ██ ██   ██ ██      ██      ',
-  '██        ████   ███████     ██       ██   ██ ██      █████   ',
-  '██         ██    ██   ██     ██    ██ ██   ██ ██      ██      ',
-  '███████    ██    ██   ██      ██████  ██████  ██████  ███████ ',
+  '██                             ██████                ██           ',
+  '██      ██   ██   ██████      ██        █████    ██████   █████   ',
+  '██      ██   ██  ██   ██      ██       ██   ██  ██   ██  ███████  ',
+  '███████  ██████   ██████       ██████   █████    ██████   ██████  ',
+  '             ██                                                   '
 ]
 
 function renderWordmark(): string[] {

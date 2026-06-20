@@ -2,61 +2,61 @@
 
 # Lya Code
 
-**CLI agentic terminal Ã‚Â· Studio CodeAI**
+**CLI agentic terminal Ãƒâ€šÃ‚Â· Studio CodeAI**
 
-*Abra qualquer projeto no terminal e trabalhe com Lya Ã¢â‚¬â€ uma IA que lÃƒÂª cÃƒÂ³digo, edita arquivos, executa comandos e apoia tarefas de engenharia do inÃƒÂ­cio ao fim.*
+*Abra qualquer projeto no terminal e trabalhe com Lya ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â uma IA que lÃƒÆ’Ã‚Âª cÃƒÆ’Ã‚Â³digo, edita arquivos, executa comandos e apoia tarefas de engenharia do inÃƒÆ’Ã‚Â­cio ao fim.*
 
-[![Version](https://img.shields.io/badge/version-1.0.6-orange?style=flat-square)](https://github.com/StudioCodeAI/lyacode-installers/releases/latest)
+[![Version](https://img.shields.io/badge/version-1.0.7-orange?style=flat-square)](https://github.com/StudioCodeAI/lyacode-installers/releases/latest)
 [![License](https://img.shields.io/badge/license-Proprietary-red?style=flat-square)](./LICENSE)
 [![Node](https://img.shields.io/badge/node-%3E%3D22.0.0-green?style=flat-square)](https://nodejs.org)
 [![Studio CodeAI](https://img.shields.io/badge/Studio-CodeAI-ff7a1a?style=flat-square)](https://github.com/StudioCodeAI)
-[![Releases](https://img.shields.io/badge/Ã°Å¸â€œÂ¦%20installers-public-brightgreen?style=flat-square)](https://github.com/StudioCodeAI/lyacode-installers/releases/latest)
+[![Releases](https://img.shields.io/badge/ÃƒÂ°Ã…Â¸Ã¢â‚¬Å“Ã‚Â¦%20installers-public-brightgreen?style=flat-square)](https://github.com/StudioCodeAI/lyacode-installers/releases/latest)
 
 </div>
 
 ---
 
-> Ã¢Å¡Â Ã¯Â¸Â **RepositÃƒÂ³rio pÃƒÂºblico Ã¢â‚¬â€ cÃƒÂ³digo-fonte restrito.**
-> Este repositÃƒÂ³rio contÃƒÂ©m documentaÃƒÂ§ÃƒÂ£o, identidade do projeto e histÃƒÂ³rico de releases.
-> O acesso ao cÃƒÂ³digo-fonte ÃƒÂ© concedido apenas a colaboradores autorizados pela Studio CodeAI.
-> Para instalaÃƒÂ§ÃƒÂ£o, use os links abaixo Ã¢â‚¬â€ nenhum acesso ao cÃƒÂ³digo ÃƒÂ© necessÃƒÂ¡rio.
+> ÃƒÂ¢Ã…Â¡Ã‚Â ÃƒÂ¯Ã‚Â¸Ã‚Â **RepositÃƒÆ’Ã‚Â³rio pÃƒÆ’Ã‚Âºblico ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â cÃƒÆ’Ã‚Â³digo-fonte restrito.**
+> Este repositÃƒÆ’Ã‚Â³rio contÃƒÆ’Ã‚Â©m documentaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o, identidade do projeto e histÃƒÆ’Ã‚Â³rico de releases.
+> O acesso ao cÃƒÆ’Ã‚Â³digo-fonte ÃƒÆ’Ã‚Â© concedido apenas a colaboradores autorizados pela Studio CodeAI.
+> Para instalaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o, use os links abaixo ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â nenhum acesso ao cÃƒÆ’Ã‚Â³digo ÃƒÆ’Ã‚Â© necessÃƒÆ’Ã‚Â¡rio.
 
 ---
 
-## Ã¢Å¡Â¡ InstalaÃƒÂ§ÃƒÂ£o rÃƒÂ¡pida
+## ÃƒÂ¢Ã…Â¡Ã‚Â¡ InstalaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o rÃƒÆ’Ã‚Â¡pida
 
-> Ã°Å¸â€œÂ¦ **Instaladores e releases:** [github.com/StudioCodeAI/lyacode-installers](https://github.com/StudioCodeAI/lyacode-installers/releases/latest)
+> ÃƒÂ°Ã…Â¸Ã¢â‚¬Å“Ã‚Â¦ **Instaladores e releases:** [github.com/StudioCodeAI/lyacode-installers](https://github.com/StudioCodeAI/lyacode-installers/releases/latest)
 
 ### Multi-plataforma via npm (recomendado)
 
 ```bash
-npm install -g https://github.com/StudioCodeAI/lyacode-installers/releases/download/v1.0.6/studiocodeai-lyacode-1.0.6.tgz
+npm install -g https://github.com/StudioCodeAI/lyacode-installers/releases/download/v1.0.7/studiocodeai-lyacode-1.0.7.tgz
 ```
 
-### Windows Ã¢â‚¬â€ Portable .zip
+### Windows ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Portable .zip
 
 ```powershell
-irm https://github.com/StudioCodeAI/lyacode-installers/releases/download/v1.0.6/lyacode-portable-1.0.6.zip -OutFile lyacode-portable.zip
+irm https://github.com/StudioCodeAI/lyacode-installers/releases/download/v1.0.7/lyacode-portable-1.0.7.zip -OutFile lyacode-portable.zip
 Expand-Archive lyacode-portable.zip -DestinationPath .\lyacode-portable -Force
 cd lyacode-portable
 .\install.cmd
 ```
 
-### Windows Ã¢â‚¬â€ Instalador .exe
+### Windows ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Instalador .exe
 
 ```powershell
-irm https://github.com/StudioCodeAI/lyacode-installers/releases/download/v1.0.6/lyacode-setup-x64-1.0.6.exe -OutFile lyacode-setup.exe
+irm https://github.com/StudioCodeAI/lyacode-installers/releases/download/v1.0.7/lyacode-setup-x64-1.0.7.exe -OutFile lyacode-setup.exe
 .\lyacode-setup.exe
 ```
 
-ApÃƒÂ³s a instalaÃƒÂ§ÃƒÂ£o, abra um **novo terminal** e digite `lya`.
+ApÃƒÆ’Ã‚Â³s a instalaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o, abra um **novo terminal** e digite `lya`.
 
-### Validar instalaÃƒÂ§ÃƒÂ£o
+### Validar instalaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o
 
-Todos os aliases abaixo apontam para o mesmo binÃƒÂ¡rio:
+Todos os aliases abaixo apontam para o mesmo binÃƒÆ’Ã‚Â¡rio:
 
 ```bash
-lya --version       # Ã¢â€ â€™ 1.0.6 (Lya Code)
+lya --version       # ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ 1.0.7 (Lya Code)
 lyacode --version
 lscloud --version
 lyacode --version
@@ -71,16 +71,16 @@ npm uninstall -g @studiocodeai/lyacode
 
 ---
 
-## Ã°Å¸Å¡â‚¬ Primeiros passos
+## ÃƒÂ°Ã…Â¸Ã…Â¡Ã¢â€šÂ¬ Primeiros passos
 
 ```bash
 # 1. Inicie a CLI
 lya
 
 # 2. Configure um provedor de IA
-> /provider          # Ollama Local aparece 1Ã‚Âº se estiver rodando
+> /provider          # Ollama Local aparece 1Ãƒâ€šÃ‚Âº se estiver rodando
 
-# 3. Ative a persona Lya (engenheira sÃƒÂªnior + sub-agentes)
+# 3. Ative a persona Lya (engenheira sÃƒÆ’Ã‚Âªnior + sub-agentes)
 > /lya
 
 # 4. Explore todos os comandos
@@ -89,56 +89,56 @@ lya
 
 ---
 
-## Ã°Å¸Â§Â  Persona Lya
+## ÃƒÂ°Ã…Â¸Ã‚Â§Ã‚Â  Persona Lya
 
-**Lya** ÃƒÂ© a engenheira de software sÃƒÂªnior e CEO de projeto da famÃƒÂ­lia Studio CodeAI.
+**Lya** ÃƒÆ’Ã‚Â© a engenheira de software sÃƒÆ’Ã‚Âªnior e CEO de projeto da famÃƒÆ’Ã‚Â­lia Studio CodeAI.
 Arquitetada para combinar dois estilos complementares:
 
 | Camada | Modelo base | Foco |
 |--------|-------------|------|
-| **DecisÃƒÂ£o** | Claude Opus | Arquitetura, tradeoffs de longo prazo, evidÃƒÂªncia antes de convicÃƒÂ§ÃƒÂ£o |
-| **ExecuÃƒÂ§ÃƒÂ£o** | Sonnet 4.x | Patches cirÃƒÂºrgicos, cobertura typecheck + test + smoke, commits atÃƒÂ´micos |
+| **DecisÃƒÆ’Ã‚Â£o** | Claude Opus | Arquitetura, tradeoffs de longo prazo, evidÃƒÆ’Ã‚Âªncia antes de convicÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o |
+| **ExecuÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o** | Sonnet 4.x | Patches cirÃƒÆ’Ã‚Âºrgicos, cobertura typecheck + test + smoke, commits atÃƒÆ’Ã‚Â´micos |
 
 ### 7 Sub-agentes especializados
 
 | Agente | Papel |
 |--------|-------|
 | `lya-architect` | Design de sistemas, tradeoffs, ADRs |
-| `lya-explorer` | InvestigaÃƒÂ§ÃƒÂ£o read-only, mapeamento de cÃƒÂ³digo |
-| `lya-reviewer` | Code review prÃƒÂ©-merge com veredito + findings |
+| `lya-explorer` | InvestigaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o read-only, mapeamento de cÃƒÆ’Ã‚Â³digo |
+| `lya-reviewer` | Code review prÃƒÆ’Ã‚Â©-merge com veredito + findings |
 | `lya-tester` | Escrita de testes `bun:test` (happy + edge + mocks) |
-| `lya-recorder` | Commits, PRs e changelogs no padrÃƒÂ£o Studio CodeAI |
-| `lya-memory` | MemÃƒÂ³ria de sessÃƒÂ£o e contexto persistente |
-| `lya-provider` | GestÃƒÂ£o de perfis de provedor de IA |
+| `lya-recorder` | Commits, PRs e changelogs no padrÃƒÆ’Ã‚Â£o Studio CodeAI |
+| `lya-memory` | MemÃƒÆ’Ã‚Â³ria de sessÃƒÆ’Ã‚Â£o e contexto persistente |
+| `lya-provider` | GestÃƒÆ’Ã‚Â£o de perfis de provedor de IA |
 
 ### Invocar Lya
 
 ```bash
-lya          # inicia o CLI Ã¢â‚¬â€ Lya ÃƒÂ© o agente default
+lya          # inicia o CLI ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Lya ÃƒÆ’Ã‚Â© o agente default
 > /lya       # recarrega o system prompt base da Lya explicitamente
-> /agents    # lista todos os sub-agentes disponÃƒÂ­veis
+> /agents    # lista todos os sub-agentes disponÃƒÆ’Ã‚Â­veis
 ```
 
 ---
 
-## Ã°Å¸Å’Â Provedores suportados (35+)
+## ÃƒÂ°Ã…Â¸Ã…â€™Ã‚Â Provedores suportados (35+)
 
-Configure via `/provider`. A ordem de exibiÃƒÂ§ÃƒÂ£o:
+Configure via `/provider`. A ordem de exibiÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o:
 
-| # | Provedor | DescriÃƒÂ§ÃƒÂ£o |
+| # | Provedor | DescriÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o |
 |---|----------|-----------|
-| 1 | **Ollama Local** | 100% local Ã‚Â· `http://localhost:11434` Ã‚Â· sem chave de API |
-| 2 | **Anthropic / Claude** | Provider default Ã‚Â· `ANTHROPIC_API_KEY` |
+| 1 | **Ollama Local** | 100% local Ãƒâ€šÃ‚Â· `http://localhost:11434` Ãƒâ€šÃ‚Â· sem chave de API |
+| 2 | **Anthropic / Claude** | Provider default Ãƒâ€šÃ‚Â· `ANTHROPIC_API_KEY` |
 | 3 | **DashScope** (CN / Intl) | Alibaba Qwen via API |
 | 4 | **Atlas Cloud** | OpenAI-compatible |
 | 5 | **Azure OpenAI** | Endpoint corporativo Azure |
 | 6 | **Bankr** | LLM Gateway OpenAI-compatible |
-| 7 | **DeepSeek** | Modelos de raciocÃƒÂ­nio DeepSeek |
+| 7 | **DeepSeek** | Modelos de raciocÃƒÆ’Ã‚Â­nio DeepSeek |
 | 8 | **Fireworks AI** | Modelos open via Fireworks |
-| 9 | **Gemini** | Google Gemini Ã‚Â· `GEMINI_API_KEY` |
-| 10 | **Groq** | InferÃƒÂªncia ultra-rÃƒÂ¡pida |
+| 9 | **Gemini** | Google Gemini Ãƒâ€šÃ‚Â· `GEMINI_API_KEY` |
+| 10 | **Groq** | InferÃƒÆ’Ã‚Âªncia ultra-rÃƒÆ’Ã‚Â¡pida |
 | 11 | **Hicap** | Gateway OpenAI-compatible |
-| 12 | **LM Studio** | Local Ã‚Â· interface grÃƒÂ¡fica |
+| 12 | **LM Studio** | Local Ãƒâ€šÃ‚Â· interface grÃƒÆ’Ã‚Â¡fica |
 | 13 | **Atomic Chat** | Local Model Provider |
 | 14 | **MiniMax** | API MiniMax |
 | 15 | **Mistral** | devstral-latest e variantes |
@@ -146,9 +146,9 @@ Configure via `/provider`. A ordem de exibiÃƒÂ§ÃƒÂ£o:
 | 17 | **Kimi Code** | Assinatura Kimi Code |
 | 18 | **NEAR AI** | Gateway unificado Claude + GPT + Gemini |
 | 19 | **NVIDIA NIM** | Modelos NVIDIA otimizados |
-| 20 | **OpenAI** | API OpenAI Ã‚Â· `OPENAI_API_KEY` |
-| 21 | **OpenCode Go** | $10/mÃƒÂªs Ã‚Â· 13 modelos open |
-| 22 | **OpenCode Zen** | Pay-as-you-go Ã‚Â· 43 modelos |
+| 20 | **OpenAI** | API OpenAI Ãƒâ€šÃ‚Â· `OPENAI_API_KEY` |
+| 21 | **OpenCode Go** | $10/mÃƒÆ’Ã‚Âªs Ãƒâ€šÃ‚Â· 13 modelos open |
+| 22 | **OpenCode Zen** | Pay-as-you-go Ãƒâ€šÃ‚Â· 43 modelos |
 | 23 | **OpenRouter** | Agregador de 200+ modelos |
 | 24 | **Together AI** | Modelos open via Together |
 | 25 | **Venice** | OpenAI-compatible |
@@ -160,29 +160,29 @@ Configure via `/provider`. A ordem de exibiÃƒÂ§ÃƒÂ£o:
 
 ---
 
-## Ã°Å¸Â§Â° Funcionalidades
+## ÃƒÂ°Ã…Â¸Ã‚Â§Ã‚Â° Funcionalidades
 
-- Ã¢Å“â€¦ CLI TypeScript Ã‚Â· runtime Node.js Ã¢â€°Â¥ 22
-- Ã¢Å“â€¦ Interface terminal com React/Ink + gradientes ANSI Studio CodeAI
-- Ã¢Å“â€¦ Persona **Lya** com 7 sub-agentes especializados
-- Ã¢Å“â€¦ Leitura, busca, ediÃƒÂ§ÃƒÂ£o e inspeÃƒÂ§ÃƒÂ£o de arquivos em qualquer projeto
-- Ã¢Å“â€¦ ExecuÃƒÂ§ÃƒÂ£o de shell / PowerShell com fluxo de permissÃƒÂ£o explÃƒÂ­cita
-- Ã¢Å“â€¦ Multi-provedor: 35+ provedores configurÃƒÂ¡veis via `/provider`
-- Ã¢Å“â€¦ MCP (Model Context Protocol) Ã¢â‚¬â€ integraÃƒÂ§ÃƒÂ£o com servidores externos
-- Ã¢Å“â€¦ Agentes, tarefas, memÃƒÂ³ria de sessÃƒÂ£o e contexto persistente
-- Ã¢Å“â€¦ ExtensÃƒÂ£o VS Code em `vscode-extension/lyacode-vscode`
-- Ã¢Å“â€¦ Anti-phone-home verificado Ã¢â‚¬â€ sem telemetria nÃƒÂ£o autorizada
-- Ã¢Å“â€¦ 4607 testes verdes Ã‚Â· typecheck verde Ã‚Â· smoke verde
+- ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¦ CLI TypeScript Ãƒâ€šÃ‚Â· runtime Node.js ÃƒÂ¢Ã¢â‚¬Â°Ã‚Â¥ 22
+- ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¦ Interface terminal com React/Ink + gradientes ANSI Studio CodeAI
+- ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¦ Persona **Lya** com 7 sub-agentes especializados
+- ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¦ Leitura, busca, ediÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o e inspeÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o de arquivos em qualquer projeto
+- ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¦ ExecuÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o de shell / PowerShell com fluxo de permissÃƒÆ’Ã‚Â£o explÃƒÆ’Ã‚Â­cita
+- ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¦ Multi-provedor: 35+ provedores configurÃƒÆ’Ã‚Â¡veis via `/provider`
+- ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¦ MCP (Model Context Protocol) ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â integraÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o com servidores externos
+- ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¦ Agentes, tarefas, memÃƒÆ’Ã‚Â³ria de sessÃƒÆ’Ã‚Â£o e contexto persistente
+- ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¦ ExtensÃƒÆ’Ã‚Â£o VS Code em `vscode-extension/lyacode-vscode`
+- ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¦ Anti-phone-home verificado ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â sem telemetria nÃƒÆ’Ã‚Â£o autorizada
+- ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¦ 4607 testes verdes Ãƒâ€šÃ‚Â· typecheck verde Ãƒâ€šÃ‚Â· smoke verde
 
 ---
 
-## Ã°Å¸â€â€” Aliases do binÃƒÂ¡rio
+## ÃƒÂ°Ã…Â¸Ã¢â‚¬ÂÃ¢â‚¬â€ Aliases do binÃƒÆ’Ã‚Â¡rio
 
 Todos equivalentes, apontam para `dist/cli.mjs`:
 
 ```text
-lya        # curto Ã¢â‚¬â€ recomendado
-lyacode   # canÃƒÂ´nico
+lya        # curto ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â recomendado
+lyacode   # canÃƒÆ’Ã‚Â´nico
 lscloud    # short cloud
 lyacode    # legacy (sucessor de LyaCode v0.1.0)
 lscode     # short code
@@ -190,61 +190,61 @@ lscode     # short code
 
 ---
 
-## Ã°Å¸Â§Â­ Ecossistema Studio CodeAI
+## ÃƒÂ°Ã…Â¸Ã‚Â§Ã‚Â­ Ecossistema Studio CodeAI
 
 ```
 Studio CodeAI
-Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ Lya Studio Coder   Ã¢â€ â€™ IDE/cockpit multi-IA, editor, automaÃƒÂ§ÃƒÂµes, orquestraÃƒÂ§ÃƒÂ£o visual
-Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ Lya Code  Ã¢Ëœâ€¦       Ã¢â€ â€™ CLI Star 1, terminal-first, instalÃƒÂ¡vel, scriptÃƒÂ¡vel
-                          (este projeto Ã¢â‚¬â€ base de execuÃƒÂ§ÃƒÂ£o local e cloud)
+ÃƒÂ¢Ã¢â‚¬ÂÃ…â€œÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Lya Studio Coder   ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ IDE/cockpit multi-IA, editor, automaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Âµes, orquestraÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o visual
+ÃƒÂ¢Ã¢â‚¬ÂÃ¢â‚¬ÂÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Lya Code  ÃƒÂ¢Ã‹Å“Ã¢â‚¬Â¦       ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ CLI Star 1, terminal-first, instalÃƒÆ’Ã‚Â¡vel, scriptÃƒÆ’Ã‚Â¡vel
+                          (este projeto ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â base de execuÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o local e cloud)
 ```
 
-Lya Code funciona sozinha no terminal e serve como fundaÃƒÂ§ÃƒÂ£o CLI para fluxos do Lya Studio Coder.
+Lya Code funciona sozinha no terminal e serve como fundaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o CLI para fluxos do Lya Studio Coder.
 
 ---
 
-## Ã°Å¸Ââ€”Ã¯Â¸Â Identidade do projeto
+## ÃƒÂ°Ã…Â¸Ã‚ÂÃ¢â‚¬â€ÃƒÂ¯Ã‚Â¸Ã‚Â Identidade do projeto
 
 | Campo | Valor |
 |-------|-------|
 | Produto | **Lya Code** |
-| FamÃƒÂ­lia | Studio CodeAI |
+| FamÃƒÆ’Ã‚Â­lia | Studio CodeAI |
 | Autor | Luis Cardozo |
 | Email | `studiocoder.ai@gmail.com` |
-| RepositÃƒÂ³rio | [github.com/StudioCodeAI/lyacode](https://github.com/StudioCodeAI/lyacode) |
+| RepositÃƒÆ’Ã‚Â³rio | [github.com/StudioCodeAI/lyacode](https://github.com/StudioCodeAI/lyacode) |
 | Releases | [github.com/StudioCodeAI/lyacode-installers](https://github.com/StudioCodeAI/lyacode-installers) |
 | Pacote npm | `@studiocodeai/lyacode` |
-| VersÃƒÂ£o atual | **1.0.6** Ã¢â‚¬â€ produÃƒÂ§ÃƒÂ£o estÃƒÂ¡vel |
-| PolÃƒÂ­tica | `v0.x.y` = teste Ã‚Â· `v1.0.0+` = produÃƒÂ§ÃƒÂ£o estÃƒÂ¡vel |
+| VersÃƒÆ’Ã‚Â£o atual | **1.0.7** ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â produÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o estÃƒÆ’Ã‚Â¡vel |
+| PolÃƒÆ’Ã‚Â­tica | `v0.x.y` = teste Ãƒâ€šÃ‚Â· `v1.0.0+` = produÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o estÃƒÆ’Ã‚Â¡vel |
 
 ---
 
-## Ã°Å¸â€œÅ“ LicenÃƒÂ§a e cÃƒÂ³digo-fonte
+## ÃƒÂ°Ã…Â¸Ã¢â‚¬Å“Ã…â€œ LicenÃƒÆ’Ã‚Â§a e cÃƒÆ’Ã‚Â³digo-fonte
 
-O cÃƒÂ³digo-fonte deste projeto ÃƒÂ© **propriedade da Studio CodeAI** e de uso restrito.
+O cÃƒÆ’Ã‚Â³digo-fonte deste projeto ÃƒÆ’Ã‚Â© **propriedade da Studio CodeAI** e de uso restrito.
 Leia [LICENSE](./LICENSE) para detalhes.
 
-- Os **instaladores e binÃƒÂ¡rios** sÃƒÂ£o de livre uso para instalaÃƒÂ§ÃƒÂ£o pessoal e comercial.
-- O **cÃƒÂ³digo-fonte** nÃƒÂ£o ÃƒÂ© open-source Ã¢â‚¬â€ acesso mediante autorizaÃƒÂ§ÃƒÂ£o da Studio CodeAI.
-- ContribuiÃƒÂ§ÃƒÂµes externas sÃƒÂ£o bem-vindas via issues e discussÃƒÂµes neste repositÃƒÂ³rio.
+- Os **instaladores e binÃƒÆ’Ã‚Â¡rios** sÃƒÆ’Ã‚Â£o de livre uso para instalaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o pessoal e comercial.
+- O **cÃƒÆ’Ã‚Â³digo-fonte** nÃƒÆ’Ã‚Â£o ÃƒÆ’Ã‚Â© open-source ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â acesso mediante autorizaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o da Studio CodeAI.
+- ContribuiÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Âµes externas sÃƒÆ’Ã‚Â£o bem-vindas via issues e discussÃƒÆ’Ã‚Âµes neste repositÃƒÆ’Ã‚Â³rio.
 
 ---
 
-## Ã°Å¸â€œÂ¦ Releases e instaladores
+## ÃƒÂ°Ã…Â¸Ã¢â‚¬Å“Ã‚Â¦ Releases e instaladores
 
-Todas as releases, changelogs e artefatos de instalaÃƒÂ§ÃƒÂ£o estÃƒÂ£o disponÃƒÂ­veis publicamente em:
+Todas as releases, changelogs e artefatos de instalaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o estÃƒÆ’Ã‚Â£o disponÃƒÆ’Ã‚Â­veis publicamente em:
 
 **[github.com/StudioCodeAI/lyacode-installers](https://github.com/StudioCodeAI/lyacode-installers)**
 
 ---
 
-## Ã°Å¸â„¢Å’ CrÃƒÂ©ditos
+## ÃƒÂ°Ã…Â¸Ã¢â€žÂ¢Ã…â€™ CrÃƒÆ’Ã‚Â©ditos
 
-**Luis Cardozo** Ã‚Â· `studiocoder.ai@gmail.com` Ã‚Â· Studio CodeAI
+**Luis Cardozo** Ãƒâ€šÃ‚Â· `studiocoder.ai@gmail.com` Ãƒâ€šÃ‚Â· Studio CodeAI
 [github.com/StudioCodeAI](https://github.com/StudioCodeAI)
 
 ---
 
 <div align="center">
-<sub>Lya Code v1.0.6 Ã¢â‚¬â€ produÃƒÂ§ÃƒÂ£o estÃƒÂ¡vel Ã‚Â· Built with Lya Ã°Å¸Å¸Â  Ã‚Â· Studio CodeAI</sub>
+<sub>Lya Code v1.0.7 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â produÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o estÃƒÆ’Ã‚Â¡vel Ãƒâ€šÃ‚Â· Built with Lya ÃƒÂ°Ã…Â¸Ã…Â¸Ã‚Â  Ãƒâ€šÃ‚Â· Studio CodeAI</sub>
 </div>

@@ -1,17 +1,17 @@
 /**
  * Build Lya Code Windows Installer (.exe + .zip + .tgz)
  *
- * Luis Cardozo Ã‚Â· studiocoder.ai@gmail.com Ã‚Â· Studio CodeAI
+ * Luis Cardozo Ãƒâ€šÃ‚Â· studiocoder.ai@gmail.com Ãƒâ€šÃ‚Â· Studio CodeAI
  *
  * Passos:
  *   1. Roda `npm pack` (gera studiocodeai-lyacode-${VERSION}.tgz na raiz)
  *   2. Valida que scripts/installer/windows/ tem todos os arquivos
  *   3. Gera pasta portable
  *   4. Gera .zip do portable (sempre)
- *   5. Tenta gerar o .exe via `iexpress` (Windows-only; pula se nÃƒÂ£o disponÃƒÂ­vel)
+ *   5. Tenta gerar o .exe via `iexpress` (Windows-only; pula se nÃƒÆ’Ã‚Â£o disponÃƒÆ’Ã‚Â­vel)
  *
- * SaÃƒÂ­da em dist/installer/:
- *   - lyacode-portable-${VERSION}/      (pasta extraÃƒÂ­da)
+ * SaÃƒÆ’Ã‚Â­da em dist/installer/:
+ *   - lyacode-portable-${VERSION}/      (pasta extraÃƒÆ’Ã‚Â­da)
  *   - lyacode-portable-${VERSION}.zip   (sempre, fallback robusto)
  *   - lyacode-setup-x64-${VERSION}.exe  (se Windows + iexpress funcionar)
  */
@@ -22,7 +22,7 @@ import { join } from 'path'
 import { spawnSync } from 'child_process'
 
 const REPO_ROOT = join(import.meta.dir, '..', '..')
-const VERSION = '1.0.6'
+const VERSION = '1.0.7'
 const TARBALL_NAME = `studiocodeai-lyacode-${VERSION}.tgz`
 const TARBALL_PATH = join(REPO_ROOT, TARBALL_NAME)
 const SED_PATH = join(
@@ -138,7 +138,7 @@ async function main(): Promise<void> {
     // OR have correct absolute paths. We pass the SED with /N and let it
     // resolve files relative to its location. The repo-root tarball is
     // referenced via SourceFiles0 with SourceFilesPath=\\ which iexpress
-    // interprets oddly. Best effort here Ã¢â‚¬â€ if it fails, .zip is enough.
+    // interprets oddly. Best effort here ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â if it fails, .zip is enough.
     const result = spawnSync(
       iexpress,
       ['/Q', `/N:${SED_PATH}`, `/O:${exeOut}`],
@@ -148,7 +148,7 @@ async function main(): Promise<void> {
       console.log(`  OK: ${exeOut}`)
     } else {
       console.warn(`  WARN: iexpress failed (exit=${result.status}).`)
-      console.warn('  Use the .zip or .tgz instead Ã¢â‚¬â€ they work everywhere.')
+      console.warn('  Use the .zip or .tgz instead ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â they work everywhere.')
     }
   }
 
