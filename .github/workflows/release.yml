@@ -72,8 +72,11 @@ jobs:
       # ── 7. Detectar versão ───────────────────────────────────────────────────
       - name: Detectar versão do package.json
         id: version
-        shell: bash
-        run: echo "version=$(node -p \"require('./package.json').version\")" >> $GITHUB_OUTPUT
+        shell: pwsh
+        run: |
+          $version = (Get-Content package.json | ConvertFrom-Json).version
+          echo "version=$version" >> $env:GITHUB_OUTPUT
+          Write-Host "Versao detectada: $version"
 
       # ── 8. Upload artefatos no workflow (cache interno) ──────────────────────
       - name: Upload artefatos do build
