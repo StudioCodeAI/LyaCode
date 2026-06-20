@@ -2,6 +2,39 @@
 
 All notable Lya Code changes will be documented here.
 
+## v1.0.8 — 2026-06-20
+
+### Added
+
+- **Lya agent completo** — 8 sub-agentes built-in registrados e disponíveis via `/agents`:
+  `lya`, `lya-architect`, `lya-explorer`, `lya-reviewer`, `lya-tester`, `lya-recorder`,
+  `lya-memory`, `lya-provider`.
+- **`lya-memory`** — novo sub-agente para memória persistente de sessão: lê/escreve
+  `.lya_tracker.md`, gera handoffs de sessão, mantém CLAUDE.md sincronizado.
+- **`lya-provider`** — novo sub-agente para diagnóstico e configuração de provedores de IA:
+  triage de perfil ativo, recomendação por objetivo, documentação de tradeoffs.
+- **CLAUDE.md** — documentação completa do projeto para Claude Code adicionada ao repo.
+
+### Changed
+
+- **Logo de startup** — wordmark "Lya Code" em 5 linhas ANSI Shadow com gradiente
+  orange Studio CodeAI; tagline "Um produto Studio CodeAI" sob o wordmark.
+- **Ink UI logo** (`LogoV2`) — wordmark em 2 linhas com meio-bloco Unicode, cores
+  `brandShimmer` (Lya) + `brand` (Code); borderTitle "Lya Code vX.Y.Z".
+- **`brand.ts`** — `BRAND_TAGLINE = 'Um produto Studio CodeAI'`; `BRAND_ACCENT_RGB`
+  em verde Studio CodeAI; `WORDMARK_LYA` + `WORDMARK_CODE` finalizados.
+- **`LYA_VERSION_LINE`** — usa `process.env.LYACODE_VERSION` → `npm_package_version`
+  como fallback (elimina hardcoded `'0.1.0'`).
+- **`scripts/build.ts`** — feature flags ajustados para o build Studio CodeAI.
+- **`scripts/installer/`** — scripts de instalador Windows atualizados para Lya Code.
+- **Release workflow** — `.github/workflows/release.yml` aponta para
+  `StudioCodeAI/LyaCode-installers` com `INSTALLERS_REPO_TOKEN`.
+
+### Fixed
+
+- Bitmap `a` minúsculo e `D` maiúsculo no wordmark normalizados para 10 chars/linha.
+- Ordem de providers em `/provider`: Ollama Local → posição 1 (local-first).
+
 ## v1.0.1 — 2026-06-20 (patch)
 
 ### Fixed
@@ -15,7 +48,7 @@ All notable Lya Code changes will be documented here.
 - **Ordem de providers** em `/provider`: `Ollama Local` promovido para a posição 1
   (local-first); `Gitlawb Opengateway` movido para a última posição.
 - **Releases e instaladores** agora publicados no repo público
-  [`StudioCodeAI/lyacode-installers`](https://github.com/StudioCodeAI/lyacode-installers)
+  [`StudioCodeAI/LyaCode-installers`](https://github.com/StudioCodeAI/LyaCode-installers)
   — código-fonte permanece no repo privado.
 - **Workflow de release** (`.github/workflows/release.yml`) atualizado para usar
   `INSTALLERS_REPO_TOKEN` e publicar artefatos no repo público.
@@ -29,7 +62,7 @@ Initial Studio CodeAI foundation release.
 ### Added
 
 - Lya Code product identity.
-- `lyacode` CLI launcher (aliases: `lscloud`, `lya`, `lyacode`, `lscode`).
+- `lyacode` CLI launcher (aliases: `lya`, `lscode`).
 - **Lya persona + 6 sub-agents** (`lya`, `lya-architect`, `lya-explorer`,
   `lya-reviewer`, `lya-tester`, `lya-recorder`) registered as built-in
   agents. Profile, voice, boundaries and operating principles in

@@ -194,7 +194,7 @@ Abrir: https://github.com/organizations/StudioCodeAI/repositories/new (ou no per
 
 - **Nome:** `lyacode-installers`
 - **Visibilidade:** Public
-- **Descrição:** "Lya Code — installers, releases, and public documentation. Source code lives at the private StudioCodeAI/lyacode repo."
+- **Descrição:** "Lya Code — installers, releases, and public documentation. Source code lives at the private StudioCodeAI/LyaCode repo."
 - **NÃO inicialize** com README/gitignore/license (o script faz isso)
 
 ### Passo 4.2 — Criar conteúdo do repo público
@@ -224,13 +224,13 @@ CLI agentic terminal by **Studio CodeAI**.
 ### Multi-plataforma via npm
 
 \`\`\`bash
-npm install -g https://github.com/StudioCodeAI/lyacode-installers/releases/latest/download/studiocodeai-lyacode-1.0.0.tgz
+npm install -g https://github.com/StudioCodeAI/LyaCode-installers/releases/latest/download/studiocodeai-lyacode-1.0.0.tgz
 \`\`\`
 
 ### Windows (portable .zip)
 
 \`\`\`powershell
-irm https://github.com/StudioCodeAI/lyacode-installers/releases/latest/download/lyacode-portable-1.0.0.zip -OutFile lyacode-portable.zip
+irm https://github.com/StudioCodeAI/LyaCode-installers/releases/latest/download/lyacode-portable-1.0.0.zip -OutFile lyacode-portable.zip
 Expand-Archive lyacode-portable.zip -DestinationPath .\lyacode-portable -Force
 cd lyacode-portable
 .\install.cmd
@@ -260,7 +260,7 @@ Lya é a engenheira sênior + CEO de projeto da família Studio CodeAI. Arquitet
 
 ## 📦 Releases
 
-Veja todas as versões em [Releases](https://github.com/StudioCodeAI/lyacode-installers/releases).
+Veja todas as versões em [Releases](https://github.com/StudioCodeAI/LyaCode-installers/releases).
 
 ## 📜 Changelog
 
@@ -291,7 +291,7 @@ Veja [LICENSE](./LICENSE).
 - Comando \`/lya\` que invoca o system prompt sênior
 - Configuração de provedores via \`/provider\`: Ollama Local, Anthropic, Gemini, Mistral, OpenAI-compatible, Codex, e ~30 outros
 - Instaladores Windows: \`.exe\`, \`.zip\` portable e \`.tgz\` npm
-- 5 aliases do binário: lyacode, lscloud, lya, lyacode, lscode
+- Aliases oficiais do binário: lyacode, lya, lscode
 - Extensão VS Code em \`vscode-extension/lyacode-vscode\`
 
 ### Política de versionamento
@@ -308,7 +308,7 @@ cd public-repo-template
 git add -A
 git commit -m "initial: Lya Code installers repo"
 git branch -M main
-git remote add origin https://github.com/StudioCodeAI/lyacode-installers.git
+git remote add origin https://github.com/StudioCodeAI/LyaCode-installers.git
 git push -u origin main
 ```
 
@@ -333,7 +333,7 @@ Atualizar pra usar PAT (Personal Access Token) e publicar release no repo públi
 
 ### Passo 5.2 — Adicionar PAT como secret no repo PRIVADO
 
-1. Abrir https://github.com/StudioCodeAI/lyacode/settings/secrets/actions
+1. Abrir https://github.com/StudioCodeAI/LyaCode/settings/secrets/actions
 2. New repository secret
 3. Name: `INSTALLERS_REPO_TOKEN`
 4. Value: cole o PAT
@@ -349,7 +349,7 @@ Substituir o passo "Create GitHub Release" no `.github/workflows/release.yml` po
         with:
           name: Lya Code v${{ steps.version.outputs.version }}
           tag_name: ${{ github.ref_name }}
-          repository: StudioCodeAI/lyacode-installers
+          repository: StudioCodeAI/LyaCode-installers
           token: ${{ secrets.INSTALLERS_REPO_TOKEN }}
           generate_release_notes: false
           fail_on_unmatched_files: false
@@ -365,13 +365,13 @@ Substituir o passo "Create GitHub Release" no `.github/workflows/release.yml` po
             ### Instalação multi-plataforma (recomendado)
 
             ```bash
-            npm install -g https://github.com/StudioCodeAI/lyacode-installers/releases/download/v${{ steps.version.outputs.version }}/studiocodeai-lyacode-${{ steps.version.outputs.version }}.tgz
+            npm install -g https://github.com/StudioCodeAI/LyaCode-installers/releases/download/v${{ steps.version.outputs.version }}/studiocodeai-lyacode-${{ steps.version.outputs.version }}.tgz
             ```
 
             ### Windows (portable .zip)
 
             ```powershell
-            irm https://github.com/StudioCodeAI/lyacode-installers/releases/download/v${{ steps.version.outputs.version }}/lyacode-portable-${{ steps.version.outputs.version }}.zip -OutFile lyacode-portable.zip
+            irm https://github.com/StudioCodeAI/LyaCode-installers/releases/download/v${{ steps.version.outputs.version }}/lyacode-portable-${{ steps.version.outputs.version }}.zip -OutFile lyacode-portable.zip
             Expand-Archive lyacode-portable.zip -DestinationPath .\lyacode-portable -Force
             cd lyacode-portable
             .\install.cmd
@@ -435,19 +435,19 @@ git push origin v1.0.1
 ## 7️⃣ Validar instalação pública
 
 Aguardar ~5-10 min após o push da tag. Acompanhar build em:
-- https://github.com/StudioCodeAI/lyacode/actions
+- https://github.com/StudioCodeAI/LyaCode/actions
 
 Quando ✅, validar:
 
 ```powershell
 # Verificar que o release apareceu no repo público
-Invoke-RestMethod https://api.github.com/repos/StudioCodeAI/lyacode-installers/releases/latest
+Invoke-RestMethod https://api.github.com/repos/StudioCodeAI/LyaCode-installers/releases/latest
 
 # Desinstalar versão atual
 npm uninstall -g @studiocodeai/lyacode
 
 # Instalar do release público
-npm install -g https://github.com/StudioCodeAI/lyacode-installers/releases/download/v1.0.1/studiocodeai-lyacode-1.0.1.tgz
+npm install -g https://github.com/StudioCodeAI/LyaCode-installers/releases/download/v1.0.1/studiocodeai-lyacode-1.0.1.tgz
 
 # Validar
 lya --version    # 1.0.1 (Lya Code)
@@ -471,9 +471,9 @@ lya              # ver letras + /provider
 
 - [ ] `/provider` mostra "Ollama" na posição 1 e "Gitlawb Opengateway" na última
 - [ ] Letras "Lya Code" renderizam sem desalinhamento no `a`
-- [ ] Repo `StudioCodeAI/lyacode-installers` existe e é público
+- [ ] Repo `StudioCodeAI/LyaCode-installers` existe e é público
 - [ ] Release v1.0.1 no repo público com `.tgz` + `.zip` + `.exe`
-- [ ] `npm install -g https://github.com/StudioCodeAI/lyacode-installers/releases/download/v1.0.1/studiocodeai-lyacode-1.0.1.tgz` funciona em terminal limpo
+- [ ] `npm install -g https://github.com/StudioCodeAI/LyaCode-installers/releases/download/v1.0.1/studiocodeai-lyacode-1.0.1.tgz` funciona em terminal limpo
 - [ ] README do repo privado tem link pro repo público de releases
 
 ---
@@ -484,7 +484,7 @@ lya              # ver letras + /provider
 >
 > **Instalação pública (qualquer terminal):**
 > ```bash
-> npm install -g https://github.com/StudioCodeAI/lyacode-installers/releases/download/v1.0.1/studiocodeai-lyacode-1.0.1.tgz
+> npm install -g https://github.com/StudioCodeAI/LyaCode-installers/releases/download/v1.0.1/studiocodeai-lyacode-1.0.1.tgz
 > ```
 >
 > **Validar:**
@@ -493,4 +493,4 @@ lya              # ver letras + /provider
 > lya              # ver wordmark
 > ```
 >
-> Código-fonte continua privado em StudioCodeAI/lyacode. Releases públicas em StudioCodeAI/lyacode-installers.
+> Código-fonte continua privado em StudioCodeAI/LyaCode. Releases públicas em StudioCodeAI/LyaCode-installers.

@@ -1,6 +1,8 @@
 import { LYA_ARCHITECT_AGENT } from './built-in/architectAgent.js'
 import { LYA_EXPLORER_AGENT } from './built-in/explorerAgent.js'
 import { LYA_AGENT } from './built-in/lyaAgent.js'
+import { LYA_MEMORY_AGENT } from './built-in/memoryAgent.js'
+import { LYA_PROVIDER_AGENT } from './built-in/providerAgent.js'
 import { LYA_RECORDER_AGENT } from './built-in/recorderAgent.js'
 import { LYA_REVIEWER_AGENT } from './built-in/reviewerAgent.js'
 import { LYA_TESTER_AGENT } from './built-in/testerAgent.js'
@@ -17,6 +19,8 @@ export const LYA_AGENTS = [
   LYA_REVIEWER_AGENT,
   LYA_TESTER_AGENT,
   LYA_RECORDER_AGENT,
+  LYA_MEMORY_AGENT,
+  LYA_PROVIDER_AGENT,
 ]
 
 export {
@@ -26,6 +30,8 @@ export {
   LYA_REVIEWER_AGENT,
   LYA_TESTER_AGENT,
   LYA_RECORDER_AGENT,
+  LYA_MEMORY_AGENT,
+  LYA_PROVIDER_AGENT,
 }
 
 export {

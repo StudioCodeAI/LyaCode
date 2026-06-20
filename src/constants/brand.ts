@@ -19,19 +19,19 @@ export const BRAND_ACCENT_RGB = 'rgb(34,197,94)'
  * rendered in different accent shades. Block characters (█ ▀ ▄) render
  * correctly in Apple Terminal. Rendered side by side with a 1-col gap:
  *
- *   █   █ █ ▄▀█   █▀▀ █   █▀█ █ █ █▀▄
- *   █▄▄  █  █▀█   █▄▄ █▄▄ █▄█ █▄█ █▄▀
+ *   █   █ █ ▄▀█   █▀▀ █▀█ █▀▄ █▀▀
+ *   █▄▄  █  █▀█   █▄▄ █▄█ █▄▀ █▄▄
  */
 export const WORDMARK_LYA = [
   '█   █ █ ▄▀█',
   '█▄▄  █  █▀█',
 ] as const
 
-export const WORDMARK_CLOUD = [
-  '█▀▀ █   █▀█ █ █ █▀▄',
-  '█▄▄ █▄▄ █▄█ █▄█ █▄▀',
+export const WORDMARK_CODE = [
+  '█▀▀ █▀█ █▀▄ █▀▀',
+  '█▄▄ █▄█ █▄▀ █▄▄',
 ] as const
 
-/** Rendered width of the full wordmark: Lya half + 1-col gap + Cloud half. */
+/** Rendered width of the full wordmark: Lya half + 1-col gap + Code half. */
 export const WORDMARK_WIDTH =
-  WORDMARK_LYA[0].length + 1 + WORDMARK_CLOUD[0].length
+  WORDMARK_LYA[0].length + 1 + WORDMARK_CODE[0].length

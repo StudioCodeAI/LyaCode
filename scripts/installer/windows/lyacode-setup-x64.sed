@@ -1,8 +1,8 @@
 ; IExpress SED file for Lya Code Windows Installer
-; Luis Cardozo ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· studiocoder.ai@gmail.com ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· Studio CodeAI
+; Luis Cardozo - studiocoder.ai@gmail.com - Studio CodeAI
 ;
 ; Build:
-;   iexpress /N:scripts\installer\windows\lyacode-setup-x64.sed /O:dist\installer\lyacode-setup-x64-1.0.8.exe
+;   iexpress /N:scripts\installer\windows\lyacode-setup-x64.sed /O:dist\installer\lyacode-setup-x64-1.0.9.exe
 ;
 ; Result: single self-extracting .exe that drops install.ps1 + tarball
 ; into a temp dir and runs install.ps1. No admin required.
@@ -19,7 +19,7 @@ InsideCompressed=2
 CAB_FixedSize=0
 CAB_ReserveCode=0
 RebootMode=N
-InstallPrompt=Instalar Lya Code ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â CLI agentic da familia Studio CodeAI
+InstallPrompt=Instalar Lya Code - CLI agentic da familia Studio CodeAI
 DisplayLicense=scripts\installer\windows\LICENSE.rtf
 FinishMessage=Lya Code instalado com sucesso.
 TargetName=%TEMP%\lyacode-setup
@@ -31,12 +31,12 @@ SourceFilesPath=scripts\installer\windows\
 SourceFiles=install.ps1
 ; The tarball is referenced from the repo root, not the SED path. Use a
 ; SourceFiles0.. entry with an absolute path instead.
-SourceFiles0=studiocodeai-lyacode-1.0.8.tgz
+SourceFiles0=studiocodeai-lyacode-1.0.9.tgz
 SourceFiles1=scripts\installer\windows\install.ps1
 SourceFiles2=scripts\installer\windows\LICENSE.rtf
 [SourceFiles0]
 SourceFilesPath=\
-SourceFiles0=studiocodeai-lyacode-1.0.8.tgz
+SourceFiles0=studiocodeai-lyacode-1.0.9.tgz
 [SourceFiles1]
 SourceFilesPath=\
 SourceFiles0=scripts\installer\windows\install.ps1

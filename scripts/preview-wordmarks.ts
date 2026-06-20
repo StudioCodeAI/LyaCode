@@ -125,9 +125,9 @@ console.log('Compare e me diga qual você quer no startup.')
 
 printPreview('A. 5-row thin (compact, single line look)', 'Lya Code', FONT_5_THIN)
 printPreview('B. 5-row big (default block, balanced)', 'Lya Code', FONT_5_BIG)
-printPreview('C. 7-row bold (LARGE, hero impact)', 'LYA CLOUD', FONT_7_BOLD)
-printPreview('D. 7-row bold mixed case (LARGE + Lya.Cloud dot)', 'Lya.Cloud', FONT_7_BOLD)
+printPreview('C. 7-row bold (legacy all-caps comparison)', 'Lya Code', FONT_7_BOLD)
+printPreview('D. 7-row bold title-case comparison', 'Lya Code', FONT_7_BOLD)
 
 console.log('\n' + '═'.repeat(60))
-console.log('Recomendacao: D (Lya.Cloud em 7-row bold)')
+console.log('Recomendacao: usar o wordmark oficial title-case de scripts/preview-final-wordmark.ts')
 console.log('═'.repeat(60))

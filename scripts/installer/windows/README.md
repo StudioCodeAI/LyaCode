@@ -12,7 +12,7 @@ Windows sem dependências externas (sem Inno Setup, sem NSIS).
 5. O PowerShell:
    - Detecta Node.js ≥ 22 (ou aborta com link de download)
    - Roda `npm install -g <tarball>` com progresso visível
-   - Valida `lyacode --version` e todos os 5 aliases
+   - Valida `lyacode --version` e todos os aliases oficiais
    - Cria atalhos no Menu Iniciar (Iniciar → Lya Code → lyacode.cmd)
    - Log completo em `%LOCALAPPDATA%\lyacode\lyacode-setup-<timestamp>.log`
 
@@ -68,9 +68,7 @@ npm install -g .\studiocodeai-lyacode-0.1.0.tgz
 
 # 4. Validar
 lyacode --version
-lscloud --version
 lya --version
-lyacode --version
 lscode --version
 ```
 

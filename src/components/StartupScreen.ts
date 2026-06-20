@@ -16,6 +16,7 @@ import { DEFAULT_GEMINI_MODEL } from '../utils/providerProfile.js'
 import { BRAND_TAGLINE } from '../constants/brand.js'
 import { getGlobalConfig } from '../utils/config.js'
 import { ANSI_DIM, ANSI_RESET, ansiRgb } from '../utils/terminalAnsi.js'
+import { LYACODE_STARTUP_WORDMARK } from './wordmark.js'
 import {
   resolveLogoPalette,
   type RGB,
@@ -53,18 +54,9 @@ export function paintLine(text: string, stops: readonly RGB[], lineT: number): s
   return out + RESET
 }
 
-// ─── Wordmark (ANSI Shadow style) ───────────────────────────────────────────
-// Hardcoded "LYA CODE" in ANSI Regular font, to match Open Claude but smaller.
-const WORDMARK_ANSI_SHADOW = [
-  '██                             ██████                ██           ',
-  '██      ██   ██   ██████      ██        █████    ██████   █████   ',
-  '██      ██   ██  ██   ██      ██       ██   ██  ██   ██  ███████  ',
-  '███████  ██████   ██████       ██████   █████    ██████   ██████  ',
-  '             ██                                                   '
-]
-
-function renderWordmark(): string[] {
-  return WORDMARK_ANSI_SHADOW
+// ─── Wordmark (title-case ANSI Shadow style) ────────────────────────────────
+function renderWordmark(): readonly string[] {
+  return LYACODE_STARTUP_WORDMARK
 }
 
 // Studio CodeAI orange gradient — warm light to deep accent.
@@ -220,7 +212,7 @@ export function printStartupScreen(modelOverride?: string): void {
 
   out.push('')
 
-  // Wordmark "Lya Code" — single-line Open Claude style. 5 rows of
+  // Wordmark "Lya Code" — title-case terminal style. 5 rows of
   // bold ANSI Shadow letters painted solid in Studio CodeAI brand
   // orange. Visually ~3× the height of a normal text line, gives the
   // terminal a hero feel without scrolling.

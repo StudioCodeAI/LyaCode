@@ -1,14 +1,14 @@
 @echo off
 REM Lya Code Windows Installer launcher
-REM Luis Cardozo ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· studiocoder.ai@gmail.com ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· Studio CodeAI
+REM Luis Cardozo - studiocoder.ai@gmail.com - Studio CodeAI
 REM
 REM Usage: install.cmd [/D] [/T:<tarball>] [/Y]
 REM   /D           Dry run (nao instala, so mostra)
-REM   /T:<tgz>     Caminho do tarball (default: .\studiocodeai-lyacode-1.0.1.tgz)
+REM   /T:<tgz>     Caminho do tarball (default: primeiro .\studiocodeai-lyacode-*.tgz)
 REM   /Y           Suprime atalhos no Menu Iniciar
 REM
 REM Para buildar um .exe auto-extraivel:
-REM   iexpress /N:lyacode-setup-x64.sed /O:..\..\..\dist\installer\lyacode-setup-x64-1.0.8.exe
+REM   iexpress /N:lyacode-setup-x64.sed /O:..\..\..\dist\installer\lyacode-setup-x64.exe
 
 setlocal
 
@@ -31,10 +31,14 @@ shift & goto :parse
 
 :end_parse
 
-if "%TARBALL%"=="" set "TARBALL=%~dp0studiocodeai-lyacode-1.0.8.tgz"
+if "%TARBALL%"=="" (
+  for %%F in ("%~dp0studiocodeai-lyacode-*.tgz") do (
+    if "%TARBALL%"=="" set "TARBALL=%%~fF"
+  )
+)
 
 echo.
-echo  Lya Code v1.0.8 - Installer Windows
+echo  Lya Code - Installer Windows
 echo  Familia Studio CodeAI
 echo.
 echo  Requisitos: Node.js 22 LTS ou superior

@@ -45,7 +45,7 @@ Lya Code should communicate in Brazilian Portuguese when working with Luis and S
 
 - **Product identity is Lya Code.** Provider names, model names, API compatibility labels, and technical protocol names may stay when they are required for correct behavior (e.g. `CLAUDE_CODE_*` env vars, `claude-code-20250219` beta header), but inherited product identity should not appear in user-facing surfaces.
 - **Email canônico**: `lyacode@studiocoder.ai` (família Studio CodeAI).
-- **CLI canônico**: `lyacode`. Aliases equivalentes: `lscloud`, `lya`, `lyacode` (legacy), `lscode`.
+- **CLI canônico**: `lyacode`. Aliases equivalentes: `lya`, `lscode`.
 
 ## Version Policy
 

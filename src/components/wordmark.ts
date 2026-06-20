@@ -2,9 +2,12 @@
  * Lya Code wordmark — large block letters rendered with ANSI colors
  * and the Studio CodeAI gradient.
  *
- * Each letter is a 7-row × 5-col bitmap. We ship two variants:
- *   - LYACODE_WORDMARK: 7 rows, large, for the startup banner
- *   - LYA_WORDMARK: 3 rows, compact, for compact headers
+ * The official product wordmark is title case: "Lya Code".
+ * Do not replace it with all-caps "LYA CODE" in user-facing surfaces.
+ *
+ * The startup banner uses a hand-tuned 5-row title-case drawing. The
+ * bitmap renderer below remains available for previews and future compact
+ * variants.
  *
  * Bitmaps use '#' for filled cells and ' ' for empty. The renderer
  * in StartupScreen converts '#' to ANSI-colored spans.
@@ -16,6 +19,14 @@
  * We keep the bitmaps as a single const so the bundle picks them up
  * via tree-shaking exactly once.
  */
+
+export const LYACODE_STARTUP_WORDMARK = [
+  '██                             ██████                ██           ',
+  '██      ██   ██   ██████      ██        █████    ██████   █████   ',
+  '██      ██   ██  ██   ██      ██       ██   ██  ██   ██  ███████  ',
+  '███████  ██████   ██████       ██████   █████    ██████   ██████  ',
+  '             ██                                                   ',
+] as const
 
 // 7-row × 5-col bitmaps. Each row is a 5-char string where '#'
 // is filled. Letters are joined left-to-right with a 1-col gap.
@@ -30,7 +41,7 @@ const FONT_7: Record<string, string[]> = {
   N: ['#   #', '##  #', '# # #', '# # #', '#  ##', '#   #', '#   #'],
   // ' ' (space) is a single-column spacer
   ' ': ['     '],
-  // '.' for the dot in Lya.Cloud, 1-col wide
+  // '.' for optional dotted variants, 1-col wide
   '.': [' ', ' ', ' ', ' ', ' ', ' ', '##'],
 }
 

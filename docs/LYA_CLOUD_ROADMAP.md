@@ -16,7 +16,7 @@ O produto deve manter o que a base atual ja entrega bem: terminal interativo, fe
 Na tela inicial, o alvo e consolidar a identidade:
 
 ```text
-LYA CLOUD
+Lya Code
 Um produto Studio CodeAI
 ```
 
@@ -30,9 +30,7 @@ Aliases ja implementados (todos equivalentes):
 
 ```text
 lyacode   # canonico
-lscloud    # short cloud
 lya        # curto (mesmo do sub-domínio lya)
-lyacode    # legacy, sucessor de LyaCode v0.1.0
 lscode     # short code
 ```
 

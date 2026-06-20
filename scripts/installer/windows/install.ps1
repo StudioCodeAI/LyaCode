@@ -12,7 +12,7 @@ $ErrorActionPreference = 'Stop'
 
 $ProductName = 'Lya Code'
 $ProductBin = 'lyacode'
-$ProductVersion = '1.0.8'
+$ProductVersion = 'unknown'
 $LogDir = Join-Path $env:LOCALAPPDATA 'lyacode'
 $LogFile = Join-Path $LogDir ("lyacode-setup-{0:yyyyMMdd-HHmmss}.log" -f (Get-Date))
 $StartMenuDir = Join-Path $env:APPDATA 'Microsoft\Windows\Start Menu\Programs\Lya Code'
@@ -31,7 +31,7 @@ trap {
     exit 99
 }
 
-Write-Log "=== $ProductName v$ProductVersion installer (Windows) ==="
+Write-Log "=== $ProductName installer (Windows) ==="
 Write-Log "Log: $LogFile"
 
 function Get-NodeVersion {
@@ -67,18 +67,26 @@ Write-Log "Node.js $(Get-NodeVersion) OK"
 
 if (-not $Tarball) {
     $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
-    $candidate = Join-Path $scriptDir 'studiocodeai-lyacode-1.0.8.tgz'
-    if (Test-Path -LiteralPath $candidate) {
-        $Tarball = $candidate
+    $candidate = Get-ChildItem -LiteralPath $scriptDir -Filter 'studiocodeai-lyacode-*.tgz' -File |
+        Sort-Object LastWriteTime -Descending |
+        Select-Object -First 1
+    if ($candidate) {
+        $Tarball = $candidate.FullName
     }
 }
 
 if (-not $Tarball -or -not (Test-Path -LiteralPath $Tarball)) {
     Write-Log "Tarball nao encontrado. Gere com: npm pack" -Level ERR
-    Write-Log "Ou passe -Tarball <caminho\studiocodeai-lyacode-1.0.8.tgz>" -Level INFO
+    Write-Log "Ou passe -Tarball <caminho\studiocodeai-lyacode-<version>.tgz>" -Level INFO
     exit 20
 }
 Write-Log "Tarball: $Tarball"
+
+$tarballName = Split-Path -Leaf $Tarball
+if ($tarballName -match '^studiocodeai-lyacode-(?<version>.+)\.tgz$') {
+    $ProductVersion = $Matches.version
+    Write-Log "Versao detectada: $ProductVersion"
+}
 
 Write-Log "Instalando $ProductName globalmente (npm install -g)..."
 if ($DryRun) {
@@ -107,7 +115,7 @@ Write-Log "$ProductBin encontrado: $($whichLyacloud.Source)"
 Write-Log "Validando instalacao..."
 $failed = $false
 $npmGlobalPrefix = (& npm config get prefix 2>$null).Trim().TrimEnd('\','/')
-foreach ($alias in @('lyacode','lscloud','lya','lyacode','lscode')) {
+foreach ($alias in @('lyacode','lya','lscode')) {
     # Em PowerShell 5.1, 'lya' pode colidir com outros binarios no PATH.
     # Considera apenas binarios dentro do npm global prefix (npm install -g target).
     $cmd = Get-Command $alias -CommandType Application -ErrorAction SilentlyContinue
@@ -136,7 +144,7 @@ foreach ($alias in @('lyacode','lscloud','lya','lyacode','lscode')) {
     }
     $exePath = $matchingCmd.Source
     $line = & $exePath --version 2>$null
-    if ($LASTEXITCODE -ne 0 -or $line -notlike "$ProductVersion*") {
+    if ($LASTEXITCODE -ne 0 -or ($ProductVersion -ne 'unknown' -and $line -notlike "$ProductVersion*")) {
         Write-Log "  FAIL: $alias ($exePath) nao respondeu corretamente: '$line'" -Level ERR
         $failed = $true
     } else {
@@ -179,7 +187,7 @@ Write-Log ""
 Write-Log "=== Instalacao concluida com sucesso ==="
 Write-Log ""
 Write-Log "Aliases disponiveis em qualquer terminal:"
-Write-Log "  lyacode, lscloud, lya, lyacode, lscode"
+Write-Log "  lyacode, lya, lscode"
 Write-Log ""
 Write-Log "Para comecar:"
 Write-Log "  lyacode                # inicia o agente Lya"

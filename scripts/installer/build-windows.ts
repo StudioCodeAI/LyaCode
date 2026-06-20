@@ -1,28 +1,29 @@
 /**
  * Build Lya Code Windows Installer (.exe + .zip + .tgz)
  *
- * Luis Cardozo ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· studiocoder.ai@gmail.com ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· Studio CodeAI
+ * Luis Cardozo - studiocoder.ai@gmail.com - Studio CodeAI
  *
  * Passos:
  *   1. Roda `npm pack` (gera studiocodeai-lyacode-${VERSION}.tgz na raiz)
  *   2. Valida que scripts/installer/windows/ tem todos os arquivos
  *   3. Gera pasta portable
  *   4. Gera .zip do portable (sempre)
- *   5. Tenta gerar o .exe via `iexpress` (Windows-only; pula se nÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â£o disponÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­vel)
+ *   5. Tenta gerar o .exe via `iexpress` (Windows-only; pula se nao disponivel)
  *
- * SaÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­da em dist/installer/:
- *   - lyacode-portable-${VERSION}/      (pasta extraÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­da)
+ * Saida em dist/installer/:
+ *   - lyacode-portable-${VERSION}/      (pasta extraida)
  *   - lyacode-portable-${VERSION}.zip   (sempre, fallback robusto)
  *   - lyacode-setup-x64-${VERSION}.exe  (se Windows + iexpress funcionar)
  */
 
-import { existsSync } from 'fs'
+import { existsSync, readFileSync } from 'fs'
 import { mkdir, readdir, copyFile, rm } from 'fs/promises'
 import { join } from 'path'
 import { spawnSync } from 'child_process'
 
 const REPO_ROOT = join(import.meta.dir, '..', '..')
-const VERSION = '1.0.8'
+const pkg = JSON.parse(readFileSync(join(REPO_ROOT, 'package.json'), 'utf-8'))
+const VERSION = pkg.version
 const TARBALL_NAME = `studiocodeai-lyacode-${VERSION}.tgz`
 const TARBALL_PATH = join(REPO_ROOT, TARBALL_NAME)
 const SED_PATH = join(
@@ -138,7 +139,7 @@ async function main(): Promise<void> {
     // OR have correct absolute paths. We pass the SED with /N and let it
     // resolve files relative to its location. The repo-root tarball is
     // referenced via SourceFiles0 with SourceFilesPath=\\ which iexpress
-    // interprets oddly. Best effort here ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â if it fails, .zip is enough.
+    // interprets oddly. Best effort here: if it fails, .zip is enough.
     const result = spawnSync(
       iexpress,
       ['/Q', `/N:${SED_PATH}`, `/O:${exeOut}`],
@@ -148,7 +149,7 @@ async function main(): Promise<void> {
       console.log(`  OK: ${exeOut}`)
     } else {
       console.warn(`  WARN: iexpress failed (exit=${result.status}).`)
-      console.warn('  Use the .zip or .tgz instead ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â they work everywhere.')
+      console.warn('  Use the .zip or .tgz instead; they work everywhere.')
     }
   }
 
