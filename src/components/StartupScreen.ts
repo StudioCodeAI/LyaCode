@@ -53,45 +53,19 @@ export function paintLine(text: string, stops: readonly RGB[], lineT: number): s
   return out + RESET
 }
 
-// ─── Wordmark (Blocky 10-line pixel style with double-stroke) ────────────────
-// Heavy blocky letters with double-stroke 3D effect. 10 rows tall.
-// Title case: L and C uppercase, ya and loud lowercase.
-const FONT_OPEN: Record<string, string[]> = {
-  L: ['##        ', '##        ', '##        ', '##        ', '##        ', '##        ', '##        ', '##        ', '##########', '##########'],
-  l: ['##        ', '##        ', '##        ', '##        ', '##        ', '##        ', '##        ', '##        ', '##        ', '##        '],
-  Y: ['##      ##', '##      ##', '##      ##', ' ##    ## ', ' ##    ## ', '  ##  ##  ', '   ####   ', '   ####   ', '    ##    ', '    ##    '],
-  y: ['##      ##', '##      ##', '##      ##', '##      ##', ' ##    ## ', '  ##  ##  ', '   ####   ', '    ##    ', '    ##    ', '   ##     '],
-  A: ['    ##    ', '    ##    ', '   ####   ', '   ####   ', '  ##  ##  ', '  ##  ##  ', ' ##    ## ', ' ######## ', ' ######## ', '##      ##'],
-  a: ['  ######  ', '  ######  ', ' ##    ## ', ' ##    ## ', ' ##    ## ', ' ######## ', ' ######## ', ' ##    ## ', ' ##    ## ', ' ######## '],
-  C: [' #########', ' #########', '##        ', '##        ', '##        ', '##        ', '##        ', '##        ', ' #########', ' #########'],
-  c: [' #########', ' #########', '##        ', '##        ', '##        ', '##        ', '##        ', '##        ', ' #########', ' #########'],
-  O: ['  ######  ', '  ######  ', ' ##    ## ', ' ##    ## ', '##      ##', '##      ##', ' ##    ## ', ' ##    ## ', '  ######  ', '  ######  '],
-  o: ['  ######  ', '  ######  ', ' ##    ## ', ' ##    ## ', '##      ##', '##      ##', ' ##    ## ', ' ##    ## ', '  ######  ', '  ######  '],
-  U: ['##      ##', '##      ##', '##      ##', '##      ##', '##      ##', '##      ##', ' ##    ## ', ' ##    ## ', '  ######  ', '  ######  '],
-  u: ['##      ##', '##      ##', '##      ##', '##      ##', '##      ##', '##      ##', ' ##    ## ', ' ##    ## ', '  ######  ', '  ######  '],
-  D: ['######### ', '######### ', '##      ##', '##      ##', '##      ##', '##      ##', '##      ##', '##      ##', '######### ', '######### '],
-  d: ['      ##  ', '      ##  ', '  ######  ', '  ######  ', ' ##   ##  ', ' ##   ##  ', ' ##   ##  ', ' ##   ##  ', '  ######  ', '  ######  '],
-  N: ['##       #', '##       #', '###      #', '####     #', '## ##    #', '##  ##   #', '##   ##  #', '##    ## #', '##     ###', '##      ##'],
-  n: ['##       #', '##       #', '###      #', '####     #', '## ##    #', '##  ##   #', '##   ##  #', '##    ## #', '##     ###', '##      ##'],
-  ' ': ['    ', '    ', '    ', '    ', '    ', '    ', '    ', '    ', '    ', '    '],
-}
+// ─── Wordmark (ANSI Shadow style) ───────────────────────────────────────────
+// Hardcoded "LYA CLOUD" in ANSI Shadow font, to match Open Claude.
+const WORDMARK_ANSI_SHADOW = [
+  '██╗  ██╗   ██╗ █████╗      ██████╗██╗      ██████╗ ██╗   ██╗██████╗ ',
+  '██║  ╚██╗ ██╔╝██╔══██╗    ██╔════╝██║     ██╔═══██╗██║   ██║██╔══██╗',
+  '██║   ╚████╔╝ ███████║    ██║     ██║     ██║   ██║██║   ██║██║  ██║',
+  '██║    ╚██╔╝  ██╔══██║    ██║     ██║     ██║   ██║██║   ██║██║  ██║',
+  '███████╗██║   ██║  ██║    ╚██████╗███████╗╚██████╔╝╚██████╔╝██████╔╝',
+  '╚══════╝╚═╝   ╚═╝  ╚═╝     ╚═════╝╚══════╝ ╚═════╝  ╚═════╝ ╚═════╝ ',
+]
 
-const WORDMARK_ROWS = 10
-const WORDMARK_GAP = 1
-
-function renderWordmark(text: string): string[] {
-  const lines: string[][] = Array.from({ length: WORDMARK_ROWS }, () => [])
-  for (let i = 0; i < text.length; i++) {
-    const ch = text[i]
-    const bitmap = FONT_OPEN[ch] ?? FONT_OPEN[' ']
-    for (let r = 0; r < WORDMARK_ROWS; r++) {
-      lines[r].push(bitmap[r])
-      if (i < text.length - 1) {
-        lines[r].push(' '.repeat(WORDMARK_GAP))
-      }
-    }
-  }
-  return lines.map(row => row.join(''))
+function renderWordmark(): string[] {
+  return WORDMARK_ANSI_SHADOW
 }
 
 // Studio CodeAI orange gradient — warm light to deep accent.
@@ -108,7 +82,7 @@ function colorizeWordmarkRow(row: string): string {
   const width = row.length
   for (let i = 0; i < width; i++) {
     const ch = row[i]
-    if (ch === '#') {
+    if (ch !== ' ') {
       const t = width > 1 ? i / (width - 1) : 0
       const segs = WORDMARK_GRADIENT.length - 1
       const seg = Math.min(Math.floor(t * segs), segs - 1)
@@ -251,7 +225,7 @@ export function printStartupScreen(modelOverride?: string): void {
   // bold ANSI Shadow letters painted solid in Studio CodeAI brand
   // orange. Visually ~3× the height of a normal text line, gives the
   // terminal a hero feel without scrolling.
-  const wordmarkLines = renderWordmark('Lya Cloud')
+  const wordmarkLines = renderWordmark()
   for (const line of wordmarkLines) {
     out.push(`${BOLD}${colorizeWordmarkRow(line)}${RESET}`)
   }
