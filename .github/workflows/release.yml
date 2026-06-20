@@ -1,21 +1,21 @@
-name: Release — Lya Cloud
+name: Release â€” Lya Code
 
-# ─────────────────────────────────────────────────────────────────────────────
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 # Dispara em:
 #   - push de uma tag v*.*.* (release normal)
 #   - workflow_dispatch com tag manual (re-release ou hotfix)
 #
 # O que faz:
 #   1. Builda o CLI (bun run build)
-#   2. Gera o tarball npm (npm pack → studiocodeai-lyacloud-X.Y.Z.tgz)
+#   2. Gera o tarball npm (npm pack â†’ studiocodeai-lyacode-X.Y.Z.tgz)
 #   3. Builda o instalador Windows (.exe via iexpress + .zip portable)
-#   4. Publica GitHub Release no repo PÚBLICO lyacloud-installers
-#      com os artefatos de instalação (sem código-fonte)
+#   4. Publica GitHub Release no repo PÃšBLICO lyacode-installers
+#      com os artefatos de instalaÃ§Ã£o (sem cÃ³digo-fonte)
 #
-# Secrets necessários (configurar em Settings → Secrets → Actions):
-#   INSTALLERS_REPO_TOKEN  — PAT com acesso de escrita ao repo lyacloud-installers
-#                            (Contents: Read & write | repo: StudioCodeAI/lyacloud-installers)
-# ─────────────────────────────────────────────────────────────────────────────
+# Secrets necessÃ¡rios (configurar em Settings â†’ Secrets â†’ Actions):
+#   INSTALLERS_REPO_TOKEN  â€” PAT com acesso de escrita ao repo lyacode-installers
+#                            (Contents: Read & write | repo: StudioCodeAI/lyacode-installers)
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 on:
   push:
@@ -37,11 +37,11 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      # ── 1. Checkout ──────────────────────────────────────────────────────────
-      - name: Checkout código-fonte
+      # â”€â”€ 1. Checkout â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+      - name: Checkout cÃ³digo-fonte
         uses: actions/checkout@v4
 
-      # ── 2. Runtime ───────────────────────────────────────────────────────────
+      # â”€â”€ 2. Runtime â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
         with:
@@ -53,24 +53,24 @@ jobs:
           node-version: '22'
           registry-url: 'https://registry.npmjs.org'
 
-      # ── 3. Dependências ──────────────────────────────────────────────────────
-      - name: Instalar dependências (bun install --frozen-lockfile)
+      # â”€â”€ 3. DependÃªncias â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+      - name: Instalar dependÃªncias (bun install --frozen-lockfile)
         run: bun install --frozen-lockfile
 
-      # ── 4. Build CLI ─────────────────────────────────────────────────────────
-      - name: Build CLI (bun run build → dist/cli.mjs)
+      # â”€â”€ 4. Build CLI â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+      - name: Build CLI (bun run build â†’ dist/cli.mjs)
         run: bun run build
 
-      # ── 5. Tarball npm ───────────────────────────────────────────────────────
+      # â”€â”€ 5. Tarball npm â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
       - name: Gerar tarball npm (npm pack)
         run: npm pack
 
-      # ── 6. Instalador Windows ────────────────────────────────────────────────
+      # â”€â”€ 6. Instalador Windows â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
       - name: Build instalador Windows (.exe + .zip portable)
         run: bun run build:installer:windows
 
-      # ── 7. Detectar versão ───────────────────────────────────────────────────
-      - name: Detectar versão do package.json
+      # â”€â”€ 7. Detectar versÃ£o â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+      - name: Detectar versÃ£o do package.json
         id: version
         shell: pwsh
         run: |
@@ -78,80 +78,80 @@ jobs:
           echo "version=$version" >> $env:GITHUB_OUTPUT
           Write-Host "Versao detectada: $version"
 
-      # ── 8. Upload artefatos no workflow (cache interno) ──────────────────────
+      # â”€â”€ 8. Upload artefatos no workflow (cache interno) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
       - name: Upload artefatos do build
         uses: actions/upload-artifact@v4
         with:
-          name: lyacloud-release-${{ steps.version.outputs.version }}
+          name: lyacode-release-${{ steps.version.outputs.version }}
           path: |
             dist/installer/*
-            studiocodeai-lyacloud-*.tgz
+            studiocodeai-lyacode-*.tgz
 
-      # ── 9. Publicar Release no repo PÚBLICO de instaladores ──────────────────
+      # â”€â”€ 9. Publicar Release no repo PÃšBLICO de instaladores â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
       #
-      # O código-fonte fica PRIVADO neste repo.
-      # Os instaladores são publicados em StudioCodeAI/lyacloud-installers.
-      # Token: PAT com Contents R/W no repo lyacloud-installers (secret INSTALLERS_REPO_TOKEN).
-      - name: Publicar Release em lyacloud-installers (repo público)
+      # O cÃ³digo-fonte fica PRIVADO neste repo.
+      # Os instaladores sÃ£o publicados em StudioCodeAI/lyacode-installers.
+      # Token: PAT com Contents R/W no repo lyacode-installers (secret INSTALLERS_REPO_TOKEN).
+      - name: Publicar Release em lyacode-installers (repo pÃºblico)
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          name: Lya Cloud v${{ steps.version.outputs.version }}
+          name: Lya Code v${{ steps.version.outputs.version }}
           tag_name: ${{ github.ref_name }}
-          repository: StudioCodeAI/lyacloud-installers
+          repository: StudioCodeAI/lyacode-installers
           token: ${{ secrets.INSTALLERS_REPO_TOKEN }}
           generate_release_notes: false
           fail_on_unmatched_files: false
           files: |
-            dist/installer/lyacloud-setup-x64-*.exe
-            dist/installer/lyacloud-portable-*.zip
-            studiocodeai-lyacloud-*.tgz
+            dist/installer/lyacode-setup-x64-*.exe
+            dist/installer/lyacode-portable-*.zip
+            studiocodeai-lyacode-*.tgz
           body: |
-            ## Lya Cloud v${{ steps.version.outputs.version }}
+            ## Lya Code v${{ steps.version.outputs.version }}
 
-            Terminal agêntico do **Studio CodeAI** para workflows de código local e em nuvem.
+            Terminal agÃªntico do **Studio CodeAI** para workflows de cÃ³digo local e em nuvem.
 
             ---
 
-            ### ⚡ Instalação — Multi-plataforma via npm (recomendado)
+            ### âš¡ InstalaÃ§Ã£o â€” Multi-plataforma via npm (recomendado)
 
             ```bash
-            npm install -g https://github.com/StudioCodeAI/lyacloud-installers/releases/download/${{ github.ref_name }}/studiocodeai-lyacloud-${{ steps.version.outputs.version }}.tgz
+            npm install -g https://github.com/StudioCodeAI/lyacode-installers/releases/download/${{ github.ref_name }}/studiocodeai-lyacode-${{ steps.version.outputs.version }}.tgz
             ```
 
-            ### 🪟 Windows — Portable .zip
+            ### ðŸªŸ Windows â€” Portable .zip
 
             ```powershell
-            irm https://github.com/StudioCodeAI/lyacloud-installers/releases/download/${{ github.ref_name }}/lyacloud-portable-${{ steps.version.outputs.version }}.zip -OutFile lyacloud-portable.zip
-            Expand-Archive lyacloud-portable.zip -DestinationPath .\lyacloud-portable -Force
-            cd lyacloud-portable
+            irm https://github.com/StudioCodeAI/lyacode-installers/releases/download/${{ github.ref_name }}/lyacode-portable-${{ steps.version.outputs.version }}.zip -OutFile lyacode-portable.zip
+            Expand-Archive lyacode-portable.zip -DestinationPath .\lyacode-portable -Force
+            cd lyacode-portable
             .\install.cmd
             ```
 
-            ### 🪟 Windows — Instalador .exe (se disponível)
+            ### ðŸªŸ Windows â€” Instalador .exe (se disponÃ­vel)
 
             ```powershell
-            irm https://github.com/StudioCodeAI/lyacloud-installers/releases/download/${{ github.ref_name }}/lyacloud-setup-x64-${{ steps.version.outputs.version }}.exe -OutFile lyacloud-setup.exe
-            .\lyacloud-setup.exe
+            irm https://github.com/StudioCodeAI/lyacode-installers/releases/download/${{ github.ref_name }}/lyacode-setup-x64-${{ steps.version.outputs.version }}.exe -OutFile lyacode-setup.exe
+            .\lyacode-setup.exe
             ```
 
-            ### ✅ Validar instalação
+            ### âœ… Validar instalaÃ§Ã£o
 
             ```bash
-            lya --version        # → ${{ steps.version.outputs.version }} (Lya Cloud)
+            lya --version        # â†’ ${{ steps.version.outputs.version }} (Lya Code)
             lya                  # inicia o CLI
-            /provider            # configura provedor (Ollama 1º se estiver rodando)
+            /provider            # configura provedor (Ollama 1Âº se estiver rodando)
             /lya                 # invoca a persona Lya
             /help                # todos os comandos
             ```
 
-            ### 🗑️ Desinstalar
+            ### ðŸ—‘ï¸ Desinstalar
 
             ```bash
-            npm uninstall -g @studiocodeai/lyacloud
+            npm uninstall -g @studiocodeai/lyacode
             ```
 
             ---
 
-            **Studio CodeAI** · Luis Cardozo · studiocoder.ai@gmail.com
-            📦 Código-fonte: repositório privado · Releases: [lyacloud-installers](https://github.com/StudioCodeAI/lyacloud-installers)
+            **Studio CodeAI** Â· Luis Cardozo Â· studiocoder.ai@gmail.com
+            ðŸ“¦ CÃ³digo-fonte: repositÃ³rio privado Â· Releases: [lyacode-installers](https://github.com/StudioCodeAI/lyacode-installers)
