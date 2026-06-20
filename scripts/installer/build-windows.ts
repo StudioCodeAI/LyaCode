@@ -22,7 +22,7 @@ import { join } from 'path'
 import { spawnSync } from 'child_process'
 
 const REPO_ROOT = join(import.meta.dir, '..', '..')
-const VERSION = '1.0.1'
+const VERSION = '1.0.2'
 const TARBALL_NAME = `studiocodeai-lyacloud-${VERSION}.tgz`
 const TARBALL_PATH = join(REPO_ROOT, TARBALL_NAME)
 const SED_PATH = join(

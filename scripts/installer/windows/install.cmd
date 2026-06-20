@@ -8,7 +8,7 @@ REM   /T:<tgz>     Caminho do tarball (default: .\studiocodeai-lyacloud-1.0.1.tg
 REM   /Y           Suprime atalhos no Menu Iniciar
 REM
 REM Para buildar um .exe auto-extraivel:
-REM   iexpress /N:lyacloud-setup-x64.sed /O:..\..\..\dist\installer\lyacloud-setup-x64-1.0.1.exe
+REM   iexpress /N:lyacloud-setup-x64.sed /O:..\..\..\dist\installer\lyacloud-setup-x64-1.0.2.exe
 
 setlocal
 
@@ -31,10 +31,10 @@ shift & goto :parse
 
 :end_parse
 
-if "%TARBALL%"=="" set "TARBALL=%~dp0studiocodeai-lyacloud-1.0.1.tgz"
+if "%TARBALL%"=="" set "TARBALL=%~dp0studiocodeai-lyacloud-1.0.2.tgz"
 
 echo.
-echo  Lya Cloud v1.0.1 - Installer Windows
+echo  Lya Cloud v1.0.2 - Installer Windows
 echo  Familia Studio CodeAI
 echo.
 echo  Requisitos: Node.js 22 LTS ou superior

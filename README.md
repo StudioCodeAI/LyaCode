@@ -6,7 +6,7 @@
 
 *Abra qualquer projeto no terminal e trabalhe com Lya — uma IA que lê código, edita arquivos, executa comandos e apoia tarefas de engenharia do início ao fim.*
 
-[![Version](https://img.shields.io/badge/version-1.0.1-orange?style=flat-square)](https://github.com/StudioCodeAI/lyacloud-installers/releases/latest)
+[![Version](https://img.shields.io/badge/version-1.0.2-orange?style=flat-square)](https://github.com/StudioCodeAI/lyacloud-installers/releases/latest)
 [![License](https://img.shields.io/badge/license-Proprietary-red?style=flat-square)](./LICENSE)
 [![Node](https://img.shields.io/badge/node-%3E%3D22.0.0-green?style=flat-square)](https://nodejs.org)
 [![Studio CodeAI](https://img.shields.io/badge/Studio-CodeAI-ff7a1a?style=flat-square)](https://github.com/StudioCodeAI)
@@ -30,13 +30,13 @@
 ### Multi-plataforma via npm (recomendado)
 
 ```bash
-npm install -g https://github.com/StudioCodeAI/lyacloud-installers/releases/download/v1.0.1/studiocodeai-lyacloud-1.0.1.tgz
+npm install -g https://github.com/StudioCodeAI/lyacloud-installers/releases/download/v1.0.2/studiocodeai-lyacloud-1.0.2.tgz
 ```
 
 ### Windows — Portable .zip
 
 ```powershell
-irm https://github.com/StudioCodeAI/lyacloud-installers/releases/download/v1.0.1/lyacloud-portable-1.0.1.zip -OutFile lyacloud-portable.zip
+irm https://github.com/StudioCodeAI/lyacloud-installers/releases/download/v1.0.2/lyacloud-portable-1.0.2.zip -OutFile lyacloud-portable.zip
 Expand-Archive lyacloud-portable.zip -DestinationPath .\lyacloud-portable -Force
 cd lyacloud-portable
 .\install.cmd
@@ -45,7 +45,7 @@ cd lyacloud-portable
 ### Windows — Instalador .exe
 
 ```powershell
-irm https://github.com/StudioCodeAI/lyacloud-installers/releases/download/v1.0.1/lyacloud-setup-x64-1.0.1.exe -OutFile lyacloud-setup.exe
+irm https://github.com/StudioCodeAI/lyacloud-installers/releases/download/v1.0.2/lyacloud-setup-x64-1.0.2.exe -OutFile lyacloud-setup.exe
 .\lyacloud-setup.exe
 ```
 
@@ -56,7 +56,7 @@ Após a instalação, abra um **novo terminal** e digite `lya`.
 Todos os aliases abaixo apontam para o mesmo binário:
 
 ```bash
-lya --version       # → 1.0.1 (Lya Cloud)
+lya --version       # → 1.0.2 (Lya Cloud)
 lyacloud --version
 lscloud --version
 lyacode --version
@@ -214,7 +214,7 @@ Lya Cloud funciona sozinha no terminal e serve como fundação CLI para fluxos d
 | Repositório | [github.com/StudioCodeAI/lyacloud](https://github.com/StudioCodeAI/lyacloud) |
 | Releases | [github.com/StudioCodeAI/lyacloud-installers](https://github.com/StudioCodeAI/lyacloud-installers) |
 | Pacote npm | `@studiocodeai/lyacloud` |
-| Versão atual | **1.0.1** — produção estável |
+| Versão atual | **1.0.2** — produção estável |
 | Política | `v0.x.y` = teste · `v1.0.0+` = produção estável |
 
 ---
@@ -246,5 +246,5 @@ Todas as releases, changelogs e artefatos de instalação estão disponíveis pu
 ---
 
 <div align="center">
-<sub>Lya Cloud v1.0.1 — produção estável · Built with Lya 🟠 · Studio CodeAI</sub>
+<sub>Lya Cloud v1.0.2 — produção estável · Built with Lya 🟠 · Studio CodeAI</sub>
 </div>
