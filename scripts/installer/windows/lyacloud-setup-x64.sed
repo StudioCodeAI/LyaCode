@@ -2,7 +2,7 @@
 ; Luis Cardozo · studiocoder.ai@gmail.com · Studio CodeAI
 ;
 ; Build:
-;   iexpress /N:scripts\installer\windows\lyacloud-setup-x64.sed /O:dist\installer\lyacloud-setup-x64-1.0.3.exe
+;   iexpress /N:scripts\installer\windows\lyacloud-setup-x64.sed /O:dist\installer\lyacloud-setup-x64-1.0.4.exe
 ;
 ; Result: single self-extracting .exe that drops install.ps1 + tarball
 ; into a temp dir and runs install.ps1. No admin required.
@@ -31,12 +31,12 @@ SourceFilesPath=scripts\installer\windows\
 SourceFiles=install.ps1
 ; The tarball is referenced from the repo root, not the SED path. Use a
 ; SourceFiles0.. entry with an absolute path instead.
-SourceFiles0=studiocodeai-lyacloud-1.0.3.tgz
+SourceFiles0=studiocodeai-lyacloud-1.0.4.tgz
 SourceFiles1=scripts\installer\windows\install.ps1
 SourceFiles2=scripts\installer\windows\LICENSE.rtf
 [SourceFiles0]
 SourceFilesPath=\
-SourceFiles0=studiocodeai-lyacloud-1.0.3.tgz
+SourceFiles0=studiocodeai-lyacloud-1.0.4.tgz
 [SourceFiles1]
 SourceFilesPath=\
 SourceFiles0=scripts\installer\windows\install.ps1
