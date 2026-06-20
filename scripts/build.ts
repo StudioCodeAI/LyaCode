@@ -952,7 +952,12 @@ if (result?.success) {
   // known item to revisit, not a blessing that the stub is safe.
   // Entries are repo-relative paths from `src/` onward, without extension — the
   // same shape canonicalStub() produces, so the allowlist reads as the key.
-  const ACCEPTABLE_RUNTIME_STUBS = new Set<string>()
+  const ACCEPTABLE_RUNTIME_STUBS = new Set<string>([
+    // src/commands/plan/index.ts: the /plan command is a planned feature stub.
+    // The feature flag PLAN_MODE gates all callsites; the stub is unreachable
+    // when the module is absent. Revisit when the plan command ships.
+    'src/commands/plan/index',
+  ])
 
   // Stub markers are not byte-stable across build hosts: the per-importer
   // scanner records each stub as the resolved absolute source path, which
