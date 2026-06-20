@@ -675,13 +675,7 @@ function ProviderChooser({
     : 'Save a provider profile without editing environment variables first. Codex profiles backed by env or auth.json can switch this session immediately.'
   const options: OptionWithDescription<ProviderChoice>[] = [
     {
-      label: 'Auto',
-      value: 'auto',
-      description:
-        'Prefer local Ollama when available, otherwise guide you into OpenAI-compatible setup',
-    },
-    {
-      label: ollamaMetadata.label,
+      label: 'Ollama Local',
       value: 'ollama',
       description: ollamaMetadata.description,
     },
@@ -715,6 +709,12 @@ function ProviderChooser({
           },
         ]
       : []),
+    {
+      label: 'Auto',
+      value: 'auto',
+      description:
+        'Prefer local Ollama when available, otherwise guide you into OpenAI-compatible setup',
+    },
   ]
 
   if (summary.savedProfileLabel !== 'none') {

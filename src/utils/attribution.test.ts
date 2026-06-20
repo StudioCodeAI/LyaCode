@@ -219,10 +219,10 @@ describe('getDefaultCommitCoAuthorName', () => {
 
   it('uses the Lya Cloud email for commit attribution across providers', () => {
     expect(getDefaultCommitCoAuthorEmail('openai')).toBe(
-      'lyacloud@gitlawb.com',
+      'lyacloud@studiocoder.ai',
     )
     expect(getDefaultCommitCoAuthorEmail('firstParty')).toBe(
-      'lyacloud@gitlawb.com',
+      'lyacloud@studiocoder.ai',
     )
   })
 })
@@ -271,7 +271,7 @@ describe('getAttributionTexts', () => {
 
     const attribution = getAttributionTexts()
     expect(attribution.commit).toStartWith('Co-Authored-By: ')
-    expect(attribution.commit).toEndWith(' <lyacloud@gitlawb.com>')
+    expect(attribution.commit).toEndWith(' <lyacloud@studiocoder.ai>')
     expect(attribution.pr).toBe(defaultPrAttribution)
   })
 

@@ -165,7 +165,9 @@ export function resolveConfigDirEnv(options?: {
     lya !== legacy
   if (legacyConflict && !warnedAboutConflictingConfigDirEnvs) {
     const selectedName = lya ? 'LYACLOUD_CONFIG_DIR' : 'CLAUDE_CONFIG_DIR'
-    const message = `Multiple Lya Cloud config directory environment variables are set to different values. Using ${selectedName}=${selected}.`
+    const legacyName = lya ? 'CLAUDE_CONFIG_DIR' : 'LYACLOUD_CONFIG_DIR'
+    const legacyValue = lya ? legacy : lya
+    const message = `Multiple Lya Cloud config directory environment variables are set to different values. Using ${selectedName}=${selected}; ${legacyName}=${legacyValue} ignored.`
     if (options?.warn) {
       warnedAboutConflictingConfigDirEnvs = true
       options.warn(message)
@@ -208,7 +210,7 @@ export function setClaudeConfigHomeDirForTesting(
 // vars so tests that change either get a fresh value without explicit
 // cache.clear.
 export const getClaudeConfigHomeDir = memoize(
-  (): string => {
+  (overrideHomeDir?: string): string => {
     if (claudeConfigHomeDirOverride) {
       return claudeConfigHomeDirOverride
     }
@@ -221,7 +223,7 @@ export const getClaudeConfigHomeDir = memoize(
         console.warn(`[lyacloud] ${message}`)
       },
     })
-    const homeDir = homedir()
+    const homeDir = overrideHomeDir ?? homedir()
     const migrationSucceeded = migrateLegacyClaudeConfigHome({
       configDirEnv,
       homeDir,
@@ -246,6 +248,30 @@ export const getClaudeConfigHomeDir = memoize(
   () =>
     `${claudeConfigHomeDirOverride ?? ''}\0${process.env.LYACLOUD_CONFIG_DIR ?? ''}\0${process.env.CLAUDE_CONFIG_DIR ?? ''}`,
 )
+
+/**
+ * Test-only variant that accepts an explicit `homeDir` instead of
+ * reading from `os.homedir()`. Lets tests pin the home directory
+ * without mocking the `os` module (which doesn't always restore
+ * cleanly across suites). Production callers should use
+ * `getClaudeConfigHomeDir()`.
+ */
+export function resolveConfigHomeDirForTest(homeDir: string): string {
+  return resolveClaudeConfigHomeDir({ homeDir })
+}
+
+/**
+ * Test-only escape hatch — clears the memo cache for
+ * `getClaudeConfigHomeDir()` so the next call re-resolves against
+ * the current process environment. Sibling suites that set
+ * `LYACLOUD_CONFIG_DIR`, `CLAUDE_CONFIG_DIR`, or the internal
+ * override via `setClaudeConfigHomeDirForTesting()` may otherwise
+ * leave a stale value cached for the rest of the process.
+ */
+export function resetClaudeConfigHomeDirCacheForTesting(): void {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ;(getClaudeConfigHomeDir as any).cache?.clear?.()
+}
 
 export function getTeamsDir(): string {
   return join(getClaudeConfigHomeDir(), 'teams')

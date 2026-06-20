@@ -1,0 +1,80 @@
+Lya Cloud wordmark — 4 estilos para você escolher
+
+Cada opção abaixo renderiza "Lya Cloud" com uma fonte/tamanho diferente.
+Eu recomendo a opção D (Lya.Cloud em 7-row bold) — tem presença visual
+máxima, lê bem em qualquer terminal, e respeita o branding do produto
+(Lya.Cloud é o domínio canônico, com ponto entre as palavras).
+
+────────────────────────────────────────────────────────────────
+A. 5-row thin (compact, single line look)
+────────────────────────────────────────────────────────────────
+#    # #   #   # #   # #
+#    # #   #   # #   # #
+#    # #   #   # #   # #
+#    # #   #   # #   # #
+#    # #   #   # #   # #
+
+rows: 5  cols: 43
+Veredito: muito fino, sem presenca. Igual ao que temos hoje.
+
+────────────────────────────────────────────────────────────────
+B. 5-row big (default block, balanced)
+────────────────────────────────────────────────────────────────
+#     #   #  ###         #   #     # #
+#     #   #  ###         #   #     # #
+#     #   #  ###         #   #     # #
+#     #   #  ###         #   #     # #
+#     #   #####         #   #     #####
+
+rows: 5  cols: 53
+Veredito: melhoria modesta. Boa se quiser minimalismo.
+
+────────────────────────────────────────────────────────────────
+C. 7-row bold (LARGE, hero impact) — "LYA CLOUD"
+────────────────────────────────────────────────────────────────
+#       #     #   ###           #     #     #  #
+#       #     #   ###           #     #     #  #
+#       #     #   ###           #     #     #  #
+#       #     #   ###           #     #     #  #
+#       #     #   ###           #     #     #  #
+#       #     #   ###           #     #     #  #
+#######      #######          #######      #######
+
+rows: 7  cols: 71
+Veredito: hero impact. Lê de longe. Caps lock forte.
+
+────────────────────────────────────────────────────────────────
+D. 7-row bold mixed case (LARGE + Lya.Cloud) — RECOMENDADO
+────────────────────────────────────────────────────────────────
+#       #     #   ###       #     #     #    #
+#       #     #   ###       #     #     #    #
+#       #     #   ###       #     #     #    #
+#       #     #   ###       #     #     #    #
+#       #     #   ###       #     #     #    #
+#       #     #   ###       #     #     #    #
+#######      #######      ## #######      #######
+
+rows: 7  cols: 65
+Veredito: presença + identidade (Lya.Cloud com ponto).
+            Branding consistente com assets/brand/lyacloud-logo.svg.
+
+────────────────────────────────────────────────────────────────
+Tamanhos disponíveis:
+────────────────────────────────────────────────────────────────
+- 5-row thin:   ~43 colunas ×  5 linhas  (pequeno, leve)
+- 5-row big:    ~53 colunas ×  5 linhas  (médio, padrão)
+- 7-row bold:   ~71 colunas ×  7 linhas  (grande, hero)
+- 7-row mix:    ~65 colunas ×  7 linhas  (grande + brand)
+
+Texto por linha:
+- 5-row thin:  Lya Cloud visível, mas só metade do tamanho de uma tag
+- 7-row bold:  Lya Cloud ocupa ~70% da largura típica de terminal (80 col)
+- 7-row mix:   Lya.Cloud ocupa ~80% da largura típica
+
+Recomendação: D (7-row bold + Lya.Cloud com ponto)
+
+Me diga qual prefere:
+  A / B / C / D
+
+Depois ajusto o StartupScreen.ts para usar a fonte escolhida
+e o gradiente Studio CodeAI orange (#FF7A1A → #B4460A).

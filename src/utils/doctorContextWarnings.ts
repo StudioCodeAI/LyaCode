@@ -76,12 +76,12 @@ async function checkClaudeMdFiles(
 
   const details = largeFiles
     .sort((a, b) => b.content.length - a.content.length)
-    .map(file => `${file.path}: ${file.content.length.toLocaleString()} chars`)
+    .map(file => `${file.path}: ${file.content.length.toLocaleString('en-US')} chars`)
 
   const message =
     largeFiles.length === 1
-      ? `Large CLAUDE.md file detected (${largeFiles[0]!.content.length.toLocaleString()} chars > ${MAX_MEMORY_CHARACTER_COUNT.toLocaleString()})`
-      : `${largeFiles.length} large CLAUDE.md files detected (each > ${MAX_MEMORY_CHARACTER_COUNT.toLocaleString()} chars)`
+      ? `Large CLAUDE.md file detected (${largeFiles[0]!.content.length.toLocaleString('en-US')} chars > ${MAX_MEMORY_CHARACTER_COUNT.toLocaleString('en-US')})`
+      : `${largeFiles.length} large CLAUDE.md files detected (each > ${MAX_MEMORY_CHARACTER_COUNT.toLocaleString('en-US')} chars)`
 
   return {
     type: 'claudemd_files',
@@ -123,7 +123,7 @@ async function checkAgentDescriptions(
 
   const details = agentTokens
     .slice(0, 5)
-    .map(agent => `${agent.name}: ~${agent.tokens.toLocaleString()} tokens`)
+    .map(agent => `${agent.name}: ~${agent.tokens.toLocaleString('en-US')} tokens`)
 
   if (agentTokens.length > 5) {
     details.push(`(${agentTokens.length - 5} more custom agents)`)
@@ -132,7 +132,7 @@ async function checkAgentDescriptions(
   return {
     type: 'agent_descriptions',
     severity: 'warning',
-    message: `Large agent descriptions (~${totalTokens.toLocaleString()} tokens > ${AGENT_DESCRIPTIONS_THRESHOLD.toLocaleString()})`,
+    message: `Large agent descriptions (~${totalTokens.toLocaleString('en-US')} tokens > ${AGENT_DESCRIPTIONS_THRESHOLD.toLocaleString('en-US')})`,
     details,
     currentValue: totalTokens,
     threshold: AGENT_DESCRIPTIONS_THRESHOLD,
@@ -248,7 +248,7 @@ function buildMcpToolsWarning(
     .slice(0, 5)
     .map(
       ([name, info]) =>
-        `${name}: ${info.count} tools (~${info.tokens.toLocaleString()} tokens)`,
+        `${name}: ${info.count} tools (~${info.tokens.toLocaleString('en-US')} tokens)`,
     )
 
   if (sortedServers.length > 5) {
@@ -258,7 +258,7 @@ function buildMcpToolsWarning(
   return {
     type: 'mcp_tools',
     severity: 'warning',
-    message: `Large MCP tools context (~${mcpToolTokens.toLocaleString()} tokens${estimated ? ' estimated' : ''} > ${MCP_TOOLS_THRESHOLD.toLocaleString()})`,
+    message: `Large MCP tools context (~${mcpToolTokens.toLocaleString('en-US')} tokens${estimated ? ' estimated' : ''} > ${MCP_TOOLS_THRESHOLD.toLocaleString('en-US')})`,
     details,
     currentValue: mcpToolTokens,
     threshold: MCP_TOOLS_THRESHOLD,

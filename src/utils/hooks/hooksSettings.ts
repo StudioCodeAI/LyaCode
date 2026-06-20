@@ -10,6 +10,11 @@ import {
   getSettingsForSource,
 } from '../settings/settings.js'
 import { getDisplayPath } from '../file.js'
+// NOTE: do NOT `import { homedir } from 'os'` at module top. Bun's
+// mock.module('os'|'node:os') binds at import time, so a prior suite
+// that mocked os.homedir() to a temp dir would freeze a stale closure
+// here. We resolve homedir() via require() inside the function so the
+// latest mocked-or-real implementation is used at call time.
 import type { HookCommand, HookMatcher } from '../settings/types.js'
 import { DEFAULT_HOOK_SHELL } from '../shell/shellProvider.js'
 import { getSessionHooks } from './sessionHooks.js'
@@ -174,8 +179,19 @@ export function hookSourceDescriptionDisplayString(source: HookSource): string {
     const filePath = getSettingsFilePathForSource(settingsSource)
     return filePath ? getDisplayPath(filePath) : 'settings.json'
   }
+  // Resolve the config home dir fresh (no memo cache) so this string
+  // reflects the current process environment even when prior suites
+  // mutated the override. This keeps `/status` descriptions honest
+  // without requiring the caller to clear the memo cache.
+  // See NOTE above re: why homedir is loaded via require() not import.
+  const realHome = require('os').homedir() as string
+  const homeDir =
+    process.env.LYACLOUD_CONFIG_DIR ??
+    process.env.CLAUDE_CONFIG_DIR ??
+    join(realHome, '.lyacloud')
   const pluginHooksPath = getDisplayPath(
-    join(getClaudeConfigHomeDir(), 'plugins', '*', 'hooks', 'hooks.json'),
+    join(homeDir, 'plugins', '*', 'hooks', 'hooks.json'),
+    realHome,
   )
 
   switch (source) {

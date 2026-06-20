@@ -1,9 +1,10 @@
-import { afterEach, describe, expect, mock, test } from 'bun:test'
+import { afterAll, afterEach, beforeAll, describe, expect, mock, test } from 'bun:test'
 import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import * as realOs from 'node:os'
 import * as realCodexCredentials from '../../utils/codexCredentials.js'
+import { restoreOsMock } from '../../test/osMock.js'
 import { acquireEnvMutex, releaseEnvMutex } from '../../entrypoints/sdk/shared.js'
 
 type ProviderConfigModule = typeof import('./providerConfig.js')
@@ -24,10 +25,21 @@ function makeJwt(payload: Record<string, unknown>): string {
 }
 
 describe('resolveCodexApiCredentials with secure storage', () => {
+  beforeAll(() => {
+    // Defensive: clear any stale os.homedir() mock left behind by a
+    // prior suite so this suite starts with the real homedir.
+    restoreOsMock()
+  })
+  afterAll(() => {
+    // Always restore the real os before moving on, so the next suite
+    // doesn't inherit our temporary homedir override.
+    restoreOsMock()
+  })
   afterEach(() => {
     try {
       mock.restore()
       mock.module('../../utils/codexCredentials.js', () => realCodexCredentials)
+      mock.module('node:os', () => realOs)
     } finally {
       releaseEnvMutex()
     }
@@ -198,6 +210,7 @@ describe('resolveCodexApiCredentials with secure storage', () => {
       expect(credentials.accountId).toBe('acct_auth_json')
       expect(credentials.apiKey).not.toBe('stored-token')
     } finally {
+      mock.restore()
       rmSync(tempHomeDir, { force: true, recursive: true })
     }
   })
@@ -237,6 +250,7 @@ describe('resolveCodexApiCredentials with secure storage', () => {
       expect(credentials.apiKey).toBe('auth-json-access-token')
       expect(credentials.accountId).toBe('acct_stored')
     } finally {
+      mock.restore()
       rmSync(tempHomeDir, { force: true, recursive: true })
     }
   })

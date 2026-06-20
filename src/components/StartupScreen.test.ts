@@ -107,7 +107,7 @@ function setupOpenAIMode(baseUrl: string, model: string): void {
 }
 
 describe('printStartupScreen logo', () => {
-  test('renders CLAUDE with a D-shaped D instead of an O-shaped block', () => {
+  test('renders the Lya Cloud wordmark (7-row bold, L+C uppercase, no dot, orange gradient)', () => {
     ;(globalThis as Record<string, unknown>).MACRO = { VERSION: 'test-version' }
     Object.defineProperty(process.stdout, 'isTTY', {
       configurable: true,
@@ -123,10 +123,33 @@ describe('printStartupScreen logo', () => {
     printStartupScreen()
 
     const plainOutput = stripAnsi(output)
-    expect(plainOutput).toContain('███████╗ ████████╗')
-    expect(plainOutput).toContain('██╔═══██╗ ██╔═════╝')
-    expect(plainOutput).toContain('███████╔╝ ████████╗')
-    expect(plainOutput).not.toContain('████████║ ████████╗')
+    expect(plainOutput).not.toContain('CLAUDE')
+    expect(plainOutput).not.toContain('███████╗')
+
+    // Wordmark is Open Claude style: 7 rows of block letters (wider
+    // + taller, double-stroke outline) painted with a horizontal
+    // orange gradient. The wordmark sits between the leading blank
+    // line (index 0) and the tagline that follows.
+    const lines = plainOutput.split('\n')
+    const wordmarkLines = lines.slice(1, 8)
+    expect(wordmarkLines.length).toBe(7)
+    for (const line of wordmarkLines) {
+      expect(line).toMatch(/#+/)
+    }
+
+    // Bottom row of "Lya Cloud" must contain the baseline of every
+    // letter (L=#########, l=#########, a=###### #, space, C=#######,
+    // l=#########, o=#####, u=#####, d=####### #) at column positions
+    // matching the font bitmap (9 cols wide).
+    const baseline = wordmarkLines[6]
+    expect(baseline).toContain('#########') // L (uppercase)
+    expect(baseline).toContain('#########') // l (lowercase)
+    expect(baseline).toContain('###### #') // a (lowercase a)
+    expect(baseline).toContain('#######')  // C (uppercase)
+    expect(baseline).toContain('#########') // l
+    expect(baseline).toContain('#####')     // o
+    expect(baseline).toContain('#####')     // u
+    expect(baseline).toContain('####### #') // d (lowercase d)
   })
 })
 

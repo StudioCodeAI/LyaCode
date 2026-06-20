@@ -12,6 +12,7 @@ import {
   resolve,
   sep,
 } from 'path'
+import { redactPathForStatus } from './statusRedaction.js'
 import { logEvent } from 'src/services/analytics/index.js'
 import { getFeatureValue_CACHED_MAY_BE_STALE } from '../services/analytics/growthbook.js'
 import { getCwd } from '../utils/cwd.js'
@@ -152,7 +153,10 @@ export function getAbsoluteAndRelativePaths(path: string | undefined): {
   return { absolutePath, relativePath }
 }
 
-export function getDisplayPath(filePath: string): string {
+export function getDisplayPath(
+  filePath: string,
+  overrideHomeDir?: string,
+): string {
   // Use relative path if file is in the current working directory
   const { relativePath } = getAbsoluteAndRelativePaths(filePath)
   if (relativePath && !relativePath.startsWith('..')) {
@@ -160,9 +164,9 @@ export function getDisplayPath(filePath: string): string {
   }
 
   // Use tilde notation for files in home directory
-  const homeDir = homedir()
+  const homeDir = overrideHomeDir ?? homedir()
   if (filePath.startsWith(homeDir + sep)) {
-    return '~' + filePath.slice(homeDir.length)
+    return redactPathForStatus(filePath, overrideHomeDir)
   }
 
   // Otherwise return the absolute path

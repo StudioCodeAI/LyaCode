@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, mock, test } from 'bun:test'
+import { afterAll, afterEach, beforeAll, describe, expect, mock, test } from 'bun:test'
 import {
   existsSync,
   mkdirSync,
@@ -8,8 +8,10 @@ import {
   writeFileSync,
 } from 'fs'
 import * as fsPromises from 'fs/promises'
+import * as realOs from 'os'
 import { homedir, tmpdir } from 'os'
 import { join } from 'path'
+import { restoreOsMock } from '../test/osMock.js'
 import { acquireEnvMutex, releaseEnvMutex } from '../entrypoints/sdk/shared.js'
 
 const originalEnv = { ...process.env }
@@ -36,9 +38,26 @@ afterEach(() => {
     process.env = { ...originalEnv }
     process.argv = [...originalArgv]
     mock.restore()
+    // Always restore real os.homedir() after a test that mocked os,
+    // so subsequent suites and tests don't observe a stale temp path.
+    mock.module('os', () => realOs)
+    mock.module('node:os', () => realOs)
   } finally {
     releaseEnvMutex()
   }
+})
+
+afterAll(() => {
+  // Final defensive cleanup so this suite leaves the process with the
+  // real os module in place.
+  mock.restore()
+  mock.module('os', () => realOs)
+  mock.module('node:os', () => realOs)
+})
+
+beforeAll(() => {
+  // Clear any leftover os.homedir() override from a prior suite.
+  restoreOsMock()
 })
 
 describe('Lya Cloud paths', () => {
@@ -199,16 +218,12 @@ describe('Lya Cloud paths', () => {
     try {
       writeFileSync(join(tempHome, '.lyacloud'), 'not a directory')
       mkdirSync(join(tempHome, '.claude'), { recursive: true })
-      mock.module('os', () => ({
-        homedir: () => tempHome,
-        tmpdir,
-      }))
       delete process.env.LYACLOUD_CONFIG_DIR
       delete process.env.CLAUDE_CONFIG_DIR
 
       const { getClaudeConfigHomeDir } = await importFreshEnvUtils()
 
-      expect(getClaudeConfigHomeDir()).toBe(join(tempHome, '.claude'))
+      expect(getClaudeConfigHomeDir(tempHome)).toBe(join(tempHome, '.claude'))
     } finally {
       rmSync(tempHome, { recursive: true, force: true })
     }

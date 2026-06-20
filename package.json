@@ -1,10 +1,14 @@
 {
   "name": "@studiocodeai/lyacloud",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Lya Cloud is a Studio CodeAI agentic terminal for local and cloud coding workflows",
   "type": "module",
   "bin": {
-    "lyacloud": "./bin/lyacloud"
+    "lyacloud": "./bin/lyacloud",
+    "lscloud": "./bin/lyacloud",
+    "lya": "./bin/lyacloud",
+    "lyacode": "./bin/lyacloud",
+    "lscode": "./bin/lyacloud"
   },
   "exports": {
     "./package.json": "./package.json",
@@ -71,7 +75,8 @@
     "doctor:report": "bun run scripts/system-check.ts --out reports/doctor-runtime.json",
     "hardening:check": "bun run smoke && bun run doctor:runtime",
     "hardening:strict": "bun run typecheck && bun run hardening:check",
-    "prepack": "npm run build"
+    "prepack": "npm run build",
+    "build:installer:windows": "bun run scripts/installer/build-windows.ts"
   },
   "dependencies": {
     "@alcalzone/ansi-tokenize": "0.3.0",

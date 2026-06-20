@@ -32,7 +32,10 @@ export function redactUrlForStatus(rawUrl: string): string {
  * (e.g. mTLS cert/key, CA bundle) stay useful without leaking usernames
  * or home directory layout.
  */
-export function redactPathForStatus(rawPath: string): string {
+export function redactPathForStatus(
+  rawPath: string,
+  overrideHomeDir?: string,
+): string {
   if (!rawPath) return rawPath
 
   const stripTrailingSep = (path: string) => path.replace(/[\\/]+$/, '')
@@ -50,7 +53,7 @@ export function redactPathForStatus(rawPath: string): string {
   const candidates = [
     process.env.HOME,
     process.env.USERPROFILE,
-    homedir(),
+    overrideHomeDir ?? homedir(),
   ]
     .filter((h): h is string => Boolean(h))
     .map(stripTrailingSep)
@@ -60,11 +63,15 @@ export function redactPathForStatus(rawPath: string): string {
     const homeForCompare = normalizeForCompare(home)
     if (rawPathForCompare === homeForCompare) return '~'
     // Match either `/home/user/...` or `C:\Users\user\...` style prefixes.
-    if (
-      rawPathForCompare.startsWith(homeForCompare + '/') ||
-      rawPathForCompare.startsWith(homeForCompare + '\\')
-    ) {
-      return '~' + rawPath.slice(home.length)
+    // Use the original-case home to slice the original-case path so the
+    // separator (which homeForCompare already lowercased) is preserved.
+    const matchedSep =
+      rawPathForCompare.startsWith(homeForCompare + '/') ? '/' : null
+    const matchedBackSep =
+      rawPathForCompare.startsWith(homeForCompare + '\\') ? '\\' : null
+    const sep = matchedSep ?? matchedBackSep
+    if (sep) {
+      return '~' + sep + rawPath.slice(home.length + sep.length)
     }
   }
   return rawPath

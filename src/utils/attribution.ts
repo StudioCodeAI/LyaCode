@@ -40,7 +40,7 @@ export type AttributionTexts = {
 }
 
 const DEFAULT_PR_ATTRIBUTION =
-  'Generated with [Lya Cloud](https://github.com/StudioCodeAI/lyacloud)'
+  '🤖 Generated with [Lya Cloud](https://github.com/StudioCodeAI/lyacloud)'
 
 function sanitizeCoAuthorNamePart(value: string): string {
   return value
@@ -97,7 +97,7 @@ export function getDefaultCommitCoAuthorName({
 }
 
 export function getDefaultCommitCoAuthorEmail(_apiProvider: string): string {
-  return 'lyacloud@studiocodeai.com'
+  return 'lyacloud@studiocoder.ai'
 }
 
 /**
@@ -437,7 +437,7 @@ export async function getEnhancedPRAttribution(
     memoryAccessCount > 0
       ? `, ${memoryAccessCount} ${memoryAccessCount === 1 ? 'memory' : 'memories'} recalled`
       : ''
-  const summary = `Generated with [Lya Cloud](https://github.com/StudioCodeAI/lyacloud) (${claudePercent}% ${promptCount}-shotted by ${shortModelName}${memSuffix})`
+  const summary = `🤖 Generated with [Lya Cloud](https://github.com/StudioCodeAI/lyacloud) (${claudePercent}% ${promptCount}-shotted by ${shortModelName}${memSuffix})`
 
   // Append trailer lines for squash-merge survival. Only for allowlisted repos
   // (INTERNAL_MODEL_REPOS) and only in builds with COMMIT_ATTRIBUTION enabled —

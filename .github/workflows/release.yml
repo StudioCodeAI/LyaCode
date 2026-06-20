@@ -1,0 +1,100 @@
+name: Release Lya Cloud
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to release (e.g., v1.0.0)'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  build-windows:
+    name: Build Windows installer + tarball
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build
+        run: bun run build
+
+      - name: Pack tarball
+        run: npm pack
+
+      - name: Build Windows installer
+        run: bun run build:installer:windows
+
+      - name: Get version
+        id: version
+        shell: bash
+        run: echo "version=$(node -p \"require('./package.json').version\")" >> $GITHUB_OUTPUT
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: lyacloud-windows-${{ steps.version.outputs.version }}
+          path: |
+            dist/installer/*
+            studiocodeai-lyacloud-*.tgz
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          name: Lya Cloud v${{ steps.version.outputs.version }}
+          generate_release_notes: true
+          files: |
+            dist/installer/lyacloud-setup-x64-*.exe
+            dist/installer/lyacloud-portable-*.zip
+            studiocodeai-lyacloud-*.tgz
+          body: |
+            ## Lya Cloud v${{ steps.version.outputs.version }}
+
+            Terminal agêntico do Studio CodeAI para workflows de código local e em nuvem.
+
+            ### Instalação rápida (Windows, PowerShell)
+
+            ```powershell
+            # Baixe e rode o .exe
+            irm https://github.com/StudioCodeAI/lyacloud/releases/download/v${{ steps.version.outputs.version }}/lyacloud-setup-x64-${{ steps.version.outputs.version }}.exe -OutFile lyacloud-setup.exe
+            .\lyacloud-setup.exe
+            ```
+
+            ### Instalação via npm (multi-plataforma)
+
+            ```bash
+            npm install -g https://github.com/StudioCodeAI/lyacloud/releases/download/v${{ steps.version.outputs.version }}/studiocodeai-lyacloud-${{ steps.version.outputs.version }}.tgz
+            ```
+
+            ### Uso
+
+            ```bash
+            lya              # CLI principal
+            lyacloud         # alias completo
+            /provider        # configurar provedor
+            /lya             # invocar agente Lya
+            ```
+
+            ---
+            **Studio CodeAI** · Luis Cardozo · studiocoder.ai@gmail.com

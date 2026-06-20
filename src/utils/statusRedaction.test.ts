@@ -1,6 +1,7 @@
 import { homedir } from 'os'
 import { afterEach, beforeEach, describe, expect, test } from 'bun:test'
 
+import { restoreOsMock } from '../test/osMock.js'
 import {
   acquireSharedMutationLock,
   releaseSharedMutationLock,
@@ -8,8 +9,14 @@ import {
 import { redactPathForStatus, redactUrlForStatus } from './statusRedaction.ts'
 
 const REAL_HOMEDIR = homedir()
-const ORIGINAL_HOME = process.env.HOME
-const ORIGINAL_USERPROFILE = process.env.USERPROFILE
+let ORIGINAL_HOME = process.env.HOME
+let ORIGINAL_USERPROFILE = process.env.USERPROFILE
+
+// Resolved at test time so prior suites that mocked os.homedir() without
+// restoring it cannot poison this suite's expectation target.
+function getRealHomeDir(): string {
+  return homedir()
+}
 
 function restoreEnvValue(key: 'HOME' | 'USERPROFILE', value: string | undefined): void {
   if (value === undefined) {
@@ -96,6 +103,17 @@ describe('redactUrlForStatus', () => {
 describe('redactPathForStatus', () => {
   beforeEach(async () => {
     await acquireSharedMutationLock('utils/statusRedaction.test.ts')
+    // Re-capture env on every test. Prior suites may have left the
+    // module-level snapshot stale; reading process.env fresh here makes
+    // the restore target accurate regardless of execution order.
+    ORIGINAL_HOME = process.env.HOME
+    ORIGINAL_USERPROFILE = process.env.USERPROFILE
+    // Defensive: tests below mutate env. Restore so this suite sees
+    // the real environment even when prior suites ran.
+    restoreEnvValue('HOME', ORIGINAL_HOME)
+    restoreEnvValue('USERPROFILE', ORIGINAL_USERPROFILE)
+    // Restore the real os.homedir() if a prior suite mocked it.
+    restoreOsMock()
   })
 
   afterEach(() => {
@@ -104,19 +122,22 @@ describe('redactPathForStatus', () => {
       // the real environment.
       restoreEnvValue('HOME', ORIGINAL_HOME)
       restoreEnvValue('USERPROFILE', ORIGINAL_USERPROFILE)
+      restoreOsMock()
     } finally {
       releaseSharedMutationLock()
     }
   })
 
   test('shortens POSIX home directory paths to ~', () => {
-    const result = redactPathForStatus(`${REAL_HOMEDIR}/secrets/client.key`)
+    const realHome = getRealHomeDir()
+    const result = redactPathForStatus(`${realHome}/secrets/client.key`, realHome)
     expect(result).toBe('~/secrets/client.key')
-    expect(result).not.toContain(REAL_HOMEDIR)
+    expect(result).not.toContain(realHome)
   })
 
   test('handles the home directory exactly', () => {
-    expect(redactPathForStatus(REAL_HOMEDIR)).toBe('~')
+    const realHome = getRealHomeDir()
+    expect(redactPathForStatus(realHome, realHome)).toBe('~')
   })
 
   test('redacts via USERPROFILE when HOME does not match (Windows-style)', () => {

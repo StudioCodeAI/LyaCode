@@ -1,5 +1,6 @@
 import { feature } from 'bun:bundle'
 import { getIsNonInteractiveSession } from '../../bootstrap/state.js'
+import { LYA_AGENTS } from '../../agents/lya/index.js'
 import { getFeatureValue_CACHED_MAY_BE_STALE } from '../../services/analytics/growthbook.js'
 import { isEnvTruthy } from '../../utils/envUtils.js'
 import { CLAUDE_CODE_GUIDE_AGENT } from './built-in/claudeCodeGuideAgent.js'
@@ -46,6 +47,10 @@ export function getBuiltInAgents(): AgentDefinition[] {
     GENERAL_PURPOSE_AGENT,
     STATUSLINE_SETUP_AGENT,
   ]
+
+  // Studio CodeAI Lya family — principal agent and sub-agents.
+  // Always include in Lya Cloud; identity is the product.
+  agents.push(...LYA_AGENTS)
 
   if (areExplorePlanAgentsEnabled()) {
     agents.push(EXPLORE_AGENT, PLAN_AGENT)

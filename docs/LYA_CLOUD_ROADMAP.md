@@ -26,12 +26,17 @@ O comando principal sugerido para a CLI e:
 lyacloud
 ```
 
-Aliases futuros possiveis:
+Aliases ja implementados (todos equivalentes):
 
 ```text
-lya
-lyacode
+lyacloud   # canonico
+lscloud    # short cloud
+lya        # curto (mesmo do sub-domínio lya)
+lyacode    # legacy, sucessor de LyaCode v0.1.0
+lscode     # short code
 ```
+
+Todos apontam para `./bin/lyacloud` (ver `package.json` campo `bin`).
 
 ## Decisao De Arquitetura
 
