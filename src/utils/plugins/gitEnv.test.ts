@@ -63,7 +63,7 @@ describe('sanitizeEnvForGit', () => {
 })
 
 describe('buildGitChildEnv', () => {
-  const ORIGINAL_BAD_KEY = 'LYACLOUD_TEST_BAD_ENV_FOR_GIT'
+  const ORIGINAL_BAD_KEY = 'LYACODE_TEST_BAD_ENV_FOR_GIT'
   let originalValue: string | undefined
 
   beforeEach(async () => {

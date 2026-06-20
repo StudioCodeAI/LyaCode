@@ -1185,7 +1185,7 @@ export async function performMCPOAuthFlow(
 
           res.writeHead(200, { 'Content-Type': 'text/html' })
           res.end(
-            `<h1>Authentication Successful</h1><p>You can close this window. Return to Lya Cloud.</p>`,
+            `<h1>Authentication Successful</h1><p>You can close this window. Return to Lya Code.</p>`,
           )
           cleanup()
           resolveOnce(result.code)

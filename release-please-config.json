@@ -3,7 +3,7 @@
   "packages": {
     ".": {
       "release-type": "node",
-      "package-name": "@studiocodeai/lyacloud",
+      "package-name": "@studiocodeai/lyacode",
       "bump-minor-pre-major": true,
       "include-v-in-tag": true
     }

@@ -26,7 +26,7 @@ export function resolveGlobalClaudeFile(options: {
   const oauthSuffix = options.oauthSuffix ?? ''
   const configDir = options.configDirEnv || options.homeDir || homedir()
   const hasExplicitConfigDir = Boolean(options.configDirEnv)
-  const newFilename = `.lyacloud${oauthSuffix}.json`
+  const newFilename = `.lyacode${oauthSuffix}.json`
   const legacyFilename = `.claude${oauthSuffix}.json`
 
   if (
@@ -52,7 +52,7 @@ export const getGlobalClaudeFile = memoize((): string => {
 
   const oauthSuffix = fileSuffixForOauthConfig()
   const configDirEnv = resolveConfigDirEnv({
-    lyaCloudConfigDir: process.env.LYACLOUD_CONFIG_DIR,
+    lyaCloudConfigDir: process.env.LYACODE_CONFIG_DIR,
     legacyConfigDir: process.env.CLAUDE_CONFIG_DIR,
   })
   const configDir = configDirEnv || homedir()
@@ -63,7 +63,7 @@ export const getGlobalClaudeFile = memoize((): string => {
     migrationSucceeded = migrateLegacyClaudeConfigHome({ homeDir: configDir })
   }
 
-  // Default installs hard-cut to .lyacloud.json after the migration above.
+  // Default installs hard-cut to .lyacode.json after the migration above.
   // Explicit config-dir users keep the legacy filename fallback because
   // either env var is an opt-out for automatic migration.
   return resolveGlobalClaudeFile({

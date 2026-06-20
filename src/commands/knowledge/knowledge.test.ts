@@ -19,7 +19,7 @@ describe('knowledge command', () => {
 
   beforeEach(async () => {
     await acquireSharedMutationLock('commands/knowledge.test.ts')
-    configDir = mkdtempSync(join(tmpdir(), 'lyacloud-knowledge-command-'))
+    configDir = mkdtempSync(join(tmpdir(), 'lyacode-knowledge-command-'))
     process.env.CLAUDE_CONFIG_DIR = configDir
     setClaudeConfigHomeDirForTesting(configDir)
     resetArc()

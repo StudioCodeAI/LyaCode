@@ -37,7 +37,7 @@ export function createWhatsNewFeed(releaseNotes: string[]): FeedConfig {
     };
   });
   return {
-    title: "Lya Cloud Updates",
+    title: "Lya Code Updates",
     lines,
     footer: lines.length > 0 ? '/release-notes for more' : undefined,
     emptyMessage: 'Check /release-notes for recent updates'
@@ -56,7 +56,7 @@ export function createProjectOnboardingFeed(steps: Step[]): FeedConfig {
       text: `${checkmark}${text}`
     };
   });
-  const warningText = getCwd() === homedir() ? 'Note: You have launched Lya Cloud in your home directory. For the best experience, launch it in a project directory instead.' : undefined;
+  const warningText = getCwd() === homedir() ? 'Note: You have launched Lya Code in your home directory. For the best experience, launch it in a project directory instead.' : undefined;
   if (warningText) {
     lines.push({
       text: warningText
@@ -69,7 +69,7 @@ export function createProjectOnboardingFeed(steps: Step[]): FeedConfig {
 }
 export function createGuestPassesFeed(): FeedConfig {
   const reward = getCachedReferrerReward();
-  const subtitle = reward ? `Share Lya Cloud and earn ${formatCreditAmount(reward)} of extra usage` : 'Share Lya Cloud with friends';
+  const subtitle = reward ? `Share Lya Code and earn ${formatCreditAmount(reward)} of extra usage` : 'Share Lya Code with friends';
   return {
     title: '3 guest passes',
     lines: [],

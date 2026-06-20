@@ -133,7 +133,7 @@ export function applySafeConfigEnvironmentVariables(): void {
         : null
   }
 
-  // Global config (~/.lyacloud.json) is user-controlled. In CCD mode,
+  // Global config (~/.lyacode.json) is user-controlled. In CCD mode,
   // filterSettingsEnv strips keys that were in the spawn env snapshot so
   // the desktop host's operational vars (OTEL, etc.) are not overridden.
   Object.assign(process.env, filterSettingsEnv(getGlobalConfig().env))

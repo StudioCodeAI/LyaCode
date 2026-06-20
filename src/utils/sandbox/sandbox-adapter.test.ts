@@ -30,7 +30,7 @@ describe('convertToSandboxRuntimeConfig', () => {
     previousOriginalCwd = getOriginalCwd()
     previousCwd = getCwdState()
 
-    tempRoot = await mkdtemp(join(tmpdir(), 'lyacloud-sandbox-adapter-'))
+    tempRoot = await mkdtemp(join(tmpdir(), 'lyacode-sandbox-adapter-'))
     const originalCwd = join(tempRoot, 'original-project')
     activeCwd = join(tempRoot, 'active-project')
 
@@ -56,14 +56,14 @@ describe('convertToSandboxRuntimeConfig', () => {
     }
   })
 
-  test('denies canonical Lya Cloud settings files in changed cwd', () => {
+  test('denies canonical Lya Code settings files in changed cwd', () => {
     const config = convertToSandboxRuntimeConfig({} as SettingsJson)
 
     expect(config.filesystem.denyWrite).toContain(
-      resolve(activeCwd, '.lyacloud', 'settings.json'),
+      resolve(activeCwd, '.lyacode', 'settings.json'),
     )
     expect(config.filesystem.denyWrite).toContain(
-      resolve(activeCwd, '.lyacloud', 'settings.local.json'),
+      resolve(activeCwd, '.lyacode', 'settings.local.json'),
     )
     expect(config.filesystem.denyWrite).toContain(
       resolve(activeCwd, '.claude', 'settings.json'),

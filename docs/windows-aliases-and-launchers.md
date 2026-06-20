@@ -1,17 +1,17 @@
 # Windows aliases and launchers
 
-This page documents optional PowerShell helper functions for launching Lya Cloud on Windows after a global npm install.
+This page documents optional PowerShell helper functions for launching Lya Code on Windows after a global npm install.
 
 ## One-time setup
 
 Run this once in PowerShell:
 
 ~~~powershell
-$packageRoot = Join-Path (npm root -g) "@studiocodeai/lyacloud"
-$aliases = Join-Path $packageRoot "scripts\windows\lyacloud-aliases.ps1"
+$packageRoot = Join-Path (npm root -g) "@studiocodeai/lyacode"
+$aliases = Join-Path $packageRoot "scripts\windows\lyacode-aliases.ps1"
 
 if (-not (Test-Path $aliases)) {
-  throw "Alias script not found at $aliases. Update or reinstall @studiocodeai/lyacloud."
+  throw "Alias script not found at $aliases. Update or reinstall @studiocodeai/lyacode."
 }
 
 if (-not (Test-Path $PROFILE)) {
@@ -25,7 +25,7 @@ if (-not (Select-String -Path $PROFILE -Pattern ([regex]::Escape($profileLine)) 
 }
 
 . $aliases
-lyacloud-help
+lyacode-help
 ~~~
 
 Open a new PowerShell window after setup, or dot-source the profile:
@@ -36,7 +36,7 @@ Open a new PowerShell window after setup, or dot-source the profile:
 
 ## Daily commands
 
-### Launch Lya Cloud
+### Launch Lya Code
 
 ~~~powershell
 lc
@@ -48,7 +48,7 @@ You can also use:
 lya
 ~~~
 
-Both aliases pass arguments through to `lyacloud`:
+Both aliases pass arguments through to `lyacode`:
 
 ~~~powershell
 lc --version
@@ -58,10 +58,10 @@ lya --help
 ### Launch with local Ollama hints
 
 ~~~powershell
-lyacloud-local
+lyacode-local
 ~~~
 
-This launches one Lya Cloud session with local OpenAI-compatible Ollama environment variables:
+This launches one Lya Code session with local OpenAI-compatible Ollama environment variables:
 
 ~~~text
 CLAUDE_CODE_USE_OPENAI=1
@@ -75,21 +75,21 @@ The environment overrides are scoped to that single invocation.
 ### Open the provider manager
 
 ~~~powershell
-lyacloud-provider
+lyacode-provider
 ~~~
 
 ### Show quick help
 
 ~~~powershell
-lyacloud-help
+lyacode-help
 ~~~
 
 ## Command summary
 
 | Command | Purpose |
 | --- | --- |
-| `lc` | Launch Lya Cloud using the installed CLI |
-| `lya` | Launch Lya Cloud using the installed CLI |
-| `lyacloud-local` | Launch once with local Ollama/OpenAI-compatible environment hints |
-| `lyacloud-provider` | Open the provider manager |
-| `lyacloud-help` | Show quick command help |
+| `lc` | Launch Lya Code using the installed CLI |
+| `lya` | Launch Lya Code using the installed CLI |
+| `lyacode-local` | Launch once with local Ollama/OpenAI-compatible environment hints |
+| `lyacode-provider` | Open the provider manager |
+| `lyacode-help` | Show quick command help |

@@ -6,7 +6,7 @@ import { LYA_REVIEWER_AGENT } from './built-in/reviewerAgent.js'
 import { LYA_TESTER_AGENT } from './built-in/testerAgent.js'
 
 /**
- * All Lya agents (built-in + loadable from .lyacloud/agents/).
+ * All Lya agents (built-in + loadable from .lyacode/agents/).
  * The AgentTool loader picks these up at startup; users see them in
  * `/agents` and can invoke explicitly with Task(agent=lya-explorer).
  */

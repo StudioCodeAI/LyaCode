@@ -35,7 +35,7 @@ export async function sendNotification(
   })
 }
 
-const DEFAULT_TITLE = 'Lya Cloud'
+const DEFAULT_TITLE = 'Lya Code'
 
 async function sendToChannel(
   channel: string,

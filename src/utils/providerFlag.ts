@@ -5,11 +5,11 @@
  * that the rest of the codebase uses for provider detection.
  *
  * Usage:
- *   lyacloud --provider openai --model gpt-4o
- *   lyacloud --provider gemini --model gemini-2.0-flash
- *   lyacloud --provider mistral --model ministral-3b-latest
- *   lyacloud --provider ollama --model llama3.2
- *   lyacloud --provider anthropic   (default, no-op)
+ *   lyacode --provider openai --model gpt-4o
+ *   lyacode --provider gemini --model gemini-2.0-flash
+ *   lyacode --provider mistral --model ministral-3b-latest
+ *   lyacode --provider ollama --model llama3.2
+ *   lyacode --provider anthropic   (default, no-op)
  */
 
 import '../integrations/index.js'
@@ -206,7 +206,7 @@ function applyOpenAIBaseUrlDefault(provider: string, baseUrl?: string): void {
 /**
  * Apply --model (without --provider) to process.env for the current process only.
  *
- * Issue #808: `lyacloud --model <name>` should work standalone so users can
+ * Issue #808: `lyacode --model <name>` should work standalone so users can
  * override the session model without reconfiguring a profile or polluting the
  * shell with OPENAI_MODEL=... Must run before the startup banner so the
  * displayed model matches the flag, and before resolution paths that read the

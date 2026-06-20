@@ -1,5 +1,5 @@
 /**
- * Print Lya Cloud wordmark as it will appear in the CLI.
+ * Print Lya Code wordmark as it will appear in the CLI.
  * Run: bun scripts/preview-final-wordmark.ts
  */
 
@@ -89,11 +89,11 @@ function colorize(row: string): string {
 }
 
 console.log('')
-console.log('Lya Cloud wordmark — 7-row bold, Lya Cloud (sem ponto)')
+console.log('Lya Code wordmark — 7-row bold, Lya Code (sem ponto)')
 console.log('Studio CodeAI orange gradient (#FF7A1A → #B4460A)')
 console.log('')
-for (const line of render('Lya Cloud')) {
+for (const line of render('Lya Code')) {
   console.log(BOLD + colorize(line) + ANSI_RESET)
 }
 console.log('')
-console.log(`(rows: ${ROWS}, cols: ${render('Lya Cloud')[0]?.length ?? 0})`)
+console.log(`(rows: ${ROWS}, cols: ${render('Lya Code')[0]?.length ?? 0})`)

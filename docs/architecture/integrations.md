@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Lya Cloud's provider system is now descriptor-first:
+Lya Code's provider system is now descriptor-first:
 
 - descriptors under `src/integrations/` define vendors, gateways, brands,
   shared model metadata, validation hints, discovery strategy, and supported

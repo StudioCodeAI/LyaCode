@@ -54,7 +54,7 @@ export type BuildBackgroundSessionLaunchDeps = {
   ) => Promise<string | null | undefined>
 }
 
-const HEAP_RELAUNCHED_ENV = 'LYACLOUD_HEAP_RELAUNCHED'
+const HEAP_RELAUNCHED_ENV = 'LYACODE_HEAP_RELAUNCHED'
 const DEFAULT_TERM_GRACE_MS = 2_000
 const DEFAULT_KILL_GRACE_MS = 2_000
 const DEFAULT_KILL_POLL_INTERVAL_MS = 100
@@ -560,7 +560,7 @@ export async function logsHandler(
   args: string[] | string | undefined,
 ): Promise<void> {
   const parsed = parseLogsInvocation(normalizeArgs(args))
-  if (!parsed.target) fail('Usage: lyacloud logs <id-or-name> [-f]')
+  if (!parsed.target) fail('Usage: lyacode logs <id-or-name> [-f]')
 
   await refreshBackgroundSessionStatuses()
   const session = await resolveSessionOrExit(parsed.target)
@@ -581,12 +581,12 @@ export async function attachHandler(
   args: string[] | string | undefined,
 ): Promise<void> {
   const target = normalizeArgs(args)[0]
-  if (!target) fail('Usage: lyacloud attach <id-or-name>')
+  if (!target) fail('Usage: lyacode attach <id-or-name>')
 
   await refreshBackgroundSessionStatuses()
   const session = await resolveSessionOrExit(target)
   console.error(
-    `Attach is not implemented for local background sessions yet. Use \`lyacloud logs ${session.id} -f\` to follow output.`,
+    `Attach is not implemented for local background sessions yet. Use \`lyacode logs ${session.id} -f\` to follow output.`,
   )
   process.exitCode = 1
 }
@@ -595,7 +595,7 @@ export async function killHandler(
   args: string[] | string | undefined,
 ): Promise<void> {
   const target = normalizeArgs(args)[0]
-  if (!target) fail('Usage: lyacloud kill <id-or-name>')
+  if (!target) fail('Usage: lyacode kill <id-or-name>')
 
   await refreshBackgroundSessionStatuses()
   const session = await resolveSessionOrExit(target)
@@ -619,7 +619,7 @@ export async function killHandler(
 export async function handleBgFlag(args: string[]): Promise<void> {
   const parsed = parseBackgroundInvocation(args)
   if (!parsed.prompt && !hasResumeSource(parsed.childArgs)) {
-    fail('Usage: lyacloud --bg [--name <name>] "<prompt>"')
+    fail('Usage: lyacode --bg [--name <name>] "<prompt>"')
   }
 
   try {
@@ -639,7 +639,7 @@ export async function handleBgFlag(args: string[]): Promise<void> {
   await ensureBackgroundSessionDirs()
   const entrypoint = process.argv[1]
   if (!entrypoint) {
-    fail('Cannot determine Lya Cloud entrypoint for background session')
+    fail('Cannot determine Lya Code entrypoint for background session')
   }
   const childConfig = buildBackgroundChildProcessConfig({
     execPath: process.execPath,
@@ -716,7 +716,7 @@ export async function handleBgFlag(args: string[]): Promise<void> {
   if (session.name) console.log(`Name: ${session.name}`)
   console.log(`PID: ${session.pid}`)
   console.log(`Logs: ${session.stdoutLogPath}`)
-  console.log(`Follow: lyacloud logs ${session.id} -f`)
+  console.log(`Follow: lyacode logs ${session.id} -f`)
   console.log(
     `Command: ${formatCommand([basename(childConfig.command), ...childConfig.args])}`,
   )

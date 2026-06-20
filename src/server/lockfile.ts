@@ -1,5 +1,5 @@
 /**
- * Inert stub for the Lya Cloud session-server lockfile.
+ * Inert stub for the Lya Code session-server lockfile.
  *
  * The bundler noop-stubs this specifier in current builds; this module
  * mirrors that behavior for the typechecker. `probeRunningServer` reports no

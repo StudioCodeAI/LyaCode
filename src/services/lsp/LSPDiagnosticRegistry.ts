@@ -302,7 +302,7 @@ function buildStormSummaryFile(
           start: { line: 0, character: 0 },
           end: { line: 0, character: 0 },
         },
-        source: 'lyacloud-lsp',
+        source: 'lyacode-lsp',
         code: 'diagnostic-storm',
       },
     ],

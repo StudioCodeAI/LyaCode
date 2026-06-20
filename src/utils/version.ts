@@ -3,8 +3,8 @@ import { dirname, join } from 'path'
 import { fileURLToPath } from 'url'
 import { coerce } from 'semver'
 
-export const LYACLOUD_RELEASES_URL =
-  'https://github.com/StudioCodeAI/lyacloud/releases'
+export const LYACODE_RELEASES_URL =
+  'https://github.com/StudioCodeAI/lyacode/releases'
 
 export function normalizePublicVersion(version: string): string {
   const trimmedVersion = version.trim()
@@ -52,7 +52,7 @@ export const publicBuildVersion = normalizePublicVersion(
 )
 
 export function getReleaseTagUrl(version: string = publicBuildVersion): string {
-  return `${LYACLOUD_RELEASES_URL}/tag/v${normalizePublicVersion(version)}`
+  return `${LYACODE_RELEASES_URL}/tag/v${normalizePublicVersion(version)}`
 }
 
 export function getPublicBuildVersion(): string {

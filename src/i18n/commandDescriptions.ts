@@ -63,7 +63,7 @@ const lyaCloudCommandDescriptionKeys: Record<string, LocalizationKey> = {
   wiki: 'commands.wiki.description',
 }
 
-export function getLyaCloudCommandDescriptionKey(
+export function getLyaCodeCommandDescriptionKey(
   commandName: string,
 ): LocalizationKey | undefined {
   return lyaCloudCommandDescriptionKeys[commandName]

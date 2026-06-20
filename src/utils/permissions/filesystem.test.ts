@@ -31,13 +31,13 @@ function permissionContext(mode: ToolPermissionContext['mode']) {
   } satisfies ToolPermissionContext
 }
 
-describe('Lya Cloud commit message temp file permissions', () => {
+describe('Lya Code commit message temp file permissions', () => {
   let originalCwd: string
   let projectDir: string
 
   beforeEach(async () => {
     originalCwd = getOriginalCwd()
-    projectDir = await mkdtemp(join(tmpdir(), 'lyacloud-perms-'))
+    projectDir = await mkdtemp(join(tmpdir(), 'lyacode-perms-'))
     await mkdir(join(projectDir, '.git'))
     setOriginalCwd(projectDir)
   })
@@ -47,38 +47,38 @@ describe('Lya Cloud commit message temp file permissions', () => {
     await rm(projectDir, { recursive: true, force: true })
   })
 
-  test('allows the project-local LYACLOUD_COMMIT_MSG file without a safety prompt', () => {
+  test('allows the project-local LYACODE_COMMIT_MSG file without a safety prompt', () => {
     const result = checkWritePermissionForTool(
       writeTool,
-      { file_path: join(projectDir, '.git', 'LYACLOUD_COMMIT_MSG') },
+      { file_path: join(projectDir, '.git', 'LYACODE_COMMIT_MSG') },
       permissionContext('bypassPermissions'),
     )
 
     expect(result.behavior).toBe('allow')
     expect(result.decisionReason).toMatchObject({
       type: 'other',
-      reason: 'Lya Cloud commit message file is allowed for writing',
+      reason: 'Lya Code commit message file is allowed for writing',
     })
   })
 
-  test('allows the project-local LYACLOUD_COMMIT_MSG file in fullAccess mode', () => {
+  test('allows the project-local LYACODE_COMMIT_MSG file in fullAccess mode', () => {
     const result = checkWritePermissionForTool(
       writeTool,
-      { file_path: join(projectDir, '.git', 'LYACLOUD_COMMIT_MSG') },
+      { file_path: join(projectDir, '.git', 'LYACODE_COMMIT_MSG') },
       permissionContext('fullAccess'),
     )
 
     expect(result.behavior).toBe('allow')
     expect(result.decisionReason).toMatchObject({
       type: 'other',
-      reason: 'Lya Cloud commit message file is allowed for writing',
+      reason: 'Lya Code commit message file is allowed for writing',
     })
   })
 
   test('still prompts for the commit message file in default mode', () => {
     const result = checkWritePermissionForTool(
       writeTool,
-      { file_path: join(projectDir, '.git', 'LYACLOUD_COMMIT_MSG') },
+      { file_path: join(projectDir, '.git', 'LYACODE_COMMIT_MSG') },
       permissionContext('default'),
     )
 
@@ -101,7 +101,7 @@ describe('Lya Cloud commit message temp file permissions', () => {
     const otherDir = join(projectDir, 'other')
     const result = checkWritePermissionForTool(
       writeTool,
-      { file_path: join(otherDir, '.git', 'LYACLOUD_COMMIT_MSG') },
+      { file_path: join(otherDir, '.git', 'LYACODE_COMMIT_MSG') },
       permissionContext('bypassPermissions'),
     )
 

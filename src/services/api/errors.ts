@@ -426,7 +426,7 @@ export function getVisionNotSupportedErrorMessage(): string {
     : interactiveMessage!
 }
 export const OAUTH_ORG_NOT_ALLOWED_ERROR_MESSAGE =
-  'Your account does not have access to Lya Cloud. Please run /login.'
+  'Your account does not have access to Lya Code. Please run /login.'
 
 export function getTokenRevokedErrorMessage(): string {
   return getIsNonInteractiveSession()
@@ -1495,8 +1495,8 @@ export function getErrorMessageIfRefusal(
       : "your provider's acceptable use policy"
 
   const baseMessage = getIsNonInteractiveSession()
-    ? `${API_ERROR_MESSAGE_PREFIX}: Lya Cloud is unable to respond to this request, which appears to violate our Usage Policy (${usagePolicyUrl}). Try rephrasing the request or attempting a different approach.`
-    : `${API_ERROR_MESSAGE_PREFIX}: Lya Cloud is unable to respond to this request, which appears to violate our Usage Policy (${usagePolicyUrl}). Please double press esc to edit your last message or start a new session for Lya Cloud to assist with a different task.`
+    ? `${API_ERROR_MESSAGE_PREFIX}: Lya Code is unable to respond to this request, which appears to violate our Usage Policy (${usagePolicyUrl}). Try rephrasing the request or attempting a different approach.`
+    : `${API_ERROR_MESSAGE_PREFIX}: Lya Code is unable to respond to this request, which appears to violate our Usage Policy (${usagePolicyUrl}). Please double press esc to edit your last message or start a new session for Lya Code to assist with a different task.`
 
   const defaultModel = getDefaultMainLoopModel()
   const modelSuggestion =

@@ -36,7 +36,7 @@ function createModel(id: string): ModelCatalogEntry {
 
 beforeEach(async () => {
   await acquireSharedMutationLock('discoveryCache.test.ts')
-  tempDir = mkdtempSync(join(tmpdir(), 'lyacloud-discovery-cache-test-'))
+  tempDir = mkdtempSync(join(tmpdir(), 'lyacode-discovery-cache-test-'))
   process.env.CLAUDE_CONFIG_DIR = tempDir
   setOriginalFsImplementation()
   await clearDiscoveryCache()

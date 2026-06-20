@@ -173,7 +173,7 @@ import {
 } from './skills/loadSkillsDir.js'
 import { getBundledSkills } from './skills/bundledSkills.js'
 import {
-  getLyaCloudCommandDescriptionKey,
+  getLyaCodeCommandDescriptionKey,
   localize,
 } from './i18n/index.js'
 import { getBuiltinPluginSkillCommands } from './plugins/builtinPlugins.js'
@@ -207,7 +207,7 @@ import stats from './commands/stats/index.js'
 const usageReport: Command = {
   type: 'prompt',
   name: 'insights',
-  description: 'Generate a report analyzing your Lya Cloud sessions',
+  description: 'Generate a report analyzing your Lya Code sessions',
   contentLength: 0,
   progressMessage: 'analyzing your sessions',
   source: 'builtin',
@@ -378,10 +378,10 @@ const COMMANDS = memoize((): Command[] => [
   ...(process.env.USER_TYPE === 'ant' && !process.env.IS_DEMO
     ? INTERNAL_ONLY_COMMANDS
     : []),
-].filter(isCommand).map(withLyaCloudCommandLocalizationKey))
+].filter(isCommand).map(withLyaCodeCommandLocalizationKey))
 
-function withLyaCloudCommandLocalizationKey(cmd: Command): Command {
-  cmd.localizationKey ??= getLyaCloudCommandDescriptionKey(cmd.name)
+function withLyaCodeCommandLocalizationKey(cmd: Command): Command {
+  cmd.localizationKey ??= getLyaCodeCommandDescriptionKey(cmd.name)
   return cmd
 }
 
@@ -774,7 +774,7 @@ export function getCommand(commandName: string, commands: Command[]): Command {
  */
 export function formatDescriptionWithSource(cmd: Command): string {
   if (cmd.type !== 'prompt') {
-    return formatLyaCloudOwnedDescription(cmd)
+    return formatLyaCodeOwnedDescription(cmd)
   }
 
   const desc = cmd.description ?? ''
@@ -793,18 +793,18 @@ export function formatDescriptionWithSource(cmd: Command): string {
 
   if (cmd.source === 'builtin' || cmd.source === 'mcp') {
     return cmd.source === 'builtin'
-      ? formatLyaCloudOwnedDescription(cmd)
+      ? formatLyaCodeOwnedDescription(cmd)
       : desc
   }
 
   if (cmd.source === 'bundled') {
-    return `${formatLyaCloudOwnedDescription(cmd)} (bundled)`
+    return `${formatLyaCodeOwnedDescription(cmd)} (bundled)`
   }
 
   return `${desc} (${getSettingSourceName(cmd.source)})`
 }
 
-function formatLyaCloudOwnedDescription(cmd: Command): string {
+function formatLyaCodeOwnedDescription(cmd: Command): string {
   const desc = cmd.description ?? ''
   if (cmd.localizationKey) {
     return localize(cmd.localizationKey, desc)

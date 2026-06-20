@@ -1,5 +1,5 @@
 /**
- * Tests for Bug Fixes applied to lyacloud.
+ * Tests for Bug Fixes applied to lyacode.
  *
  * Covers:
  * 1. Gemini `store: false` rejection fix

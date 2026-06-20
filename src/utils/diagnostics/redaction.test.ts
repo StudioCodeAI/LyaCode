@@ -66,7 +66,7 @@ describe('diagnostic redaction', () => {
         'MISTRAL_API_KEY=mistralOpaqueToken123456789',
         'mistral api key abcdefghijklmnopqrstuvwxyz',
       ],
-      path: `${home}/private/lyacloud/src/file.ts`,
+      path: `${home}/private/lyacode/src/file.ts`,
     }) as { messages: string[]; path: string }
     const serialized = JSON.stringify(redacted)
 
@@ -78,7 +78,7 @@ describe('diagnostic redaction', () => {
       'MISTRAL_API_KEY=[redacted]',
       'mistral api key [redacted]',
     ])
-    expect(redacted.path).toBe('~/private/lyacloud/src/file.ts')
+    expect(redacted.path).toBe('~/private/lyacode/src/file.ts')
     expect(serialized).not.toContain('sk-openai-secret-token')
     expect(serialized).not.toContain('AIzaSyDUMMY-secret-token')
     expect(serialized).not.toContain('abcdefghijklmnop')
@@ -105,12 +105,12 @@ describe('diagnostic redaction', () => {
 
     expect(
       redactHomePath(
-        'debug path C:\\Users\\Alice\\AppData\\Roaming\\lyacloud',
+        'debug path C:\\Users\\Alice\\AppData\\Roaming\\lyacode',
         home,
       ),
-    ).toBe('debug path ~\\AppData\\Roaming\\lyacloud')
-    expect(redactHomePath('C:\\Users\\AliceOther\\lyacloud', home)).toBe(
-      'C:\\Users\\AliceOther\\lyacloud',
+    ).toBe('debug path ~\\AppData\\Roaming\\lyacode')
+    expect(redactHomePath('C:\\Users\\AliceOther\\lyacode', home)).toBe(
+      'C:\\Users\\AliceOther\\lyacode',
     )
   })
 

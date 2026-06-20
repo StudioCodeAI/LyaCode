@@ -1,4 +1,4 @@
-# Lya Cloud Windows Installer (PowerShell)
+# Lya Code Windows Installer (PowerShell)
 # Luis Cardozo - studiocoder.ai@gmail.com - Studio CodeAI
 
 [CmdletBinding()]
@@ -10,12 +10,12 @@ param(
 
 $ErrorActionPreference = 'Stop'
 
-$ProductName = 'Lya Cloud'
-$ProductBin = 'lyacloud'
-$ProductVersion = '1.0.4'
-$LogDir = Join-Path $env:LOCALAPPDATA 'lyacloud'
-$LogFile = Join-Path $LogDir ("lyacloud-setup-{0:yyyyMMdd-HHmmss}.log" -f (Get-Date))
-$StartMenuDir = Join-Path $env:APPDATA 'Microsoft\Windows\Start Menu\Programs\Lya Cloud'
+$ProductName = 'Lya Code'
+$ProductBin = 'lyacode'
+$ProductVersion = '1.0.5'
+$LogDir = Join-Path $env:LOCALAPPDATA 'lyacode'
+$LogFile = Join-Path $LogDir ("lyacode-setup-{0:yyyyMMdd-HHmmss}.log" -f (Get-Date))
+$StartMenuDir = Join-Path $env:APPDATA 'Microsoft\Windows\Start Menu\Programs\Lya Code'
 
 New-Item -ItemType Directory -Force -Path $LogDir | Out-Null
 
@@ -67,7 +67,7 @@ Write-Log "Node.js $(Get-NodeVersion) OK"
 
 if (-not $Tarball) {
     $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
-    $candidate = Join-Path $scriptDir 'studiocodeai-lyacloud-1.0.4.tgz'
+    $candidate = Join-Path $scriptDir 'studiocodeai-lyacode-1.0.5.tgz'
     if (Test-Path -LiteralPath $candidate) {
         $Tarball = $candidate
     }
@@ -75,7 +75,7 @@ if (-not $Tarball) {
 
 if (-not $Tarball -or -not (Test-Path -LiteralPath $Tarball)) {
     Write-Log "Tarball nao encontrado. Gere com: npm pack" -Level ERR
-    Write-Log "Ou passe -Tarball <caminho\studiocodeai-lyacloud-1.0.4.tgz>" -Level INFO
+    Write-Log "Ou passe -Tarball <caminho\studiocodeai-lyacode-1.0.5.tgz>" -Level INFO
     exit 20
 }
 Write-Log "Tarball: $Tarball"
@@ -107,7 +107,7 @@ Write-Log "$ProductBin encontrado: $($whichLyacloud.Source)"
 Write-Log "Validando instalacao..."
 $failed = $false
 $npmGlobalPrefix = (& npm config get prefix 2>$null).Trim().TrimEnd('\','/')
-foreach ($alias in @('lyacloud','lscloud','lya','lyacode','lscode')) {
+foreach ($alias in @('lyacode','lscloud','lya','lyacode','lscode')) {
     # Em PowerShell 5.1, 'lya' pode colidir com outros binarios no PATH.
     # Considera apenas binarios dentro do npm global prefix (npm install -g target).
     $cmd = Get-Command $alias -CommandType Application -ErrorAction SilentlyContinue
@@ -123,7 +123,7 @@ foreach ($alias in @('lyacloud','lscloud','lya','lyacode','lscode')) {
     # Filtra apenas binarios dentro do npm global prefix (evita colisao com
     # outros binarios 'lya' / 'lyacode' que existam no PATH por outros motivos).
     $matchingCmd = $cmd | Where-Object {
-        $_.Source -like "$npmGlobalPrefix*" -and $_.Source -notmatch 'lyacloud-help\.cmd$'
+        $_.Source -like "$npmGlobalPrefix*" -and $_.Source -notmatch 'lyacode-help\.cmd$'
     } | Select-Object -First 1
     if (-not $matchingCmd) {
         if ($DryRun) {
@@ -149,20 +149,20 @@ if (-not $NoShortcuts) {
     Write-Log "Criando atalhos no Menu Iniciar..."
     New-Item -ItemType Directory -Force -Path $StartMenuDir | Out-Null
 
-    $launcherPs1 = Join-Path $StartMenuDir 'lyacloud.cmd'
+    $launcherPs1 = Join-Path $StartMenuDir 'lyacode.cmd'
     $launcherLines = New-Object System.Collections.Generic.List[string]
     $null = $launcherLines.Add('@echo off')
-    $null = $launcherLines.Add('title Lya Cloud')
+    $null = $launcherLines.Add('title Lya Code')
     $null = $launcherLines.Add('cd /d %USERPROFILE%')
     $null = $launcherLines.Add($ProductBin)
     $null = $launcherLines.Add('pause')
     $lyacmdBody = [string]::Join([Environment]::NewLine, $launcherLines.ToArray()) + [Environment]::NewLine
     Set-Content -LiteralPath $launcherPs1 -Value $lyacmdBody -Encoding ASCII
 
-    $helpCmd = Join-Path $StartMenuDir 'lyacloud-help.cmd'
+    $helpCmd = Join-Path $StartMenuDir 'lyacode-help.cmd'
     $helpLines = New-Object System.Collections.Generic.List[string]
     $null = $helpLines.Add('@echo off')
-    $null = $helpLines.Add('title Lya Cloud Ajuda')
+    $null = $helpLines.Add('title Lya Code Ajuda')
     $null = $helpLines.Add(($ProductBin + ' --help'))
     $null = $helpLines.Add('pause')
     $lyahelpBody = [string]::Join([Environment]::NewLine, $helpLines.ToArray()) + [Environment]::NewLine
@@ -179,14 +179,14 @@ Write-Log ""
 Write-Log "=== Instalacao concluida com sucesso ==="
 Write-Log ""
 Write-Log "Aliases disponiveis em qualquer terminal:"
-Write-Log "  lyacloud, lscloud, lya, lyacode, lscode"
+Write-Log "  lyacode, lscloud, lya, lyacode, lscode"
 Write-Log ""
 Write-Log "Para comecar:"
-Write-Log "  lyacloud                # inicia o agente Lya"
+Write-Log "  lyacode                # inicia o agente Lya"
 Write-Log "  /lya                    # dentro do CLI, invoca a persona Lya"
 Write-Log ""
 Write-Log "Desinstalar:"
-Write-Log "  npm uninstall -g @studiocodeai/lyacloud"
+Write-Log "  npm uninstall -g @studiocodeai/lyacode"
 Write-Log ""
 Write-Log "Log completo: $LogFile"
 

@@ -29,42 +29,42 @@ afterEach(() => {
 
 describe('commit-message command helpers', () => {
   it('parses quoted co-author names with a plain email', () => {
-    expect(parseCoAuthor('"GPT 5.5" noreply@lyacloud.dev')).toEqual({
+    expect(parseCoAuthor('"GPT 5.5" noreply@lyacode.dev')).toEqual({
       name: 'GPT 5.5',
-      email: 'noreply@lyacloud.dev',
+      email: 'noreply@lyacode.dev',
     })
   })
 
   it('parses co-author trailers with angle-bracket emails', () => {
-    expect(parseCoAuthor('Lya Cloud (gpt-5.5) <noreply@lyacloud.dev>')).toEqual(
+    expect(parseCoAuthor('Lya Code (gpt-5.5) <noreply@lyacode.dev>')).toEqual(
       {
-        name: 'Lya Cloud (gpt-5.5)',
-        email: 'noreply@lyacloud.dev',
+        name: 'Lya Code (gpt-5.5)',
+        email: 'noreply@lyacode.dev',
       },
     )
   })
 
   it('rejects co-author trailers with empty sanitized names', () => {
-    expect(parseCoAuthor('"  " noreply@lyacloud.dev')).toBeNull()
-    expect(parseCoAuthor('"  " <noreply@lyacloud.dev>')).toBeNull()
+    expect(parseCoAuthor('"  " noreply@lyacode.dev')).toBeNull()
+    expect(parseCoAuthor('"  " <noreply@lyacode.dev>')).toBeNull()
   })
 
   it('strips one pair of matching quotes from custom attribution text', () => {
-    expect(stripMatchingQuotes('"Generated with Lya Cloud"')).toBe(
-      'Generated with Lya Cloud',
+    expect(stripMatchingQuotes('"Generated with Lya Code"')).toBe(
+      'Generated with Lya Code',
     )
-    expect(stripMatchingQuotes("'Generated with Lya Cloud'")).toBe(
-      'Generated with Lya Cloud',
+    expect(stripMatchingQuotes("'Generated with Lya Code'")).toBe(
+      'Generated with Lya Code',
     )
-    expect(stripMatchingQuotes('"Generated with Lya Cloud')).toBe(
-      '"Generated with Lya Cloud',
+    expect(stripMatchingQuotes('"Generated with Lya Code')).toBe(
+      '"Generated with Lya Code',
     )
   })
 
   it('formats a sanitized co-author trailer', () => {
     expect(
-      formatCoAuthorTrailer('Lya Cloud <gpt>\n', '<noreply@lyacloud.dev>'),
-    ).toBe('Co-Authored-By: Lya Cloud gpt <noreply@lyacloud.dev>')
+      formatCoAuthorTrailer('Lya Code <gpt>\n', '<noreply@lyacode.dev>'),
+    ).toBe('Co-Authored-By: Lya Code gpt <noreply@lyacode.dev>')
   })
 
   it('makes set scope explicit with example text', () => {
@@ -72,13 +72,13 @@ describe('commit-message command helpers', () => {
       'Controls only the attribution text appended after /commit messages.',
     )
     expect(USAGE).toContain(
-      '/commit-message set "Generated with Lya Cloud using GPT-5.5"',
+      '/commit-message set "Generated with Lya Code using GPT-5.5"',
     )
     expect(USAGE).not.toContain('/commit-message set-attribution')
   })
 
   it('describes default reset as privacy-preserving', async () => {
-    tempSettingsDir = mkdtempSync(join(tmpdir(), 'lyacloud-settings-'))
+    tempSettingsDir = mkdtempSync(join(tmpdir(), 'lyacode-settings-'))
     setClaudeConfigHomeDirForTesting(tempSettingsDir)
     getClaudeConfigHomeDir.cache?.clear?.()
 

@@ -24,16 +24,16 @@ describe('parseProfileCustomHeadersInput', () => {
       error: expect.stringContaining('Name: value'),
     })
     expect(parseProfileCustomHeadersInput('Authorization: Bearer token')).toMatchObject({
-      error: expect.stringContaining('managed by Lya Cloud'),
+      error: expect.stringContaining('managed by Lya Code'),
     })
     expect(parseProfileCustomHeadersInput('api-key: token')).toMatchObject({
-      error: expect.stringContaining('managed by Lya Cloud'),
+      error: expect.stringContaining('managed by Lya Code'),
     })
     expect(parseProfileCustomHeadersInput('x-api-key: token')).toMatchObject({
-      error: expect.stringContaining('managed by Lya Cloud'),
+      error: expect.stringContaining('managed by Lya Code'),
     })
     expect(parseProfileCustomHeadersInput('x-anthropic-danger: yes')).toMatchObject({
-      error: expect.stringContaining('managed by Lya Cloud'),
+      error: expect.stringContaining('managed by Lya Code'),
     })
   })
 })

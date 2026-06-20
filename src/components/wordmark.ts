@@ -1,9 +1,9 @@
 /**
- * Lya Cloud wordmark — large block letters rendered with ANSI colors
+ * Lya Code wordmark — large block letters rendered with ANSI colors
  * and the Studio CodeAI gradient.
  *
  * Each letter is a 7-row × 5-col bitmap. We ship two variants:
- *   - LYACLOUD_WORDMARK: 7 rows, large, for the startup banner
+ *   - LYACODE_WORDMARK: 7 rows, large, for the startup banner
  *   - LYA_WORDMARK: 3 rows, compact, for compact headers
  *
  * Bitmaps use '#' for filled cells and ' ' for empty. The renderer
@@ -59,4 +59,4 @@ export function renderWordmark7(text: string): string[] {
 }
 
 /** Single-line wordmark fallback (used in narrow contexts). */
-export const LYACLOUD_WORDMARK_INLINE = '  Lya Cloud'
+export const LYACODE_WORDMARK_INLINE = '  Lya Code'

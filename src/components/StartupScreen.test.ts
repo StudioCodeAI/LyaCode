@@ -107,7 +107,7 @@ function setupOpenAIMode(baseUrl: string, model: string): void {
 }
 
 describe('printStartupScreen logo', () => {
-  test('renders the Lya Cloud wordmark (7-row bold, L+C uppercase, no dot, orange gradient)', () => {
+  test('renders the Lya Code wordmark (7-row bold, L+C uppercase, no dot, orange gradient)', () => {
     ;(globalThis as Record<string, unknown>).MACRO = { VERSION: 'test-version' }
     Object.defineProperty(process.stdout, 'isTTY', {
       configurable: true,
@@ -137,7 +137,7 @@ describe('printStartupScreen logo', () => {
       expect(line).toMatch(/#+/)
     }
 
-    // Bottom row of "Lya Cloud" must contain the baseline of every
+    // Bottom row of "Lya Code" must contain the baseline of every
     // letter (L=#########, l=#########, a=###### #, space, C=#######,
     // l=#########, o=#####, u=#####, d=####### #) at column positions
     // matching the font bitmap (9 cols wide).

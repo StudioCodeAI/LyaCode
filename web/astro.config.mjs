@@ -2,7 +2,7 @@ import { defineConfig } from 'astro/config'
 import sitemap from '@astrojs/sitemap'
 
 export default defineConfig({
-  site: 'https://lyacloud.gitlawb.com',
+  site: 'https://lyacode.gitlawb.com',
   trailingSlash: 'always',
   integrations: [sitemap()],
 })

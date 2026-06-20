@@ -206,14 +206,14 @@ export async function countConcurrentSessions(): Promise<number> {
 /**
  * Calculate per-session memory budget based on concurrent sessions.
  * For 32GB system: 4 sessions = ~7GB each, 8 sessions = ~3.5GB each.
- * Respects LYACLOUD_MAX_MEMORY_MB env var if set.
+ * Respects LYACODE_MAX_MEMORY_MB env var if set.
  */
 const OS_OVERHEAD_MB = 4096
 const MIN_PER_SESSION_MB = 512
 
 export async function calculatePerSessionMemoryBudget(): Promise<number> {
   const envBudget = Number.parseInt(
-    process.env.LYACLOUD_MAX_MEMORY_MB ?? '0',
+    process.env.LYACODE_MAX_MEMORY_MB ?? '0',
     10,
   )
   if (envBudget > 0) return envBudget

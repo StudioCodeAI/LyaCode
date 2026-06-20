@@ -43,7 +43,7 @@ describe('buildPlanApprovalOptions', () => {
       usedPercent: 42,
       isAutoModeAvailable: false,
       dangerousPlanExitMode: 'fullAccess',
-      planAuthorName: 'Lya Cloud',
+      planAuthorName: 'Lya Code',
       onFeedbackChange: () => {},
     })
 
@@ -64,7 +64,7 @@ describe('buildPlanApprovalOptions', () => {
       usedPercent: 42,
       isAutoModeAvailable: false,
       dangerousPlanExitMode: 'bypassPermissions',
-      planAuthorName: 'Lya Cloud',
+      planAuthorName: 'Lya Code',
       onFeedbackChange: () => {},
     })
 

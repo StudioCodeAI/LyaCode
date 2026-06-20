@@ -1,8 +1,8 @@
-# Contributing to Lya Cloud
+# Contributing to Lya Code
 
 Thanks for contributing.
 
-Lya Cloud is a rapidly evolving open-source coding-agent CLI with support for multiple providers, local backends, MCP, and a terminal-first workflow. The project is actively developed and updated frequently. Our current focus is on **stability and performance** — we're prioritizing reliable, well-tested contributions over new feature additions. The best contributions here are focused, well-tested, and easy to review.
+Lya Code is a rapidly evolving open-source coding-agent CLI with support for multiple providers, local backends, MCP, and a terminal-first workflow. The project is actively developed and updated frequently. Our current focus is on **stability and performance** — we're prioritizing reliable, well-tested contributions over new feature additions. The best contributions here are focused, well-tested, and easy to review.
 
 ## Table of Contents
 
@@ -25,8 +25,8 @@ Lya Cloud is a rapidly evolving open-source coding-agent CLI with support for mu
 
 ## Before You Start
 
-- Search existing [issues](https://github.com/StudioCodeAI/lyacloud/issues) and [discussions](https://github.com/StudioCodeAI/lyacloud/discussions) before opening a new thread.
-- Check [open pull requests](https://github.com/StudioCodeAI/lyacloud/pulls) for work that overlaps with your contribution. If a PR already exists that addresses the same change, open an issue or discussion first to align on direction — duplicate PRs may be closed without review.
+- Search existing [issues](https://github.com/StudioCodeAI/lyacode/issues) and [discussions](https://github.com/StudioCodeAI/lyacode/discussions) before opening a new thread.
+- Check [open pull requests](https://github.com/StudioCodeAI/lyacode/pulls) for work that overlaps with your contribution. If a PR already exists that addresses the same change, open an issue or discussion first to align on direction — duplicate PRs may be closed without review.
 - Use issues for confirmed bugs and actionable feature work.
 - Use discussions for setup help, ideas, and general community conversation.
 - For larger changes, open an issue first so the scope is clear before implementation.
@@ -34,7 +34,7 @@ Lya Cloud is a rapidly evolving open-source coding-agent CLI with support for mu
 
 ## Proposing New Features
 
-Lya Cloud is moving toward a more **maintainer-directed roadmap**. We are focusing development efforts on stability, performance, and core reliability. As a result, new feature additions are being evaluated more carefully to ensure they align with the project's direction.
+Lya Code is moving toward a more **maintainer-directed roadmap**. We are focusing development efforts on stability, performance, and core reliability. As a result, new feature additions are being evaluated more carefully to ensure they align with the project's direction.
 
 **Before investing time in a feature PR, please open an issue first** to propose and discuss your idea with the maintainers. This isn't about gatekeeping — we genuinely value your ideas and want to help shape them into contributions that fit the project's goals. The conversation will help you understand:
 
@@ -79,8 +79,8 @@ This policy ensures the project stays maintainable and that contributor queue do
 
 We are proactive about closing duplicate PRs. Before submitting, **it is your responsibility to check** whether a similar PR already exists:
 
-- Search [open pull requests](https://github.com/StudioCodeAI/lyacloud/pulls) for related work
-- Check [closed pull requests](https://github.com/StudioCodeAI/lyacloud/pulls?q=is%3Apr+is%3Aclosed) to see if similar work was previously addressed or declined
+- Search [open pull requests](https://github.com/StudioCodeAI/lyacode/pulls) for related work
+- Check [closed pull requests](https://github.com/StudioCodeAI/lyacode/pulls?q=is%3Apr+is%3Aclosed) to see if similar work was previously addressed or declined
 - If you find an existing PR, engage in that thread rather than opening a new one
 
 Duplicate PRs will likely be closed without review or follow-up. This isn't personal — it's about keeping the review queue focused and efficient.
@@ -102,7 +102,7 @@ This is not a judgment on the contributor. It is how the project stays reviewabl
 
 ### Contributor Conduct
 
-We want Lya Cloud to be a welcoming community, but we must also protect the project's quality and contributor time. The following actions will result in a **ban from future contributions**:
+We want Lya Code to be a welcoming community, but we must also protect the project's quality and contributor time. The following actions will result in a **ban from future contributions**:
 
 - Repeated fly-by PRs with no follow-up after review requests
 - Repeated submission of duplicate PRs
@@ -150,7 +150,7 @@ If you are an AI agent (Copilot, Cursor, Claude, etc.) working on this codebase,
 
 ## Provider Changes
 
-Lya Cloud supports multiple provider paths. Before contributing provider changes, review the relevant documentation to ensure your implementation follows the expected patterns:
+Lya Code supports multiple provider paths. Before contributing provider changes, review the relevant documentation to ensure your implementation follows the expected patterns:
 
 - start with `docs/integrations/overview.md` for an understanding of how integrations are structured
 - use the focused how-to guides under `docs/integrations/how-to/` for new vendors, gateways, models, anthropic proxies, and `/usage` support

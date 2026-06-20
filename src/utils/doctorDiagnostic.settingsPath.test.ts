@@ -13,7 +13,7 @@ let tempDir: string | null = null
 let originalCwd: string | null = null
 
 function createProject(): string {
-  tempDir = mkdtempSync(join(tmpdir(), 'lyacloud-settings-drift-'))
+  tempDir = mkdtempSync(join(tmpdir(), 'lyacode-settings-drift-'))
   return tempDir
 }
 
@@ -51,16 +51,16 @@ describe('detectStaleProjectSettingsPaths', () => {
 
     expect(warning).toEqual({
       issue:
-        'Legacy project settings file .claude/settings.json found, but Lya Cloud reads .lyacloud/settings.json',
+        'Legacy project settings file .claude/settings.json found, but Lya Code reads .lyacode/settings.json',
       fix:
-        'Move or copy .claude/settings.json to .lyacloud/settings.json if you intended Lya Cloud to use those project settings.',
+        'Move or copy .claude/settings.json to .lyacode/settings.json if you intended Lya Code to use those project settings.',
     })
   })
 
   test('does not warn when the matching canonical project settings file exists', async () => {
     const project = createProject()
     writeJson(join(project, '.claude', 'settings.json'))
-    writeJson(join(project, '.lyacloud', 'settings.json'))
+    writeJson(join(project, '.lyacode', 'settings.json'))
 
     await expect(detectStaleProjectSettingsPaths(project)).resolves.toBeNull()
   })
@@ -73,8 +73,8 @@ describe('detectStaleProjectSettingsPaths', () => {
 
   test('does not warn when only canonical settings files exist', async () => {
     const project = createProject()
-    writeJson(join(project, '.lyacloud', 'settings.json'))
-    writeJson(join(project, '.lyacloud', 'settings.local.json'))
+    writeJson(join(project, '.lyacode', 'settings.json'))
+    writeJson(join(project, '.lyacode', 'settings.local.json'))
 
     await expect(detectStaleProjectSettingsPaths(project)).resolves.toBeNull()
   })
@@ -86,7 +86,7 @@ describe('detectStaleProjectSettingsPaths', () => {
     const warning = await detectStaleProjectSettingsPaths(project)
 
     expect(warning?.issue).toContain('.claude/settings.local.json')
-    expect(warning?.issue).toContain('.lyacloud/settings.local.json')
+    expect(warning?.issue).toContain('.lyacode/settings.local.json')
   })
 
   test('warns about both legacy settings files when both canonical files are absent', async () => {
@@ -98,8 +98,8 @@ describe('detectStaleProjectSettingsPaths', () => {
 
     expect(warning?.issue).toContain('.claude/settings.json')
     expect(warning?.issue).toContain('.claude/settings.local.json')
-    expect(warning?.issue).toContain('.lyacloud/settings.json')
-    expect(warning?.issue).toContain('.lyacloud/settings.local.json')
+    expect(warning?.issue).toContain('.lyacode/settings.json')
+    expect(warning?.issue).toContain('.lyacode/settings.local.json')
   })
 
   test('uses the settings resolver project root by default', async () => {
@@ -110,6 +110,6 @@ describe('detectStaleProjectSettingsPaths', () => {
     const warning = await detectStaleProjectSettingsPaths()
 
     expect(warning?.issue).toContain('.claude/settings.json')
-    expect(warning?.issue).toContain('.lyacloud/settings.json')
+    expect(warning?.issue).toContain('.lyacode/settings.json')
   })
 })

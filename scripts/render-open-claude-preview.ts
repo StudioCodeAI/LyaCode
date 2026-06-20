@@ -39,9 +39,9 @@ function render(text: string): string[] {
   return lines.map(row => row.join(''))
 }
 
-console.log('=== Preview: Lya Cloud wordmark (Open Claude double-stroke, gradient orange) ===')
+console.log('=== Preview: Lya Code wordmark (Open Claude double-stroke, gradient orange) ===')
 console.log('')
-for (const line of render('Lya Cloud')) {
+for (const line of render('Lya Code')) {
   console.log(line)
 }
 console.log('')

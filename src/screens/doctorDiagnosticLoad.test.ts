@@ -6,8 +6,8 @@ import type { DiagnosticInfo } from '../utils/doctorDiagnostic.js'
 const diagnostic: DiagnosticInfo = {
   installationType: 'npm-global',
   version: '1.2.3',
-  installationPath: '/usr/local/bin/lyacloud',
-  invokedBinary: '/usr/local/bin/lyacloud',
+  installationPath: '/usr/local/bin/lyacode',
+  invokedBinary: '/usr/local/bin/lyacode',
   configInstallMethod: 'not set',
   autoUpdates: 'enabled',
   hasUpdatePermissions: null,

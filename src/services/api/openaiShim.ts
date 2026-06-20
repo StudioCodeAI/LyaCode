@@ -897,7 +897,7 @@ function convertTools(
   const isGemini = isGeminiMode()
   const strict =
     !isGemini &&
-    !isEnvTruthy(process.env.LYACLOUD_DISABLE_STRICT_TOOLS) &&
+    !isEnvTruthy(process.env.LYACODE_DISABLE_STRICT_TOOLS) &&
     !options.skipStrict
 
   return tools

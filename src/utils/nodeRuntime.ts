@@ -35,7 +35,7 @@ export function checkSupportedNodeVersion(
       ok: false,
       version,
       major,
-      message: `Could not parse Node.js version: ${version}. Lya Cloud requires Node.js ${MIN_NODE_ENGINE_RANGE}.`,
+      message: `Could not parse Node.js version: ${version}. Lya Code requires Node.js ${MIN_NODE_ENGINE_RANGE}.`,
     }
   }
 
@@ -44,7 +44,7 @@ export function checkSupportedNodeVersion(
       ok: false,
       version,
       major,
-      message: `Detected ${version}. Lya Cloud requires Node.js ${MIN_NODE_ENGINE_RANGE}. Install Node ${MIN_NODE_MAJOR} LTS or newer, then reinstall/re-run Lya Cloud.`,
+      message: `Detected ${version}. Lya Code requires Node.js ${MIN_NODE_ENGINE_RANGE}. Install Node ${MIN_NODE_MAJOR} LTS or newer, then reinstall/re-run Lya Code.`,
     }
   }
 

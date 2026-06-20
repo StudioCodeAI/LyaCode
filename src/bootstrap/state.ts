@@ -397,7 +397,7 @@ const STATE: State = getInitialState()
  *
  * **Runtime Requirement:** Uses Node.js `async_hooks.AsyncLocalStorage`.
  * Not available in browsers or non-Node JavaScript environments.
- * SDK consumers must run in Lya Cloud's supported Node.js runtime (>=22.0.0).
+ * SDK consumers must run in Lya Code's supported Node.js runtime (>=22.0.0).
  */
 type SdkContext = {
   sessionId: SessionId

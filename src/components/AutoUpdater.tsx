@@ -188,9 +188,9 @@ export function AutoUpdater({
             ✓ Update installed · Restart to apply
           </Text>}
       {(autoUpdaterResult?.status === 'install_failed' || autoUpdaterResult?.status === 'no_permissions') && <Text color="error" wrap="truncate">
-          ✗ Auto-update failed &middot; Try <Text bold>lyacloud doctor</Text> or{' '}
+          ✗ Auto-update failed &middot; Try <Text bold>lyacode doctor</Text> or{' '}
           <Text bold>
-            {hasLocalInstall ? `cd ~/.lyacloud/local && npm update ${MACRO.PACKAGE_URL}` : `npm i -g ${MACRO.PACKAGE_URL}@latest`}
+            {hasLocalInstall ? `cd ~/.lyacode/local && npm update ${MACRO.PACKAGE_URL}` : `npm i -g ${MACRO.PACKAGE_URL}@latest`}
           </Text>
         </Text>}
     </Box>;

@@ -31,9 +31,9 @@ import { isThirdPartyBuildBlocked } from 'src/utils/updateStrategy.js'
 export async function update() {
   // Block updates for third-party providers using upstream Anthropic builds.
   // The update mechanism downloads from the first-party distribution bucket,
-  // which would silently replace the Lya Cloud build with the upstream
+  // which would silently replace the Lya Code build with the upstream
   // Claude Code binary. However, builds with a custom PACKAGE_URL (like
-  // Lya Cloud's @studiocodeai/lyacloud) are safe to self-update.
+  // Lya Code's @studiocodeai/lyacode) are safe to self-update.
   if (isThirdPartyBuildBlocked()) {
     writeToStdout(
       chalk.yellow(
@@ -263,7 +263,7 @@ export async function update() {
 
       if (result.latestVersion === MACRO.DISPLAY_VERSION) {
         writeToStdout(
-          chalk.green(`Lya Cloud is up to date (${MACRO.DISPLAY_VERSION})`) + '\n',
+          chalk.green(`Lya Code is up to date (${MACRO.DISPLAY_VERSION})`) + '\n',
         )
       } else {
         writeToStdout(
@@ -277,7 +277,7 @@ export async function update() {
     } catch (error) {
       process.stderr.write('Error: Failed to install native update\n')
       process.stderr.write(String(error) + '\n')
-      process.stderr.write('Try running "lyacloud doctor" for diagnostics\n')
+      process.stderr.write('Try running "lyacode doctor" for diagnostics\n')
       await gracefulShutdown(1)
     }
   }
@@ -333,7 +333,7 @@ export async function update() {
   // Check if versions match exactly, including any build metadata (like SHA)
   if (latestVersion === MACRO.DISPLAY_VERSION) {
     writeToStdout(
-      chalk.green(`Lya Cloud is up to date (${MACRO.DISPLAY_VERSION})`) + '\n',
+      chalk.green(`Lya Code is up to date (${MACRO.DISPLAY_VERSION})`) + '\n',
     )
     await gracefulShutdown(0)
   }
@@ -411,12 +411,12 @@ export async function update() {
       if (useLocalUpdate) {
         process.stderr.write('Try manually updating with:\n')
         process.stderr.write(
-          `  cd ~/.lyacloud/local && npm update ${MACRO.PACKAGE_URL}\n`,
+          `  cd ~/.lyacode/local && npm update ${MACRO.PACKAGE_URL}\n`,
         )
       } else {
         process.stderr.write('Try running with sudo or fix npm permissions\n')
         process.stderr.write(
-          'Or consider using native installation with: lyacloud install\n',
+          'Or consider using native installation with: lyacode install\n',
         )
       }
       await gracefulShutdown(1)
@@ -426,11 +426,11 @@ export async function update() {
       if (useLocalUpdate) {
         process.stderr.write('Try manually updating with:\n')
         process.stderr.write(
-          `  cd ~/.lyacloud/local && npm update ${MACRO.PACKAGE_URL}\n`,
+          `  cd ~/.lyacode/local && npm update ${MACRO.PACKAGE_URL}\n`,
         )
       } else {
         process.stderr.write(
-          'Or consider using native installation with: lyacloud install\n',
+          'Or consider using native installation with: lyacode install\n',
         )
       }
       await gracefulShutdown(1)

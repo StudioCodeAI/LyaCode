@@ -260,11 +260,11 @@ describe('background session CLI parsing', () => {
     const config = buildBackgroundChildProcessConfig({
       execPath: '/usr/bin/node',
       execArgv: ['--max-old-space-size=8192', '--expose-gc'],
-      entrypoint: '/repo/bin/lyacloud',
+      entrypoint: '/repo/bin/lyacode',
       childArgs: ['--print', 'fix failing tests'],
       processEnv: {
-        LYACLOUD_HEAP_RELAUNCHED: '1',
-        LYACLOUD_NODE_MAX_OLD_SPACE_SIZE_MB: '8192',
+        LYACODE_HEAP_RELAUNCHED: '1',
+        LYACODE_NODE_MAX_OLD_SPACE_SIZE_MB: '8192',
       },
       sessionName: 'tests',
       stdoutLogPath: '/tmp/bg.out.log',
@@ -274,12 +274,12 @@ describe('background session CLI parsing', () => {
     expect(config.args).toEqual([
       '--max-old-space-size=8192',
       '--expose-gc',
-      '/repo/bin/lyacloud',
+      '/repo/bin/lyacode',
       '--print',
       'fix failing tests',
     ])
-    expect(config.env.LYACLOUD_HEAP_RELAUNCHED).toBeUndefined()
-    expect(config.env.LYACLOUD_NODE_MAX_OLD_SPACE_SIZE_MB).toBe('8192')
+    expect(config.env.LYACODE_HEAP_RELAUNCHED).toBeUndefined()
+    expect(config.env.LYACODE_NODE_MAX_OLD_SPACE_SIZE_MB).toBe('8192')
     expect(config.env.CLAUDE_CODE_SESSION_KIND).toBe('bg')
     expect(config.env.CLAUDE_CODE_SESSION_LOG).toBe('/tmp/bg.out.log')
     expect(config.env.CLAUDE_CODE_SESSION_NAME).toBe('tests')

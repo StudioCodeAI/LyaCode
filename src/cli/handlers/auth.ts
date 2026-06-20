@@ -287,7 +287,7 @@ export async function authStatus(opts: {
     }
     if (!loggedIn) {
       process.stdout.write(
-        'Not logged in. Run lyacloud auth login to authenticate.\n',
+        'Not logged in. Run lyacode auth login to authenticate.\n',
       )
     }
   } else {

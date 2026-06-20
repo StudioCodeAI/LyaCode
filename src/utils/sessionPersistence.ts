@@ -57,8 +57,8 @@ function getConfigDir(): string {
 
 function getSessionsDir(): string {
   // Test override for temp directory
-  if (process.env.LYACLOUD_TEST_SESSIONS_DIR) {
-    return process.env.LYACLOUD_TEST_SESSIONS_DIR
+  if (process.env.LYACODE_TEST_SESSIONS_DIR) {
+    return process.env.LYACODE_TEST_SESSIONS_DIR
   }
   return path.join(getConfigDir(), 'sessions')
 }

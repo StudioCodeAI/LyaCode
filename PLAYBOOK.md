@@ -1,6 +1,6 @@
-# Lya Cloud Local Agent Playbook
+# Lya Code Local Agent Playbook
 
-This playbook is a practical guide to run Lya Cloud with a local model (Ollama), work safely, and get strong day-to-day results.
+This playbook is a practical guide to run Lya Code with a local model (Ollama), work safely, and get strong day-to-day results.
 
 ## 1. What You Have
 
@@ -27,7 +27,7 @@ bun run dev:fast
 bun run dev:code
 ```
 
-If everything is healthy, Lya Cloud starts directly.
+If everything is healthy, Lya Code starts directly.
 
 ## 3. One-Time Setup (If Needed)
 
@@ -37,7 +37,7 @@ If everything is healthy, Lya Cloud starts directly.
 bun run profile:init -- --provider ollama --model llama3.1:8b
 ```
 
-Or let Lya Cloud recommend the best local model for your goal:
+Or let Lya Code recommend the best local model for your goal:
 
 ```powershell
 bun run profile:init -- --provider ollama --goal coding
@@ -52,7 +52,7 @@ bun run profile:recommend -- --goal coding --benchmark
 ### 3.2 Confirm profile file
 
 ```powershell
-Get-Content .\.lyacloud-profile.json
+Get-Content .\.lyacode-profile.json
 ```
 
 ### 3.3 Validate environment
@@ -260,7 +260,7 @@ bun run profile:init -- --provider ollama --goal coding
 
 - Run `doctor:runtime` before debugging provider issues.
 - Prefer `dev:profile` over manual env edits.
-- Keep any legacy workspace `.lyacloud-profile.json` local; new provider saves use the user config directory.
+- Keep any legacy workspace `.lyacode-profile.json` local; new provider saves use the user config directory.
 - Use `doctor:report` before asking for help so you have a reproducible snapshot.
 
 ## 10. Quick Recovery Checklist

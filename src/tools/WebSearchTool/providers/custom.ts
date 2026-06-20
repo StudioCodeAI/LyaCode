@@ -357,7 +357,7 @@ function auditLogCustomSearch(url: string): void {
     `[web-search] ⚠️  Custom search provider is active. ` +
     `Outbound requests go to: ${safeHostname(url) ?? url}. ` +
     `Ensure this endpoint is trusted. ` +
-    `See: https://github.com/StudioCodeAI/lyacloud/pull/512#security`,
+    `See: https://github.com/StudioCodeAI/lyacode/pull/512#security`,
   )
 }
 

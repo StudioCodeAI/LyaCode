@@ -109,7 +109,7 @@ export async function processSessionStartHooks(
         errorMessage.includes('schema')
       ) {
         userGuidance =
-          'This appears to be a configuration issue. Check your plugin settings in .lyacloud/settings.json'
+          'This appears to be a configuration issue. Check your plugin settings in .lyacode/settings.json'
       } else {
         userGuidance =
           'Please fix the plugin configuration or remove problematic plugins from your settings.'

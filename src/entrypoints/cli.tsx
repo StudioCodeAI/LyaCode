@@ -1,7 +1,7 @@
 import { feature } from 'bun:bundle';
 
 // Defensive compatibility guard for environments where globalThis.File is
-// unexpectedly absent. Lya Cloud's supported runtime is Node >=22; this is
+// unexpectedly absent. Lya Code's supported runtime is Node >=22; this is
 // not a Node 18 support guarantee. The guard is harmless on supported Node
 // versions and prevents undici's module evaluation from throwing in unusual
 // embedded/runtime setups.
@@ -27,7 +27,7 @@ if (typeof globalThis.File === 'undefined') {
   }
 }
 
-// Lya Cloud: disable experimental API betas by default.
+// Lya Code: disable experimental API betas by default.
 // Tool search (defer_loading), global cache scope, and context management
 // require internal API support not available to external accounts → 500.
 // Users can opt-in with CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS=false.
@@ -151,11 +151,11 @@ export async function main(
   if (args.length === 1 && (args[0] === '--version' || args[0] === '-v' || args[0] === '-V')) {
     // MACRO.VERSION is inlined at build time
     // biome-ignore lint/suspicious/noConsole:: intentional console output
-    console.log(`${MACRO.DISPLAY_VERSION ?? MACRO.VERSION} (Lya Cloud)`);
+    console.log(`${MACRO.DISPLAY_VERSION ?? MACRO.VERSION} (Lya Code)`);
     return;
   }
 
-  // Fast-path for `lyacloud ps|logs|attach|kill`.
+  // Fast-path for `lyacode ps|logs|attach|kill`.
   // Session management is entirely local, so it should not require config,
   // profile, credential, provider-validation, or startup-screen work.
   if (bgSessionsEnabled && (args[0] === 'ps' || args[0] === 'logs' || args[0] === 'attach' || args[0] === 'kill')) {
@@ -539,8 +539,8 @@ export async function main(
 
   // No special flags detected, load and run the full CLI
   if (
-    process.env.LYACLOUD_DISABLE_EARLY_INPUT !== '1' &&
-    process.env.LYACLOUD_DISABLE_EARLY_INPUT !== '1'
+    process.env.LYACODE_DISABLE_EARLY_INPUT !== '1' &&
+    process.env.LYACODE_DISABLE_EARLY_INPUT !== '1'
   ) {
     const {
       startCapturingEarlyInput
@@ -558,8 +558,8 @@ export async function main(
 
 // eslint-disable-next-line custom-rules/no-top-level-side-effects, custom-rules/no-process-env-top-level
 if (
-  process.env.LYACLOUD_DISABLE_CLI_ENTRYPOINT_AUTO_RUN !== '1' &&
-  process.env.LYACLOUD_DISABLE_CLI_ENTRYPOINT_AUTO_RUN !== '1'
+  process.env.LYACODE_DISABLE_CLI_ENTRYPOINT_AUTO_RUN !== '1' &&
+  process.env.LYACODE_DISABLE_CLI_ENTRYPOINT_AUTO_RUN !== '1'
 ) {
   void main();
 }

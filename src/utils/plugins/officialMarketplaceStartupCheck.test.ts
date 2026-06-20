@@ -68,12 +68,12 @@ mock.module('../config.js', () => ({
   getGlobalConfigWriteCount: () => 0,
   getAutoUpdaterDisabledReason: () => null,
   formatAutoUpdaterDisabledReason: () => 'enabled',
-  getManagedClaudeRulesDir: () => '/tmp/lyacloud-managed-rules',
-  getMemoryPath: () => '/tmp/lyacloud-memory.md',
+  getManagedClaudeRulesDir: () => '/tmp/lyacode-managed-rules',
+  getMemoryPath: () => '/tmp/lyacode-memory.md',
   getOrCreateUserID: () => 'test-user-id',
-  getProjectPathForConfig: () => '/tmp/lyacloud-project-config.json',
+  getProjectPathForConfig: () => '/tmp/lyacode-project-config.json',
   getRemoteControlAtStartup: () => false,
-  getUserClaudeRulesDir: () => '/tmp/lyacloud-user-rules',
+  getUserClaudeRulesDir: () => '/tmp/lyacode-user-rules',
   isAutoUpdaterDisabled: () => false,
   recordFirstStartTime: mock(() => {}),
   getCustomApiKeyStatus: () => ({ hasCustomApiKey: false }),
@@ -135,7 +135,7 @@ mock.module('./marketplaceManager.js', () => ({
   addMarketplaceSource,
   getMarketplace: async () => ({ plugins: [] }),
   getMarketplaceCacheOnly: async () => ({ plugins: [] }),
-  getMarketplacesCacheDir: () => '/tmp/lyacloud-marketplaces',
+  getMarketplacesCacheDir: () => '/tmp/lyacode-marketplaces',
   getPluginById: async () => undefined,
   getPluginByIdCacheOnly: async () => undefined,
   loadKnownMarketplacesConfig: async () => knownMarketplaces,
@@ -191,7 +191,7 @@ describe('checkAndInstallOfficialMarketplace', () => {
   test('uses known marketplaces as the installed source of truth', async () => {
     knownMarketplaces = {
       'claude-plugins-official': {
-        installLocation: '/tmp/lyacloud-marketplaces/claude-plugins-official',
+        installLocation: '/tmp/lyacode-marketplaces/claude-plugins-official',
       },
     }
 

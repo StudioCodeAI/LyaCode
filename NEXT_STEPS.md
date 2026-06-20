@@ -1,6 +1,6 @@
 # NEXT_STEPS.md — Plano de execução para Claude Code
 
-**Contexto:** Lya Cloud v1.0.0 publicado mas com 2 problemas pendentes:
+**Contexto:** Lya Code v1.0.0 publicado mas com 2 problemas pendentes:
 1. ❌ Lista do `/provider` não mudou (eu editei o arquivo errado — `provider.tsx` é legacy, a tela real usa `ProviderManager.tsx` + `integrationArtifacts.generated.ts`)
 2. ⚠️ Letras blocky mas com pequenos bugs de alinhamento (algumas linhas têm 11 chars em vez de 10)
 
@@ -18,7 +18,7 @@ Também:
 | 1 | Corrigir lista de providers (arquivo gerado correto) | ⏳ |
 | 2 | Corrigir bugs de bitmap das letras (`a` minúsculo) | ⏳ |
 | 3 | Rebuild + smoke test local | ⏳ |
-| 4 | Criar repo público `lyacloud-installers` | ⏳ |
+| 4 | Criar repo público `lyacode-installers` | ⏳ |
 | 5 | Workflow que publica artefatos no repo público | ⏳ |
 | 6 | Tag v1.0.1 + push | ⏳ |
 | 7 | Validar instalação pública | ⏳ |
@@ -147,7 +147,7 @@ a: [
 
 Mudanças: removeu 1 espaço das linhas 6 e 7; trocou a linha 10 pelo padrão simétrico.
 
-**Bug similar no `D` maiúsculo** (não usado em "Lya Cloud" mas latente):
+**Bug similar no `D` maiúsculo** (não usado em "Lya Code" mas latente):
 
 ```ts
 // ANTES (mistura 9 e 10 chars):
@@ -162,29 +162,29 @@ D: ['######### ', '######### ', '##      ##', '##      ##', '##      ##', '##   
 ## 3️⃣ Rebuild + smoke local
 
 ```powershell
-cd E:\GitHub\lyacloud-main
+cd E:\GitHub\lyacode-main
 
 # Limpar restos
-Remove-Item -Force "studiocodeai-lyacloud-*.tgz" -ErrorAction SilentlyContinue
-Remove-Item -Recurse -Force "dist/installer/lyacloud-portable-0.1.0" -ErrorAction SilentlyContinue
+Remove-Item -Force "studiocodeai-lyacode-*.tgz" -ErrorAction SilentlyContinue
+Remove-Item -Recurse -Force "dist/installer/lyacode-portable-0.1.0" -ErrorAction SilentlyContinue
 
 # Rebuild
 bun run build
 bun run smoke
 
 # Testar visualmente
-node bin/lyacloud
+node bin/lyacode
 # Verificar:
-#   - Letras "Lya Cloud" estão limpas (sem desalinhamento no 'a')
+#   - Letras "Lya Code" estão limpas (sem desalinhamento no 'a')
 #   - /provider abre com Ollama 1º, Gitlawb Opengateway último
-#   - lyacloud v1.0.0 no rodapé
+#   - lyacode v1.0.0 no rodapé
 ```
 
 Se algo ficar ruim, voltar pra editar antes de seguir.
 
 ---
 
-## 4️⃣ Criar repo público `lyacloud-installers`
+## 4️⃣ Criar repo público `lyacode-installers`
 
 **Objetivo:** repo público com SÓ instaladores + docs. Código-fonte fica no privado.
 
@@ -192,9 +192,9 @@ Se algo ficar ruim, voltar pra editar antes de seguir.
 
 Abrir: https://github.com/organizations/StudioCodeAI/repositories/new (ou no perfil pessoal se preferir)
 
-- **Nome:** `lyacloud-installers`
+- **Nome:** `lyacode-installers`
 - **Visibilidade:** Public
-- **Descrição:** "Lya Cloud — installers, releases, and public documentation. Source code lives at the private StudioCodeAI/lyacloud repo."
+- **Descrição:** "Lya Code — installers, releases, and public documentation. Source code lives at the private StudioCodeAI/lyacode repo."
 - **NÃO inicialize** com README/gitignore/license (o script faz isso)
 
 ### Passo 4.2 — Criar conteúdo do repo público
@@ -212,7 +212,7 @@ Conteúdo a criar (Claude Code escreve):
 **`README.md`** (do repo público):
 
 ```markdown
-# Lya Cloud — Installers & Releases
+# Lya Code — Installers & Releases
 
 CLI agentic terminal by **Studio CodeAI**.
 
@@ -224,15 +224,15 @@ CLI agentic terminal by **Studio CodeAI**.
 ### Multi-plataforma via npm
 
 \`\`\`bash
-npm install -g https://github.com/StudioCodeAI/lyacloud-installers/releases/latest/download/studiocodeai-lyacloud-1.0.0.tgz
+npm install -g https://github.com/StudioCodeAI/lyacode-installers/releases/latest/download/studiocodeai-lyacode-1.0.0.tgz
 \`\`\`
 
 ### Windows (portable .zip)
 
 \`\`\`powershell
-irm https://github.com/StudioCodeAI/lyacloud-installers/releases/latest/download/lyacloud-portable-1.0.0.zip -OutFile lyacloud-portable.zip
-Expand-Archive lyacloud-portable.zip -DestinationPath .\lyacloud-portable -Force
-cd lyacloud-portable
+irm https://github.com/StudioCodeAI/lyacode-installers/releases/latest/download/lyacode-portable-1.0.0.zip -OutFile lyacode-portable.zip
+Expand-Archive lyacode-portable.zip -DestinationPath .\lyacode-portable -Force
+cd lyacode-portable
 .\install.cmd
 \`\`\`
 
@@ -240,7 +240,7 @@ cd lyacloud-portable
 
 \`\`\`bash
 lya --version
-# 1.0.0 (Lya Cloud)
+# 1.0.0 (Lya Code)
 \`\`\`
 
 ## 🚀 Primeiros passos
@@ -260,7 +260,7 @@ Lya é a engenheira sênior + CEO de projeto da família Studio CodeAI. Arquitet
 
 ## 📦 Releases
 
-Veja todas as versões em [Releases](https://github.com/StudioCodeAI/lyacloud-installers/releases).
+Veja todas as versões em [Releases](https://github.com/StudioCodeAI/lyacode-installers/releases).
 
 ## 📜 Changelog
 
@@ -283,16 +283,16 @@ Veja [LICENSE](./LICENSE).
 
 ## v1.0.0 — 2026-06-20 (produção estável)
 
-🎉 **Primeira release de produção da Lya Cloud.**
+🎉 **Primeira release de produção da Lya Code.**
 
 ### Adicionado
-- Wordmark blocky 10-linhas "Lya Cloud" com gradiente Studio CodeAI no startup
+- Wordmark blocky 10-linhas "Lya Code" com gradiente Studio CodeAI no startup
 - Persona Lya completa: 7 sub-agentes (architect, explorer, reviewer, tester, recorder, memory, provider)
 - Comando \`/lya\` que invoca o system prompt sênior
 - Configuração de provedores via \`/provider\`: Ollama Local, Anthropic, Gemini, Mistral, OpenAI-compatible, Codex, e ~30 outros
 - Instaladores Windows: \`.exe\`, \`.zip\` portable e \`.tgz\` npm
-- 5 aliases do binário: lyacloud, lscloud, lya, lyacode, lscode
-- Extensão VS Code em \`vscode-extension/lyacloud-vscode\`
+- 5 aliases do binário: lyacode, lscloud, lya, lyacode, lscode
+- Extensão VS Code em \`vscode-extension/lyacode-vscode\`
 
 ### Política de versionamento
 - \`v0.x.y\` = teste (zero na frente)
@@ -306,9 +306,9 @@ Veja [LICENSE](./LICENSE).
 ```powershell
 cd public-repo-template
 git add -A
-git commit -m "initial: Lya Cloud installers repo"
+git commit -m "initial: Lya Code installers repo"
 git branch -M main
-git remote add origin https://github.com/StudioCodeAI/lyacloud-installers.git
+git remote add origin https://github.com/StudioCodeAI/lyacode-installers.git
 git push -u origin main
 ```
 
@@ -323,9 +323,9 @@ Atualizar pra usar PAT (Personal Access Token) e publicar release no repo públi
 ### Passo 5.1 — Criar PAT
 
 1. Abrir https://github.com/settings/personal-access-tokens/new
-2. Token name: `lyacloud-release-publish`
+2. Token name: `lyacode-release-publish`
 3. Expiration: 1 ano
-4. Repository access: **Only select repositories** → `lyacloud-installers`
+4. Repository access: **Only select repositories** → `lyacode-installers`
 5. Permissions:
    - **Contents:** Read and write
    - **Actions:** Read
@@ -333,7 +333,7 @@ Atualizar pra usar PAT (Personal Access Token) e publicar release no repo públi
 
 ### Passo 5.2 — Adicionar PAT como secret no repo PRIVADO
 
-1. Abrir https://github.com/StudioCodeAI/lyacloud/settings/secrets/actions
+1. Abrir https://github.com/StudioCodeAI/lyacode/settings/secrets/actions
 2. New repository secret
 3. Name: `INSTALLERS_REPO_TOKEN`
 4. Value: cole o PAT
@@ -347,33 +347,33 @@ Substituir o passo "Create GitHub Release" no `.github/workflows/release.yml` po
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          name: Lya Cloud v${{ steps.version.outputs.version }}
+          name: Lya Code v${{ steps.version.outputs.version }}
           tag_name: ${{ github.ref_name }}
-          repository: StudioCodeAI/lyacloud-installers
+          repository: StudioCodeAI/lyacode-installers
           token: ${{ secrets.INSTALLERS_REPO_TOKEN }}
           generate_release_notes: false
           fail_on_unmatched_files: false
           files: |
-            dist/installer/lyacloud-setup-x64-*.exe
-            dist/installer/lyacloud-portable-*.zip
-            studiocodeai-lyacloud-*.tgz
+            dist/installer/lyacode-setup-x64-*.exe
+            dist/installer/lyacode-portable-*.zip
+            studiocodeai-lyacode-*.tgz
           body: |
-            ## Lya Cloud v${{ steps.version.outputs.version }}
+            ## Lya Code v${{ steps.version.outputs.version }}
 
             Terminal agêntico do Studio CodeAI para workflows de código local e em nuvem.
 
             ### Instalação multi-plataforma (recomendado)
 
             ```bash
-            npm install -g https://github.com/StudioCodeAI/lyacloud-installers/releases/download/v${{ steps.version.outputs.version }}/studiocodeai-lyacloud-${{ steps.version.outputs.version }}.tgz
+            npm install -g https://github.com/StudioCodeAI/lyacode-installers/releases/download/v${{ steps.version.outputs.version }}/studiocodeai-lyacode-${{ steps.version.outputs.version }}.tgz
             ```
 
             ### Windows (portable .zip)
 
             ```powershell
-            irm https://github.com/StudioCodeAI/lyacloud-installers/releases/download/v${{ steps.version.outputs.version }}/lyacloud-portable-${{ steps.version.outputs.version }}.zip -OutFile lyacloud-portable.zip
-            Expand-Archive lyacloud-portable.zip -DestinationPath .\lyacloud-portable -Force
-            cd lyacloud-portable
+            irm https://github.com/StudioCodeAI/lyacode-installers/releases/download/v${{ steps.version.outputs.version }}/lyacode-portable-${{ steps.version.outputs.version }}.zip -OutFile lyacode-portable.zip
+            Expand-Archive lyacode-portable.zip -DestinationPath .\lyacode-portable -Force
+            cd lyacode-portable
             .\install.cmd
             ```
 
@@ -389,7 +389,7 @@ Substituir o passo "Create GitHub Release" no `.github/workflows/release.yml` po
             Studio CodeAI · Luis Cardozo · studiocoder.ai@gmail.com
 ```
 
-Diferença vs versão atual: `repository:` aponta pra `lyacloud-installers`, e `token:` usa o PAT.
+Diferença vs versão atual: `repository:` aponta pra `lyacode-installers`, e `token:` usa o PAT.
 
 ---
 
@@ -398,15 +398,15 @@ Diferença vs versão atual: `repository:` aponta pra `lyacloud-installers`, e `
 Após corrigir 1, 2 e 5:
 
 ```powershell
-cd E:\GitHub\lyacloud-main
+cd E:\GitHub\lyacode-main
 
 # Bump versão pra 1.0.1 (patch release)
 # Editar package.json: "version": "1.0.1"
 # Editar .release-please-manifest.json: ".": "1.0.1"
 # Editar scripts/installer/build-windows.ts: const VERSION = '1.0.1'
 # Editar scripts/installer/windows/install.ps1: $ProductVersion = '1.0.1'
-# Editar scripts/installer/windows/install.cmd: v1.0.1, studiocodeai-lyacloud-1.0.1.tgz
-# Editar scripts/installer/windows/lyacloud-setup-x64.sed: studiocodeai-lyacloud-1.0.1.tgz
+# Editar scripts/installer/windows/install.cmd: v1.0.1, studiocodeai-lyacode-1.0.1.tgz
+# Editar scripts/installer/windows/lyacode-setup-x64.sed: studiocodeai-lyacode-1.0.1.tgz
 # Editar README.md: substituir todos 1.0.0 → 1.0.1
 
 # Rebuild
@@ -420,12 +420,12 @@ git commit -m "release: v1.0.1 - fix provider list + bitmaps + public installers
 - Provider list: Ollama Local 1o, Gitlawb Opengateway ultimo
 - Fix bitmap 'a' minusculo (3 linhas com 11 chars -> 10 chars)
 - Fix bitmap 'D' maiusculo (mistura 9/10 chars -> 10 chars)
-- Workflow publica artefatos no repo publico lyacloud-installers
+- Workflow publica artefatos no repo publico lyacode-installers
 - README atualizado para v1.0.1
 
 Refs: Studio CodeAI · Luis Cardozo"
 
-git tag -a v1.0.1 -m "Lya Cloud v1.0.1 - provider order + bitmap fixes"
+git tag -a v1.0.1 -m "Lya Code v1.0.1 - provider order + bitmap fixes"
 git push origin main
 git push origin v1.0.1
 ```
@@ -435,22 +435,22 @@ git push origin v1.0.1
 ## 7️⃣ Validar instalação pública
 
 Aguardar ~5-10 min após o push da tag. Acompanhar build em:
-- https://github.com/StudioCodeAI/lyacloud/actions
+- https://github.com/StudioCodeAI/lyacode/actions
 
 Quando ✅, validar:
 
 ```powershell
 # Verificar que o release apareceu no repo público
-Invoke-RestMethod https://api.github.com/repos/StudioCodeAI/lyacloud-installers/releases/latest
+Invoke-RestMethod https://api.github.com/repos/StudioCodeAI/lyacode-installers/releases/latest
 
 # Desinstalar versão atual
-npm uninstall -g @studiocodeai/lyacloud
+npm uninstall -g @studiocodeai/lyacode
 
 # Instalar do release público
-npm install -g https://github.com/StudioCodeAI/lyacloud-installers/releases/download/v1.0.1/studiocodeai-lyacloud-1.0.1.tgz
+npm install -g https://github.com/StudioCodeAI/lyacode-installers/releases/download/v1.0.1/studiocodeai-lyacode-1.0.1.tgz
 
 # Validar
-lya --version    # 1.0.1 (Lya Cloud)
+lya --version    # 1.0.1 (Lya Code)
 lya              # ver letras + /provider
 ```
 
@@ -470,21 +470,21 @@ lya              # ver letras + /provider
 ## ✅ Critérios de "feito"
 
 - [ ] `/provider` mostra "Ollama" na posição 1 e "Gitlawb Opengateway" na última
-- [ ] Letras "Lya Cloud" renderizam sem desalinhamento no `a`
-- [ ] Repo `StudioCodeAI/lyacloud-installers` existe e é público
+- [ ] Letras "Lya Code" renderizam sem desalinhamento no `a`
+- [ ] Repo `StudioCodeAI/lyacode-installers` existe e é público
 - [ ] Release v1.0.1 no repo público com `.tgz` + `.zip` + `.exe`
-- [ ] `npm install -g https://github.com/StudioCodeAI/lyacloud-installers/releases/download/v1.0.1/studiocodeai-lyacloud-1.0.1.tgz` funciona em terminal limpo
+- [ ] `npm install -g https://github.com/StudioCodeAI/lyacode-installers/releases/download/v1.0.1/studiocodeai-lyacode-1.0.1.tgz` funciona em terminal limpo
 - [ ] README do repo privado tem link pro repo público de releases
 
 ---
 
 ## 📞 Mensagem pra Luis quando terminar
 
-> ✅ Lya Cloud v1.0.1 publicada.
+> ✅ Lya Code v1.0.1 publicada.
 >
 > **Instalação pública (qualquer terminal):**
 > ```bash
-> npm install -g https://github.com/StudioCodeAI/lyacloud-installers/releases/download/v1.0.1/studiocodeai-lyacloud-1.0.1.tgz
+> npm install -g https://github.com/StudioCodeAI/lyacode-installers/releases/download/v1.0.1/studiocodeai-lyacode-1.0.1.tgz
 > ```
 >
 > **Validar:**
@@ -493,4 +493,4 @@ lya              # ver letras + /provider
 > lya              # ver wordmark
 > ```
 >
-> Código-fonte continua privado em StudioCodeAI/lyacloud. Releases públicas em StudioCodeAI/lyacloud-installers.
+> Código-fonte continua privado em StudioCodeAI/lyacode. Releases públicas em StudioCodeAI/lyacode-installers.

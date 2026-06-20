@@ -72,8 +72,8 @@ function renderSuccessPage(): string {
   </head>
   <body>
     <h1>Codex login complete</h1>
-    <p>You can return to Lya Cloud now.</p>
-    <p>Lya Cloud will finish activating your new Codex OAuth login.</p>
+    <p>You can return to Lya Code now.</p>
+    <p>Lya Code will finish activating your new Codex OAuth login.</p>
   </body>
 </html>`
 }
@@ -94,7 +94,7 @@ function renderErrorPage(message: string): string {
   <body>
     <h1>Codex login failed</h1>
     <p>${safeMessage}</p>
-    <p>You can close this window and try again in Lya Cloud.</p>
+    <p>You can close this window and try again in Lya Code.</p>
   </body>
 </html>`
 }
@@ -113,7 +113,7 @@ function renderCancelledPage(): string {
   </head>
   <body>
     <h1>Codex login cancelled</h1>
-    <p>You can close this window and retry in Lya Cloud.</p>
+    <p>You can close this window and retry in Lya Code.</p>
   </body>
 </html>`
 }

@@ -33,8 +33,8 @@ beforeAll(async () => {
     DISPLAY_VERSION: '0.0.0-test',
     BUILD_TIME: new Date().toISOString(),
     ISSUES_EXPLAINER:
-      'report the issue at https://github.com/StudioCodeAI/lyacloud/issues',
-    PACKAGE_URL: '@studiocodeai/lyacloud',
+      'report the issue at https://github.com/StudioCodeAI/lyacode/issues',
+    PACKAGE_URL: '@studiocodeai/lyacode',
     NATIVE_PACKAGE_URL: undefined,
   }
 
@@ -77,24 +77,24 @@ afterEach(() => {
   clearSystemPromptSections()
 })
 
-test('CLI identity prefixes describe Lya Cloud instead of Claude Code', () => {
-  expect(getCLISyspromptPrefix()).toContain('Lya Cloud')
+test('CLI identity prefixes describe Lya Code instead of Claude Code', () => {
+  expect(getCLISyspromptPrefix()).toContain('Lya Code')
   expect(getCLISyspromptPrefix()).not.toContain('Claude Code')
   expect(getCLISyspromptPrefix()).not.toContain("Anthropic's official CLI for Claude")
 
   for (const prefix of CLI_SYSPROMPT_PREFIXES) {
-    expect(prefix).toContain('Lya Cloud')
+    expect(prefix).toContain('Lya Code')
     expect(prefix).not.toContain('Claude Code')
     expect(prefix).not.toContain("Anthropic's official CLI for Claude")
   }
 })
 
-test('simple mode identity describes Lya Cloud instead of Claude Code', async () => {
+test('simple mode identity describes Lya Code instead of Claude Code', async () => {
   process.env.CLAUDE_CODE_SIMPLE = '1'
 
   const prompt = await getSystemPrompt([], 'gpt-4o')
 
-  expect(prompt[0]).toContain('Lya Cloud')
+  expect(prompt[0]).toContain('Lya Code')
   expect(prompt[0]).not.toContain('Claude Code')
   expect(prompt[0]).not.toContain("Anthropic's official CLI for Claude")
 })
@@ -161,35 +161,35 @@ test('system prompt includes immediate-tool-use directive in REPL mode', async (
   }
 })
 
-test('built-in agent prompts describe Lya Cloud instead of Claude Code', () => {
-  expect(DEFAULT_AGENT_PROMPT).toContain('Lya Cloud')
+test('built-in agent prompts describe Lya Code instead of Claude Code', () => {
+  expect(DEFAULT_AGENT_PROMPT).toContain('Lya Code')
   expect(DEFAULT_AGENT_PROMPT).not.toContain('Claude Code')
   expect(DEFAULT_AGENT_PROMPT).not.toContain("Anthropic's official CLI for Claude")
 
   const generalPrompt = GENERAL_PURPOSE_AGENT.getSystemPrompt({
     toolUseContext: { options: {} as never },
   })
-  expect(generalPrompt).toContain('Lya Cloud')
+  expect(generalPrompt).toContain('Lya Code')
   expect(generalPrompt).not.toContain('Claude Code')
   expect(generalPrompt).not.toContain("Anthropic's official CLI for Claude")
 
   const explorePrompt = EXPLORE_AGENT.getSystemPrompt({
     toolUseContext: { options: {} as never },
   })
-  expect(explorePrompt).toContain('Lya Cloud')
+  expect(explorePrompt).toContain('Lya Code')
   expect(explorePrompt).not.toContain('Claude Code')
   expect(explorePrompt).not.toContain("Anthropic's official CLI for Claude")
 
   const planPrompt = PLAN_AGENT.getSystemPrompt({
     toolUseContext: { options: {} as never },
   })
-  expect(planPrompt).toContain('Lya Cloud')
+  expect(planPrompt).toContain('Lya Code')
   expect(planPrompt).not.toContain('Claude Code')
 
   const statuslinePrompt = STATUSLINE_SETUP_AGENT.getSystemPrompt({
     toolUseContext: { options: {} as never },
   })
-  expect(statuslinePrompt).toContain('Lya Cloud')
+  expect(statuslinePrompt).toContain('Lya Code')
   expect(statuslinePrompt).not.toContain('Claude Code')
 
   const guidePrompt = CLAUDE_CODE_GUIDE_AGENT.getSystemPrompt({
@@ -201,9 +201,9 @@ test('built-in agent prompts describe Lya Cloud instead of Claude Code', () => {
       } as never,
     },
   })
-  expect(guidePrompt).toContain('Lya Cloud')
-  expect(guidePrompt).toContain('You are the Lya Cloud guide agent.')
-  expect(guidePrompt).toContain('**Lya Cloud** (the CLI tool)')
+  expect(guidePrompt).toContain('Lya Code')
+  expect(guidePrompt).toContain('You are the Lya Code guide agent.')
+  expect(guidePrompt).toContain('**Lya Code** (the CLI tool)')
   expect(guidePrompt).not.toContain('You are the Claude guide agent.')
   expect(guidePrompt).not.toContain('**Claude Code** (the CLI tool)')
 })

@@ -14,9 +14,9 @@ const path = Astro.url.pathname
 
 <header class="site-nav" id="site-nav">
   <div class="container">
-    <a class="brand" href="/" aria-label="lyacloud home">
-      <img src="/lyacloud.png" alt="" width="22" height="22" />
-      <span>lyacloud</span>
+    <a class="brand" href="/" aria-label="lyacode home">
+      <img src="/lyacode.png" alt="" width="22" height="22" />
+      <span>lyacode</span>
       <span class="ver">v{SITE.version}</span>
     </a>
     <nav class="nav-links" aria-label="primary">
@@ -42,7 +42,7 @@ const path = Astro.url.pathname
 </header>
 
 <script>
-  const KEY = 'lyacloud-theme'
+  const KEY = 'lyacode-theme'
 
   function currentTheme(): 'dark' | 'light' {
     return document.documentElement.dataset.theme === 'light' ? 'light' : 'dark'

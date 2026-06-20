@@ -1496,9 +1496,9 @@ export const InstalledPluginsFileSchemaV1 = lazySchema(() =>
  *
  * Plugins can be installed at different scopes:
  * - managed: Enterprise/system-wide (read-only, platform-specific paths)
- * - user: User's global settings (~/.lyacloud/settings.json)
- * - project: Shared project settings ($project/.lyacloud/settings.json)
- * - local: Personal project overrides ($project/.lyacloud/settings.local.json)
+ * - user: User's global settings (~/.lyacode/settings.json)
+ * - project: Shared project settings ($project/.lyacode/settings.json)
+ * - local: Personal project overrides ($project/.lyacode/settings.local.json)
  *
  * Note: 'flag' scope plugins (from --settings) are session-only and
  * are NOT persisted to installed_plugins.json.

@@ -1,19 +1,19 @@
 /**
- * Build Lya Cloud Windows Installer (.exe + .zip + .tgz)
+ * Build Lya Code Windows Installer (.exe + .zip + .tgz)
  *
- * Luis Cardozo · studiocoder.ai@gmail.com · Studio CodeAI
+ * Luis Cardozo Â· studiocoder.ai@gmail.com Â· Studio CodeAI
  *
  * Passos:
- *   1. Roda `npm pack` (gera studiocodeai-lyacloud-${VERSION}.tgz na raiz)
+ *   1. Roda `npm pack` (gera studiocodeai-lyacode-${VERSION}.tgz na raiz)
  *   2. Valida que scripts/installer/windows/ tem todos os arquivos
  *   3. Gera pasta portable
  *   4. Gera .zip do portable (sempre)
- *   5. Tenta gerar o .exe via `iexpress` (Windows-only; pula se não disponível)
+ *   5. Tenta gerar o .exe via `iexpress` (Windows-only; pula se nÃ£o disponÃ­vel)
  *
- * Saída em dist/installer/:
- *   - lyacloud-portable-${VERSION}/      (pasta extraída)
- *   - lyacloud-portable-${VERSION}.zip   (sempre, fallback robusto)
- *   - lyacloud-setup-x64-${VERSION}.exe  (se Windows + iexpress funcionar)
+ * SaÃ­da em dist/installer/:
+ *   - lyacode-portable-${VERSION}/      (pasta extraÃ­da)
+ *   - lyacode-portable-${VERSION}.zip   (sempre, fallback robusto)
+ *   - lyacode-setup-x64-${VERSION}.exe  (se Windows + iexpress funcionar)
  */
 
 import { existsSync } from 'fs'
@@ -22,20 +22,20 @@ import { join } from 'path'
 import { spawnSync } from 'child_process'
 
 const REPO_ROOT = join(import.meta.dir, '..', '..')
-const VERSION = '1.0.4'
-const TARBALL_NAME = `studiocodeai-lyacloud-${VERSION}.tgz`
+const VERSION = '1.0.5'
+const TARBALL_NAME = `studiocodeai-lyacode-${VERSION}.tgz`
 const TARBALL_PATH = join(REPO_ROOT, TARBALL_NAME)
 const SED_PATH = join(
   REPO_ROOT,
   'scripts',
   'installer',
   'windows',
-  'lyacloud-setup-x64.sed'
+  'lyacode-setup-x64.sed'
 )
 const OUT_DIR = join(REPO_ROOT, 'dist', 'installer')
 
 async function main(): Promise<void> {
-  console.log('=== Lya Cloud Windows Installer Builder ===')
+  console.log('=== Lya Code Windows Installer Builder ===')
   console.log(`Repo:    ${REPO_ROOT}`)
   console.log(`Output:  ${OUT_DIR}`)
   console.log(`Version: ${VERSION}`)
@@ -61,7 +61,7 @@ async function main(): Promise<void> {
   const required = [
     'install.ps1',
     'install.cmd',
-    'lyacloud-setup-x64.sed',
+    'lyacode-setup-x64.sed',
     'LICENSE.rtf',
     'README.md',
   ]
@@ -77,7 +77,7 @@ async function main(): Promise<void> {
   // 3. Build portable folder
   console.log('\n[3/5] Building portable folder...')
   await mkdir(OUT_DIR, { recursive: true })
-  const portableDir = join(OUT_DIR, `lyacloud-portable-${VERSION}`)
+  const portableDir = join(OUT_DIR, `lyacode-portable-${VERSION}`)
   await rm(portableDir, { recursive: true, force: true })
   await mkdir(portableDir, { recursive: true })
   for (const file of required) {
@@ -91,7 +91,7 @@ async function main(): Promise<void> {
 
   // 4. Zip portable bundle (works on Windows via PowerShell, Linux/Mac via zip)
   console.log('\n[4/5] Zipping portable bundle...')
-  const zipOut = join(OUT_DIR, `lyacloud-portable-${VERSION}.zip`)
+  const zipOut = join(OUT_DIR, `lyacode-portable-${VERSION}.zip`)
   await rm(zipOut, { force: true })
 
   let zipOk = false
@@ -112,7 +112,7 @@ async function main(): Promise<void> {
     // Use zip (Linux/Mac)
     const zipResult = spawnSync(
       'zip',
-      ['-r', zipOut, `lyacloud-portable-${VERSION}`],
+      ['-r', zipOut, `lyacode-portable-${VERSION}`],
       { cwd: OUT_DIR, stdio: 'inherit', timeout: 60000 }
     )
     zipOk = zipResult.status === 0 && existsSync(zipOut)
@@ -132,13 +132,13 @@ async function main(): Promise<void> {
       `  SKIP: iexpress is Windows-only. Current platform: ${process.platform}`
     )
   } else {
-    const exeOut = join(OUT_DIR, `lyacloud-setup-x64-${VERSION}.exe`)
+    const exeOut = join(OUT_DIR, `lyacode-setup-x64-${VERSION}.exe`)
     await rm(exeOut, { force: true })
     // iexpress requires the SED to be in the same dir as referenced files
     // OR have correct absolute paths. We pass the SED with /N and let it
     // resolve files relative to its location. The repo-root tarball is
     // referenced via SourceFiles0 with SourceFilesPath=\\ which iexpress
-    // interprets oddly. Best effort here — if it fails, .zip is enough.
+    // interprets oddly. Best effort here â€” if it fails, .zip is enough.
     const result = spawnSync(
       iexpress,
       ['/Q', `/N:${SED_PATH}`, `/O:${exeOut}`],
@@ -148,7 +148,7 @@ async function main(): Promise<void> {
       console.log(`  OK: ${exeOut}`)
     } else {
       console.warn(`  WARN: iexpress failed (exit=${result.status}).`)
-      console.warn('  Use the .zip or .tgz instead — they work everywhere.')
+      console.warn('  Use the .zip or .tgz instead â€” they work everywhere.')
     }
   }
 
@@ -163,9 +163,9 @@ async function main(): Promise<void> {
   console.log('\n=== Done ===')
   console.log('\nDistribution artifacts:')
   console.log(`  1. ${TARBALL_NAME}                          (npm tarball, multi-platform)`)
-  if (zipOk) console.log(`  2. lyacloud-portable-${VERSION}.zip          (portable Windows zip)`)
-  const exePath = join(OUT_DIR, `lyacloud-setup-x64-${VERSION}.exe`)
-  if (existsSync(exePath)) console.log(`  3. lyacloud-setup-x64-${VERSION}.exe         (Windows installer)`)
+  if (zipOk) console.log(`  2. lyacode-portable-${VERSION}.zip          (portable Windows zip)`)
+  const exePath = join(OUT_DIR, `lyacode-setup-x64-${VERSION}.exe`)
+  if (existsSync(exePath)) console.log(`  3. lyacode-setup-x64-${VERSION}.exe         (Windows installer)`)
   console.log('\nInstall (multi-platform via npm):')
   console.log(`  npm install -g ${TARBALL_PATH}`)
 }

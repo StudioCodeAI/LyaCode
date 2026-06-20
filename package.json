@@ -1,14 +1,12 @@
 {
-  "name": "@studiocodeai/lyacloud",
-  "version": "1.0.4",
-  "description": "Lya Cloud is a Studio CodeAI agentic terminal for local and cloud coding workflows",
+  "name": "@studiocodeai/lyacode",
+  "version": "1.0.5",
+  "description": "Lya Code is a Studio CodeAI agentic terminal for local and cloud coding workflows",
   "type": "module",
   "bin": {
-    "lyacloud": "./bin/lyacloud",
-    "lscloud": "./bin/lyacloud",
-    "lya": "./bin/lyacloud",
-    "lyacode": "./bin/lyacloud",
-    "lscode": "./bin/lyacloud"
+    "lyacode": "./bin/lyacode",
+    "lscode": "./bin/lyacode",
+    "lya": "./bin/lyacode"
   },
   "exports": {
     "./package.json": "./package.json",
@@ -24,7 +22,7 @@
     "dist/sdk.mjs",
     "src/entrypoints/sdk.d.ts",
     "src/entrypoints/sdk/coreTypes.generated.ts",
-    "scripts/windows/lyacloud-aliases.ps1",
+    "scripts/windows/lyacode-aliases.ps1",
     "docs/windows-aliases-and-launchers.md",
     "README.md"
   ],
@@ -32,7 +30,7 @@
     "build": "bun run scripts/build.ts",
     "integrations:generate": "bun run scripts/generate-integrations-artifacts.ts",
     "integrations:check": "bun run scripts/generate-integrations-artifacts.ts --check",
-    "dev": "bun run build && node bin/lyacloud",
+    "dev": "bun run build && node bin/lyacode",
     "dev:profile": "bun run scripts/provider-launch.ts",
     "dev:profile:fast": "bun run scripts/provider-launch.ts auto --fast --bare",
     "dev:codex": "bun run scripts/provider-launch.ts codex",
@@ -51,7 +49,7 @@
     "dev:code": "bun run profile:code && bun run dev:profile",
     "dev:grpc": "bun run scripts/start-grpc.ts",
     "dev:grpc:cli": "bun run scripts/grpc-cli.ts",
-    "start": "node bin/lyacloud",
+    "start": "node bin/lyacode",
     "web:dev": "bun run --cwd web dev",
     "web:build": "bun run --cwd web build",
     "web:preview": "bun run --cwd web preview",
@@ -155,12 +153,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/StudioCodeAI/lyacloud.git"
+    "url": "https://github.com/StudioCodeAI/lyacode.git"
   },
   "keywords": [
     "claude-code",
     "studio-codeai",
-    "lyacloud",
+    "lyacode",
     "openai",
     "llm",
     "cli",

@@ -25,10 +25,10 @@ test('update-config skill can generate its prompt without JSON Schema conversion
     '## Full Settings JSON Schema',
   )
   expect((blocks[0] as { text: string }).text).toContain(
-    '.lyacloud/settings.json',
+    '.lyacode/settings.json',
   )
   expect((blocks[0] as { text: string }).text).toContain(
-    '.lyacloud/settings.local.json',
+    '.lyacode/settings.local.json',
   )
   expect((blocks[0] as { text: string }).text).not.toContain(
     '.claude/settings.json',

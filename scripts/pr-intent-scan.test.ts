@@ -154,7 +154,7 @@ describe('scanAddedLines', () => {
 
 describe('getGitDiff', () => {
   test('uses the explicit pull request head instead of a synthetic merge checkout', () => {
-    const repo = mkdtempSync(join(tmpdir(), 'lyacloud-pr-intent-scan-'))
+    const repo = mkdtempSync(join(tmpdir(), 'lyacode-pr-intent-scan-'))
     const originalCwd = process.cwd()
 
     try {

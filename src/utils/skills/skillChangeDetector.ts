@@ -204,7 +204,7 @@ async function getWatchablePaths(): Promise<string[]> {
   const fs = dependencies.getFsImplementation()
   const paths: string[] = []
 
-  // User skills directory (~/.lyacloud/skills)
+  // User skills directory (~/.lyacode/skills)
   const userSkillsPath = dependencies.getSkillsPath('userSettings', 'skills')
   if (userSkillsPath) {
     try {
@@ -215,7 +215,7 @@ async function getWatchablePaths(): Promise<string[]> {
     }
   }
 
-  // User commands directory (~/.lyacloud/commands)
+  // User commands directory (~/.lyacode/commands)
   const userCommandsPath = dependencies.getSkillsPath(
     'userSettings',
     'commands',

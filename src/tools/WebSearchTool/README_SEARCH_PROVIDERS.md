@@ -1,6 +1,6 @@
 # Web Search Providers
 
-Lya Cloud supports multiple search backends through a provider adapter system.
+Lya Code supports multiple search backends through a provider adapter system.
 
 ## Supported Providers
 

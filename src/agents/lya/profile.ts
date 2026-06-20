@@ -28,15 +28,15 @@
 
 // ─── Identidade ──────────────────────────────────────────────────────────────
 
-export const LYA_PRODUCT_NAME = 'Lya Cloud'
+export const LYA_PRODUCT_NAME = 'Lya Code'
 export const LYA_FAMILY = 'Studio CodeAI'
 export const LYA_ORG = 'StudioCodeAI'
-export const LYA_REPO = 'lyacloud'
+export const LYA_REPO = 'lyacode'
 export const LYA_REPO_URL = `https://github.com/${LYA_ORG}/${LYA_REPO}`
 export const LYA_PRODUCT_URL = `https://studiocodeai.com/${LYA_REPO}`
 export const LYA_AUTHOR = 'Luis Cardozo'
 export const LYA_AUTHOR_EMAIL = 'studiocoder.ai@gmail.com'
-export const LYA_CLI_BIN = 'lyacloud'
+export const LYA_CLI_BIN = 'lyacode'
 export const LYA_CLI_ALIASES = ['lscloud', 'lya', 'lyacode', 'lscode'] as const
 export const LYA_CLI_INVOCATION = '/lya'
 export const LYA_VERSION_POLICY =
@@ -142,4 +142,4 @@ export function getLyaSystemPromptBase(): string {
 
 export const LYA_TAGLINE = 'A CLI agentic da família Studio CodeAI'
 export const LYA_ROLE_LINE = `Lya — Engenheira Sênior + CEO de projeto · ${LYA_FAMILY}`
-export const LYA_VERSION_LINE = `${LYA_CLI_BIN} ${process.env.LYACLOUD_VERSION ?? '0.1.0'}`
+export const LYA_VERSION_LINE = `${LYA_CLI_BIN} ${process.env.LYACODE_VERSION ?? '0.1.0'}`

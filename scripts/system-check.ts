@@ -130,7 +130,7 @@ export function readNodeExecutableVersion(
   if (result.error) {
     return {
       ok: false,
-      detail: `Unable to run \`node --version\`: ${result.error.message}. Lya Cloud requires Node.js ${MIN_NODE_ENGINE_RANGE} on PATH.`,
+      detail: `Unable to run \`node --version\`: ${result.error.message}. Lya Code requires Node.js ${MIN_NODE_ENGINE_RANGE} on PATH.`,
     }
   }
 
@@ -139,7 +139,7 @@ export function readNodeExecutableVersion(
     const suffix = output ? `: ${output}` : `: exit code ${result.status ?? 'unknown'}`
     return {
       ok: false,
-      detail: `Unable to run \`node --version\`${suffix}. Lya Cloud requires Node.js ${MIN_NODE_ENGINE_RANGE} on PATH.`,
+      detail: `Unable to run \`node --version\`${suffix}. Lya Code requires Node.js ${MIN_NODE_ENGINE_RANGE} on PATH.`,
     }
   }
 
@@ -147,7 +147,7 @@ export function readNodeExecutableVersion(
   if (!version) {
     return {
       ok: false,
-      detail: `Unable to read Node.js version from \`node --version\`. Lya Cloud requires Node.js ${MIN_NODE_ENGINE_RANGE} on PATH.`,
+      detail: `Unable to read Node.js version from \`node --version\`. Lya Code requires Node.js ${MIN_NODE_ENGINE_RANGE} on PATH.`,
     }
   }
 
@@ -563,7 +563,7 @@ async function checkBaseUrlReachability(): Promise<CheckResult> {
         headers['chatgpt-account-id'] = credentials.accountId
       }
       headers['Content-Type'] = 'application/json'
-      headers.originator = 'lyacloud'
+      headers.originator = 'lyacode'
       method = 'POST'
       body = JSON.stringify({
         model: request.resolvedModel,

@@ -11,13 +11,13 @@ import { isEssentialTrafficOnly } from './privacyLevel.js'
 import { gt } from './semver.js'
 import {
   normalizePublicVersion,
-  LYACLOUD_RELEASES_URL,
+  LYACODE_RELEASES_URL,
   publicBuildVersion,
 } from './version.js'
 
 const MAX_RELEASE_NOTES_SHOWN = 5
 const RELEASES_API_URL =
-  'https://api.github.com/repos/StudioCodeAI/lyacloud/releases?per_page=10'
+  'https://api.github.com/repos/StudioCodeAI/lyacode/releases?per_page=10'
 const SECTION_HEADER_PREFIX = '__section__:'
 
 type GitHubRelease = {
@@ -28,7 +28,7 @@ type GitHubRelease = {
 }
 
 /**
- * We fetch Lya Cloud release notes from GitHub instead of bundling them with
+ * We fetch Lya Code release notes from GitHub instead of bundling them with
  * the build.
  *
  * This is necessary because Ink's static rendering makes it difficult to
@@ -41,7 +41,7 @@ type GitHubRelease = {
  * 2. We fetch GitHub release notes in the background and store them in config
  * 3. Next startup, the cached release notes are available immediately
  */
-export const RELEASES_URL = LYACLOUD_RELEASES_URL
+export const RELEASES_URL = LYACODE_RELEASES_URL
 
 /**
  * Get the path for the cached changelog file.
@@ -175,7 +175,7 @@ async function fetchGitHubReleases(): Promise<GitHubRelease[]> {
   const response = await axios.get<GitHubRelease[]>(RELEASES_API_URL, {
     headers: {
       Accept: 'application/vnd.github+json',
-      'User-Agent': 'lyacloud',
+      'User-Agent': 'lyacode',
     },
   })
 
@@ -378,7 +378,7 @@ export function getRecentReleaseNotes(
     const baseCurrentVersion = coerce(currentVersion)
     let basePreviousVersion = previousVersion ? coerce(previousVersion) : null
 
-    // Older Lya Cloud builds stored the internal compatibility version
+    // Older Lya Code builds stored the internal compatibility version
     // (e.g. 99.0.0) as the "seen" marker. Treat that as unseen so users
     // can start receiving release notes keyed to the public version.
     if (

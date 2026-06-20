@@ -178,7 +178,7 @@ function printResumeHint(): void {
       writeSync(
         1,
         chalk.dim(
-          `\nResume this session with:\nlyacloud --resume ${resumeArg}\n`,
+          `\nResume this session with:\nlyacode --resume ${resumeArg}\n`,
         ),
       )
       resumeHintPrinted = true

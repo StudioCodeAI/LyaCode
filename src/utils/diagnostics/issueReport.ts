@@ -55,7 +55,7 @@ export type DiagnosticCheck = {
 export type IssueReport = {
   schemaVersion: 1
   generatedAt: string
-  lyacloud: {
+  lyacode: {
     version: string
     displayVersion?: string
     buildTime?: string
@@ -203,7 +203,7 @@ function readPackageInfo(options?: BuildIssueReportOptions['packageInfo']) {
   return { version, displayVersion, buildTime }
 }
 
-function detectSource(cwd: string): IssueReport['lyacloud']['source'] {
+function detectSource(cwd: string): IssueReport['lyacode']['source'] {
   if (existsSync(resolve(cwd, 'src')) && existsSync(resolve(cwd, 'package.json'))) {
     return 'source'
   }
@@ -567,7 +567,7 @@ export async function buildIssueReport(
   const report: IssueReport = {
     schemaVersion: 1,
     generatedAt: now.toISOString(),
-    lyacloud: {
+    lyacode: {
       version: packageInfo.version,
       ...(packageInfo.displayVersion ? { displayVersion: packageInfo.displayVersion } : {}),
       ...(packageInfo.buildTime ? { buildTime: packageInfo.buildTime } : {}),
@@ -636,10 +636,10 @@ function tableEscape(value: string | number | boolean | null | undefined): strin
 
 export function formatIssueReportAsMarkdown(report: IssueReport): string {
   const lines = [
-    '# Lya Cloud diagnostic report',
+    '# Lya Code diagnostic report',
     '',
     '## Summary',
-    `- Lya Cloud: ${report.lyacloud.displayVersion ?? report.lyacloud.version}`,
+    `- Lya Code: ${report.lyacode.displayVersion ?? report.lyacode.version}`,
     `- Runtime: ${report.runtime.platform} ${report.runtime.arch}, Node ${report.runtime.node}`,
     `- Provider: ${report.provider.label} (${report.provider.routeId})`,
     `- Model: ${report.provider.model}`,

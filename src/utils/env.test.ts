@@ -8,7 +8,7 @@ import {
 } from '../test/sharedMutationLock.js'
 
 const originalEnv = {
-  LYACLOUD_CONFIG_DIR: process.env.LYACLOUD_CONFIG_DIR,
+  LYACODE_CONFIG_DIR: process.env.LYACODE_CONFIG_DIR,
   CLAUDE_CONFIG_DIR: process.env.CLAUDE_CONFIG_DIR,
   CLAUDE_CODE_CUSTOM_OAUTH_URL: process.env.CLAUDE_CODE_CUSTOM_OAUTH_URL,
   USER_TYPE: process.env.USER_TYPE,
@@ -18,8 +18,8 @@ let tempDir: string
 
 beforeEach(async () => {
   await acquireSharedMutationLock('env.test.ts')
-  tempDir = mkdtempSync(join(tmpdir(), 'lyacloud-env-test-'))
-  delete process.env.LYACLOUD_CONFIG_DIR
+  tempDir = mkdtempSync(join(tmpdir(), 'lyacode-env-test-'))
+  delete process.env.LYACODE_CONFIG_DIR
   process.env.CLAUDE_CONFIG_DIR = tempDir
   delete process.env.CLAUDE_CODE_CUSTOM_OAUTH_URL
   delete process.env.USER_TYPE
@@ -28,10 +28,10 @@ beforeEach(async () => {
 afterEach(() => {
   try {
     rmSync(tempDir, { recursive: true, force: true })
-    if (originalEnv.LYACLOUD_CONFIG_DIR === undefined) {
-      delete process.env.LYACLOUD_CONFIG_DIR
+    if (originalEnv.LYACODE_CONFIG_DIR === undefined) {
+      delete process.env.LYACODE_CONFIG_DIR
     } else {
-      process.env.LYACLOUD_CONFIG_DIR = originalEnv.LYACLOUD_CONFIG_DIR
+      process.env.LYACODE_CONFIG_DIR = originalEnv.LYACODE_CONFIG_DIR
     }
     if (originalEnv.CLAUDE_CONFIG_DIR === undefined) {
       delete process.env.CLAUDE_CONFIG_DIR
@@ -59,9 +59,9 @@ async function importFreshEnvModule() {
 
 // getGlobalClaudeFile — default path plus explicit override compatibility
 
-test('getGlobalClaudeFile: new install returns .lyacloud.json when neither file exists', async () => {
+test('getGlobalClaudeFile: new install returns .lyacode.json when neither file exists', async () => {
   const { getGlobalClaudeFile } = await importFreshEnvModule()
-  expect(getGlobalClaudeFile()).toBe(join(tempDir, '.lyacloud.json'))
+  expect(getGlobalClaudeFile()).toBe(join(tempDir, '.lyacode.json'))
 })
 
 test('getGlobalClaudeFile: explicit config dir keeps .claude.json fallback when only legacy file exists', async () => {
@@ -70,31 +70,31 @@ test('getGlobalClaudeFile: explicit config dir keeps .claude.json fallback when 
   expect(getGlobalClaudeFile()).toBe(join(tempDir, '.claude.json'))
 })
 
-test('getGlobalClaudeFile: migrated user uses .lyacloud.json when both files exist', async () => {
+test('getGlobalClaudeFile: migrated user uses .lyacode.json when both files exist', async () => {
   writeFileSync(join(tempDir, '.claude.json'), '{}')
-  writeFileSync(join(tempDir, '.lyacloud.json'), '{}')
+  writeFileSync(join(tempDir, '.lyacode.json'), '{}')
   const { getGlobalClaudeFile } = await importFreshEnvModule()
-  expect(getGlobalClaudeFile()).toBe(join(tempDir, '.lyacloud.json'))
+  expect(getGlobalClaudeFile()).toBe(join(tempDir, '.lyacode.json'))
 })
 
-test('getGlobalClaudeFile: LYACLOUD_CONFIG_DIR uses preferred config dir', async () => {
-  const preferredDir = mkdtempSync(join(tmpdir(), 'lyacloud-preferred-env-test-'))
+test('getGlobalClaudeFile: LYACODE_CONFIG_DIR uses preferred config dir', async () => {
+  const preferredDir = mkdtempSync(join(tmpdir(), 'lyacode-preferred-env-test-'))
   try {
-    process.env.LYACLOUD_CONFIG_DIR = preferredDir
+    process.env.LYACODE_CONFIG_DIR = preferredDir
     process.env.CLAUDE_CONFIG_DIR = tempDir
 
     const { getGlobalClaudeFile } = await importFreshEnvModule()
 
-    expect(getGlobalClaudeFile()).toBe(join(preferredDir, '.lyacloud.json'))
+    expect(getGlobalClaudeFile()).toBe(join(preferredDir, '.lyacode.json'))
   } finally {
     rmSync(preferredDir, { recursive: true, force: true })
   }
 })
 
-test('getGlobalClaudeFile: LYACLOUD_CONFIG_DIR keeps .claude.json fallback when only legacy file exists', async () => {
-  const preferredDir = mkdtempSync(join(tmpdir(), 'lyacloud-preferred-env-test-'))
+test('getGlobalClaudeFile: LYACODE_CONFIG_DIR keeps .claude.json fallback when only legacy file exists', async () => {
+  const preferredDir = mkdtempSync(join(tmpdir(), 'lyacode-preferred-env-test-'))
   try {
-    process.env.LYACLOUD_CONFIG_DIR = preferredDir
+    process.env.LYACODE_CONFIG_DIR = preferredDir
     process.env.CLAUDE_CONFIG_DIR = tempDir
     writeFileSync(join(preferredDir, '.claude.json'), '{}')
 

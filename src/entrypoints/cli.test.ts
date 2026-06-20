@@ -1,6 +1,6 @@
 /**
  * Regression tests for issue #402 — NODE_OPTIONS heap cap
- * Closes: StudioCodeAI/lyacloud#402 — JavaScript heap OOM during large tasks
+ * Closes: StudioCodeAI/lyacode#402 — JavaScript heap OOM during large tasks
  */
 
 import {
@@ -159,7 +159,7 @@ describe('cli.tsx — --provider startup ordering', () => {
 
   beforeEach(() => {
     clearRememberedProviderFlagForTests()
-    tempDir = mkdtempSync(join(tmpdir(), 'lyacloud-cli-env-file-test-'))
+    tempDir = mkdtempSync(join(tmpdir(), 'lyacode-cli-env-file-test-'))
     for (const key of providerEnvKeys) {
       originalEnv.set(key, process.env[key])
       delete process.env[key]
@@ -383,10 +383,10 @@ describe('cli.tsx — background routing behavior', () => {
     },
   } as unknown as Parameters<CliMain>[1]
   const originalAutoRunGuard =
-    process.env.LYACLOUD_DISABLE_CLI_ENTRYPOINT_AUTO_RUN
+    process.env.LYACODE_DISABLE_CLI_ENTRYPOINT_AUTO_RUN
 
   beforeAll(async () => {
-    process.env.LYACLOUD_DISABLE_CLI_ENTRYPOINT_AUTO_RUN = '1'
+    process.env.LYACODE_DISABLE_CLI_ENTRYPOINT_AUTO_RUN = '1'
 
     const entrypoint = await import('./cli.js')
     runCliEntrypoint = entrypoint.main
@@ -394,9 +394,9 @@ describe('cli.tsx — background routing behavior', () => {
 
   afterAll(() => {
     if (originalAutoRunGuard === undefined) {
-      delete process.env.LYACLOUD_DISABLE_CLI_ENTRYPOINT_AUTO_RUN
+      delete process.env.LYACODE_DISABLE_CLI_ENTRYPOINT_AUTO_RUN
     } else {
-      process.env.LYACLOUD_DISABLE_CLI_ENTRYPOINT_AUTO_RUN =
+      process.env.LYACODE_DISABLE_CLI_ENTRYPOINT_AUTO_RUN =
         originalAutoRunGuard
     }
   })

@@ -18,7 +18,7 @@ Princípios:
   2. Edge cases documentados no código
   3. Mock side-effects (env, fs, time, network) — esses quebram suite cheia se mal isolados
 
-Regras de teste para Lya Cloud:
+Regras de teste para Lya Code:
 - Use bun:test (não jest, não vitest)
 - Mock.module('os'|'node:os') sempre acompanhado de mock.restore() em afterEach/afterAll
 - env vars: sempre restaurar em afterEach, nunca confiar em snapshot no module top

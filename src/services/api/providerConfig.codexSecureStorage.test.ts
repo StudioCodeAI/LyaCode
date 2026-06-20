@@ -45,7 +45,7 @@ describe('resolveCodexApiCredentials with secure storage', () => {
     }
   })
 
-  test('loads Codex credentials from Lya Cloud secure storage', async () => {
+  test('loads Codex credentials from Lya Code secure storage', async () => {
     await acquireEnvMutex()
     mock.module('../../utils/codexCredentials.js', () => ({
       ...realCodexCredentials,
@@ -121,7 +121,7 @@ describe('resolveCodexApiCredentials with secure storage', () => {
       readCodexCredentials: () => undefined,
     }))
 
-    const tempDir = mkdtempSync(join(tmpdir(), 'lyacloud-codex-auth-'))
+    const tempDir = mkdtempSync(join(tmpdir(), 'lyacode-codex-auth-'))
     const authPath = join(tempDir, 'auth.json')
 
     writeFileSync(
@@ -174,7 +174,7 @@ describe('resolveCodexApiCredentials with secure storage', () => {
 
   test('falls back to the default auth.json when stored Codex refresh is cooling down', async () => {
     await acquireEnvMutex()
-    const tempHomeDir = mkdtempSync(join(tmpdir(), 'lyacloud-codex-home-'))
+    const tempHomeDir = mkdtempSync(join(tmpdir(), 'lyacode-codex-home-'))
     const authJson = JSON.stringify({
       openai_api_key: makeJwt({
         'https://api.openai.com/auth': {
@@ -217,7 +217,7 @@ describe('resolveCodexApiCredentials with secure storage', () => {
 
   test('preserves the stored account id when auth.json fallback lacks one', async () => {
     await acquireEnvMutex()
-    const tempHomeDir = mkdtempSync(join(tmpdir(), 'lyacloud-codex-home-'))
+    const tempHomeDir = mkdtempSync(join(tmpdir(), 'lyacode-codex-home-'))
     const authJson = JSON.stringify({
       openai_api_key: 'auth-json-access-token',
     })

@@ -6,7 +6,7 @@ import type { PackageManager } from './nativeInstaller/packageManagers.js'
 import { getPackageManager } from './nativeInstaller/packageManagers.js'
 
 /**
- * How the *currently running* Lya Cloud installation should be updated.
+ * How the *currently running* Lya Code installation should be updated.
  *
  *  - `blocked`         — must not self-update (third-party upstream build, or a
  *                        development build); the caller should show guidance.
@@ -25,10 +25,10 @@ export type UpdateStrategy =
  * True when this build must NOT self-update: a third-party provider session
  * running on the upstream `@anthropic-ai/claude-code` package. Self-updating
  * there pulls from the first-party distribution and would silently replace the
- * build the user is running. Custom-PACKAGE_URL builds (Lya Cloud's
- * `@studiocodeai/lyacloud`) are safe to self-update.
+ * build the user is running. Custom-PACKAGE_URL builds (Lya Code's
+ * `@studiocodeai/lyacode`) are safe to self-update.
  *
- * Shared by the `lyacloud update` CLI and the `/update` slash command so both
+ * Shared by the `lyacode update` CLI and the `/update` slash command so both
  * honour the same guard.
  */
 export function isThirdPartyBuildBlocked(): boolean {

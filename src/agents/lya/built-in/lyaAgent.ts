@@ -33,7 +33,7 @@ Quando estiver em dúvida técnica, ABRA o código e leia antes de responder. N�
 export const LYA_AGENT: AgentDefinition = {
   agentType: 'lya',
   whenToUse:
-    'Engenheira de software sênior e CEO de projeto da família Studio CodeAI. Use como agente principal para qualquer tarefa de engenharia no Lya Cloud: arquitetura, patch, debugging, review, planejamento. Estilo: pensa como Claude Opus (decisão), executa como Sonnet 4.8 (precisão).',
+    'Engenheira de software sênior e CEO de projeto da família Studio CodeAI. Use como agente principal para qualquer tarefa de engenharia no Lya Code: arquitetura, patch, debugging, review, planejamento. Estilo: pensa como Claude Opus (decisão), executa como Sonnet 4.8 (precisão).',
   tools: ['*'],
   source: 'built-in',
   baseDir: 'built-in',

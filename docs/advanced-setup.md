@@ -1,16 +1,16 @@
-# Lya Cloud Advanced Setup
+# Lya Code Advanced Setup
 
 This guide is for users who want source builds, Bun workflows, provider profiles, diagnostics, or more control over runtime behavior.
 
 ## Install Options
 
-Lya Cloud requires Node.js `>=22.0.0` for npm installs and runtime. Bun is
+Lya Code requires Node.js `>=22.0.0` for npm installs and runtime. Bun is
 only required when building or running from source.
 
 ### Option A: npm
 
 ```bash
-npm install -g @studiocodeai/lyacloud@latest
+npm install -g @studiocodeai/lyacode@latest
 ```
 
 ### Option B: From source with Bun
@@ -18,8 +18,8 @@ npm install -g @studiocodeai/lyacloud@latest
 Use Bun `1.3.13` or newer for source builds. Older Bun versions can fail during `bun run build`.
 
 ```bash
-git clone https://github.com/StudioCodeAI/lyacloud.git
-cd lyacloud
+git clone https://github.com/StudioCodeAI/lyacode.git
+cd lyacode
 
 bun install
 bun run build
@@ -29,8 +29,8 @@ npm link
 ### Option C: Run directly with Bun
 
 ```bash
-git clone https://github.com/StudioCodeAI/lyacloud.git
-cd lyacloud
+git clone https://github.com/StudioCodeAI/lyacode.git
+cd lyacode
 
 bun install
 bun run dev
@@ -51,9 +51,9 @@ export OPENAI_MODEL=gpt-4o
 `codexplan` maps to GPT-5.5 on the Codex backend with high reasoning.
 `codexspark` maps to GPT-5.3 Codex Spark for faster loops.
 
-If you use the in-app provider wizard, choose `Codex OAuth` to open ChatGPT sign-in in your browser and let Lya Cloud store Codex credentials securely.
+If you use the in-app provider wizard, choose `Codex OAuth` to open ChatGPT sign-in in your browser and let Lya Code store Codex credentials securely.
 
-If you already use the Codex CLI, Lya Cloud reads `~/.codex/auth.json` automatically. You can also point it elsewhere with `CODEX_AUTH_JSON_PATH` or override the token directly with `CODEX_API_KEY`.
+If you already use the Codex CLI, Lya Code reads `~/.codex/auth.json` automatically. You can also point it elsewhere with `CODEX_AUTH_JSON_PATH` or override the token directly with `CODEX_API_KEY`.
 
 If you set `CODEX_API_KEY` manually and are not relying on `auth.json` or stored
 Codex OAuth credentials, also set `CHATGPT_ACCOUNT_ID` (or
@@ -67,7 +67,7 @@ export OPENAI_MODEL=codexplan
 export CODEX_API_KEY=...
 export CHATGPT_ACCOUNT_ID=...
 
-lyacloud
+lyacode
 ```
 
 ### DeepSeek
@@ -112,7 +112,7 @@ export ANTHROPIC_VERTEX_PROJECT_ID=my-gcp-project
 export GOOGLE_CLOUD_PROJECT=my-gcp-project
 export CLOUD_ML_REGION=us-east5
 
-lyacloud --model claude-sonnet-4-6
+lyacode --model claude-sonnet-4-6
 ```
 
 `CLOUD_ML_REGION` is optional and defaults to `us-east5`. Model-specific
@@ -194,7 +194,7 @@ export OPENCODE_API_KEY=...
 export OPENAI_BASE_URL=https://opencode.ai/zen/v1
 export OPENAI_MODEL=gpt-5.4
 
-lyacloud
+lyacode
 ```
 
 OpenCode Zen is a pay-as-you-go AI gateway with 43 models (GPT, Claude, Gemini,
@@ -209,7 +209,7 @@ export OPENCODE_API_KEY=...
 export OPENAI_BASE_URL=https://opencode.ai/zen/go/v1
 export OPENAI_MODEL=glm-5.1
 
-lyacloud
+lyacode
 ```
 
 OpenCode Go is a $10/mo subscription for 13 open models (GLM, Kimi, DeepSeek,
@@ -250,7 +250,7 @@ export NEARAI_API_KEY=...
 export OPENAI_BASE_URL=https://cloud-api.near.ai/v1
 export OPENAI_MODEL=anthropic/claude-sonnet-4-6
 
-lyacloud
+lyacode
 ```
 
 NEAR AI is a unified OpenAI-compatible gateway that proxies Anthropic, OpenAI,
@@ -317,7 +317,7 @@ export OPENAI_BASE_URL=https://api.fireworks.ai/inference/v1
 export OPENAI_MODEL=accounts/fireworks/models/llama-v3p1-70b-instruct
 ```
 
-The **Lya Cloud VS Code extension** can store the key in Secret Storage and set these variables for you when you launch from the Control Center. See `vscode-extension/lyacloud-vscode/README.md`.
+The **Lya Code VS Code extension** can store the key in Secret Storage and set these variables for you when you launch from the Control Center. See `vscode-extension/lyacode-vscode/README.md`.
 
 ## Environment Variables
 
@@ -343,10 +343,10 @@ The **Lya Cloud VS Code extension** can store the key in Secret Storage and set 
 | `CHATGPT_ACCOUNT_ID` / `CODEX_ACCOUNT_ID` | Codex only | Required for manual Codex env setup when the account id is not coming from `auth.json` or stored OAuth credentials |
 | `CODEX_AUTH_JSON_PATH` | Codex only | Path to a Codex CLI `auth.json` file |
 | `CODEX_HOME` | Codex only | Alternative Codex home directory |
-| `LYACLOUD_MAX_RETRIES` | No | Maximum retry attempts for retryable API failures, capped at 100 (default: 10). Set to `0` to disable retries after the initial request. If unset, deprecated `CLAUDE_CODE_MAX_RETRIES` is still honored for compatibility. |
-| `LYACLOUD_RETRY_DELAY_MS` | No | Base retry delay in milliseconds for APIs that do not send `Retry-After`; exponential backoff starts from this value, capped at 60000 (default: 500) |
-| `LYACLOUD_DISABLE_CO_AUTHORED_BY` | No | Suppress the default `Co-Authored-By` trailer in generated git commits |
-| `LYACLOUD_LOG_TOKEN_USAGE` | No | When truthy (e.g. `verbose`), emits one JSON line on stderr per API request with input/output/cache tokens and the resolved provider. **User-facing debug output** — complements the REPL display controlled by `/config showCacheStats`. Distinct from `CLAUDE_CODE_ENABLE_TOKEN_USAGE_ATTACHMENT`, which is **model-facing** (injects context usage info into the prompt itself). Both can run together. |
+| `LYACODE_MAX_RETRIES` | No | Maximum retry attempts for retryable API failures, capped at 100 (default: 10). Set to `0` to disable retries after the initial request. If unset, deprecated `CLAUDE_CODE_MAX_RETRIES` is still honored for compatibility. |
+| `LYACODE_RETRY_DELAY_MS` | No | Base retry delay in milliseconds for APIs that do not send `Retry-After`; exponential backoff starts from this value, capped at 60000 (default: 500) |
+| `LYACODE_DISABLE_CO_AUTHORED_BY` | No | Suppress the default `Co-Authored-By` trailer in generated git commits |
+| `LYACODE_LOG_TOKEN_USAGE` | No | When truthy (e.g. `verbose`), emits one JSON line on stderr per API request with input/output/cache tokens and the resolved provider. **User-facing debug output** — complements the REPL display controlled by `/config showCacheStats`. Distinct from `CLAUDE_CODE_ENABLE_TOKEN_USAGE_ATTACHMENT`, which is **model-facing** (injects context usage info into the prompt itself). Both can run together. |
 
 Model env vars are provider-scoped: first-party Anthropic sessions read
 `ANTHROPIC_MODEL`, OpenAI-compatible sessions read `OPENAI_MODEL`, Gemini reads
@@ -371,10 +371,10 @@ bun run doctor:runtime:json
 bun run doctor:report
 
 # print a redacted public issue report
-lyacloud doctor report --markdown
+lyacode doctor report --markdown
 
 # write a redacted JSON issue report for attachment
-lyacloud doctor report --json --out lyacloud-report.json
+lyacode doctor report --json --out lyacode-report.json
 
 # full local hardening check (smoke + runtime doctor)
 bun run hardening:check
@@ -389,7 +389,7 @@ Notes:
 - `doctor:runtime` also validates the dedicated Gemini and Mistral env paths when `CLAUDE_CODE_USE_GEMINI=1` or `CLAUDE_CODE_USE_MISTRAL=1`.
 - Local providers such as `http://localhost:11434/v1`, `http://10.0.0.1:11434/v1`, and `http://127.0.0.1:1337/v1` can run without `OPENAI_API_KEY`.
 - Codex profiles validate `CODEX_API_KEY` or the Codex CLI auth file and probe `POST /responses` instead of `GET /models`.
-- `lyacloud doctor report` is redacted by default and is intended for GitHub issues. It summarizes provider/runtime/build/settings state without prompts, transcripts, raw settings files, API keys, MCP command details, or full home-directory paths.
+- `lyacode doctor report` is redacted by default and is intended for GitHub issues. It summarizes provider/runtime/build/settings state without prompts, transcripts, raw settings files, API keys, MCP command details, or full home-directory paths.
 
 ## Provider Launch Profiles
 
@@ -453,7 +453,7 @@ If no profile exists yet, `dev:profile` uses the same goal-aware defaults when p
 
 When a saved provider profile is active, `/model` can either show the provider's
 catalog/discovered models or only the models explicitly listed in the profile.
-Configure this in `~/.lyacloud.json`:
+Configure this in `~/.lyacode.json`:
 
 ```json
 {
@@ -485,8 +485,8 @@ For `dev:atomic-chat`, make sure Atomic Chat is running with a model loaded befo
 
 ## Message-Count Compaction Threshold
 
-By default, Lya Cloud compacts conversations based on token usage. A secondary
-message-count-based trigger (`LYACLOUD_MAX_ACTIVE_MESSAGES`) exists for
+By default, Lya Code compacts conversations based on token usage. A secondary
+message-count-based trigger (`LYACODE_MAX_ACTIVE_MESSAGES`) exists for
 diagnostics but is disabled by default.
 
 If you frequently resume long sessions that accumulate hundreds of small
@@ -503,5 +503,5 @@ or `1000`). Setting it to `off` (default) disables the message-count trigger.
 This setting is intended for power users debugging specific edge cases. Most
 users should leave it at `off`.
 
-The legacy `LYACLOUD_MAX_ACTIVE_MESSAGES` environment variable is still
+The legacy `LYACODE_MAX_ACTIVE_MESSAGES` environment variable is still
 honored when the setting is `off`.

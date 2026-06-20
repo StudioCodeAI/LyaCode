@@ -53,8 +53,8 @@ function setupConsumerProject(name: string): string {
     ),
   )
 
-  // Simulate node_modules/@studiocodeai/lyacloud structure
-  const pkgDir = join(tmpDir, 'node_modules', '@gitlawb', 'lyacloud')
+  // Simulate node_modules/@studiocodeai/lyacode structure
+  const pkgDir = join(tmpDir, 'node_modules', '@gitlawb', 'lyacode')
   mkdirSync(pkgDir, { recursive: true })
   mkdirSync(join(pkgDir, 'src', 'entrypoints', 'sdk'), { recursive: true })
   mkdirSync(join(pkgDir, 'dist'), { recursive: true })
@@ -64,7 +64,7 @@ function setupConsumerProject(name: string): string {
     join(pkgDir, 'package.json'),
     JSON.stringify(
       {
-        name: '@studiocodeai/lyacloud',
+        name: '@studiocodeai/lyacode',
         version: '0.0.0-test',
         type: 'module',
         exports: {
@@ -138,7 +138,7 @@ describe('package consumer types', () => {
         `  SDKRateLimitError,`,
         `  QueryOptions,`,
         `  SDKSession,`,
-        `} from '@studiocodeai/lyacloud/sdk'`,
+        `} from '@studiocodeai/lyacode/sdk'`,
         ``,
         `// Use the types so they're not unused-imports-eliminated`,
         `type _Msg = SDKMessage`,
@@ -165,7 +165,7 @@ describe('package consumer types', () => {
     writeFileSync(
       join(tmpDir, 'consumer.ts'),
       [
-        `import type { SDKMessage, SDKUserMessage, SDKResultMessage } from '@studiocodeai/lyacloud/sdk'`,
+        `import type { SDKMessage, SDKUserMessage, SDKResultMessage } from '@studiocodeai/lyacode/sdk'`,
         ``,
         `// Discriminated union check — if types are broken, this won't compile`,
         `function handle(msg: SDKMessage) {`,
@@ -190,7 +190,7 @@ describe('package consumer types', () => {
     writeFileSync(
       join(tmpDir, 'consumer.ts'),
       [
-        `import type { SDKResultMessage } from '@studiocodeai/lyacloud/sdk'`,
+        `import type { SDKResultMessage } from '@studiocodeai/lyacode/sdk'`,
         ``,
         `// Result messages are populated from QueryEngine.totalUsage`,
         `// (initialized from EMPTY_USAGE), so the standard counters are`,
@@ -224,7 +224,7 @@ describe('package consumer types', () => {
     writeFileSync(
       join(tmpDir, 'consumer.ts'),
       [
-        `import { SDKRateLimitError } from '@studiocodeai/lyacloud/sdk'`,
+        `import { SDKRateLimitError } from '@studiocodeai/lyacode/sdk'`,
         ``,
         `// Constructor should accept (message?, resetsAt?, rateLimitType?)`,
         `const err = new SDKRateLimitError('rate limited', 12345, 'requests')`,
@@ -246,7 +246,7 @@ describe('package consumer types', () => {
     writeFileSync(
       join(tmpDir, 'consumer.ts'),
       [
-        `import type { SDKControlInitializeResponse, ModelInfo } from '@studiocodeai/lyacloud/sdk'`,
+        `import type { SDKControlInitializeResponse, ModelInfo } from '@studiocodeai/lyacode/sdk'`,
         ``,
         `const models: ModelInfo[] = [{`,
         `  value: 'claude-opus-4-6',`,

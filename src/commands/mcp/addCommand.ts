@@ -34,16 +34,16 @@ export function registerMcpAddCommand(mcp: Command): void {
   mcp
     .command('add <name> <commandOrUrl> [args...]')
     .description(
-      'Add an MCP server to Lya Cloud.\n\n' +
+      'Add an MCP server to Lya Code.\n\n' +
         'Examples:\n' +
         '  # Add HTTP server:\n' +
-        '  lyacloud mcp add --transport http sentry https://mcp.sentry.dev/mcp\n\n' +
+        '  lyacode mcp add --transport http sentry https://mcp.sentry.dev/mcp\n\n' +
         '  # Add HTTP server with headers:\n' +
-        '  lyacloud mcp add --transport http corridor https://app.corridor.dev/api/mcp --header "Authorization: Bearer ..."\n\n' +
+        '  lyacode mcp add --transport http corridor https://app.corridor.dev/api/mcp --header "Authorization: Bearer ..."\n\n' +
         '  # Add stdio server with environment variables:\n' +
-        '  lyacloud mcp add -e API_KEY=xxx my-server -- npx my-mcp-server\n\n' +
+        '  lyacode mcp add -e API_KEY=xxx my-server -- npx my-mcp-server\n\n' +
         '  # Add stdio server with subprocess flags:\n' +
-        '  lyacloud mcp add my-server -- my-command --some-flag arg1',
+        '  lyacode mcp add my-server -- my-command --some-flag arg1',
     )
     .option(
       '-s, --scope <scope>',
@@ -75,7 +75,7 @@ export function registerMcpAddCommand(mcp: Command): void {
     .addOption(
       new Option(
         '--xaa',
-        "Enable XAA (SEP-990) for this server. Requires 'lyacloud mcp xaa setup' first. Also requires --client-id and --client-secret (for the MCP server's AS).",
+        "Enable XAA (SEP-990) for this server. Requires 'lyacode mcp xaa setup' first. Also requires --client-id and --client-secret (for the MCP server's AS).",
       ).hideHelp(!isXaaEnabled()),
     )
     .action(async (name, commandOrUrl, args, options) => {
@@ -87,12 +87,12 @@ export function registerMcpAddCommand(mcp: Command): void {
       if (!name) {
         cliError(
           'Error: Server name is required.\n' +
-            'Usage: lyacloud mcp add <name> <command> [args...]',
+            'Usage: lyacode mcp add <name> <command> [args...]',
         )
       } else if (!actualCommand) {
         cliError(
           'Error: Command is required when server name is provided.\n' +
-            'Usage: lyacloud mcp add <name> <command> [args...]',
+            'Usage: lyacode mcp add <name> <command> [args...]',
         )
       }
 
@@ -113,7 +113,7 @@ export function registerMcpAddCommand(mcp: Command): void {
           if (!options.clientSecret) missing.push('--client-secret')
           if (!getXaaIdpSettings()) {
             missing.push(
-              "'lyacloud mcp xaa setup' (settings.xaaIdp not configured)",
+              "'lyacode mcp xaa setup' (settings.xaaIdp not configured)",
             )
           }
           if (missing.length) {
@@ -254,10 +254,10 @@ export function registerMcpAddCommand(mcp: Command): void {
               `\nWarning: The command "${actualCommand}" looks like a URL, but is being interpreted as a stdio server as --transport was not specified.\n`,
             )
             process.stderr.write(
-              `If this is an HTTP server, use: lyacloud mcp add --transport http ${name} ${actualCommand}\n`,
+              `If this is an HTTP server, use: lyacode mcp add --transport http ${name} ${actualCommand}\n`,
             )
             process.stderr.write(
-              `If this is an SSE server, use: lyacloud mcp add --transport sse ${name} ${actualCommand}\n`,
+              `If this is an SSE server, use: lyacode mcp add --transport sse ${name} ${actualCommand}\n`,
             )
           }
 

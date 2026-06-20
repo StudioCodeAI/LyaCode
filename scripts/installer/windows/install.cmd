@@ -1,14 +1,14 @@
 @echo off
-REM Lya Cloud Windows Installer launcher
-REM Luis Cardozo · studiocoder.ai@gmail.com · Studio CodeAI
+REM Lya Code Windows Installer launcher
+REM Luis Cardozo Â· studiocoder.ai@gmail.com Â· Studio CodeAI
 REM
 REM Usage: install.cmd [/D] [/T:<tarball>] [/Y]
 REM   /D           Dry run (nao instala, so mostra)
-REM   /T:<tgz>     Caminho do tarball (default: .\studiocodeai-lyacloud-1.0.1.tgz)
+REM   /T:<tgz>     Caminho do tarball (default: .\studiocodeai-lyacode-1.0.1.tgz)
 REM   /Y           Suprime atalhos no Menu Iniciar
 REM
 REM Para buildar um .exe auto-extraivel:
-REM   iexpress /N:lyacloud-setup-x64.sed /O:..\..\..\dist\installer\lyacloud-setup-x64-1.0.4.exe
+REM   iexpress /N:lyacode-setup-x64.sed /O:..\..\..\dist\installer\lyacode-setup-x64-1.0.5.exe
 
 setlocal
 
@@ -31,10 +31,10 @@ shift & goto :parse
 
 :end_parse
 
-if "%TARBALL%"=="" set "TARBALL=%~dp0studiocodeai-lyacloud-1.0.4.tgz"
+if "%TARBALL%"=="" set "TARBALL=%~dp0studiocodeai-lyacode-1.0.5.tgz"
 
 echo.
-echo  Lya Cloud v1.0.4 - Installer Windows
+echo  Lya Code v1.0.5 - Installer Windows
 echo  Familia Studio CodeAI
 echo.
 echo  Requisitos: Node.js 22 LTS ou superior

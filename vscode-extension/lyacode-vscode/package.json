@@ -1,0 +1,235 @@
+{
+  "name": "lyacode-vscode",
+  "displayName": "Lya Code",
+  "description": "Practical VS Code companion for Lya Code with project-aware launch, Control Center, optional Microsoft Foundry / Azure OpenAI terminal env, and chat.",
+  "version": "0.2.0",
+  "publisher": "devnull-bootloader",
+  "engines": {
+    "vscode": "^1.95.0"
+  },
+  "categories": [
+    "Themes",
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished",
+    "onCommand:lyacode.start",
+    "onCommand:lyacode.startInWorkspaceRoot",
+    "onCommand:lyacode.openDocs",
+    "onCommand:lyacode.openSetupDocs",
+    "onCommand:lyacode.openWorkspaceProfile",
+    "onCommand:lyacode.openControlCenter",
+    "onCommand:lyacode.newChat",
+    "onCommand:lyacode.openChat",
+    "onCommand:lyacode.resumeSession",
+    "onCommand:lyacode.abortChat",
+    "onCommand:lyacode.setAzureApiKey",
+    "onCommand:lyacode.clearAzureApiKey",
+    "onCommand:lyacode.configureAzureChat",
+    "onCommand:lyacode.openAzureSettings",
+    "onView:lyacode.controlCenter",
+    "onView:lyacode.chat"
+  ],
+  "main": "./src/extension.js",
+  "files": [
+    "README.md",
+    "media/**",
+    "src/extension.js",
+    "src/presentation.js",
+    "src/state.js",
+    "src/chat/**",
+    "themes/**"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "lyacode.start",
+        "title": "Lya Code: Launch in Terminal",
+        "category": "Lya Code"
+      },
+      {
+        "command": "lyacode.startInWorkspaceRoot",
+        "title": "Lya Code: Launch in Workspace Root",
+        "category": "Lya Code"
+      },
+      {
+        "command": "lyacode.openDocs",
+        "title": "Lya Code: Open Repository",
+        "category": "Lya Code"
+      },
+      {
+        "command": "lyacode.openSetupDocs",
+        "title": "Lya Code: Open Setup Guide",
+        "category": "Lya Code"
+      },
+      {
+        "command": "lyacode.openWorkspaceProfile",
+        "title": "Lya Code: Open Workspace Profile",
+        "category": "Lya Code"
+      },
+      {
+        "command": "lyacode.openControlCenter",
+        "title": "Lya Code: Open Control Center",
+        "category": "Lya Code"
+      },
+      {
+        "command": "lyacode.newChat",
+        "title": "Lya Code: New Chat",
+        "category": "Lya Code"
+      },
+      {
+        "command": "lyacode.openChat",
+        "title": "Lya Code: Open Chat Panel",
+        "category": "Lya Code"
+      },
+      {
+        "command": "lyacode.resumeSession",
+        "title": "Lya Code: Resume Session",
+        "category": "Lya Code"
+      },
+      {
+        "command": "lyacode.abortChat",
+        "title": "Lya Code: Abort Generation",
+        "category": "Lya Code"
+      },
+      {
+        "command": "lyacode.setAzureApiKey",
+        "title": "Lya Code: Set Azure / Foundry API Key (Secret Storage)",
+        "category": "Lya Code"
+      },
+      {
+        "command": "lyacode.clearAzureApiKey",
+        "title": "Lya Code: Clear Azure / Foundry API Key",
+        "category": "Lya Code"
+      },
+      {
+        "command": "lyacode.configureAzureChat",
+        "title": "Lya Code: Configure Azure / Foundry Chat (wizard)",
+        "category": "Lya Code"
+      },
+      {
+        "command": "lyacode.openAzureSettings",
+        "title": "Lya Code: Open Azure / Foundry Settings",
+        "category": "Lya Code"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "lyacode",
+          "title": "Lya Code",
+          "icon": "media/lyacode.svg"
+        }
+      ]
+    },
+    "views": {
+      "lyacode": [
+        {
+          "id": "lyacode.chat",
+          "name": "Chat",
+          "type": "webview"
+        },
+        {
+          "id": "lyacode.controlCenter",
+          "name": "Control Center",
+          "type": "webview"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "lyacode.openChat",
+        "key": "ctrl+shift+l",
+        "mac": "cmd+shift+l"
+      }
+    ],
+    "configuration": {
+      "title": "Lya Code",
+      "properties": {
+        "lyacode.launchCommand": {
+          "type": "string",
+          "default": "lyacode",
+          "description": "Command run in the integrated terminal when launching Lya Code."
+        },
+        "lyacode.terminalName": {
+          "type": "string",
+          "default": "Lya Code",
+          "description": "Integrated terminal tab name for Lya Code sessions."
+        },
+        "lyacode.useOpenAIShim": {
+          "type": "boolean",
+          "default": false,
+          "description": "Optionally set CLAUDE_CODE_USE_OPENAI=1 in launched Lya Code terminals when Azure injection is off or incomplete."
+        },
+        "lyacode.azure.enabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "When true, launch injects Microsoft Foundry / Azure OpenAI-compatible chat env (OPENAI_* + AZURE_OPENAI_API_VERSION) into the Lya Code terminal."
+        },
+        "lyacode.azure.endpoint": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Azure resource base URL for OpenAI-compatible chat (example: `https://YOUR_RESOURCE.openai.azure.com`). Do not put `api-version` here; use **Lya Code: Azure API Version**."
+        },
+        "lyacode.azure.apiVersion": {
+          "type": "string",
+          "default": "2024-12-01-preview",
+          "description": "Azure API version for chat completions (AZURE_OPENAI_API_VERSION)."
+        },
+        "lyacode.azure.deployment": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Azure deployment name (maps to `OPENAI_MODEL` for the OpenAI shim)."
+        },
+        "lyacode.azure.forceAzureUrlStyle": {
+          "type": "boolean",
+          "default": true,
+          "description": "Sets OPENAI_AZURE_STYLE=1 so deployment URLs and api-key header work on Foundry and non-standard Azure hosts."
+        },
+        "lyacode.azure.apiKey": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Optional API key in settings (not recommended). Prefer **Lya Code: Set Azure / Foundry API Key**. Secret wins if both are set."
+        },
+        "lyacode.permissionMode": {
+          "type": "string",
+          "default": "acceptEdits",
+          "enum": ["default", "acceptEdits", "bypassPermissions", "plan"],
+          "enumDescriptions": [
+            "Prompt for permission on each tool use (requires manual approval)",
+            "Auto-approve file edits, prompt for other operations (recommended)",
+            "Auto-approve all operations without prompting",
+            "Read-only mode — no file modifications allowed"
+          ],
+          "description": "Permission mode for chat sessions. Controls which tool operations are auto-approved."
+        }
+      }
+    },
+    "themes": [
+      {
+        "label": "Lya Code Terminal Black",
+        "uiTheme": "vs-dark",
+        "path": "./themes/LyaCode-Terminal-Black.json"
+      }
+    ]
+  },
+  "scripts": {
+    "test": "bun test src",
+    "lint": "node scripts/lint.js",
+    "package": "npx @vscode/vsce package --no-dependencies"
+  },
+  "keywords": [
+    "lyacode",
+    "terminal",
+    "theme",
+    "cli",
+    "llm",
+    "azure",
+    "foundry"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/StudioCodeAI/lyacode"
+  },
+  "license": "MIT"
+}

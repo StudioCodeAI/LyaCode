@@ -96,7 +96,7 @@ describe('AgentTool input schema isolation contract', () => {
       fullInputSchema().safeParse({
         ...baseInput,
         isolation: 'worktree',
-        cwd: '/tmp/lyacloud-agent',
+        cwd: '/tmp/lyacode-agent',
       }).success,
     ).toBe(false)
   })
@@ -105,7 +105,7 @@ describe('AgentTool input schema isolation contract', () => {
     expect(
       fullInputSchema().safeParse({
         ...baseInput,
-        cwd: '/tmp/lyacloud-agent',
+        cwd: '/tmp/lyacode-agent',
       }).success,
     ).toBe(true)
   })
@@ -124,21 +124,21 @@ describe('AgentTool input schema isolation contract', () => {
 
   test('rejects cwd for any effective worktree isolation source', () => {
     expect(() =>
-      assertAgentToolCwdAllowed('/tmp/lyacloud-agent', 'worktree'),
+      assertAgentToolCwdAllowed('/tmp/lyacode-agent', 'worktree'),
     ).toThrow('cwd is mutually exclusive with isolation: "worktree".')
     expect(() =>
-      assertAgentToolCwdAllowed('/tmp/lyacloud-agent', undefined),
+      assertAgentToolCwdAllowed('/tmp/lyacode-agent', undefined),
     ).not.toThrow()
   })
 
   test('prefers worktree cwd over explicit cwd when both are present defensively', () => {
     expect(
-      resolveAgentToolCwdOverride('/tmp/lyacloud-agent', {
-        worktreePath: '/tmp/lyacloud-worktree',
+      resolveAgentToolCwdOverride('/tmp/lyacode-agent', {
+        worktreePath: '/tmp/lyacode-worktree',
       }),
-    ).toBe('/tmp/lyacloud-worktree')
-    expect(resolveAgentToolCwdOverride('/tmp/lyacloud-agent', null)).toBe(
-      '/tmp/lyacloud-agent',
+    ).toBe('/tmp/lyacode-worktree')
+    expect(resolveAgentToolCwdOverride('/tmp/lyacode-agent', null)).toBe(
+      '/tmp/lyacode-agent',
     )
   })
 })
@@ -161,7 +161,7 @@ describe('AgentTool output status contract', () => {
         agentId: 'agent-1',
         description: baseInput.description,
         prompt: baseInput.prompt,
-        outputFile: '/tmp/lyacloud-agent-output.txt',
+        outputFile: '/tmp/lyacode-agent-output.txt',
         canReadOutputFile: true,
       },
       'toolu_1',
@@ -170,7 +170,7 @@ describe('AgentTool output status contract', () => {
     expect(block.type).toBe('tool_result')
     const text = block.content[0]?.type === 'text' ? block.content[0].text : ''
     expect(text).toContain('Async agent launched successfully')
-    expect(text).toContain('output_file: /tmp/lyacloud-agent-output.txt')
+    expect(text).toContain('output_file: /tmp/lyacode-agent-output.txt')
   })
 
   test('throws for unsupported output statuses', () => {
@@ -190,7 +190,7 @@ describe('AgentTool output status contract', () => {
           agentId: 'agent-1',
           description: baseInput.description,
           prompt: baseInput.prompt,
-          outputFile: '/tmp/lyacloud-agent-output.txt',
+          outputFile: '/tmp/lyacode-agent-output.txt',
           canReadOutputFile: true,
         },
         [],

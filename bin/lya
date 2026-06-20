@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Lya Cloud — agentic terminal by Studio CodeAI.
+ * Lya Code — agentic terminal by Studio CodeAI.
  *
  * If dist/cli.mjs exists (built), run that.
  * Otherwise, tell the user to build first or use `bun run dev`.
@@ -15,9 +15,9 @@ import { spawnSync } from 'child_process'
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const distPath = join(__dirname, '..', 'dist', 'cli.mjs')
 
-const HEAP_RELAUNCHED_ENV = 'LYACLOUD_HEAP_RELAUNCHED'
-const DISABLE_HEAP_RELAUNCH_ENV = 'LYACLOUD_DISABLE_HEAP_RELAUNCH'
-const HEAP_SIZE_ENV = 'LYACLOUD_NODE_MAX_OLD_SPACE_SIZE_MB'
+const HEAP_RELAUNCHED_ENV = 'LYACODE_HEAP_RELAUNCHED'
+const DISABLE_HEAP_RELAUNCH_ENV = 'LYACODE_DISABLE_HEAP_RELAUNCH'
+const HEAP_SIZE_ENV = 'LYACODE_NODE_MAX_OLD_SPACE_SIZE_MB'
 const DEFAULT_HEAP_SIZE_MB = 8192
 
 function hasNodeFlag(args, flag) {
@@ -37,12 +37,12 @@ function getHeapSizeMb() {
     const mb = Number.parseInt(maxMemArg.split('=')[1] || '0', 10)
     if (Number.isSafeInteger(mb) && mb > 0) {
       process.env[HEAP_SIZE_ENV] = String(mb)
-      process.env.LYACLOUD_MAX_MEMORY_MB = String(mb)
+      process.env.LYACODE_MAX_MEMORY_MB = String(mb)
       return mb
     }
   }
 
-  const raw = process.env[HEAP_SIZE_ENV] || process.env.LYACLOUD_NODE_MAX_OLD_SPACE_SIZE_MB
+  const raw = process.env[HEAP_SIZE_ENV] || process.env.LYACODE_NODE_MAX_OLD_SPACE_SIZE_MB
   if (!raw) return DEFAULT_HEAP_SIZE_MB
   const parsed = Number.parseInt(raw, 10)
   return Number.isSafeInteger(parsed) && parsed > 0
@@ -83,7 +83,7 @@ function relaunchWithLongSessionHeapIfNeeded() {
   })
 
   if (result.error) {
-    console.error(`lyacloud: failed to restart with long-session heap: ${result.error.message}`)
+    console.error(`lyacode: failed to restart with long-session heap: ${result.error.message}`)
     process.exit(1)
   }
 
@@ -95,7 +95,7 @@ if (existsSync(distPath)) {
   await import(pathToFileURL(distPath).href)
 } else {
   console.error(`
-  lyacloud: dist/cli.mjs not found.
+  lyacode: dist/cli.mjs not found.
 
   Build first:
     bun run build

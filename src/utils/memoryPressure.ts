@@ -2,7 +2,7 @@
  * Memory Pressure Monitor
  *
  * Watches process RSS and triggers cleanup actions at configurable thresholds.
- * Designed to prevent OOM when running multiple Lya Cloud sessions.
+ * Designed to prevent OOM when running multiple Lya Code sessions.
  */
 
 import { logForDebugging } from './debug.js'
@@ -21,7 +21,7 @@ const DEFAULT_CONFIG: MemoryPressureConfig = {
   criticalThresholdMB: 0,
   checkIntervalMs: 30_000,
   perSessionBudgetMB: Number.parseInt(
-    process.env.LYACLOUD_MAX_MEMORY_MB ?? '1536',
+    process.env.LYACODE_MAX_MEMORY_MB ?? '1536',
     10,
   ),
 }

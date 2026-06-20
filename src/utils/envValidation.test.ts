@@ -4,7 +4,7 @@ import { validateEnvVars } from './envValidation.js'
 const optionalEnvVars = [
   'ANTHROPIC_API_KEY',
   'ANTHROPIC_AUTH_TOKEN',
-  'LYACLOUD_CONFIG_DIR',
+  'LYACODE_CONFIG_DIR',
   'CLAUDE_CONFIG_DIR',
   'NODE_EXTRA_CA_CERTS',
 ] as const

@@ -7,7 +7,7 @@ import {
 
 const originalEnv = { ...process.env }
 const originalPlatform = process.platform
-const mockedClipboardPath = join(process.cwd(), 'lyacloud-clipboard.txt')
+const mockedClipboardPath = join(process.cwd(), 'lyacode-clipboard.txt')
 
 const generateTempFilePathMock = mock(() => mockedClipboardPath)
 
@@ -103,7 +103,7 @@ describe('Windows clipboard fallback', () => {
     expect(windowsCall?.[2]).not.toMatchObject({ input: 'Привет мир' })
     expect(windowsCall?.[2]).not.toMatchObject({
       env: expect.objectContaining({
-        LYACLOUD_CLIPBOARD_TEXT_B64: expect.any(String),
+        LYACODE_CLIPBOARD_TEXT_B64: expect.any(String),
       }),
     })
     expect(windowsCall?.[1]).toContain(

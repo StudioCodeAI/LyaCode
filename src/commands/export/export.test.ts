@@ -27,7 +27,7 @@ function defaultMessages(): unknown[] {
 }
 
 async function withExportTestCwd<T>(fn: (cwd: string) => Promise<T>): Promise<T> {
-  const cwd = await mkdtemp(join(tmpdir(), 'lyacloud-export-test-'))
+  const cwd = await mkdtemp(join(tmpdir(), 'lyacode-export-test-'))
   try {
     return await fn(cwd)
   } finally {

@@ -68,7 +68,7 @@ export const DANGEROUS_FILES = [
   '.profile',
   '.ripgreprc',
   '.mcp.json',
-  '.lyacloud.json',
+  '.lyacode.json',
   '.claude.json',
 ] as const
 
@@ -81,7 +81,7 @@ export const DANGEROUS_DIRECTORIES = [
   '.vscode',
   '.idea',
   '.claude',
-  '.lyacloud',
+  '.lyacode',
 ] as const
 
 /**
@@ -99,7 +99,7 @@ export function normalizeCaseForComparison(path: string): string {
 
 /**
  * If filePath is inside a .claude/skills/{name}/ directory (project) or
- * .lyacloud/skills/{name}/ directory (global), plus the legacy global
+ * .lyacode/skills/{name}/ directory (global), plus the legacy global
  * .claude/skills path, return the skill name and a session-allow pattern
  * scoped to just that skill.
  * Used to offer a narrower "allow edits to this skill only" option in the
@@ -118,8 +118,8 @@ export function getClaudeSkillScope(
       prefix: '/.claude/skills/',
     },
     {
-      dir: expandPath(join(homedir(), '.lyacloud', 'skills')),
-      prefix: '~/.lyacloud/skills/',
+      dir: expandPath(join(homedir(), '.lyacode', 'skills')),
+      prefix: '~/.lyacode/skills/',
     },
     {
       dir: expandPath(join(homedir(), '.claude', 'skills')),
@@ -220,8 +220,8 @@ export function isClaudeSettingsPath(filePath: string): boolean {
 
   // Use platform separator so endsWith checks work on both Unix (/) and Windows (\)
   if (
-    normalizedPath.endsWith(`${sep}.lyacloud${sep}settings.json`) ||
-    normalizedPath.endsWith(`${sep}.lyacloud${sep}settings.local.json`) ||
+    normalizedPath.endsWith(`${sep}.lyacode${sep}settings.json`) ||
+    normalizedPath.endsWith(`${sep}.lyacode${sep}settings.local.json`) ||
     normalizedPath.endsWith(`${sep}.claude${sep}settings.json`) ||
     normalizedPath.endsWith(`${sep}.claude${sep}settings.local.json`)
   ) {
@@ -247,9 +247,9 @@ function isClaudeConfigFilePath(filePath: string): boolean {
   const commandsDir = join(getOriginalCwd(), '.claude', 'commands')
   const agentsDir = join(getOriginalCwd(), '.claude', 'agents')
   const skillsDir = join(getOriginalCwd(), '.claude', 'skills')
-  const openCommandsDir = join(getOriginalCwd(), '.lyacloud', 'commands')
-  const openAgentsDir = join(getOriginalCwd(), '.lyacloud', 'agents')
-  const openSkillsDir = join(getOriginalCwd(), '.lyacloud', 'skills')
+  const openCommandsDir = join(getOriginalCwd(), '.lyacode', 'commands')
+  const openAgentsDir = join(getOriginalCwd(), '.lyacode', 'agents')
+  const openSkillsDir = join(getOriginalCwd(), '.lyacode', 'skills')
 
   return (
     pathInWorkingPath(filePath, commandsDir) ||
@@ -492,8 +492,8 @@ function pathsEqualForPermission(a: string, b: string): boolean {
     normalizeCaseForComparison(normalize(b))
 }
 
-export function isLyaCloudCommitMessagePath(absolutePath: string): boolean {
-  const expectedPath = join(getOriginalCwd(), '.git', 'LYACLOUD_COMMIT_MSG')
+export function isLyaCodeCommitMessagePath(absolutePath: string): boolean {
+  const expectedPath = join(getOriginalCwd(), '.git', 'LYACODE_COMMIT_MSG')
   const expectedForms = getPathsForPermissionCheck(expectedPath)
   const targetForms = getPathsForPermissionCheck(absolutePath)
 
@@ -1356,8 +1356,8 @@ export function checkWritePermissionForTool<Input extends AnyObject>(
   if (claudeFolderAllowRule) {
     // Check if this rule is scoped under a Claude config folder.
     // Accepts broad project/global patterns ('/.claude/**',
-    // '~/.lyacloud/**', and legacy '~/.claude/**') plus narrowed skill
-    // patterns like '~/.lyacloud/skills/my-skill/**' so users can grant
+    // '~/.lyacode/**', and legacy '~/.claude/**') plus narrowed skill
+    // patterns like '~/.lyacode/skills/my-skill/**' so users can grant
     // session access to a single skill without also exposing settings.json
     // or hooks/. The rule already matched the path via matchingRuleForInput;
     // this is an additional scope check. Reject '..' to prevent a rule like
@@ -1695,14 +1695,14 @@ export function checkEditableInternalPath(
   if (
     (toolPermissionContext?.mode === 'bypassPermissions' ||
       toolPermissionContext?.mode === 'fullAccess') &&
-    isLyaCloudCommitMessagePath(normalizedPath)
+    isLyaCodeCommitMessagePath(normalizedPath)
   ) {
     return {
       behavior: 'allow',
       updatedInput: input,
       decisionReason: {
         type: 'other',
-        reason: 'Lya Cloud commit message file is allowed for writing',
+        reason: 'Lya Code commit message file is allowed for writing',
       },
     }
   }

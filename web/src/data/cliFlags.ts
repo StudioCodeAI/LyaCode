@@ -125,12 +125,12 @@ export const flagGroups: FlagGroup[] = [
 export const subcommands: Subcommand[] = [
   {
     name: 'mcp',
-    usage: 'lyacloud mcp [add|remove|list|doctor]',
+    usage: 'lyacode mcp [add|remove|list|doctor]',
     description: 'Manage MCP server configuration from the command line.',
   },
   {
     name: 'ssh',
-    usage: 'lyacloud ssh <host> [dir]',
-    description: 'Run Lya Cloud on a remote host over SSH. Deploys the binary and tunnels API auth back through your local machine — no remote setup needed.',
+    usage: 'lyacode ssh <host> [dir]',
+    description: 'Run Lya Code on a remote host over SSH. Deploys the binary and tunnels API auth back through your local machine — no remote setup needed.',
   },
 ]

@@ -218,7 +218,7 @@ export const DeniedMcpServerEntrySchema = lazySchema(() =>
  *
  * ⚠️ BACKWARD COMPATIBILITY NOTICE ⚠️
  *
- * This schema defines the structure of user settings files (~/.lyacloud/settings.json).
+ * This schema defines the structure of user settings files (~/.lyacode/settings.json).
  * We support backward-compatible changes! Here's how:
  *
  * ✅ ALLOWED CHANGES:
@@ -619,7 +619,7 @@ export const SettingsSchema = lazySchema(() =>
         })
         .optional()
         .describe(
-          'Additional marketplaces to make available for this repository. Typically used in repository .lyacloud/settings.json to ensure team members have required plugin sources.',
+          'Additional marketplaces to make available for this repository. Typically used in repository .lyacode/settings.json to ensure team members have required plugin sources.',
         ),
       // Enterprise strict list of allowed marketplace sources (policy settings only)
       // When set, ONLY these exact sources can be added. Check happens BEFORE download.
@@ -785,7 +785,7 @@ export const SettingsSchema = lazySchema(() =>
         .optional()
         .describe(
           'Ordered list of providerProfile ids. When the active provider returns a rate-limit ' +
-            'or quota error, Lya Cloud advances to the next profile in this list (starting after ' +
+            'or quota error, Lya Code advances to the next profile in this list (starting after ' +
             'the currently-active id) and retries the turn. ' +
             'Example: ["provider_anthropic", "provider_openai", "provider_ollama"]',
         ),
@@ -902,7 +902,7 @@ export const SettingsSchema = lazySchema(() =>
         .optional()
         .describe(
           'Custom directory for plan files, relative to project root. ' +
-            'If not set, defaults to ~/.lyacloud/plans/',
+            'If not set, defaults to ~/.lyacode/plans/',
         ),
       ...(process.env.USER_TYPE === 'ant'
         ? {
@@ -1034,7 +1034,7 @@ export const SettingsSchema = lazySchema(() =>
         .string()
         .optional()
         .describe(
-          'Custom directory path for auto-memory storage. Supports ~/ prefix for home directory expansion. Ignored if set in projectSettings (checked-in .lyacloud/settings.json) for security. When unset, defaults to ~/.lyacloud/projects/<sanitized-cwd>/memory/.',
+          'Custom directory path for auto-memory storage. Supports ~/ prefix for home directory expansion. Ignored if set in projectSettings (checked-in .lyacode/settings.json) for security. When unset, defaults to ~/.lyacode/projects/<sanitized-cwd>/memory/.',
         ),
       autoDreamEnabled: z
         .boolean()

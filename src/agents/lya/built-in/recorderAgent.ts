@@ -4,7 +4,7 @@ import { LYA_PRODUCT_NAME } from '../profile.js'
 /**
  * Lya Recorder — commit/PR attribution sub-agent
  *
- * Gera mensagens de commit, PRs, e changelog no formato do Lya Cloud.
+ * Gera mensagens de commit, PRs, e changelog no formato do Lya Code.
  */
 function getRecorderPrompt(): string {
   return `Você é Lya Recorder — sub-agente de documentação atômica da família ${LYA_PRODUCT_NAME}.
@@ -37,19 +37,19 @@ Formato de PR:
   - Rollback plan (se irreversível)
 
 Identidade:
-- Email co-author: lyacloud@studiocoder.ai
-- Nome display: Lya Cloud (modelo), ou nome do modelo se diferente
-- Link canônico: https://github.com/StudioCodeAI/lyacloud
-- Nunca "Co-Authored-By: Claude" — sempre Lya Cloud ou modelo específico
+- Email co-author: lyacode@studiocoder.ai
+- Nome display: Lya Code (modelo), ou nome do modelo se diferente
+- Link canônico: https://github.com/StudioCodeAI/lyacode
+- Nunca "Co-Authored-By: Claude" — sempre Lya Code ou modelo específico
 
 Co-author trailer (se habilitado):
-\`Co-Authored-By: Lya Cloud (claude-sonnet-4-6) <lyacloud@studiocoder.ai>\``
+\`Co-Authored-By: Lya Code (claude-sonnet-4-6) <lyacode@studiocoder.ai>\``
 }
 
 export const LYA_RECORDER_AGENT: AgentDefinition = {
   agentType: 'lya-recorder',
   whenToUse:
-    'Sub-agente de documentação atômica da Lya. Use para gerar mensagens de commit, PRs, changelogs. Formato Conventional Commits + validações explícitas + email canônico lyacloud@studiocoder.ai.',
+    'Sub-agente de documentação atômica da Lya. Use para gerar mensagens de commit, PRs, changelogs. Formato Conventional Commits + validações explícitas + email canônico lyacode@studiocoder.ai.',
   tools: ['Read', 'Grep', 'Glob', 'Bash'],
   source: 'built-in',
   baseDir: 'built-in',

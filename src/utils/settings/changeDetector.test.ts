@@ -13,11 +13,11 @@ type SettingsChangeDetectorModule = typeof import('./changeDetector.js') & {
 }
 
 const pathsBySource: Record<SettingSource, string | null> = {
-  userSettings: normalize('/tmp/lyacloud/user/settings.json'),
-  projectSettings: normalize('/tmp/lyacloud/project/.lyacloud/settings.json'),
-  localSettings: normalize('/tmp/lyacloud/project/.lyacloud/settings.local.json'),
+  userSettings: normalize('/tmp/lyacode/user/settings.json'),
+  projectSettings: normalize('/tmp/lyacode/project/.lyacode/settings.json'),
+  localSettings: normalize('/tmp/lyacode/project/.lyacode/settings.local.json'),
   flagSettings: null,
-  policySettings: normalize('/tmp/lyacloud/managed/managed-settings.json'),
+  policySettings: normalize('/tmp/lyacode/managed/managed-settings.json'),
 }
 
 let resetSettingsCache = mock(() => {})
@@ -44,7 +44,7 @@ async function importFreshModule(): Promise<SettingsChangeDetectorModule> {
     consumeInternalWrite,
     executeConfigChangeHooks,
     getManagedSettingsDropInDir: () =>
-      normalize('/tmp/lyacloud/managed/managed-settings.d'),
+      normalize('/tmp/lyacode/managed/managed-settings.d'),
     getSettingsFilePathForSource: (source: SettingSource) =>
       pathsBySource[source],
     hasBlockingResult: (results: { blocked: boolean }[]) =>

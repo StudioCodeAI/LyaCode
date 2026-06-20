@@ -1,4 +1,4 @@
-# Lya Cloud Quick Start for macOS and Linux
+# Lya Code Quick Start for macOS and Linux
 
 This guide uses a standard shell such as Terminal, iTerm, bash, or zsh.
 
@@ -15,15 +15,15 @@ node --version
 npm --version
 ```
 
-## 2. Install Lya Cloud
+## 2. Install Lya Code
 
 ```bash
-npm install -g @studiocodeai/lyacloud@latest
+npm install -g @studiocodeai/lyacode@latest
 ```
-On Arch Linux, you can alternatively install Lya Cloud via the community-maintained [AUR package](https://aur.archlinux.org/packages/lyacloud):
+On Arch Linux, you can alternatively install Lya Code via the community-maintained [AUR package](https://aur.archlinux.org/packages/lyacode):
 
 ```bash
-paru -S lyacloud
+paru -S lyacode
 ```
 ## 3. Pick One Provider
 
@@ -36,7 +36,7 @@ export CLAUDE_CODE_USE_OPENAI=1
 export OPENAI_API_KEY=sk-your-key-here
 export OPENAI_MODEL=gpt-4o
 
-lyacloud
+lyacode
 ```
 
 ### Option B: DeepSeek
@@ -47,7 +47,7 @@ export OPENAI_API_KEY=sk-your-key-here
 export OPENAI_BASE_URL=https://api.deepseek.com/v1
 export OPENAI_MODEL=deepseek-v4-flash
 
-lyacloud
+lyacode
 ```
 
 Use `deepseek-v4-pro` when you want the stronger model. `deepseek-chat` and `deepseek-reasoner` still work as DeepSeek's legacy API aliases.
@@ -67,7 +67,7 @@ export CLAUDE_CODE_USE_OPENAI=1
 export OPENAI_BASE_URL=http://localhost:11434/v1
 export OPENAI_MODEL=llama3.1:8b
 
-lyacloud
+lyacode
 ```
 
 No API key is needed for Ollama local models.
@@ -92,7 +92,7 @@ export OPENAI_BASE_URL=http://localhost:1234/v1
 export OPENAI_MODEL=your-model-name
 # export OPENAI_API_KEY=lmstudio  # optional: some users need a dummy key
 
-lyacloud
+lyacode
 ```
 
 Replace `your-model-name` with the model name shown in LM Studio.
@@ -101,21 +101,21 @@ No API key is needed for LM Studio local models (but uncomment the `OPENAI_API_K
 
 ### Option E: Using a .env file (Optional)
 
-If you prefer to keep your keys in a `.env` file instead of exporting them individually, note that Lya Cloud does not load `.env` files automatically. You must explicitly pass it:
+If you prefer to keep your keys in a `.env` file instead of exporting them individually, note that Lya Code does not load `.env` files automatically. You must explicitly pass it:
 
 ```bash
-lyacloud --provider-env-file .env
+lyacode --provider-env-file .env
 ```
 
 Keep `.env` out of git because it contains secrets.
 The explicit loader accepts provider/setup variables. Export runtime/debug variables from your shell or launcher instead.
 
-## 4. If `lyacloud` Is Not Found
+## 4. If `lyacode` Is Not Found
 
 Close the terminal, open a new one, and try again:
 
 ```bash
-lyacloud
+lyacode
 ```
 
 ## 5. If Your Provider Fails
@@ -141,11 +141,11 @@ Check the basics:
 - make sure a model is loaded in LM Studio
 - make sure the model name matches what you set in `OPENAI_MODEL`
 
-## 6. Updating Lya Cloud
+## 6. Updating Lya Code
 
 **Via npm:**
 ```bash
-npm install -g @studiocodeai/lyacloud@latest
+npm install -g @studiocodeai/lyacode@latest
 ```
 
 **Via AUR:**
@@ -154,16 +154,16 @@ paru
 ```
 *(Or use your preferred AUR helper like `yay -Syu`)*
 
-## 7. Uninstalling Lya Cloud
+## 7. Uninstalling Lya Code
 
 **Via npm:**
 ```bash
-npm uninstall -g @studiocodeai/lyacloud
+npm uninstall -g @studiocodeai/lyacode
 ```
 
 **Via AUR (Arch Linux):**
 ```bash
-paru -Rns lyacloud
+paru -Rns lyacode
 ```
 
 ## Need Advanced Setup?

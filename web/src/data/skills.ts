@@ -40,6 +40,6 @@ export const skills: Skill[] = [
     name: 'keybindings-help',
     invocation: '/keybindings-help',
     description:
-      'Customize keyboard shortcuts: rebind keys, add chord bindings, or modify your keybindings file (default: ~/.lyacloud/keybindings.json; override via LYACLOUD_CONFIG_DIR).',
+      'Customize keyboard shortcuts: rebind keys, add chord bindings, or modify your keybindings file (default: ~/.lyacode/keybindings.json; override via LYACODE_CONFIG_DIR).',
   },
 ]

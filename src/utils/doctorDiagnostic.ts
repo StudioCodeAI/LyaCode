@@ -51,7 +51,7 @@ import { which } from './which.js'
 function getCliBinaryName(): string {
   return MACRO.PACKAGE_URL === '@anthropic-ai/claude-code'
     ? 'claude'
-    : 'lyacloud'
+    : 'lyacode'
 }
 
 function getNativeDataDirName(): string {
@@ -379,8 +379,8 @@ export async function detectStaleProjectSettingsPaths(
   const canonicalPaths = stale.map(pair => pair.canonical).join(', ')
 
   return {
-    issue: `Legacy project settings file${stale.length === 1 ? '' : 's'} ${legacyPaths} found, but Lya Cloud reads ${canonicalPaths}`,
-    fix: `Move or copy ${legacyPaths} to ${canonicalPaths} if you intended Lya Cloud to use those project settings.`,
+    issue: `Legacy project settings file${stale.length === 1 ? '' : 's'} ${legacyPaths} found, but Lya Code reads ${canonicalPaths}`,
+    fix: `Move or copy ${legacyPaths} to ${canonicalPaths} if you intended Lya Code to use those project settings.`,
   }
 }
 
@@ -544,13 +544,13 @@ async function detectConfigurationIssues(
         // Alias exists but points to invalid target
         warnings.push({
           issue: 'Local installation not accessible',
-          fix: `Alias exists but points to invalid target: ${existingAlias}. Update alias: alias ${getCliBinaryName()}="~/.lyacloud/local/${getCliBinaryName()}"`,
+          fix: `Alias exists but points to invalid target: ${existingAlias}. Update alias: alias ${getCliBinaryName()}="~/.lyacode/local/${getCliBinaryName()}"`,
         })
       } else {
         // No alias exists and not in PATH
         warnings.push({
           issue: 'Local installation not accessible',
-          fix: `Create alias: alias ${getCliBinaryName()}="~/.lyacloud/local/${getCliBinaryName()}"`,
+          fix: `Create alias: alias ${getCliBinaryName()}="~/.lyacode/local/${getCliBinaryName()}"`,
         })
       }
     }

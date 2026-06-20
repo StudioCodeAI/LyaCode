@@ -14,7 +14,7 @@ afterEach(async () => {
 })
 
 async function makeProjectDir(): Promise<string> {
-  const dir = await mkdtemp(join(tmpdir(), 'lyacloud-wiki-init-'))
+  const dir = await mkdtemp(join(tmpdir(), 'lyacode-wiki-init-'))
   tempDirs.push(dir)
   return dir
 }
@@ -26,17 +26,17 @@ test('initializeWiki creates the expected wiki scaffold', async () => {
 
   expect(result.alreadyExisted).toBe(false)
   expect(result.createdFiles).toEqual([
-    join('.lyacloud', 'wiki', 'schema.md'),
-    join('.lyacloud', 'wiki', 'index.md'),
-    join('.lyacloud', 'wiki', 'log.md'),
-    join('.lyacloud', 'wiki', 'pages', 'architecture.md'),
+    join('.lyacode', 'wiki', 'schema.md'),
+    join('.lyacode', 'wiki', 'index.md'),
+    join('.lyacode', 'wiki', 'log.md'),
+    join('.lyacode', 'wiki', 'pages', 'architecture.md'),
   ])
   expect(await readFile(paths.schemaFile, 'utf8')).toContain(
-    '# Lya Cloud Wiki Schema',
+    '# Lya Code Wiki Schema',
   )
   expect(await readFile(paths.indexFile, 'utf8')).toContain('Wiki')
   expect(await readFile(paths.logFile, 'utf8')).toContain(
-    'Wiki initialized by Lya Cloud',
+    'Wiki initialized by Lya Code',
   )
   expect(await readFile(join(paths.pagesDir, 'architecture.md'), 'utf8')).toContain(
     '# Architecture',

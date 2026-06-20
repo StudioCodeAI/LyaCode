@@ -1,6 +1,6 @@
 /**
  * Wordmark style samples for the user to choose from.
- * Renders "Lya Cloud" in 4 different fonts × 3 sizes, prints each
+ * Renders "Lya Code" in 4 different fonts × 3 sizes, prints each
  * preview to stdout so the user can compare visually.
  *
  * Run: bun scripts/preview-wordmarks.ts
@@ -44,7 +44,7 @@ const FONT_7_BOLD: Record<string, string[]> = {
 }
 
 const PALETTE = {
-  // Studio CodeAI warm orange gradient (matches assets/brand/lyacloud-logo.svg)
+  // Studio CodeAI warm orange gradient (matches assets/brand/lyacode-logo.svg)
   start: [255, 122, 26] as [number, number, number],
   mid: [220, 100, 20] as [number, number, number],
   end: [180, 70, 10] as [number, number, number],
@@ -120,11 +120,11 @@ function printPreview(label: string, text: string, font: Record<string, string>)
   console.log(`rows: ${lines.length}  cols: ${lines[0]?.length ?? 0}`)
 }
 
-console.log('\nLya Cloud wordmark samples')
+console.log('\nLya Code wordmark samples')
 console.log('Compare e me diga qual você quer no startup.')
 
-printPreview('A. 5-row thin (compact, single line look)', 'Lya Cloud', FONT_5_THIN)
-printPreview('B. 5-row big (default block, balanced)', 'Lya Cloud', FONT_5_BIG)
+printPreview('A. 5-row thin (compact, single line look)', 'Lya Code', FONT_5_THIN)
+printPreview('B. 5-row big (default block, balanced)', 'Lya Code', FONT_5_BIG)
 printPreview('C. 7-row bold (LARGE, hero impact)', 'LYA CLOUD', FONT_7_BOLD)
 printPreview('D. 7-row bold mixed case (LARGE + Lya.Cloud dot)', 'Lya.Cloud', FONT_7_BOLD)
 

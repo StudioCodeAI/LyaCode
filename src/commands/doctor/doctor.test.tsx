@@ -20,7 +20,7 @@ describe('/doctor report', () => {
     }
     const parseIssueReportArgs = mock(() => options)
     const renderIssueReport = mock(async () => '# diagnostic report')
-    const writeIssueReport = mock(() => '/tmp/lyacloud-report.md')
+    const writeIssueReport = mock(() => '/tmp/lyacode-report.md')
     const onDone = mock(() => {})
     const result = await runDoctorReportCommand(['--json'], onDone, {
       parseIssueReportArgs,
@@ -46,7 +46,7 @@ describe('/doctor report', () => {
     }
     const parseIssueReportArgs = mock(() => options)
     const renderIssueReport = mock(async () => '# diagnostic report')
-    const writeIssueReport = mock(() => '/tmp/lyacloud-report.md')
+    const writeIssueReport = mock(() => '/tmp/lyacode-report.md')
     const onDone = mock(() => {})
     const result = await runDoctorReportCommand(
       ['--out', 'report.md'],
@@ -63,7 +63,7 @@ describe('/doctor report', () => {
     expect(renderIssueReport).toHaveBeenCalledWith(options)
     expect(writeIssueReport).toHaveBeenCalledWith('report.md', '# diagnostic report')
     expect(onDone).toHaveBeenCalledWith(
-      'Diagnostic report written to /tmp/lyacloud-report.md',
+      'Diagnostic report written to /tmp/lyacode-report.md',
       { display: 'system' },
     )
   })

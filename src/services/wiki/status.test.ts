@@ -15,7 +15,7 @@ afterEach(async () => {
 })
 
 async function makeProjectDir(): Promise<string> {
-  const dir = await mkdtemp(join(tmpdir(), 'lyacloud-wiki-status-'))
+  const dir = await mkdtemp(join(tmpdir(), 'lyacode-wiki-status-'))
   tempDirs.push(dir)
   return dir
 }

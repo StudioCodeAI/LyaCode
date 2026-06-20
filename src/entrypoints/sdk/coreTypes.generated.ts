@@ -1538,7 +1538,7 @@ export type AgentDefinition = {
   permissionMode?: "default" | "acceptEdits" | "bypassPermissions" | "fullAccess" | "plan" | "dontAsk"
 }
 
-/** Source for loading filesystem-based settings. 'user' - Global user settings (~/.lyacloud/settings.json). 'project' - Project settings (.lyacloud/settings.json). 'local' - Local settings (.lyacloud/settings.local.json). */
+/** Source for loading filesystem-based settings. 'user' - Global user settings (~/.lyacode/settings.json). 'project' - Project settings (.lyacode/settings.json). 'local' - Local settings (.lyacode/settings.local.json). */
 export type SettingSource = "user" | "project" | "local"
 
 /** Configuration for loading a plugin. */

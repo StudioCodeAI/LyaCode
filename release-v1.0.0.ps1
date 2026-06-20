@@ -1,6 +1,6 @@
 # release-v1.0.0.ps1
 # Script completo de release: build + git + tag + push
-# Studio CodeAI · Luis Cardozo · Lya Cloud v1.0.0
+# Studio CodeAI · Luis Cardozo · Lya Code v1.0.0
 #
 # Uso: .\release-v1.0.0.ps1
 # Ou em uma linha: powershell -ExecutionPolicy Bypass -File .\release-v1.0.0.ps1
@@ -38,7 +38,7 @@ if (-not $ok) {
 }
 
 # Diretório do projeto
-Set-Location "E:\GitHub\lyacloud-main"
+Set-Location "E:\GitHub\lyacode-main"
 Write-Host "  CWD: $(Get-Location)" -ForegroundColor Gray
 
 # 1. Install
@@ -80,7 +80,7 @@ if ([string]::IsNullOrEmpty($status)) {
     git add -A
     git commit -m "release: v1.0.0 - producao estavel
 
-- Wordmark blocky 10-line (Lya Cloud)
+- Wordmark blocky 10-line (Lya Code)
 - Provider list reordenada (Ollama Local 1o, Auto ultimo)
 - Versao 0.1.0 -> 1.0.0 (producao)
 - README polido com instalacao via GitHub Releases
@@ -96,7 +96,7 @@ if ($tagExists) {
     Write-Host "  Tag v1.0.0 ja existe. Apagando para recriar..." -ForegroundColor Yellow
     git tag -d v1.0.0 | Out-Null
 }
-git tag -a v1.0.0 -m "Lya Cloud v1.0.0 - producao estavel"
+git tag -a v1.0.0 -m "Lya Code v1.0.0 - producao estavel"
 if ($LASTEXITCODE -ne 0) { Write-Host "FALHOU em git tag" -ForegroundColor Red; exit 1 }
 
 # 6. Push
@@ -123,10 +123,10 @@ Write-Host "  LYA CLOUD v1.0.0 - RELEASE COMPLETO" -ForegroundColor Green
 Write-Host "===========================================" -ForegroundColor Green
 Write-Host ""
 Write-Host "  Acompanhe o build em:" -ForegroundColor Cyan
-Write-Host "  https://github.com/StudioCodeAI/lyacloud/actions" -ForegroundColor White
+Write-Host "  https://github.com/StudioCodeAI/lyacode/actions" -ForegroundColor White
 Write-Host ""
 Write-Host "  Release final aparecera em:" -ForegroundColor Cyan
-Write-Host "  https://github.com/StudioCodeAI/lyacloud/releases/tag/v1.0.0" -ForegroundColor White
+Write-Host "  https://github.com/StudioCodeAI/lyacode/releases/tag/v1.0.0" -ForegroundColor White
 Write-Host ""
 Write-Host "  Artefatos locais em: dist/installer/" -ForegroundColor Cyan
 Get-ChildItem -Path "dist/installer" -ErrorAction SilentlyContinue | ForEach-Object {

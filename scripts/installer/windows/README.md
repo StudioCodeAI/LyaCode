@@ -1,26 +1,26 @@
-# Lya Cloud Windows Installer
+# Lya Code Windows Installer
 
-Conjunto de scripts para distribuir o Lya Cloud como instalador nativo
+Conjunto de scripts para distribuir o Lya Code como instalador nativo
 Windows sem dependências externas (sem Inno Setup, sem NSIS).
 
 ## Como funciona
 
-1. O usuário faz download de `lyacloud-setup-x64-0.1.0.exe` (gerado por IExpress)
+1. O usuário faz download de `lyacode-setup-x64-0.1.0.exe` (gerado por IExpress)
 2. Clica duas vezes no `.exe`
-3. O IExpress extrai `install.ps1` + `studiocodeai-lyacloud-0.1.0.tgz` para `%TEMP%\lyacloud-setup\`
+3. O IExpress extrai `install.ps1` + `studiocodeai-lyacode-0.1.0.tgz` para `%TEMP%\lyacode-setup\`
 4. Roda `cmd.exe /c powershell.exe -NoProfile -ExecutionPolicy Bypass -File install.ps1`
 5. O PowerShell:
    - Detecta Node.js ≥ 22 (ou aborta com link de download)
    - Roda `npm install -g <tarball>` com progresso visível
-   - Valida `lyacloud --version` e todos os 5 aliases
-   - Cria atalhos no Menu Iniciar (Iniciar → Lya Cloud → lyacloud.cmd)
-   - Log completo em `%LOCALAPPDATA%\lyacloud\lyacloud-setup-<timestamp>.log`
+   - Valida `lyacode --version` e todos os 5 aliases
+   - Cria atalhos no Menu Iniciar (Iniciar → Lya Code → lyacode.cmd)
+   - Log completo em `%LOCALAPPDATA%\lyacode\lyacode-setup-<timestamp>.log`
 
 ## Como buildar o `.exe`
 
 Pré-requisitos:
 - Windows 10/11 com `iexpress.exe` (já vem com Windows)
-- Tarball `studiocodeai-lyacloud-0.1.0.tgz` na raiz do repo (gerado por `npm pack`)
+- Tarball `studiocodeai-lyacode-0.1.0.tgz` na raiz do repo (gerado por `npm pack`)
 
 Comandos (PowerShell):
 ```powershell
@@ -34,15 +34,15 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1
 .\install.cmd
 
 # 3. Gerar o .exe auto-extraível
-iexpress /N:.\lyacloud-setup-x64.sed /O:..\..\..\dist\installer\lyacloud-setup-x64-0.1.0.exe
+iexpress /N:.\lyacode-setup-x64.sed /O:..\..\..\dist\installer\lyacode-setup-x64-0.1.0.exe
 ```
 
-Resultado: `dist\installer\lyacloud-setup-x64-0.1.0.exe` — single-file installer.
+Resultado: `dist\installer\lyacode-setup-x64-0.1.0.exe` — single-file installer.
 
 ## Flags
 
 - `/D` — Dry run (mostra comandos sem executar)
-- `/T:<path>` — Caminho do tarball (default: `./studiocodeai-lyacloud-0.1.0.tgz`)
+- `/T:<path>` — Caminho do tarball (default: `./studiocodeai-lyacode-0.1.0.tgz`)
 - `/Y` — Suprime criação de atalhos no Menu Iniciar
 
 ## Distribuição
@@ -60,14 +60,14 @@ Se o `.exe` falhar ou se preferir:
 winget install OpenJS.NodeJS.LTS
 
 # 2. Gerar tarball
-cd E:\GitHub\lyacloud-main
+cd E:\GitHub\lyacode-main
 npm pack
 
 # 3. Instalar global
-npm install -g .\studiocodeai-lyacloud-0.1.0.tgz
+npm install -g .\studiocodeai-lyacode-0.1.0.tgz
 
 # 4. Validar
-lyacloud --version
+lyacode --version
 lscloud --version
 lya --version
 lyacode --version
@@ -77,12 +77,12 @@ lscode --version
 ## Desinstalação
 
 ```powershell
-npm uninstall -g @studiocodeai/lyacloud
+npm uninstall -g @studiocodeai/lyacode
 ```
 
 Para remover atalhos do Menu Iniciar manualmente:
 ```
-%APPDATA%\Microsoft\Windows\Start Menu\Programs\Lya Cloud\
+%APPDATA%\Microsoft\Windows\Start Menu\Programs\Lya Code\
 ```
 
 ## Versão política

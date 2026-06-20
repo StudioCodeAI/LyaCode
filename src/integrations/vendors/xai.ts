@@ -34,7 +34,7 @@ export default defineVendor({
       XAI_CREDENTIAL_SOURCE: ['oauth'],
     },
     missingCredentialMessage:
-      'XAI_API_KEY is required, or sign in with `lyacloud auth xai login` (browser OAuth) or `lyacloud auth xai device` (remote hosts).',
+      'XAI_API_KEY is required, or sign in with `lyacode auth xai login` (browser OAuth) or `lyacode auth xai device` (remote hosts).',
   },
   catalog: {
     source: 'static',

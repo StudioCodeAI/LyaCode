@@ -232,7 +232,7 @@ function parseSettingsFileUncached(path: string): {
 
 /**
  * Get the absolute path to the associated file root for a given settings source
- * (e.g. for $PROJ_DIR/.lyacloud/settings.json, returns $PROJ_DIR)
+ * (e.g. for $PROJ_DIR/.lyacode/settings.json, returns $PROJ_DIR)
  * @param source The source of the settings
  * @returns The root path of the settings file
  */
@@ -300,9 +300,9 @@ export function getRelativeSettingsFilePathForSource(
 ): string {
   switch (source) {
     case 'projectSettings':
-      return '.lyacloud/settings.json'
+      return '.lyacode/settings.json'
     case 'localSettings':
-      return '.lyacloud/settings.local.json'
+      return '.lyacode/settings.local.json'
   }
 }
 
@@ -639,14 +639,14 @@ export function getManagedSettingsKeysForLogging(
 function isSettingsLoadInProgress(): boolean {
   return (
     (globalThis as Record<string, unknown>)[
-      '__lyacloudSettingsLoadInProgress'
+      '__lyacodeSettingsLoadInProgress'
     ] === true
   )
 }
 
 function setSettingsLoadInProgress(value: boolean): void {
   ;(globalThis as Record<string, unknown>)[
-    '__lyacloudSettingsLoadInProgress'
+    '__lyacodeSettingsLoadInProgress'
   ] = value
 }
 

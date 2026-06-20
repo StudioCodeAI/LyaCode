@@ -49,7 +49,7 @@ export function getBuiltInAgents(): AgentDefinition[] {
   ]
 
   // Studio CodeAI Lya family — principal agent and sub-agents.
-  // Always include in Lya Cloud; identity is the product.
+  // Always include in Lya Code; identity is the product.
   agents.push(...LYA_AGENTS)
 
   if (areExplorePlanAgentsEnabled()) {

@@ -62,11 +62,11 @@ async function expectModelCommandDoesNotWaitForRefresh(
   const result = await Promise.race([
     commandPromise,
     new Promise(resolve =>
-      setTimeout(() => resolve(Symbol.for('lyacloud.test.timeout')), 1_000),
+      setTimeout(() => resolve(Symbol.for('lyacode.test.timeout')), 1_000),
     ),
   ])
 
-  expect(result).not.toBe(Symbol.for('lyacloud.test.timeout'))
+  expect(result).not.toBe(Symbol.for('lyacode.test.timeout'))
   return result
 }
 

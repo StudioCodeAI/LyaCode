@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-Lya Cloud is currently maintained on the latest `main` branch and the latest
+Lya Code is currently maintained on the latest `main` branch and the latest
 npm release only.
 
 | Version | Supported |
@@ -16,7 +16,7 @@ landed directly on `main` before a package release is published.
 
 ## Reporting a Vulnerability
 
-If you believe you have found a security vulnerability in Lya Cloud, please
+If you believe you have found a security vulnerability in Lya Code, please
 report it privately.
 
 Preferred reporting channel:
@@ -58,9 +58,9 @@ report.
 
 This policy applies to:
 
-- the Lya Cloud source code in this repository
+- the Lya Code source code in this repository
 - official release artifacts published from this repository
-- the `@studiocodeai/lyacloud` npm package
+- the `@studiocodeai/lyacode` npm package
 
 This policy does not cover:
 

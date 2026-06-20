@@ -35,7 +35,7 @@ export function getSecureStorageServiceName(
 ): string {
   const configDir = getClaudeConfigHomeDir()
   const isDefaultDir =
-    !process.env.LYACLOUD_CONFIG_DIR && !process.env.CLAUDE_CONFIG_DIR
+    !process.env.LYACODE_CONFIG_DIR && !process.env.CLAUDE_CONFIG_DIR
 
   // Use a hash of the config dir path to create a unique but stable suffix
   // Only add suffix for non-default directories to maintain backwards compatibility

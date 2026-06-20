@@ -25,7 +25,7 @@ export const en = {
     'Show the total cost and duration of the current session',
   'commands.diff.description': 'View uncommitted changes and per-turn diffs',
   'commands.doctor.description':
-    'Diagnose and verify your Lya Cloud installation and settings',
+    'Diagnose and verify your Lya Code installation and settings',
   'commands.dream.description':
     'Run memory consolidation — synthesize recent sessions into durable memories',
   'commands.effort.description': 'Set effort level for model usage',
@@ -39,7 +39,7 @@ export const en = {
   'commands.init.description':
     'Initialize a new project instruction file with codebase documentation',
   'commands.insights.description':
-    'Generate a report analyzing your Lya Cloud sessions',
+    'Generate a report analyzing your Lya Code sessions',
   'commands.install-github-app.description':
     'Set up Claude GitHub Actions for a repository',
   'commands.knowledge.description': 'Manage native Knowledge Graph',
@@ -57,7 +57,7 @@ export const en = {
     'Manage allow & deny tool permission rules',
   'commands.plan.description':
     'Enable plan mode or view the current session plan',
-  'commands.plugin.description': 'Manage Lya Cloud plugins',
+  'commands.plugin.description': 'Manage Lya Code plugins',
   'commands.provider.description': 'Manage API provider profiles',
   'commands.pr-comments.description':
     'Get comments from a GitHub pull request',
@@ -75,11 +75,11 @@ export const en = {
     'Complete a security review of the pending changes on the current branch',
   'commands.skills.description': 'List available skills',
   'commands.stats.description':
-    'Show your Lya Cloud usage statistics and activity',
+    'Show your Lya Code usage statistics and activity',
   'commands.status.description':
-    'Show Lya Cloud status including version, model, account, API connectivity, and tool statuses',
-  'commands.statusline.description': "Set up Lya Cloud's status line UI",
-  'commands.stickers.description': 'Order Lya Cloud stickers',
+    'Show Lya Code status including version, model, account, API connectivity, and tool statuses',
+  'commands.statusline.description': "Set up Lya Code's status line UI",
+  'commands.stickers.description': 'Order Lya Code stickers',
   'commands.tasks.description': 'List and manage background tasks',
   'commands.terminal-setup.description':
     'Install Shift+Enter key binding for newlines',
@@ -87,7 +87,7 @@ export const en = {
   'commands.usage.description': 'Show plan usage limits',
   'commands.vim.description': 'Toggle between Vim and Normal editing modes',
   'commands.wiki.description':
-    'Initialize and inspect the Lya Cloud project wiki',
+    'Initialize and inspect the Lya Code project wiki',
   'skills.batch.description':
     'Research and plan a large-scale change, then execute it in parallel across 5–30 isolated worktree agents that each open a PR.',
   'skills.batch.whenToUse':

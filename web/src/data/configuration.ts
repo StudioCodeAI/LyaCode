@@ -8,24 +8,24 @@ export interface SettingsFile {
 
 export const settingsFiles: SettingsFile[] = [
   {
-    path: '~/.lyacloud/settings.json',
+    path: '~/.lyacode/settings.json',
     scope: 'user',
-    notes: 'Default global settings path for every project on the machine; LYACLOUD_CONFIG_DIR moves this under the configured config home.',
+    notes: 'Default global settings path for every project on the machine; LYACODE_CONFIG_DIR moves this under the configured config home.',
   },
   {
-    path: '.lyacloud/settings.json',
+    path: '.lyacode/settings.json',
     scope: 'project',
     notes: 'Shared project settings, committed to the repo.',
   },
   {
-    path: '.lyacloud/settings.local.json',
+    path: '.lyacode/settings.local.json',
     scope: 'local',
     notes: 'Per-machine overrides for one project; typically gitignored.',
   },
   {
-    path: '~/.lyacloud/keybindings.json',
+    path: '~/.lyacode/keybindings.json',
     scope: 'user',
-    notes: 'Default keyboard shortcut overrides path; LYACLOUD_CONFIG_DIR moves this under the configured config home.',
+    notes: 'Default keyboard shortcut overrides path; LYACODE_CONFIG_DIR moves this under the configured config home.',
   },
   {
     path: 'CLAUDE.md / .claude/CLAUDE.md',
@@ -68,8 +68,8 @@ export const envVars: EnvVar[] = [
   { name: 'MIMO_API_KEY', description: 'Xiaomi MiMo API key.' },
   { name: 'OPENCODE_API_KEY', description: 'OpenCode Zen / Go gateway key.' },
   { name: 'GITHUB_TOKEN', description: 'GitHub token for GitHub Models and PR workflows.' },
-  { name: 'LYACLOUD_CONFIG_DIR', description: 'Preferred config directory override. Defaults to ~/.lyacloud when unset.' },
-  { name: 'CLAUDE_CONFIG_DIR', description: 'Legacy config directory override. Used only when LYACLOUD_CONFIG_DIR is unset.' },
+  { name: 'LYACODE_CONFIG_DIR', description: 'Preferred config directory override. Defaults to ~/.lyacode when unset.' },
+  { name: 'CLAUDE_CONFIG_DIR', description: 'Legacy config directory override. Used only when LYACODE_CONFIG_DIR is unset.' },
   { name: 'HTTP_PROXY / HTTPS_PROXY', description: 'Route API traffic through a proxy.' },
   { name: 'NODE_EXTRA_CA_CERTS', description: 'Extra CA certificates for corporate TLS interception.' },
   { name: 'CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC', description: 'Disable non-essential network traffic.' },

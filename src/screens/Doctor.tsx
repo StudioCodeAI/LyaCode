@@ -211,7 +211,7 @@ export function Doctor(t0: Props) {
   let t7;
   if ($[11] !== onDone) {
     t7 = () => {
-      onDone("Lya Cloud diagnostics dismissed", {
+      onDone("Lya Code diagnostics dismissed", {
         display: "system"
       });
     };

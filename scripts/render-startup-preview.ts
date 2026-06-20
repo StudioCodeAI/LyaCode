@@ -42,7 +42,7 @@ function render(text: string): string[] {
   return lines.map(row => row.join(''))
 }
 
-const wordmarkLines = render('Lya Cloud')
+const wordmarkLines = render('Lya Code')
 const W = 72
 
 const boxBorder = (n: number) => '\u2500'.repeat(n)
@@ -62,7 +62,7 @@ out.push(`  \u2502  Endpoint  https://api.anthropic.com${' '.repeat(W - 41)}\u25
 out.push(`  \u2560${boxBorder(W - 2)}\u2563`)
 out.push(`  \u2502  \u25cf cloud    Ready \u2014 type /help to begin${' '.repeat(W - 41)}\u2502`)
 out.push(`  \u255a${boxBorder(W - 2)}\u255d`)
-out.push(`  lyacloud v0.1.0`)
+out.push(`  lyacode v0.1.0`)
 out.push('')
 
 console.log('=== Preview of the new startup screen ===')

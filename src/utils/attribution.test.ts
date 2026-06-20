@@ -60,8 +60,8 @@ const originalEnv = {
   VENICE_API_KEY: process.env.VENICE_API_KEY,
   MIMO_API_KEY: process.env.MIMO_API_KEY,
   BNKR_API_KEY: process.env.BNKR_API_KEY,
-  LYACLOUD_DISABLE_CO_AUTHORED_BY:
-    process.env.LYACLOUD_DISABLE_CO_AUTHORED_BY,
+  LYACODE_DISABLE_CO_AUTHORED_BY:
+    process.env.LYACODE_DISABLE_CO_AUTHORED_BY,
   CLAUDE_CODE_REMOTE_SESSION_ID: process.env.CLAUDE_CODE_REMOTE_SESSION_ID,
   SESSION_INGRESS_URL: process.env.SESSION_INGRESS_URL,
   USER_TYPE: process.env.USER_TYPE,
@@ -70,7 +70,7 @@ const originalClientType = getClientType()
 const originalMainLoopModelOverride = getMainLoopModelOverride()
 
 const defaultPrAttribution =
-  '🤖 Generated with [Lya Cloud](https://github.com/StudioCodeAI/lyacloud)'
+  '🤖 Generated with [Lya Code](https://github.com/StudioCodeAI/lyacode)'
 
 function useSettings(settings: SettingsJson): void {
   testSettings = settings
@@ -122,7 +122,7 @@ beforeEach(async () => {
   process.env.CLAUDE_CODE_USE_OPENAI = '1'
   process.env.OPENAI_MODEL = 'gpt-5.5'
   setMainLoopModelOverride('gpt-5.5')
-  delete process.env.LYACLOUD_DISABLE_CO_AUTHORED_BY
+  delete process.env.LYACODE_DISABLE_CO_AUTHORED_BY
   delete process.env.CLAUDE_CODE_REMOTE_SESSION_ID
   delete process.env.SESSION_INGRESS_URL
   delete process.env.USER_TYPE
@@ -174,7 +174,7 @@ describe('getDefaultCommitCoAuthorName', () => {
         apiProvider: 'openai',
         isInternalRepo: false,
       }),
-    ).toBe('Lya Cloud (gpt-5.5)')
+    ).toBe('Lya Code (gpt-5.5)')
   })
 
   it('does not apply internal Claude formatting to non-Claude providers', () => {
@@ -184,7 +184,7 @@ describe('getDefaultCommitCoAuthorName', () => {
         apiProvider: 'openai',
         isInternalRepo: true,
       }),
-    ).toBe('Lya Cloud (gpt-5.5)')
+    ).toBe('Lya Code (gpt-5.5)')
   })
 
   it('keeps the codename-safe fallback for unknown first-party models', () => {
@@ -217,12 +217,12 @@ describe('getDefaultCommitCoAuthorName', () => {
     ).toBe('Claude Opus 4.6')
   })
 
-  it('uses the Lya Cloud email for commit attribution across providers', () => {
+  it('uses the Lya Code email for commit attribution across providers', () => {
     expect(getDefaultCommitCoAuthorEmail('openai')).toBe(
-      'lyacloud@studiocoder.ai',
+      'lyacode@studiocoder.ai',
     )
     expect(getDefaultCommitCoAuthorEmail('firstParty')).toBe(
-      'lyacloud@studiocoder.ai',
+      'lyacode@studiocoder.ai',
     )
   })
 })
@@ -271,7 +271,7 @@ describe('getAttributionTexts', () => {
 
     const attribution = getAttributionTexts()
     expect(attribution.commit).toStartWith('Co-Authored-By: ')
-    expect(attribution.commit).toEndWith(' <lyacloud@studiocoder.ai>')
+    expect(attribution.commit).toEndWith(' <lyacode@studiocoder.ai>')
     expect(attribution.pr).toBe(defaultPrAttribution)
   })
 
@@ -281,8 +281,8 @@ describe('getAttributionTexts', () => {
     expect(getAttributionTexts()).toEqual({ commit: '', pr: '' })
   })
 
-  it('uses LYACLOUD_DISABLE_CO_AUTHORED_BY to disable the old default co-author trailer', () => {
-    process.env.LYACLOUD_DISABLE_CO_AUTHORED_BY = '1'
+  it('uses LYACODE_DISABLE_CO_AUTHORED_BY to disable the old default co-author trailer', () => {
+    process.env.LYACODE_DISABLE_CO_AUTHORED_BY = '1'
     useSettings({ includeCoAuthoredBy: true })
 
     expect(getAttributionTexts()).toEqual({
@@ -291,8 +291,8 @@ describe('getAttributionTexts', () => {
     })
   })
 
-  it('does not let LYACLOUD_DISABLE_CO_AUTHORED_BY override explicit commit attribution', () => {
-    process.env.LYACLOUD_DISABLE_CO_AUTHORED_BY = '1'
+  it('does not let LYACODE_DISABLE_CO_AUTHORED_BY override explicit commit attribution', () => {
+    process.env.LYACODE_DISABLE_CO_AUTHORED_BY = '1'
     useSettings({
       attribution: { commit: 'Reviewed-by: Human <h@example.com>' },
     })

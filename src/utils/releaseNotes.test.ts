@@ -26,10 +26,10 @@ test('parseGitHubReleaseBody strips markdown links and trailing refs', () => {
 test('parseGitHubReleaseBody preserves snake_case identifiers', () => {
   expect(
     parseGitHubReleaseBody(
-      '* add LYACLOUD_DISABLE_TOOL_REMINDERS env var to suppress reminders',
+      '* add LYACODE_DISABLE_TOOL_REMINDERS env var to suppress reminders',
     ),
   ).toEqual([
-    'add LYACLOUD_DISABLE_TOOL_REMINDERS env var to suppress reminders',
+    'add LYACODE_DISABLE_TOOL_REMINDERS env var to suppress reminders',
   ])
 })
 
@@ -57,13 +57,13 @@ test('getRecentReleaseNotes treats legacy internal seen versions as unseen', () 
 test('release-please changelog headings are normalized for version lookups', () => {
   const changelog = `# Changelog
 
-## [0.8.0](https://github.com/StudioCodeAI/lyacloud/compare/v0.7.0...v0.8.0) (2026-05-02)
+## [0.8.0](https://github.com/StudioCodeAI/lyacode/compare/v0.7.0...v0.8.0) (2026-05-02)
 
 ### Features
 
 * add thing
 
-## [0.7.0](https://github.com/StudioCodeAI/lyacloud/compare/v0.6.0...v0.7.0) (2026-04-26)
+## [0.7.0](https://github.com/StudioCodeAI/lyacode/compare/v0.6.0...v0.7.0) (2026-04-26)
 
 ### Bug Fixes
 
@@ -77,7 +77,7 @@ test('release-please changelog headings are normalized for version lookups', () 
 
 test('getReleaseTagUrl normalizes build metadata to the public tag', () => {
   expect(getReleaseTagUrl('0.8.0+abc123')).toBe(
-    'https://github.com/StudioCodeAI/lyacloud/releases/tag/v0.8.0',
+    'https://github.com/StudioCodeAI/lyacode/releases/tag/v0.8.0',
   )
 })
 

@@ -1,6 +1,6 @@
 # fix-and-rerelease.ps1
 # Limpa lixo, commita correcoes, recria tag v1.0.0 e re-dispara o GitHub Actions
-# Studio CodeAI · Luis Cardozo · Lya Cloud v1.0.0
+# Studio CodeAI · Luis Cardozo · Lya Code v1.0.0
 
 $ErrorActionPreference = "Stop"
 
@@ -11,33 +11,33 @@ function Step($n, $msg) {
     Write-Host "===========================================" -ForegroundColor Cyan
 }
 
-Set-Location "E:\GitHub\lyacloud-main"
+Set-Location "E:\GitHub\lyacode-main"
 Write-Host "  CWD: $(Get-Location)" -ForegroundColor Gray
 
 # 1. Limpar lixo da v0.1.0
 Step "1/7" "Limpando lixo da v0.1.0"
 
 # Remover tarball antigo da raiz
-if (Test-Path ".\studiocodeai-lyacloud-0.1.0.tgz") {
-    Remove-Item -Force ".\studiocodeai-lyacloud-0.1.0.tgz"
-    Write-Host "  Removido: studiocodeai-lyacloud-0.1.0.tgz" -ForegroundColor Green
+if (Test-Path ".\studiocodeai-lyacode-0.1.0.tgz") {
+    Remove-Item -Force ".\studiocodeai-lyacode-0.1.0.tgz"
+    Write-Host "  Removido: studiocodeai-lyacode-0.1.0.tgz" -ForegroundColor Green
 }
 
 # Remover tarball novo da raiz (gerado pelo build, nao precisa estar no git)
-if (Test-Path ".\studiocodeai-lyacloud-1.0.0.tgz") {
-    Remove-Item -Force ".\studiocodeai-lyacloud-1.0.0.tgz"
-    Write-Host "  Removido: studiocodeai-lyacloud-1.0.0.tgz (sera regenerado)" -ForegroundColor Green
+if (Test-Path ".\studiocodeai-lyacode-1.0.0.tgz") {
+    Remove-Item -Force ".\studiocodeai-lyacode-1.0.0.tgz"
+    Write-Host "  Removido: studiocodeai-lyacode-1.0.0.tgz (sera regenerado)" -ForegroundColor Green
 }
 
 # Remover pasta portable antiga
-if (Test-Path ".\dist\installer\lyacloud-portable-0.1.0") {
-    Remove-Item -Force -Recurse ".\dist\installer\lyacloud-portable-0.1.0"
-    Write-Host "  Removida pasta: dist/installer/lyacloud-portable-0.1.0" -ForegroundColor Green
+if (Test-Path ".\dist\installer\lyacode-portable-0.1.0") {
+    Remove-Item -Force -Recurse ".\dist\installer\lyacode-portable-0.1.0"
+    Write-Host "  Removida pasta: dist/installer/lyacode-portable-0.1.0" -ForegroundColor Green
 }
 
 # Remover do git tracking (caso ja tenham sido commitados antes)
-git rm --cached studiocodeai-lyacloud-0.1.0.tgz 2>$null | Out-Null
-git rm --cached studiocodeai-lyacloud-1.0.0.tgz 2>$null | Out-Null
+git rm --cached studiocodeai-lyacode-0.1.0.tgz 2>$null | Out-Null
+git rm --cached studiocodeai-lyacode-1.0.0.tgz 2>$null | Out-Null
 Write-Host "  Limpeza do git tracking (se aplicavel)" -ForegroundColor Green
 
 # 2. Rebuild
@@ -69,7 +69,7 @@ if (-not [string]::IsNullOrEmpty($status)) {
     git add -A
     git commit -m "fix: corrige referencias v0.1.0 -> v1.0.0 no installer
 
-- scripts/installer/windows/lyacloud-setup-x64.sed (paths do tarball)
+- scripts/installer/windows/lyacode-setup-x64.sed (paths do tarball)
 - scripts/installer/windows/install.ps1 (versao + nome do tarball)
 - scripts/installer/windows/install.cmd (versao + nome do tarball)
 - scripts/installer/build-windows.ts (gera .zip do portable)
@@ -92,7 +92,7 @@ git push --delete origin v1.0.0 2>$null
 
 Write-Host "  Apagando release v1.0.0 no GitHub (se existir)..." -ForegroundColor Yellow
 Write-Host "  ATENCAO: voce pode precisar deletar manualmente em:" -ForegroundColor Yellow
-Write-Host "  https://github.com/StudioCodeAI/lyacloud/releases/tag/v1.0.0" -ForegroundColor White
+Write-Host "  https://github.com/StudioCodeAI/lyacode/releases/tag/v1.0.0" -ForegroundColor White
 
 Write-Host ""
 Write-Host "  Quer continuar e recriar a tag? (S/N)" -ForegroundColor Yellow
@@ -107,7 +107,7 @@ git push origin main
 if ($LASTEXITCODE -ne 0) { Write-Host "FALHOU em git push main" -ForegroundColor Red; exit 1 }
 
 # Recriar a tag
-git tag -a v1.0.0 -m "Lya Cloud v1.0.0 - producao estavel"
+git tag -a v1.0.0 -m "Lya Code v1.0.0 - producao estavel"
 git push origin v1.0.0
 if ($LASTEXITCODE -ne 0) { Write-Host "FALHOU em git push tag" -ForegroundColor Red; exit 1 }
 
@@ -120,15 +120,15 @@ Write-Host "  LYA CLOUD v1.0.0 - RE-RELEASE COMPLETO" -ForegroundColor Green
 Write-Host "===========================================" -ForegroundColor Green
 Write-Host ""
 Write-Host "  Acompanhe o build (deve levar ~5-10 min):" -ForegroundColor Cyan
-Write-Host "  https://github.com/StudioCodeAI/lyacloud/actions" -ForegroundColor White
+Write-Host "  https://github.com/StudioCodeAI/lyacode/actions" -ForegroundColor White
 Write-Host ""
 Write-Host "  Release final aparecera em:" -ForegroundColor Cyan
-Write-Host "  https://github.com/StudioCodeAI/lyacloud/releases/tag/v1.0.0" -ForegroundColor White
+Write-Host "  https://github.com/StudioCodeAI/lyacode/releases/tag/v1.0.0" -ForegroundColor White
 Write-Host ""
 Write-Host "  ENQUANTO ESPERA, voce pode testar a versao local:" -ForegroundColor Cyan
-Write-Host "    npm install -g .\studiocodeai-lyacloud-1.0.0.tgz" -ForegroundColor White
+Write-Host "    npm install -g .\studiocodeai-lyacode-1.0.0.tgz" -ForegroundColor White
 Write-Host "    lya --version" -ForegroundColor White
 Write-Host ""
 Write-Host "  COMANDO DE INSTALACAO publico (apos o release ficar pronto):" -ForegroundColor Cyan
-Write-Host "    npm install -g https://github.com/StudioCodeAI/lyacloud/releases/download/v1.0.0/studiocodeai-lyacloud-1.0.0.tgz" -ForegroundColor White
+Write-Host "    npm install -g https://github.com/StudioCodeAI/lyacode/releases/download/v1.0.0/studiocodeai-lyacode-1.0.0.tgz" -ForegroundColor White
 Write-Host ""

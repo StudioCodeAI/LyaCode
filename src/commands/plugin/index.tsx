@@ -3,7 +3,7 @@ const plugin = {
   type: 'local-jsx',
   name: 'plugin',
   aliases: ['plugins', 'marketplace'],
-  description: 'Manage Lya Cloud plugins',
+  description: 'Manage Lya Code plugins',
   immediate: true,
   load: () => import('./plugin.js')
 } satisfies Command;

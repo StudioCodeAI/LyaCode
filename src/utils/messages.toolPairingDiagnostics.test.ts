@@ -138,7 +138,7 @@ test('validateToolResultPairing reports server tool uses without in-message resu
         type: 'server_tool_use',
         id: 'srvu_missing',
         name: 'web_search',
-        input: { query: 'lyacloud' },
+        input: { query: 'lyacode' },
       } as unknown as BetaContentBlock,
     ],
   })

@@ -11,10 +11,10 @@ import { unlink } from 'node:fs/promises'
 import { mkdirSync, rmSync } from 'fs'
 
 describe('sessionPersistence', () => {
-  const testSessionDir = join(process.env.TEMP_DIR ?? '/tmp', 'lyacloud-test-sessions')
+  const testSessionDir = join(process.env.TEMP_DIR ?? '/tmp', 'lyacode-test-sessions')
 
   beforeEach(async () => {
-    process.env.LYACLOUD_TEST_SESSIONS_DIR = testSessionDir
+    process.env.LYACODE_TEST_SESSIONS_DIR = testSessionDir
     mkdirSync(testSessionDir, { recursive: true })
     try {
       const sessions = await listSessions()
@@ -27,7 +27,7 @@ describe('sessionPersistence', () => {
   })
 
   afterEach(() => {
-    delete process.env.LYACLOUD_TEST_SESSIONS_DIR
+    delete process.env.LYACODE_TEST_SESSIONS_DIR
   })
 
   describe('createSession', () => {

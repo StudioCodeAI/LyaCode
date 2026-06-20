@@ -12,7 +12,7 @@ import { getCwd } from '../../utils/cwd.js'
 function renderHelp(): string {
   return `Usage: /wiki [init|status|ingest <path>]
 
-Manage the Lya Cloud project wiki stored in .lyacloud/wiki.
+Manage the Lya Code project wiki stored in .lyacode/wiki.
 
 Commands:
   /wiki init    Initialize the wiki structure in the current project
@@ -26,7 +26,7 @@ Examples:
 }
 
 function formatInitResult(result: Awaited<ReturnType<typeof initializeWiki>>): string {
-  const lines = [`Initialized Lya Cloud wiki at ${result.root}`]
+  const lines = [`Initialized Lya Code wiki at ${result.root}`]
 
   if (result.alreadyExisted) {
     lines.push('', 'Wiki already existed. No new files were created.')
@@ -45,11 +45,11 @@ function formatInitResult(result: Awaited<ReturnType<typeof initializeWiki>>): s
 
 function formatStatus(status: Awaited<ReturnType<typeof getWikiStatus>>): string {
   if (!status.initialized) {
-    return `Lya Cloud wiki is not initialized in this project.\n\nRun /wiki init to create ${status.root}.`
+    return `Lya Code wiki is not initialized in this project.\n\nRun /wiki init to create ${status.root}.`
   }
 
   return [
-    'Lya Cloud wiki status',
+    'Lya Code wiki status',
     '',
     `Root: ${status.root}`,
     `Pages: ${status.pageCount}`,
@@ -65,7 +65,7 @@ function formatIngestResult(
   result: Awaited<ReturnType<typeof ingestLocalWikiSource>>,
 ): string {
   return [
-    `Ingested ${result.sourceFile} into the Lya Cloud wiki.`,
+    `Ingested ${result.sourceFile} into the Lya Code wiki.`,
     '',
     `Title: ${result.title}`,
     `Source note: ${result.sourceNote}`,

@@ -1,5 +1,5 @@
-export const PRODUCT_DISPLAY_NAME = 'Lya Cloud'
-export const PRODUCT_URL = 'https://studiocodeai.com/lyacloud'
+export const PRODUCT_DISPLAY_NAME = 'Lya Code'
+export const PRODUCT_URL = 'https://studiocodeai.com/lyacode'
 
 // Claude Code Remote session URLs
 export const CLAUDE_AI_BASE_URL = 'https://claude.ai'

@@ -640,7 +640,7 @@ export async function performCodexRequest(options: {
   if (options.credentials.accountId) {
     headers['chatgpt-account-id'] = options.credentials.accountId
   }
-  headers.originator ??= 'lyacloud'
+  headers.originator ??= 'lyacode'
 
   const response = await fetchWithProxyRetry(
     `${options.request.baseUrl}/responses`,

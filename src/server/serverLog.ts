@@ -1,5 +1,5 @@
 /**
- * Inert stub for the Lya Cloud session-server logger.
+ * Inert stub for the Lya Code session-server logger.
  *
  * The bundler noop-stubs this specifier in current builds; this module
  * mirrors that behavior for the typechecker. `createServerLogger` returns a

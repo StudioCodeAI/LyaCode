@@ -227,7 +227,7 @@ function Update({ onDone, force, target }: UpdateProps): React.ReactNode {
           <Box>
             <StatusIcon status="warning" withSpace />
             <Text color="warning">
-              Lya Cloud is managed by a package manager ({state.manager}).
+              Lya Code is managed by a package manager ({state.manager}).
             </Text>
           </Box>
           <Box marginLeft={2}>
@@ -263,7 +263,7 @@ function Update({ onDone, force, target }: UpdateProps): React.ReactNode {
 
       {state.type === 'updating' && (
         <Text color="claude">
-          Updating Lya Cloud to {state.version} via {state.via} (this may take a
+          Updating Lya Code to {state.version} via {state.via} (this may take a
           moment)...
         </Text>
       )}
@@ -273,12 +273,12 @@ function Update({ onDone, force, target }: UpdateProps): React.ReactNode {
           <Box>
             <StatusIcon status="success" withSpace />
             <Text color="success" bold>
-              Lya Cloud updated to {state.version} via {state.via}!
+              Lya Code updated to {state.version} via {state.via}!
             </Text>
           </Box>
           <Box marginLeft={2}>
             <Text dimColor>
-              Restart Lya Cloud for the new version to take effect.
+              Restart Lya Code for the new version to take effect.
             </Text>
           </Box>
         </Box>
@@ -309,20 +309,20 @@ function terminalDoneMessage(state: UpdateState): {
 } {
   switch (state.type) {
     case 'success':
-      return { message: 'Lya Cloud updated successfully', delay: 3000 }
+      return { message: 'Lya Code updated successfully', delay: 3000 }
     case 'up-to-date':
-      return { message: 'Lya Cloud is already up to date', delay: 1500 }
+      return { message: 'Lya Code is already up to date', delay: 1500 }
     case 'blocked':
       return { message: 'Auto-update is unavailable for this build', delay: 3000 }
     case 'package-manager':
       return {
-        message: 'Lya Cloud is managed by a package manager',
+        message: 'Lya Code is managed by a package manager',
         delay: 3000,
       }
     case 'no-package-manager':
       return { message: 'No supported package manager found', delay: 3000 }
     case 'error':
-      return { message: 'Lya Cloud update failed', delay: 4000 }
+      return { message: 'Lya Code update failed', delay: 4000 }
     default:
       return { message: '', delay: 0 }
   }

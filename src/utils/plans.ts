@@ -27,7 +27,7 @@ const MAX_SLUG_RETRIES = 10
 
 export function getDefaultPlansDirectory({
   configDirEnv = resolveConfigDirEnv({
-    lyaCloudConfigDir: process.env.LYACLOUD_CONFIG_DIR,
+    lyaCloudConfigDir: process.env.LYACODE_CONFIG_DIR,
     legacyConfigDir: process.env.CLAUDE_CONFIG_DIR,
   }),
   homeDir = homedir(),
@@ -38,7 +38,7 @@ export function getDefaultPlansDirectory({
   if (configDirEnv) {
     return join(configDirEnv.normalize('NFC'), 'plans')
   }
-  return join(homeDir, '.lyacloud', 'plans').normalize('NFC')
+  return join(homeDir, '.lyacode', 'plans').normalize('NFC')
 }
 
 /**

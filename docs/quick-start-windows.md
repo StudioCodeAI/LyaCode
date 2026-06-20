@@ -1,4 +1,4 @@
-# Lya Cloud Quick Start for Windows
+# Lya Code Quick Start for Windows
 
 This guide uses Windows PowerShell.
 
@@ -15,10 +15,10 @@ node --version
 npm --version
 ```
 
-## 2. Install Lya Cloud
+## 2. Install Lya Code
 
 ```powershell
-npm install -g @studiocodeai/lyacloud@latest
+npm install -g @studiocodeai/lyacode@latest
 ```
 
 ## 3. Pick One Provider
@@ -32,7 +32,7 @@ $env:CLAUDE_CODE_USE_OPENAI="1"
 $env:OPENAI_API_KEY="sk-your-key-here"
 $env:OPENAI_MODEL="gpt-4o"
 
-lyacloud
+lyacode
 ```
 
 ### Option B: DeepSeek
@@ -43,7 +43,7 @@ $env:OPENAI_API_KEY="sk-your-key-here"
 $env:OPENAI_BASE_URL="https://api.deepseek.com/v1"
 $env:OPENAI_MODEL="deepseek-v4-flash"
 
-lyacloud
+lyacode
 ```
 
 Use `deepseek-v4-pro` when you want the stronger model. `deepseek-chat` and `deepseek-reasoner` still work as DeepSeek's legacy API aliases.
@@ -63,7 +63,7 @@ $env:CLAUDE_CODE_USE_OPENAI="1"
 $env:OPENAI_BASE_URL="http://localhost:11434/v1"
 $env:OPENAI_MODEL="llama3.1:8b"
 
-lyacloud
+lyacode
 ```
 
 No API key is needed for Ollama local models.
@@ -88,7 +88,7 @@ $env:OPENAI_BASE_URL="http://localhost:1234/v1"
 $env:OPENAI_MODEL="your-model-name"
 # $env:OPENAI_API_KEY="lmstudio"  # optional: some users need a dummy key
 
-lyacloud
+lyacode
 ```
 
 Replace `your-model-name` with the model name shown in LM Studio.
@@ -97,24 +97,24 @@ No API key is needed for LM Studio local models (but uncomment the `OPENAI_API_K
 
 ### Option E: Using a .env file (Optional)
 
-If you prefer to keep your keys in a `.env` file instead of exporting them individually, note that Lya Cloud does not load `.env` files automatically. You must explicitly pass it:
+If you prefer to keep your keys in a `.env` file instead of exporting them individually, note that Lya Code does not load `.env` files automatically. You must explicitly pass it:
 
 ```powershell
-lyacloud --provider-env-file .env
+lyacode --provider-env-file .env
 ```
 
 Keep `.env` out of git because it contains secrets.
 The explicit loader accepts provider/setup variables. Set runtime/debug variables in PowerShell or your launcher instead.
 
-## 4. If `lyacloud` Is Not Found
+## 4. If `lyacode` Is Not Found
 
 Close PowerShell, open a new one, and try again:
 
 ```powershell
-lyacloud
+lyacode
 ```
 
-If PowerShell still says `lyacloud` is not recognized, npm's global bin
+If PowerShell still says `lyacode` is not recognized, npm's global bin
 folder may be missing from your user `Path`. Add it, then open a new
 PowerShell window:
 
@@ -154,16 +154,16 @@ Check the basics:
 - make sure a model is loaded in LM Studio
 - make sure the model name matches what you set in `OPENAI_MODEL`
 
-## 6. Updating Lya Cloud
+## 6. Updating Lya Code
 
 ```powershell
-npm install -g @studiocodeai/lyacloud@latest
+npm install -g @studiocodeai/lyacode@latest
 ```
 
-## 7. Uninstalling Lya Cloud
+## 7. Uninstalling Lya Code
 
 ```powershell
-npm uninstall -g @studiocodeai/lyacloud
+npm uninstall -g @studiocodeai/lyacode
 ```
 
 
@@ -173,6 +173,6 @@ For advanced provider setup, custom endpoints, environment variables, and enterp
 
 - [Advanced setup](advanced-setup.md)
 
-For Windows helper aliases and launcher shortcuts such as `lc`, `lya`, `lyacloud-local`, and `lyacloud-provider`, see:
+For Windows helper aliases and launcher shortcuts such as `lc`, `lya`, `lyacode-local`, and `lyacode-provider`, see:
 
 - [Windows aliases and launchers](windows-aliases-and-launchers.md)

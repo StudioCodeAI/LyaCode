@@ -186,9 +186,9 @@ export function hookSourceDescriptionDisplayString(source: HookSource): string {
   // See NOTE above re: why homedir is loaded via require() not import.
   const realHome = require('os').homedir() as string
   const homeDir =
-    process.env.LYACLOUD_CONFIG_DIR ??
+    process.env.LYACODE_CONFIG_DIR ??
     process.env.CLAUDE_CONFIG_DIR ??
-    join(realHome, '.lyacloud')
+    join(realHome, '.lyacode')
   const pluginHooksPath = getDisplayPath(
     join(homeDir, 'plugins', '*', 'hooks', 'hooks.json'),
     realHome,

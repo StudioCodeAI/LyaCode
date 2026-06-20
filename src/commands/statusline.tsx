@@ -4,12 +4,12 @@ import { AGENT_TOOL_NAME } from '../tools/AgentTool/constants.js';
 import { getSettingsFilePathForSource } from '../utils/settings/settings.js';
 
 function getUserSettingsPath(): string {
-  return getSettingsFilePathForSource('userSettings') ?? '~/.lyacloud/settings.json';
+  return getSettingsFilePathForSource('userSettings') ?? '~/.lyacode/settings.json';
 }
 
 const statusline = {
   type: 'prompt',
-  description: "Set up Lya Cloud's status line UI",
+  description: "Set up Lya Code's status line UI",
   contentLength: 0,
   // Dynamic content
   aliases: [],

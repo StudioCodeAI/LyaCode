@@ -1,13 +1,13 @@
 # Changelog
 
-All notable Lya Cloud changes will be documented here.
+All notable Lya Code changes will be documented here.
 
 ## v1.0.1 — 2026-06-20 (patch)
 
 ### Fixed
 
 - **Bitmap `a` minúsculo** — 3 linhas com 11 chars corrigidas para 10: elimina
-  desalinhamento visual no wordmark "Lya Cloud" que aparecia no startup screen.
+  desalinhamento visual no wordmark "Lya Code" que aparecia no startup screen.
 - **Bitmap `D` maiúsculo** — normalizado para 10 chars por linha (era mistura de 9 e 10).
 
 ### Changed
@@ -15,7 +15,7 @@ All notable Lya Cloud changes will be documented here.
 - **Ordem de providers** em `/provider`: `Ollama Local` promovido para a posição 1
   (local-first); `Gitlawb Opengateway` movido para a última posição.
 - **Releases e instaladores** agora publicados no repo público
-  [`StudioCodeAI/lyacloud-installers`](https://github.com/StudioCodeAI/lyacloud-installers)
+  [`StudioCodeAI/lyacode-installers`](https://github.com/StudioCodeAI/lyacode-installers)
   — código-fonte permanece no repo privado.
 - **Workflow de release** (`.github/workflows/release.yml`) atualizado para usar
   `INSTALLERS_REPO_TOKEN` e publicar artefatos no repo público.
@@ -28,35 +28,35 @@ Initial Studio CodeAI foundation release.
 
 ### Added
 
-- Lya Cloud product identity.
-- `lyacloud` CLI launcher (aliases: `lscloud`, `lya`, `lyacode`, `lscode`).
+- Lya Code product identity.
+- `lyacode` CLI launcher (aliases: `lscloud`, `lya`, `lyacode`, `lscode`).
 - **Lya persona + 6 sub-agents** (`lya`, `lya-architect`, `lya-explorer`,
   `lya-reviewer`, `lya-tester`, `lya-recorder`) registered as built-in
   agents. Profile, voice, boundaries and operating principles in
   `src/agents/lya/profile.ts`.
 - `/lya` slash command — explicit invocation that loads Lya's system
   prompt base into the current session.
-- Co-author email `lyacloud@studiocoder.ai` for commit attribution
-  (was `lyacloud@studiocodeai.com`).
+- Co-author email `lyacode@studiocoder.ai` for commit attribution
+  (was `lyacode@studiocodeai.com`).
 - Studio CodeAI README, roadmap, identity document, and Windows aliases.
-- `.lyacloud` user configuration direction.
-- VS Code extension source under the Lya Cloud identity.
+- `.lyacode` user configuration direction.
+- VS Code extension source under the Lya Code identity.
 - Documentation website source under `web/`.
 
 ### Changed
 
-- Reworked the inherited coding-agent CLI base into the Lya Cloud foundation.
-- Replaced inherited product identity references with Lya Cloud.
-- Standardized environment variables on `LYACLOUD_*` where they belong to this product.
+- Reworked the inherited coding-agent CLI base into the Lya Code foundation.
+- Replaced inherited product identity references with Lya Code.
+- Standardized environment variables on `LYACODE_*` where they belong to this product.
 - `getDisplayPath(path, overrideHomeDir?)`,
   `redactPathForStatus(path, overrideHomeDir?)`,
   `getClaudeConfigHomeDir(overrideHomeDir?)` now accept an explicit
   home directory so test suites can pin paths without mocking
   `os.homedir()` (which leaked state across suites).
-- `resolveConfigDirEnv` warns and prefers `LYACLOUD_CONFIG_DIR` over
+- `resolveConfigDirEnv` warns and prefers `LYACODE_CONFIG_DIR` over
   legacy `CLAUDE_CONFIG_DIR`.
 - Default PR attribution string carries the 🤖 prefix and Studio CodeAI
-  Lya Cloud wordmark.
+  Lya Code wordmark.
 
 ### Fixed
 

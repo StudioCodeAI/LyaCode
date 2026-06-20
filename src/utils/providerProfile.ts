@@ -41,8 +41,8 @@ export {
 } from './providerSecrets.js'
 import { getClaudeConfigHomeDir, isEnvTruthy } from './envUtils.js'
 
-export const PROFILE_FILE_NAME = '.lyacloud-profile.json'
-export const LEGACY_PROFILE_FILE_NAME = '.lyacloud-profile.json'
+export const PROFILE_FILE_NAME = '.lyacode-profile.json'
+export const LEGACY_PROFILE_FILE_NAME = '.lyacode-profile.json'
 export const DEFAULT_GEMINI_BASE_URL =
   'https://generativelanguage.googleapis.com/v1beta/openai'
 export const DEFAULT_GEMINI_MODEL = 'gemini-3-flash-preview'
@@ -1779,7 +1779,7 @@ export async function buildStartupEnvFromProfile(options?: {
     persisted,
     goal:
       options?.goal ??
-      normalizeRecommendationGoal(processEnv.LYACLOUD_PROFILE_GOAL),
+      normalizeRecommendationGoal(processEnv.LYACODE_PROFILE_GOAL),
     processEnv,
     getOllamaChatBaseUrl:
       options?.getOllamaChatBaseUrl ?? getOllamaChatBaseUrl,
@@ -1846,7 +1846,7 @@ export async function applySavedProfileToCurrentSession(options: {
     const explicitEnv = await buildLaunchEnv({
       profile: options.profileFile.profile,
       persisted: options.profileFile,
-      goal: normalizeRecommendationGoal(processEnv.LYACLOUD_PROFILE_GOAL),
+      goal: normalizeRecommendationGoal(processEnv.LYACODE_PROFILE_GOAL),
       processEnv: buildEnvSource,
       getOllamaChatBaseUrl,
       readGeminiAccessToken,
@@ -1895,7 +1895,7 @@ export async function applySavedProfileToCurrentSession(options: {
   const nextEnv = await buildLaunchEnv({
     profile: options.profileFile.profile,
     persisted: options.profileFile,
-    goal: normalizeRecommendationGoal(processEnv.LYACLOUD_PROFILE_GOAL),
+    goal: normalizeRecommendationGoal(processEnv.LYACODE_PROFILE_GOAL),
     processEnv: baseEnv,
     getOllamaChatBaseUrl,
     readGeminiAccessToken,

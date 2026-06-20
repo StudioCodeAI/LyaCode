@@ -14,8 +14,8 @@ vscode-extension/*/dist/
 .env.*
 !.env.example
 auth.json
-.lyacloud-profile.json
-.lyacloud/
+.lyacode-profile.json
+.lyacode/
 reports/
 GEMINI.md
 CLAUDE.md

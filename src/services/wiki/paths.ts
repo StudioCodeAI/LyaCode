@@ -1,11 +1,11 @@
 import { join } from 'path'
 import type { WikiPaths } from './types.js'
 
-export const LYACLOUD_DIRNAME = '.lyacloud'
+export const LYACODE_DIRNAME = '.lyacode'
 export const WIKI_DIRNAME = 'wiki'
 
 export function getWikiPaths(cwd: string): WikiPaths {
-  const root = join(cwd, LYACLOUD_DIRNAME, WIKI_DIRNAME)
+  const root = join(cwd, LYACODE_DIRNAME, WIKI_DIRNAME)
 
   return {
     root,

@@ -58,7 +58,7 @@ export function getWebFetchUserAgent(): string {
   const supportUrl =
     getAPIProvider() === 'firstParty'
       ? 'https://support.anthropic.com/'
-      : 'https://github.com/StudioCodeAI/lyacloud'
+      : 'https://github.com/StudioCodeAI/lyacode'
   return `Claude-User (${getClaudeCodeUserAgent()}; +${supportUrl})`
 }
 

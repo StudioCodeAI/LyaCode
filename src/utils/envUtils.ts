@@ -114,7 +114,7 @@ export function migrateLegacyClaudeConfigHome(options?: {
   }
 
   const homeDir = options?.homeDir ?? homedir()
-  const lyaCloudDir = join(homeDir, '.lyacloud')
+  const lyaCloudDir = join(homeDir, '.lyacode')
   const legacyClaudeDir = join(homeDir, '.claude')
 
   try {
@@ -130,7 +130,7 @@ export function migrateLegacyClaudeConfigHome(options?: {
     }
 
     for (const legacyFile of legacyGlobalConfigFiles) {
-      const lyaCloudFile = legacyFile.replace(/^\.claude/, '.lyacloud')
+      const lyaCloudFile = legacyFile.replace(/^\.claude/, '.lyacode')
       copyMissingPathSync(
         join(homeDir, legacyFile),
         join(homeDir, lyaCloudFile),
@@ -144,8 +144,8 @@ export function migrateLegacyClaudeConfigHome(options?: {
 
 /**
  * Resolves the override env value for the config home directory.
- * `LYACLOUD_CONFIG_DIR` is preferred. `CLAUDE_CONFIG_DIR` is kept as a
- * technical compatibility fallback. When values disagree, Lya Cloud wins and
+ * `LYACODE_CONFIG_DIR` is preferred. `CLAUDE_CONFIG_DIR` is kept as a
+ * technical compatibility fallback. When values disagree, Lya Code wins and
  * we warn once so the user can clean up. Exported for tests.
  */
 let warnedAboutConflictingConfigDirEnvs = false
@@ -164,10 +164,10 @@ export function resolveConfigDirEnv(options?: {
     legacy &&
     lya !== legacy
   if (legacyConflict && !warnedAboutConflictingConfigDirEnvs) {
-    const selectedName = lya ? 'LYACLOUD_CONFIG_DIR' : 'CLAUDE_CONFIG_DIR'
-    const legacyName = lya ? 'CLAUDE_CONFIG_DIR' : 'LYACLOUD_CONFIG_DIR'
+    const selectedName = lya ? 'LYACODE_CONFIG_DIR' : 'CLAUDE_CONFIG_DIR'
+    const legacyName = lya ? 'CLAUDE_CONFIG_DIR' : 'LYACODE_CONFIG_DIR'
     const legacyValue = lya ? legacy : lya
-    const message = `Multiple Lya Cloud config directory environment variables are set to different values. Using ${selectedName}=${selected}; ${legacyName}=${legacyValue} ignored.`
+    const message = `Multiple Lya Code config directory environment variables are set to different values. Using ${selectedName}=${selected}; ${legacyName}=${legacyValue} ignored.`
     if (options?.warn) {
       warnedAboutConflictingConfigDirEnvs = true
       options.warn(message)
@@ -193,7 +193,7 @@ export function resolveClaudeConfigHomeDir(options?: {
   }
 
   const homeDir = options?.homeDir ?? homedir()
-  const lyaCloudDir = join(homeDir, '.lyacloud')
+  const lyaCloudDir = join(homeDir, '.lyacode')
 
   return lyaCloudDir.normalize('NFC')
 }
@@ -216,11 +216,11 @@ export const getClaudeConfigHomeDir = memoize(
     }
 
     const configDirEnv = resolveConfigDirEnv({
-      lyaCloudConfigDir: process.env.LYACLOUD_CONFIG_DIR,
+      lyaCloudConfigDir: process.env.LYACODE_CONFIG_DIR,
       legacyConfigDir: process.env.CLAUDE_CONFIG_DIR,
       warn: message => {
         // eslint-disable-next-line no-console
-        console.warn(`[lyacloud] ${message}`)
+        console.warn(`[lyacode] ${message}`)
       },
     })
     const homeDir = overrideHomeDir ?? homedir()
@@ -228,7 +228,7 @@ export const getClaudeConfigHomeDir = memoize(
       configDirEnv,
       homeDir,
     })
-    const lyaCloudDir = join(homeDir, '.lyacloud')
+    const lyaCloudDir = join(homeDir, '.lyacode')
     const legacyClaudeDir = join(homeDir, '.claude')
 
     if (
@@ -246,7 +246,7 @@ export const getClaudeConfigHomeDir = memoize(
     })
   },
   () =>
-    `${claudeConfigHomeDirOverride ?? ''}\0${process.env.LYACLOUD_CONFIG_DIR ?? ''}\0${process.env.CLAUDE_CONFIG_DIR ?? ''}`,
+    `${claudeConfigHomeDirOverride ?? ''}\0${process.env.LYACODE_CONFIG_DIR ?? ''}\0${process.env.CLAUDE_CONFIG_DIR ?? ''}`,
 )
 
 /**
@@ -264,7 +264,7 @@ export function resolveConfigHomeDirForTest(homeDir: string): string {
  * Test-only escape hatch — clears the memo cache for
  * `getClaudeConfigHomeDir()` so the next call re-resolves against
  * the current process environment. Sibling suites that set
- * `LYACLOUD_CONFIG_DIR`, `CLAUDE_CONFIG_DIR`, or the internal
+ * `LYACODE_CONFIG_DIR`, `CLAUDE_CONFIG_DIR`, or the internal
  * override via `setClaudeConfigHomeDirForTesting()` may otherwise
  * leave a stale value cached for the rest of the process.
  */

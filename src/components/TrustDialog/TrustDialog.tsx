@@ -206,7 +206,7 @@ export function TrustDialog(t0) {
   if ($[20] === Symbol.for("react.memo_cache_sentinel")) {
     t16 = <Text bold={true}>{getFsImplementation().cwd()}</Text>;
     t17 = <Text>Verificação rápida de segurança: este projeto é seu ou vem de uma fonte em que você confia? Se não tiver certeza, revise o conteúdo desta pasta antes de continuar.</Text>;
-    t18 = <Text>Lya Cloud poderá ler, editar e executar arquivos neste workspace.</Text>;
+    t18 = <Text>Lya Code poderá ler, editar e executar arquivos neste workspace.</Text>;
     $[20] = t16;
     $[21] = t17;
     $[22] = t18;

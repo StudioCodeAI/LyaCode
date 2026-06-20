@@ -147,7 +147,7 @@ export function MCPSettings(t0: Props): React.ReactNode {
         return;
       }
       if (servers.length === 0 && agentMcpServers.length === 0) {
-        onComplete("No MCP servers configured. Please run /doctor if this is unexpected. Otherwise, run `lyacloud mcp --help` or visit https://github.com/StudioCodeAI/lyacloud to learn more.");
+        onComplete("No MCP servers configured. Please run /doctor if this is unexpected. Otherwise, run `lyacode mcp --help` or visit https://github.com/StudioCodeAI/lyacode to learn more.");
       }
     };
     t8 = [servers.length, filteredClients.length, agentMcpServers.length, onComplete];

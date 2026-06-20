@@ -23,8 +23,8 @@ const originalCwd = process.cwd()
 
 beforeEach(async () => {
   await acquireSharedMutationLock('cli/handlers/xaiAuth.test.ts')
-  tempConfigDir = mkdtempSync(join(tmpdir(), 'lyacloud-xai-cli-config-'))
-  tempCwd = mkdtempSync(join(tmpdir(), 'lyacloud-xai-cli-cwd-'))
+  tempConfigDir = mkdtempSync(join(tmpdir(), 'lyacode-xai-cli-config-'))
+  tempCwd = mkdtempSync(join(tmpdir(), 'lyacode-xai-cli-cwd-'))
   process.chdir(tempCwd)
   process.env.CLAUDE_CONFIG_DIR = tempConfigDir
   process.env.CLAUDE_CODE_SIMPLE = '1'
@@ -98,13 +98,13 @@ async function freshHandlerModules() {
 }
 
 function readProfileFile(): { profile?: string; env?: Record<string, unknown> } | null {
-  const path = join(tempConfigDir, '.lyacloud-profile.json')
+  const path = join(tempConfigDir, '.lyacode-profile.json')
   if (!existsSync(path)) return null
   return JSON.parse(readFileSync(path, 'utf8'))
 }
 
 function writeMarkerStartupProfile(): string {
-  const path = join(tempConfigDir, '.lyacloud-profile.json')
+  const path = join(tempConfigDir, '.lyacode-profile.json')
   writeFileSync(
     path,
     JSON.stringify(
@@ -125,8 +125,8 @@ function writeMarkerStartupProfile(): string {
 }
 
 // Regression: a user who configured xAI OAuth via /provider and later
-// runs `lyacloud auth xai logout` previously only had secure storage
-// cleared. The marker-tagged .lyacloud-profile.json survived, leaving
+// runs `lyacode auth xai logout` previously only had secure storage
+// cleared. The marker-tagged .lyacode-profile.json survived, leaving
 // startup in a half-logged-out state — validation would still accept
 // XAI_CREDENTIAL_SOURCE=oauth while openaiShim could no longer resolve
 // a token.
@@ -164,7 +164,7 @@ test('xaiLogout leaves unrelated startup profiles intact', async () => {
   const { handlers, xaiLogoutDeps } = await freshHandlerModules()
 
   // Simulate a non-xAI startup file (e.g. an openai profile).
-  const path = join(tempConfigDir, '.lyacloud-profile.json')
+  const path = join(tempConfigDir, '.lyacode-profile.json')
   writeFileSync(
     path,
     JSON.stringify(

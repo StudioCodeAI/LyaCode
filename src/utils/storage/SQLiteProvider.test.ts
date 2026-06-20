@@ -19,7 +19,7 @@ describe('SQLite Storage Layer', () => {
   const originalConfigDir = process.env.CLAUDE_CONFIG_DIR
   const originalCwd = process.cwd()
   const originalFs = getFsImplementation()
-  const configDir = mkdtempSync(join(tmpdir(), 'lyacloud-sqlite-'))
+  const configDir = mkdtempSync(join(tmpdir(), 'lyacode-sqlite-'))
   let workspaceDir = ''
   const removeDirWithRetry = (dir: string) => {
     for (let attempt = 0; attempt < 5; attempt++) {
@@ -83,7 +83,7 @@ describe('SQLite Storage Layer', () => {
 
   beforeEach(async () => {
     await acquireEnvMutex()
-    workspaceDir = mkdtempSync(join(tmpdir(), 'lyacloud-sqlite-cwd-'))
+    workspaceDir = mkdtempSync(join(tmpdir(), 'lyacode-sqlite-cwd-'))
     process.chdir(workspaceDir)
     setFsImplementation({
       ...originalFs,

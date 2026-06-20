@@ -13,9 +13,9 @@ const toc = [
 ---
 
 <DocsLayout
-  title="Install lyacloud — npm, macOS, Linux & Windows"
-  description="How to install the lyacloud CLI with npm on macOS, Linux, and Windows. Requirements, global install, verifying the install, and updating to the latest version."
-  heading="install lyacloud"
+  title="Install lyacode — npm, macOS, Linux & Windows"
+  description="How to install the lyacode CLI with npm on macOS, Linux, and Windows. Requirements, global install, verifying the install, and updating to the latest version."
+  heading="install lyacode"
   lede="One npm command on macOS, Linux, or Windows. An AUR package exists for Arch."
   toc={toc}
 >
@@ -29,23 +29,23 @@ const toc = [
   <h2 id="install">install with npm</h2>
   <pre><code>{SITE.installCommand}</code></pre>
   <p>
-    This installs the <code>lyacloud</code> binary globally. On macOS/Linux you may need
+    This installs the <code>lyacode</code> binary globally. On macOS/Linux you may need
     a Node installation that doesn't require <code>sudo</code> for global installs (nvm,
     fnm, or Homebrew node all work).
   </p>
 
   <h2 id="arch-linux">arch linux (aur)</h2>
   <p>
-    A community-maintained <a href="https://aur.archlinux.org/packages/lyacloud" rel="noopener">AUR package</a> is available:
+    A community-maintained <a href="https://aur.archlinux.org/packages/lyacode" rel="noopener">AUR package</a> is available:
   </p>
-  <pre><code>paru -S lyacloud</code></pre>
+  <pre><code>paru -S lyacode</code></pre>
 
   <h2 id="verify">verify the install</h2>
-  <pre><code>lyacloud --version</code></pre>
+  <pre><code>lyacode --version</code></pre>
   <p>
     To check which version is the latest published release:
   </p>
-  <pre><code>npm view @studiocodeai/lyacloud dist-tags</code></pre>
+  <pre><code>npm view @studiocodeai/lyacode dist-tags</code></pre>
 
   <h2 id="update">update</h2>
   <p>Re-run the install command — <code>@latest</code> always resolves to the newest release:</p>
@@ -55,7 +55,7 @@ const toc = [
   <ul>
     <li><strong>Old version after update</strong> — your shell may cache the binary path; run <code>hash -r</code> (bash/zsh) or open a new terminal.</li>
     <li><strong>Multiple Node versions</strong> — global installs are per Node version with nvm/fnm; make sure you installed under the version your shell uses.</li>
-    <li><strong>Anything else</strong> — run <code>/doctor</code> inside lyacloud to diagnose the installation, or check the <a href={`${SITE.github}/issues`} rel="noopener">issue tracker</a>.</li>
+    <li><strong>Anything else</strong> — run <code>/doctor</code> inside lyacode to diagnose the installation, or check the <a href={`${SITE.github}/issues`} rel="noopener">issue tracker</a>.</li>
   </ul>
   <p>Next: <a href="/docs/quickstart/">run your first session →</a></p>
 </DocsLayout>

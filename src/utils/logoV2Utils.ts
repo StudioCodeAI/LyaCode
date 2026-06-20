@@ -100,7 +100,7 @@ export function calculateOptimalLeftWidth(
  */
 export function formatWelcomeMessage(username: string | null): string {
   if (!username || username.length > MAX_USERNAME_LENGTH) {
-    return 'Welcome to Lya Cloud'
+    return 'Welcome to Lya Code'
   }
   return `Welcome back, ${username}`
 }

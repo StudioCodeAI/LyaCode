@@ -1,6 +1,6 @@
-Lya Cloud wordmark — 4 estilos para você escolher
+Lya Code wordmark — 4 estilos para você escolher
 
-Cada opção abaixo renderiza "Lya Cloud" com uma fonte/tamanho diferente.
+Cada opção abaixo renderiza "Lya Code" com uma fonte/tamanho diferente.
 Eu recomendo a opção D (Lya.Cloud em 7-row bold) — tem presença visual
 máxima, lê bem em qualquer terminal, e respeita o branding do produto
 (Lya.Cloud é o domínio canônico, com ponto entre as palavras).
@@ -56,7 +56,7 @@ D. 7-row bold mixed case (LARGE + Lya.Cloud) — RECOMENDADO
 
 rows: 7  cols: 65
 Veredito: presença + identidade (Lya.Cloud com ponto).
-            Branding consistente com assets/brand/lyacloud-logo.svg.
+            Branding consistente com assets/brand/lyacode-logo.svg.
 
 ────────────────────────────────────────────────────────────────
 Tamanhos disponíveis:
@@ -67,8 +67,8 @@ Tamanhos disponíveis:
 - 7-row mix:    ~65 colunas ×  7 linhas  (grande + brand)
 
 Texto por linha:
-- 5-row thin:  Lya Cloud visível, mas só metade do tamanho de uma tag
-- 7-row bold:  Lya Cloud ocupa ~70% da largura típica de terminal (80 col)
+- 5-row thin:  Lya Code visível, mas só metade do tamanho de uma tag
+- 7-row bold:  Lya Code ocupa ~70% da largura típica de terminal (80 col)
 - 7-row mix:   Lya.Cloud ocupa ~80% da largura típica
 
 Recomendação: D (7-row bold + Lya.Cloud com ponto)

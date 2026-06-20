@@ -1026,9 +1026,9 @@ export const connectToServer = memoize(
           // name stays 'claude-code' for compatibility with MCP servers that
           // gate features on the upstream client identifier.
           name: 'claude-code',
-          title: 'Lya Cloud',
+          title: 'Lya Code',
           version: MACRO.VERSION ?? 'unknown',
-          description: 'Lya Cloud — coding-agent CLI for any LLM provider',
+          description: 'Lya Code — coding-agent CLI for any LLM provider',
           websiteUrl: PRODUCT_URL,
         },
         {
@@ -3423,9 +3423,9 @@ export async function setupSdkMcpClients(
           // name stays 'claude-code' for compatibility with MCP servers that
           // gate features on the upstream client identifier.
           name: 'claude-code',
-          title: 'Lya Cloud',
+          title: 'Lya Code',
           version: MACRO.VERSION ?? 'unknown',
-          description: 'Lya Cloud — coding-agent CLI for any LLM provider',
+          description: 'Lya Code — coding-agent CLI for any LLM provider',
           websiteUrl: PRODUCT_URL,
         },
         {

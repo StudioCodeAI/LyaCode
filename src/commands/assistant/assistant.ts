@@ -25,7 +25,7 @@ export function NewInstallWizard(props: NewInstallWizardProps): null {
 }
 
 export async function computeDefaultInstallDir(): Promise<string> {
-  return join(homedir(), '.lyacloud', 'assistant')
+  return join(homedir(), '.lyacode', 'assistant')
 }
 
 export default null

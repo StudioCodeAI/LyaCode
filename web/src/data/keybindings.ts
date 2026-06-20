@@ -1,5 +1,5 @@
 // Seeded from src/keybindings/defaultBindings.ts. User overrides live in
-// ~/.lyacloud/keybindings.json (open it with /keybindings).
+// ~/.lyacode/keybindings.json (open it with /keybindings).
 
 export interface Keybinding {
   keys: string

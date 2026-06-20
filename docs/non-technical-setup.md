@@ -1,4 +1,4 @@
-# Lya Cloud for Non-Technical Users
+# Lya Code for Non-Technical Users
 
 This guide is for people who want the easiest setup path.
 
@@ -6,9 +6,9 @@ You do not need to build from source. You do not need Bun. You do not need to un
 
 If you can copy and paste commands into a terminal, you can set this up.
 
-## What Lya Cloud Does
+## What Lya Code Does
 
-Lya Cloud lets you use an AI coding assistant with different model providers such as:
+Lya Code lets you use an AI coding assistant with different model providers such as:
 
 - OpenAI
 - DeepSeek
@@ -28,8 +28,8 @@ You need:
 
 ## Fastest Path
 
-1. Install Lya Cloud with npm
-2. Run `lyacloud`
+1. Install Lya Code with npm
+2. Run `lyacode`
 3. Inside the CLI, run `/provider` for guided provider setup
 
 The `/provider` command walks you through choosing a provider and entering credentials. You do not need to set environment variables beforehand.
@@ -41,7 +41,7 @@ The `/provider` command walks you through choosing a provider and entering crede
 
 ## Which Provider Should You Choose?
 
-Once you have picked a provider, run `/provider` inside Lya Cloud to set it up with guided prompts.
+Once you have picked a provider, run `/provider` inside Lya Code to set it up with guided prompts.
 
 ### OpenAI
 
@@ -66,7 +66,7 @@ Choose this if:
 
 ## What Success Looks Like
 
-After you run `lyacloud`, the CLI should start and wait for your prompt.
+After you run `lyacode`, the CLI should start and wait for your prompt.
 
 At that point, you can ask it to:
 
@@ -77,7 +77,7 @@ At that point, you can ask it to:
 
 ## Common Problems
 
-### `lyacloud` command not found
+### `lyacode` command not found
 
 Cause:
 
@@ -88,7 +88,7 @@ Fix:
 
 1. Close the terminal
 2. Open a new terminal
-3. Run `lyacloud` again
+3. Run `lyacode` again
 
 On Windows PowerShell, if that still does not work, add npm's global bin folder
 to your user `Path`, then open a new PowerShell window:
@@ -115,20 +115,20 @@ Cause:
 Fix:
 
 1. Get a fresh key from your provider
-2. Run `/provider` inside Lya Cloud to update your credentials
-3. Re-run `lyacloud`
+2. Run `/provider` inside Lya Code to update your credentials
+3. Re-run `lyacode`
 
 ### Missing Provider Key after copying .env.example
 
 Cause:
 
-- Lya Cloud does not automatically load `.env` files. If you copied `.env.example` to `.env`, Lya Cloud won't see the variables unless you tell it to.
+- Lya Code does not automatically load `.env` files. If you copied `.env.example` to `.env`, Lya Code won't see the variables unless you tell it to.
 
 Fix:
 
 - Load the file explicitly:
-  `lyacloud --provider-env-file .env`
-- Or, use the `/provider` command inside Lya Cloud instead (recommended).
+  `lyacode --provider-env-file .env`
+- Or, use the `/provider` command inside Lya Code instead (recommended).
 - Do not commit your `.env` file to git.
 - The explicit loader accepts provider/setup variables. Export runtime/debug variables from your shell or launcher instead.
 
@@ -153,18 +153,18 @@ If you want source builds, advanced provider profiles, diagnostics, or Bun-based
 
 ## Getting Help
 
-- **GitHub Discussions**: https://github.com/StudioCodeAI/lyacloud/discussions
+- **GitHub Discussions**: https://github.com/StudioCodeAI/lyacode/discussions
   Use this for Q&A, setup help, and community conversation.
 
-- **GitHub Issues**: https://github.com/StudioCodeAI/lyacloud/issues
+- **GitHub Issues**: https://github.com/StudioCodeAI/lyacode/issues
   Use this for confirmed bugs and feature requests.
 
 ### Quick diagnostic check
 
-If Lya Cloud is not working after setup, run:
+If Lya Code is not working after setup, run:
 
 ```bash
-lyacloud --version
+lyacode --version
 ```
 
 If this prints a version number, the install succeeded. If it says "command not found," close your terminal, open a new one, and try again. On Windows, you may also need to add npm's global bin folder to your user `Path` (see the [Windows Quick Start](quick-start-windows.md) guide for details).
@@ -172,5 +172,5 @@ If this prints a version number, the install succeeded. If it says "command not 
 When filing a bug, run this and paste the redacted output into the issue:
 
 ```bash
-lyacloud doctor report --markdown
+lyacode doctor report --markdown
 ```

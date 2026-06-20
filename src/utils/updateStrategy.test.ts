@@ -11,7 +11,7 @@ import {
 
 describe('isThirdPartyBuildBlockedFor', () => {
   const UPSTREAM = '@anthropic-ai/claude-code'
-  const LYACLOUD = '@studiocodeai/lyacloud'
+  const LYACODE = '@studiocodeai/lyacode'
 
   test('blocks a third-party provider running the upstream build', () => {
     for (const provider of [
@@ -28,9 +28,9 @@ describe('isThirdPartyBuildBlockedFor', () => {
     expect(isThirdPartyBuildBlockedFor('firstParty', UPSTREAM)).toBe(false)
   })
 
-  test('allows a custom-PACKAGE_URL build (Lya Cloud) on any provider', () => {
-    expect(isThirdPartyBuildBlockedFor('bedrock', LYACLOUD)).toBe(false)
-    expect(isThirdPartyBuildBlockedFor('firstParty', LYACLOUD)).toBe(false)
+  test('allows a custom-PACKAGE_URL build (Lya Code) on any provider', () => {
+    expect(isThirdPartyBuildBlockedFor('bedrock', LYACODE)).toBe(false)
+    expect(isThirdPartyBuildBlockedFor('firstParty', LYACODE)).toBe(false)
   })
 })
 

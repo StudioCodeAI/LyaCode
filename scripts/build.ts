@@ -1,5 +1,5 @@
 /**
- * Lya Cloud build script — bundles the TypeScript source into a single
+ * Lya Code build script — bundles the TypeScript source into a single
  * distributable JS file using Bun's bundler.
  *
  * Handles:
@@ -126,15 +126,15 @@ result = await Bun.build({
     // MACRO.* build-time constants
     // Keep the internal compatibility version high enough to pass
     // first-party minimum-version guards, but expose the real package
-    // version separately in Lya Cloud branding.
+    // version separately in Lya Code branding.
     'MACRO.VERSION': JSON.stringify('99.0.0'),
     'MACRO.DISPLAY_VERSION': JSON.stringify(version),
     'MACRO.BUILD_TIME': JSON.stringify(new Date().toISOString()),
     'MACRO.ISSUES_EXPLAINER':
-      JSON.stringify('report the issue at https://github.com/StudioCodeAI/lyacloud/issues'),
+      JSON.stringify('report the issue at https://github.com/StudioCodeAI/lyacode/issues'),
     'MACRO.FEEDBACK_CHANNEL':
-      JSON.stringify('https://github.com/StudioCodeAI/lyacloud/issues'),
-    'MACRO.PACKAGE_URL': JSON.stringify('@studiocodeai/lyacloud'),
+      JSON.stringify('https://github.com/StudioCodeAI/lyacode/issues'),
+    'MACRO.PACKAGE_URL': JSON.stringify('@studiocodeai/lyacode'),
     'MACRO.NATIVE_PACKAGE_URL': 'undefined',
     'MACRO.VERSION_CHANGELOG': 'undefined',
   },
@@ -446,7 +446,7 @@ if (!result.success) {
   }
   process.exitCode = 1
 } else {
-  console.log(`✓ Built lyacloud v${version} → dist/cli.mjs`)
+  console.log(`✓ Built lyacode v${version} → dist/cli.mjs`)
 }
 
 // ── SDK Bundle Build ──────────────────────────────────────────────────────
@@ -467,10 +467,10 @@ sdkResult = await Bun.build({
     'MACRO.DISPLAY_VERSION': JSON.stringify(version),
     'MACRO.BUILD_TIME': JSON.stringify(new Date().toISOString()),
     'MACRO.ISSUES_EXPLAINER':
-      JSON.stringify('report the issue at https://github.com/StudioCodeAI/lyacloud/issues'),
+      JSON.stringify('report the issue at https://github.com/StudioCodeAI/lyacode/issues'),
     'MACRO.FEEDBACK_CHANNEL':
-      JSON.stringify('https://github.com/StudioCodeAI/lyacloud/issues'),
-    'MACRO.PACKAGE_URL': JSON.stringify('@studiocodeai/lyacloud'),
+      JSON.stringify('https://github.com/StudioCodeAI/lyacode/issues'),
+    'MACRO.PACKAGE_URL': JSON.stringify('@studiocodeai/lyacode'),
     'MACRO.NATIVE_PACKAGE_URL': 'undefined',
     'MACRO.VERSION_CHANGELOG': 'undefined',
   },
@@ -962,8 +962,8 @@ if (result?.success) {
 
   // Stub markers are not byte-stable across build hosts: the per-importer
   // scanner records each stub as the resolved absolute source path, which
-  // differs only by the repo-root prefix (`/home/ubuntu/.../lyacloud` locally
-  // vs `/home/runner/work/lyacloud/lyacloud` on CI). Diffing raw text made
+  // differs only by the repo-root prefix (`/home/ubuntu/.../lyacode` locally
+  // vs `/home/runner/work/lyacode/lyacode` on CI). Diffing raw text made
   // CI fail on already-allowlisted stubs and report them stale. Key on the
   // repo-relative path from `src/` onward without extension: stable across hosts
   // yet still path-specific, so a stub named `constants.ts` in one directory

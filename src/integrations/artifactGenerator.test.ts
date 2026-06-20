@@ -22,7 +22,7 @@ async function withFixtureRepo(
   callback: (repoRoot: string) => Promise<void>,
 ): Promise<void> {
   const repoRoot = await mkdtemp(
-    path.join(os.tmpdir(), 'lyacloud-integration-artifacts-'),
+    path.join(os.tmpdir(), 'lyacode-integration-artifacts-'),
   )
 
   try {

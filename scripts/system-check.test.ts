@@ -214,7 +214,7 @@ describe('checkNodeVersion', () => {
       ok: false,
       label: 'Node.js version',
       detail:
-        'Detected 20.11.1. Lya Cloud requires Node.js >=22.0.0. Install Node 22 LTS or newer, then reinstall/re-run Lya Cloud.',
+        'Detected 20.11.1. Lya Code requires Node.js >=22.0.0. Install Node 22 LTS or newer, then reinstall/re-run Lya Code.',
     })
   })
 
@@ -230,7 +230,7 @@ describe('checkNodeVersion', () => {
       ok: false,
       label: 'Node.js version',
       detail:
-        'Unable to run `node --version`: spawn node ENOENT. Lya Cloud requires Node.js >=22.0.0 on PATH.',
+        'Unable to run `node --version`: spawn node ENOENT. Lya Code requires Node.js >=22.0.0 on PATH.',
     })
   })
 
@@ -239,7 +239,7 @@ describe('checkNodeVersion', () => {
       ok: false,
       label: 'Node.js version',
       detail:
-        'Detected 20.11.1. Lya Cloud requires Node.js >=22.0.0. Install Node 22 LTS or newer, then reinstall/re-run Lya Cloud.',
+        'Detected 20.11.1. Lya Code requires Node.js >=22.0.0. Install Node 22 LTS or newer, then reinstall/re-run Lya Code.',
     })
   })
 

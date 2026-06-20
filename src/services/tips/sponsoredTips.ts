@@ -66,7 +66,7 @@ export const sponsoredTips: Tip[] = [
     content: async ctx =>
       renderSponsoredTip(
         ATOMIC,
-        'Atomic Chat local models give you free access to Lya Cloud',
+        'Atomic Chat local models give you free access to Lya Code',
         ctx,
       ),
     cooldownSessions: 20,

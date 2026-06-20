@@ -22,7 +22,7 @@ import {
 import { env } from '../../utils/env.js'
 import { cacheKeys } from '../../utils/fileStateCache.js'
 import { getWorktreeCount } from '../../utils/git.js'
-import { getUserSkillExampleDisplayPath } from '../../utils/lyacloudDisplayPaths.js'
+import { getUserSkillExampleDisplayPath } from '../../utils/lyacodeDisplayPaths.js'
 import {
   detectRunningIDEsCached,
   getSortedIdeLockfiles,
@@ -102,7 +102,7 @@ const externalTips: Tip[] = [
   {
     id: 'new-user-warmup',
     content: async () =>
-      `Start with small features or bug fixes, tell Lya Cloud to propose a plan, and verify its suggested edits`,
+      `Start with small features or bug fixes, tell Lya Code to propose a plan, and verify its suggested edits`,
     cooldownSessions: 3,
     async isRelevant() {
       const config = getGlobalConfig()
@@ -148,7 +148,7 @@ const externalTips: Tip[] = [
   {
     id: 'git-worktrees',
     content: async () =>
-      'Use git worktrees to run multiple Lya Cloud sessions in parallel.',
+      'Use git worktrees to run multiple Lya Code sessions in parallel.',
     cooldownSessions: 10,
     isRelevant: async () => {
       try {
@@ -163,7 +163,7 @@ const externalTips: Tip[] = [
   {
     id: 'color-when-multi-clauding',
     content: async () =>
-      'Running multiple Lya Cloud sessions? Use /color and /rename to tell them apart at a glance.',
+      'Running multiple Lya Code sessions? Use /color and /rename to tell them apart at a glance.',
     cooldownSessions: 10,
     isRelevant: async () => {
       if (getCurrentSessionAgentColor()) return false
@@ -221,7 +221,7 @@ const externalTips: Tip[] = [
   },
   {
     id: 'memory-command',
-    content: async () => 'Use /memory to view and manage Lya Cloud memory',
+    content: async () => 'Use /memory to view and manage Lya Code memory',
     cooldownSessions: 15,
     async isRelevant() {
       const config = getGlobalConfig()
@@ -260,7 +260,7 @@ const externalTips: Tip[] = [
   {
     id: 'prompt-queue',
     content: async () =>
-      'Hit Enter to queue up additional messages while Lya Cloud is working.',
+      'Hit Enter to queue up additional messages while Lya Code is working.',
     cooldownSessions: 5,
     async isRelevant() {
       const config = getGlobalConfig()
@@ -270,14 +270,14 @@ const externalTips: Tip[] = [
   {
     id: 'enter-to-steer-in-relatime',
     content: async () =>
-      'Send messages to Lya Cloud while it works to steer Lya Cloud in real-time',
+      'Send messages to Lya Code while it works to steer Lya Code in real-time',
     cooldownSessions: 20,
     isRelevant: async () => true,
   },
   {
     id: 'todo-list',
     content: async () =>
-      'Ask Lya Cloud to create a todo list when working on complex tasks to track progress and remain on track',
+      'Ask Lya Code to create a todo list when working on complex tasks to track progress and remain on track',
     cooldownSessions: 20,
     isRelevant: async () => true,
   },
@@ -310,7 +310,7 @@ const externalTips: Tip[] = [
   },
   {
     id: 'ide-upsell-external-terminal',
-    content: async () => 'Connect Lya Cloud to your IDE · /ide',
+    content: async () => 'Connect Lya Code to your IDE · /ide',
     cooldownSessions: 4,
     async isRelevant() {
       if (isSupportedTerminal()) {
@@ -330,13 +330,13 @@ const externalTips: Tip[] = [
   {
     id: 'install-github-app',
     content: async () =>
-      'Run /install-github-app to enable GitHub issue and PR tagging from Lya Cloud',
+      'Run /install-github-app to enable GitHub issue and PR tagging from Lya Code',
     cooldownSessions: 10,
     isRelevant: async () => !getGlobalConfig().githubActionSetupCount,
   },
   {
     id: 'install-slack-app',
-    content: async () => 'Run /install-slack-app to use Lya Cloud in Slack',
+    content: async () => 'Run /install-slack-app to use Lya Code in Slack',
     cooldownSessions: 10,
     isRelevant: async () => !getGlobalConfig().slackAppInstallCount,
   },
@@ -360,7 +360,7 @@ const externalTips: Tip[] = [
   {
     id: 'paste-images-mac',
     content: async () =>
-      'Paste images into Lya Cloud using control+v (not cmd+v!)',
+      'Paste images into Lya Code using control+v (not cmd+v!)',
     cooldownSessions: 10,
     isRelevant: async () => getPlatform() === 'macos',
   },
@@ -381,7 +381,7 @@ const externalTips: Tip[] = [
   {
     id: 'continue',
     content: async () =>
-      'Run lyacloud --continue or lyacloud --resume to resume a conversation',
+      'Run lyacode --continue or lyacode --resume to resume a conversation',
     cooldownSessions: 10,
     isRelevant: async () => true,
   },
@@ -439,7 +439,7 @@ const externalTips: Tip[] = [
   {
     id: 'desktop-app',
     content: async () =>
-      'Run Lya Cloud locally or remotely with /desktop',
+      'Run Lya Code locally or remotely with /desktop',
     cooldownSessions: 15,
     isRelevant: async () => getPlatform() !== 'linux',
   },
@@ -515,7 +515,7 @@ const externalTips: Tip[] = [
         'off' | 'copy_a' | 'copy_b'
       >('tengu_tide_elm', 'off')
       return variant === 'copy_b'
-        ? `Use ${cmd} for better one-shot answers. Lya Cloud thinks it through first.`
+        ? `Use ${cmd} for better one-shot answers. Lya Code thinks it through first.`
         : `Working on something tricky? ${cmd} gives better first answers`
     },
     cooldownSessions: 3,
@@ -544,8 +544,8 @@ const externalTips: Tip[] = [
         'off' | 'copy_a' | 'copy_b'
       >('tengu_tern_alloy', 'off')
       return variant === 'copy_b'
-        ? `For big tasks, tell Lya Cloud to ${blue('use subagents')}. They work in parallel and keep your main thread clean.`
-        : `Say ${blue('"fan out subagents"')} and Lya Cloud sends a team. Each one digs deep so nothing gets missed.`
+        ? `For big tasks, tell Lya Code to ${blue('use subagents')}. They work in parallel and keep your main thread clean.`
+        : `Say ${blue('"fan out subagents"')} and Lya Code sends a team. Each one digs deep so nothing gets missed.`
     },
     cooldownSessions: 3,
     isRelevant: async () => {
@@ -587,7 +587,7 @@ const externalTips: Tip[] = [
       const claude = color('claude', ctx.theme)
       const reward = getCachedReferrerReward()
       return reward
-        ? `Share Lya Cloud and earn ${claude(formatCreditAmount(reward))} of extra usage · ${claude('/passes')}`
+        ? `Share Lya Code and earn ${claude(formatCreditAmount(reward))} of extra usage · ${claude('/passes')}`
         : `You have free guest passes to share · ${claude('/passes')}`
     },
     cooldownSessions: 3,

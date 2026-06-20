@@ -1,5 +1,5 @@
 /**
- * Lya Cloud startup screen — single-line title-case wordmark with Studio CodeAI gradient.
+ * Lya Code startup screen — single-line title-case wordmark with Studio CodeAI gradient.
  * Called once at CLI startup before the Ink UI renders.
  */
 
@@ -68,7 +68,7 @@ function renderWordmark(): string[] {
 }
 
 // Studio CodeAI orange gradient — warm light to deep accent.
-// Matches the brand identity in assets/brand/lyacloud-logo.svg.
+// Matches the brand identity in assets/brand/lyacode-logo.svg.
 const WORDMARK_GRADIENT: ReadonlyArray<[number, number, number]> = [
   [255, 168, 80],   // warm light (top-left highlight)
   [255, 122, 26],   // brand orange
@@ -220,7 +220,7 @@ export function printStartupScreen(modelOverride?: string): void {
 
   out.push('')
 
-  // Wordmark "Lya Cloud" — single-line Open Claude style. 5 rows of
+  // Wordmark "Lya Code" — single-line Open Claude style. 5 rows of
   // bold ANSI Shadow letters painted solid in Studio CodeAI brand
   // orange. Visually ~3× the height of a normal text line, gives the
   // terminal a hero feel without scrolling.
@@ -262,7 +262,7 @@ export function printStartupScreen(modelOverride?: string): void {
   out.push(boxRow(sRow, W, sLen, BORDER))
 
   out.push(`${ansiRgb(...BORDER)}\u255a${'\u2550'.repeat(W - 2)}\u255d${RESET}`)
-  out.push(`  ${DIM}${ansiRgb(...DIMCOL)}lyacloud ${RESET}${ansiRgb(...ACCENT)}v${MACRO.DISPLAY_VERSION ?? MACRO.VERSION}${RESET}`)
+  out.push(`  ${DIM}${ansiRgb(...DIMCOL)}lyacode ${RESET}${ansiRgb(...ACCENT)}v${MACRO.DISPLAY_VERSION ?? MACRO.VERSION}${RESET}`)
   out.push('')
 
   process.stdout.write(out.join('\n') + '\n')

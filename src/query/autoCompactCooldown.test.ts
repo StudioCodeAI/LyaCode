@@ -31,7 +31,7 @@ let tempDir: string | undefined
 
 beforeEach(async () => {
   await acquireSharedMutationLock('query/autoCompactCooldown.test.ts')
-  tempDir = mkdtempSync(join(tmpdir(), 'lyacloud-autocompact-test-'))
+  tempDir = mkdtempSync(join(tmpdir(), 'lyacode-autocompact-test-'))
   process.env.CLAUDE_CONFIG_DIR = tempDir
   savedAutoCompactEnabled = getGlobalConfig().autoCompactEnabled
   saveGlobalConfig(current => ({ ...current, autoCompactEnabled: true }))

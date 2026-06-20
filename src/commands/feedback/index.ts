@@ -3,7 +3,7 @@ const feedback = {
   aliases: ['bug'],
   type: 'local-jsx',
   name: 'feedback',
-  description: `Submit feedback about Lya Cloud`,
+  description: `Submit feedback about Lya Code`,
   argumentHint: '[report]',
   isEnabled: () => false,
   load: () => import('./feedback.js'),

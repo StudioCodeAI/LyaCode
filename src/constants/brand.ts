@@ -1,5 +1,5 @@
 /**
- * Lya Cloud brand identity — single source of truth for the product name,
+ * Lya Code brand identity — single source of truth for the product name,
  * tagline, accent color, and wordmark art used across the TUI.
  *
  * Theme entries derived from the accent MUST stay in `rgb(r,g,b)` form
@@ -7,7 +7,7 @@
  * with `parseRGB`, which only matches `rgb(...)` strings.
  */
 
-export const BRAND_NAME = 'Lya Cloud'
+export const BRAND_NAME = 'Lya Code'
 
 export const BRAND_TAGLINE = 'Um produto Studio CodeAI'
 
