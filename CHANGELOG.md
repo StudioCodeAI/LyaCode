@@ -2,7 +2,7 @@
 
 All notable Lya Code changes will be documented here.
 
-## v1.0.8 — 2026-06-20
+## v1.0.9 — 2026-06-20
 
 ### Added
 

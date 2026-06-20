@@ -7,7 +7,7 @@
 Abra qualquer projeto no terminal e trabalhe com Lya: uma IA que le codigo,
 edita arquivos, executa comandos e apoia tarefas de engenharia do inicio ao fim.
 
-[![Version](https://img.shields.io/badge/source-1.0.8-orange?style=flat-square)](./package.json)
+[![Version](https://img.shields.io/badge/source-1.0.9-orange?style=flat-square)](./package.json)
 [![License](https://img.shields.io/badge/license-Proprietary-red?style=flat-square)](./LICENSE)
 [![Node](https://img.shields.io/badge/node-%3E%3D22.0.0-green?style=flat-square)](https://nodejs.org)
 [![Studio CodeAI](https://img.shields.io/badge/Studio-CodeAI-ff7a1a?style=flat-square)](https://github.com/StudioCodeAI)
@@ -26,7 +26,7 @@ Coder.
 O codigo-fonte fica no repositorio `StudioCodeAI/LyaCode`. Instaladores,
 pacotes e releases publicas ficam em `StudioCodeAI/LyaCode-installers`.
 
-Versao atual: **v1.0.8**.
+Versao atual: **v1.0.9**.
 
 ---
 
@@ -45,7 +45,7 @@ npm install -g https://github.com/StudioCodeAI/LyaCode-installers/releases/downl
 Exemplo para uma release publicada:
 
 ```bash
-npm install -g https://github.com/StudioCodeAI/LyaCode-installers/releases/download/v1.0.8/studiocodeai-lyacode-1.0.8.tgz
+npm install -g https://github.com/StudioCodeAI/LyaCode-installers/releases/download/v1.0.9/studiocodeai-lyacode-1.0.9.tgz
 ```
 
 ### Windows Portable
