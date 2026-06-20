@@ -12,7 +12,7 @@ $ErrorActionPreference = 'Stop'
 
 $ProductName = 'Lya Cloud'
 $ProductBin = 'lyacloud'
-$ProductVersion = '0.1.0'
+$ProductVersion = '1.0.1'
 $LogDir = Join-Path $env:LOCALAPPDATA 'lyacloud'
 $LogFile = Join-Path $LogDir ("lyacloud-setup-{0:yyyyMMdd-HHmmss}.log" -f (Get-Date))
 $StartMenuDir = Join-Path $env:APPDATA 'Microsoft\Windows\Start Menu\Programs\Lya Cloud'
@@ -67,7 +67,7 @@ Write-Log "Node.js $(Get-NodeVersion) OK"
 
 if (-not $Tarball) {
     $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
-    $candidate = Join-Path $scriptDir 'studiocodeai-lyacloud-0.1.0.tgz'
+    $candidate = Join-Path $scriptDir 'studiocodeai-lyacloud-1.0.1.tgz'
     if (Test-Path -LiteralPath $candidate) {
         $Tarball = $candidate
     }
@@ -75,7 +75,7 @@ if (-not $Tarball) {
 
 if (-not $Tarball -or -not (Test-Path -LiteralPath $Tarball)) {
     Write-Log "Tarball nao encontrado. Gere com: npm pack" -Level ERR
-    Write-Log "Ou passe -Tarball <caminho\studiocodeai-lyacloud-0.1.0.tgz>" -Level INFO
+    Write-Log "Ou passe -Tarball <caminho\studiocodeai-lyacloud-1.0.1.tgz>" -Level INFO
     exit 20
 }
 Write-Log "Tarball: $Tarball"

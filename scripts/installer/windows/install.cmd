@@ -4,11 +4,11 @@ REM Luis Cardozo · studiocoder.ai@gmail.com · Studio CodeAI
 REM
 REM Usage: install.cmd [/D] [/T:<tarball>] [/Y]
 REM   /D           Dry run (nao instala, so mostra)
-REM   /T:<tgz>     Caminho do tarball (default: .\studiocodeai-lyacloud-0.1.0.tgz)
+REM   /T:<tgz>     Caminho do tarball (default: .\studiocodeai-lyacloud-1.0.1.tgz)
 REM   /Y           Suprime atalhos no Menu Iniciar
 REM
 REM Para buildar um .exe auto-extraivel:
-REM   iexpress /N:lyacloud-setup-x64.sed /O:..\..\..\dist\installer\lyacloud-setup-x64-0.1.0.exe
+REM   iexpress /N:lyacloud-setup-x64.sed /O:..\..\..\dist\installer\lyacloud-setup-x64-1.0.1.exe
 
 setlocal
 
@@ -31,10 +31,10 @@ shift & goto :parse
 
 :end_parse
 
-if "%TARBALL%"=="" set "TARBALL=%~dp0studiocodeai-lyacloud-0.1.0.tgz"
+if "%TARBALL%"=="" set "TARBALL=%~dp0studiocodeai-lyacloud-1.0.1.tgz"
 
 echo.
-echo  Lya Cloud v0.1.0 - Installer Windows
+echo  Lya Cloud v1.0.1 - Installer Windows
 echo  Familia Studio CodeAI
 echo.
 echo  Requisitos: Node.js 22 LTS ou superior

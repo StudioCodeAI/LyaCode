@@ -485,7 +485,7 @@ export const PROVIDER_PRESET_MANIFEST = [
 ] as const satisfies readonly ProviderPresetManifestEntry[]
 export type ProviderPreset = (typeof PROVIDER_PRESET_MANIFEST)[number]['preset']
 export const ORDERED_PROVIDER_PRESETS = [
-  "gitlawb-opengateway",
+  "ollama",
   "anthropic",
   "dashscope-cn",
   "dashscope-intl",
@@ -499,7 +499,6 @@ export const ORDERED_PROVIDER_PRESETS = [
   "hicap",
   "lmstudio",
   "atomic-chat",
-  "ollama",
   "minimax",
   "mistral",
   "moonshotai",
@@ -515,5 +514,6 @@ export const ORDERED_PROVIDER_PRESETS = [
   "xai",
   "xiaomi-mimo",
   "zai",
-  "custom"
+  "custom",
+  "gitlawb-opengateway"
 ] as const

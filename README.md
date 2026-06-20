@@ -6,39 +6,51 @@
 
 > Abra um projeto real no terminal e trabalhe com **Lya** — uma IA capaz de ler código, editar arquivos, executar comandos, alternar provedores de modelo e apoiar tarefas de engenharia ponta-a-ponta.
 
-[![Version](https://img.shields.io/badge/version-1.0.0-orange)](https://github.com/StudioCodeAI/lyacloud/releases/latest)
+[![Version](https://img.shields.io/badge/version-1.0.1-orange)](https://github.com/StudioCodeAI/lyacloud-installers/releases/latest)
 [![License](https://img.shields.io/badge/license-See%20LICENSE-blue)](./LICENSE)
 [![Node](https://img.shields.io/badge/node-%3E%3D22.0.0-green)](https://nodejs.org)
 [![Studio CodeAI](https://img.shields.io/badge/family-Studio%20CodeAI-ff7a1a)](https://github.com/StudioCodeAI)
 
 Lya Cloud faz parte da família **Studio CodeAI** e nasce como a **CLI Star 1** do ecossistema: a camada terminal agêntica que serve a irmã mais velha, [Lya Studio Coder](https://github.com/StudioCodeAI/Lya-Studio-Coder).
 
+> **📦 Releases e instaladores públicos:** [github.com/StudioCodeAI/lyacloud-installers](https://github.com/StudioCodeAI/lyacloud-installers)
+
 ---
 
 ## ⚡ Instalação rápida
 
-### Windows (PowerShell — recomendado)
+### Multi-plataforma via npm (recomendado)
+
+```bash
+npm install -g https://github.com/StudioCodeAI/lyacloud-installers/releases/download/v1.0.1/studiocodeai-lyacloud-1.0.1.tgz
+```
+
+### Windows (portable .zip)
 
 ```powershell
-# Baixe e rode o instalador oficial do GitHub Releases
-irm https://github.com/StudioCodeAI/lyacloud/releases/latest/download/lyacloud-setup-x64-1.0.0.exe -OutFile lyacloud-setup.exe
+irm https://github.com/StudioCodeAI/lyacloud-installers/releases/download/v1.0.1/lyacloud-portable-1.0.1.zip -OutFile lyacloud-portable.zip
+Expand-Archive lyacloud-portable.zip -DestinationPath .\lyacloud-portable -Force
+cd lyacloud-portable
+.\install.cmd
+```
+
+### Windows (instalador .exe)
+
+Se o `.exe` estiver disponível no release:
+
+```powershell
+irm https://github.com/StudioCodeAI/lyacloud-installers/releases/download/v1.0.1/lyacloud-setup-x64-1.0.1.exe -OutFile lyacloud-setup.exe
 .\lyacloud-setup.exe
 ```
 
 Após a instalação, abra um novo terminal e digite `lya`.
-
-### Multi-plataforma (via npm + tarball do release)
-
-```bash
-npm install -g https://github.com/StudioCodeAI/lyacloud/releases/latest/download/studiocodeai-lyacloud-1.0.0.tgz
-```
 
 ### Validar instalação
 
 Qualquer alias funciona — todos apontam para o mesmo binário:
 
 ```bash
-lya --version           # → 1.0.0 (Lya Cloud)
+lya --version           # → 1.0.1 (Lya Cloud)
 lyacloud --version
 lscloud --version
 lyacode --version
@@ -59,7 +71,7 @@ npm uninstall -g @studiocodeai/lyacloud
 # 1. Inicie a CLI
 lya
 
-# 2. Configure um provedor (escolha Ollama Local se tiver Ollama rodando)
+# 2. Configure um provedor (Ollama Local aparece em primeiro se estiver rodando)
 > /provider
 
 # 3. Entre em modo Lya (carrega persona sênior + sub-agentes)
@@ -106,12 +118,12 @@ A ordem que aparece em `/provider`:
 | Posição | Provedor | Descrição |
 |---------|----------|-----------|
 | 1 | **Ollama Local** | Roda 100% local em `http://localhost:11434` (qwen2.5-coder, llama3.1, etc.) |
-| 2 | **OpenAI-compatible** | OpenAI, OpenCode Gateway, GitHub Models, OpenRouter, Groq, etc. |
+| 2 | **Anthropic / Claude** | API nativa Claude (usa `ANTHROPIC_API_KEY`) — provider default se nenhum perfil configurado |
 | 3 | **Gemini** | Google Gemini via API key, access token ou ADC local |
 | 4 | **Mistral** | Mistral AI (devstral-latest e variantes) |
-| 5 | **Codex** | ChatGPT Codex CLI auth ou env credentials |
-| 6 | **Codex OAuth** | Login com ChatGPT via browser + storage seguro |
-| 7 | **Auto** | Prefere Ollama local; cai em OpenAI-compatible se não houver |
+| 5 | **OpenAI** | OpenAI API com API key |
+| 6+ | **30+ outros** | DeepSeek, Groq, OpenRouter, Together, Azure OpenAI, NVIDIA NIM, etc. |
+| Último | **Gitlawb Opengateway** | Gateway OpenAI-compatible via https://gitlawb.com/opengateway |
 
 O **Anthropic / Claude** é o **provedor default** quando nenhum perfil é configurado (usa `ANTHROPIC_API_KEY`).
 
@@ -125,9 +137,10 @@ O **Anthropic / Claude** é o **provedor default** quando nenhum perfil é confi
 | Família | Studio CodeAI |
 | Autor | Luis Cardozo |
 | Email | `studiocoder.ai@gmail.com` |
-| Repositório | https://github.com/StudioCodeAI/lyacloud |
+| Código-fonte | https://github.com/StudioCodeAI/lyacloud *(privado)* |
+| Releases públicas | https://github.com/StudioCodeAI/lyacloud-installers |
 | Pacote npm | `@studiocodeai/lyacloud` |
-| Versão | **1.0.0** (produção) |
+| Versão | **1.0.1** (produção) |
 | Política de versão | `v0.x.y` = teste · `v1.0.0+` = produção estável |
 
 ---
@@ -139,7 +152,7 @@ O **Anthropic / Claude** é o **provedor default** quando nenhum perfil é confi
 - ✅ Persona **Lya** com 7 sub-agentes especializados
 - ✅ Ferramentas de leitura, busca, edição e inspeção de arquivos
 - ✅ Execução de shell/PowerShell com fluxo de permissão
-- ✅ Multi-provedor: Ollama, OpenAI, Gemini, Mistral, Codex, Anthropic
+- ✅ Multi-provedor: Ollama, Anthropic, OpenAI, Gemini, Mistral, DeepSeek e 25+ mais
 - ✅ MCP (Model Context Protocol), agentes, tarefas, memória, sessões
 - ✅ Extensão VS Code em `vscode-extension/lyacloud-vscode`
 - ✅ Site/documentação em `web/`
@@ -188,26 +201,27 @@ bun run build:installer:windows
 ```
 
 Saída em `dist/installer/`:
-- `lyacloud-setup-x64-1.0.0.exe` (Windows com iexpress)
-- `lyacloud-portable-1.0.0/` (pasta extraída, fallback multi-plataforma)
-- `studiocodeai-lyacloud-1.0.0.tgz` (tarball npm)
+- `lyacloud-setup-x64-1.0.1.exe` (Windows com iexpress)
+- `lyacloud-portable-1.0.1/` (pasta extraída, fallback multi-plataforma)
+- `studiocodeai-lyacloud-1.0.1.tgz` (tarball npm)
 
 ---
 
 ## 📦 Publicar release no GitHub
 
-O workflow em `.github/workflows/release.yml` builda automaticamente quando você dá push de uma tag `v*.*.*`:
+O workflow em `.github/workflows/release.yml` builda automaticamente quando você dá push de uma tag `v*.*.*`.
+Os artefatos são publicados no repo público [lyacloud-installers](https://github.com/StudioCodeAI/lyacloud-installers).
 
 ```bash
-git tag v1.0.0
-git push origin v1.0.0
+git tag v1.0.1
+git push origin v1.0.1
 ```
 
 O GitHub Actions:
 1. Builda o CLI
 2. Gera o tarball npm
 3. Builda o instalador Windows (`.exe`)
-4. Cria o GitHub Release com todos os artefatos
+4. Publica o GitHub Release em `StudioCodeAI/lyacloud-installers` com todos os artefatos
 5. Adiciona instruções de instalação prontas para copiar
 
 ---
@@ -248,4 +262,4 @@ Veja [LICENSE](./LICENSE).
 
 ---
 
-<sub>Lya Cloud v1.0.0 — produção estável · Built with Lya 🟠</sub>
+<sub>Lya Cloud v1.0.1 — produção estável · Built with Lya 🟠</sub>

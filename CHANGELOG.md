@@ -2,6 +2,26 @@
 
 All notable Lya Cloud changes will be documented here.
 
+## v1.0.1 — 2026-06-20 (patch)
+
+### Fixed
+
+- **Bitmap `a` minúsculo** — 3 linhas com 11 chars corrigidas para 10: elimina
+  desalinhamento visual no wordmark "Lya Cloud" que aparecia no startup screen.
+- **Bitmap `D` maiúsculo** — normalizado para 10 chars por linha (era mistura de 9 e 10).
+
+### Changed
+
+- **Ordem de providers** em `/provider`: `Ollama Local` promovido para a posição 1
+  (local-first); `Gitlawb Opengateway` movido para a última posição.
+- **Releases e instaladores** agora publicados no repo público
+  [`StudioCodeAI/lyacloud-installers`](https://github.com/StudioCodeAI/lyacloud-installers)
+  — código-fonte permanece no repo privado.
+- **Workflow de release** (`.github/workflows/release.yml`) atualizado para usar
+  `INSTALLERS_REPO_TOKEN` e publicar artefatos no repo público.
+- **README** atualizado com versão 1.0.1, link para installers públicos e tabela de
+  providers corrigida.
+
 ## 0.1.0 - Foundation
 
 Initial Studio CodeAI foundation release.
