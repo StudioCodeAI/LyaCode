@@ -1,6 +1,13 @@
 <div align="center">
 
-# Lya Code
+```
+██╗       ██╗   ██╗   █████╗     ██████╗   ██████╗   ██████╗   ███████╗
+██║       ╚██╗ ██╔╝  ██╔══██╗   ██╔════╝  ██╔═══██╗  ██╔══██╗  ██╔════╝
+██║        ╚████╔╝   ███████║   ██║       ██║   ██║  ██║  ██║  █████╗
+██║         ╚██╔╝    ██╔══██║   ██║       ██║   ██║  ██║  ██║  ██╔══╝
+███████╗    ██║      ██║  ██║   ╚██████╗  ╚██████╔╝  ██████╔╝  ███████╗
+╚══════╝    ╚═╝      ╚═╝  ╚═╝    ╚═════╝   ╚═════╝   ╚═════╝   ╚══════╝
+```
 
 **CLI agentic terminal da Studio CodeAI — Star 1 da familia**
 
@@ -8,7 +15,7 @@ Abra qualquer projeto no terminal e trabalhe com Lya: uma IA que le codigo,
 edita arquivos, executa comandos e apoia tarefas de engenharia do inicio ao fim.
 Suporta provedores cloud e locais por meio de um perfil unificado.
 
-[![Version](https://img.shields.io/badge/source-1.0.9-orange?style=flat-square)](./package.json)
+[![Version](https://img.shields.io/badge/source-1.1.0-orange?style=flat-square)](./package.json)
 [![License](https://img.shields.io/badge/license-Proprietary-red?style=flat-square)](./LICENSE)
 [![Node](https://img.shields.io/badge/node-%3E%3D22.0.0-green?style=flat-square)](https://nodejs.org)
 [![Studio CodeAI](https://img.shields.io/badge/Studio-CodeAI-ff7a1a?style=flat-square)](https://github.com/StudioCodeAI)
@@ -61,7 +68,7 @@ e execute o instalador.
 ### Versao especifica via tgz
 
 ```bash
-npm install -g https://github.com/StudioCodeAI/LyaCode-installers/releases/download/v1.0.9/studiocodeai-lyacode-1.0.9.tgz
+npm install -g https://github.com/StudioCodeAI/LyaCode-installers/releases/download/v1.1.0/studiocodeai-lyacode-1.1.0.tgz
 ```
 
 ---
@@ -180,7 +187,7 @@ Quando alterar comportamento de provedor, consulte primeiro
 | Pacote npm | `@studiocodeai/lyacode` |
 | Binario canonico | `lyacode` |
 | Aliases | `lya`, `lscode` |
-| Versao atual | **v1.0.9** |
+| Versao atual | **v1.1.0** |
 
 ---
 

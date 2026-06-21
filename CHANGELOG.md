@@ -2,6 +2,26 @@
 
 All notable Lya Code changes will be documented here.
 
+## v1.1.0 — 2026-06-20
+
+### Added
+
+- **Notificação de atualização interativa** — ao iniciar, a CLI verifica o npm registry
+  (cache 24h) e exibe um prompt `[s/N]` se houver versão mais nova. Respondendo "s",
+  roda `npm install -g @studiocodeai/lyacode@<versão>` e sai para reinicialização.
+- **Wordmark ANSI Shadow** — `LYA CODE` em uma linha, 6 rows de altura, estilo FigFont
+  com box-drawing characters (`╔═╗║╚╝`) + blocos `█`. Visual bold e uppercase equivalente
+  ao padrão do ecossistema. Substituiu o wordmark bitmap 5-row anterior.
+- **README wordmark** — bloco de código com o wordmark ANSI Shadow no topo do README
+  (visível no GitHub sem dependência de ANSI/cores).
+- **`quick-install.ps1`** — script PowerShell publicado em `LyaCode-installers` para
+  o one-liner `irm ... | iex`. Verifica Node >= 22, instala, valida e exibe primeiros passos.
+
+### Changed
+
+- README: secao "O que e o Lya Code?", tabela de provedores, sessoes em background,
+  irm one-liner, secao "Desinstalar" com comando npm uninstall.
+
 ## v1.0.9 — 2026-06-20
 
 ### Added

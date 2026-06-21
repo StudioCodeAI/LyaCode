@@ -1,6 +1,6 @@
 {
   "name": "@studiocodeai/lyacode",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "description": "Lya Code is a Studio CodeAI agentic terminal for local and cloud coding workflows",
   "type": "module",
   "bin": {

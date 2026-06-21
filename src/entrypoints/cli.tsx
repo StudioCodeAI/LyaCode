@@ -323,6 +323,10 @@ export async function main(
   const { printStartupScreen } = await importers.startupScreen()
   printStartupScreen(earlyModelFlag)
 
+  // Check for newer npm version and prompt user (cached 24h, only in interactive TTY)
+  const { checkNpmUpdateAndPrompt } = await import('../utils/npmUpdateCheck.js')
+  await checkNpmUpdateAndPrompt()
+
   // For all other paths, load the startup profiler
   const {
     profileCheckpoint
