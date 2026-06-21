@@ -2,10 +2,11 @@
 
 # Lya Code
 
-**CLI agentic terminal da Studio CodeAI**
+**CLI agentic terminal da Studio CodeAI — Star 1 da familia**
 
 Abra qualquer projeto no terminal e trabalhe com Lya: uma IA que le codigo,
 edita arquivos, executa comandos e apoia tarefas de engenharia do inicio ao fim.
+Suporta provedores cloud e locais por meio de um perfil unificado.
 
 [![Version](https://img.shields.io/badge/source-1.0.9-orange?style=flat-square)](./package.json)
 [![License](https://img.shields.io/badge/license-Proprietary-red?style=flat-square)](./LICENSE)
@@ -17,52 +18,55 @@ edita arquivos, executa comandos e apoia tarefas de engenharia do inicio ao fim.
 
 ---
 
-## Status
+## O que e o Lya Code?
 
-Lya Code e o CLI Star 1 da familia Studio CodeAI: terminal-first, instalavel,
-scriptavel e preparado para servir como camada de execucao para o Lya Studio
-Coder.
+Lya Code e o CLI agentic do ecossistema Studio CodeAI. Voce abre um terminal
+em qualquer projeto e a Lya — a IA embutida — le o codigo, edita arquivos,
+roda comandos e raciocina sobre problemas de engenharia em tempo real.
 
-O codigo-fonte fica no repositorio `StudioCodeAI/LyaCode`. Instaladores,
-pacotes e releases publicas ficam em `StudioCodeAI/LyaCode-installers`.
+Principais capacidades:
 
-Versao atual: **v1.0.9**.
+- **Multi-provedor** — Anthropic Claude, Gemini, OpenAI, DeepSeek, Ollama local e outros via `/provider`
+- **Ferramentas de codigo** — ler/editar/escrever arquivos, Bash, grep, glob, busca web, MCP
+- **Agentes especializados** — time Lya com 8 sub-agentes (arquiteto, explorador, revisor, testador, recorder, memoria, provedor)
+- **Sessoes em segundo plano** — tarefas longas rodando sem bloquear o terminal
+- **Extensao VS Code** — lancamento e integracao com tema Studio CodeAI
 
 ---
 
-## Instalacao
+## Instalacao rapida (Windows)
 
-Veja a release mais recente em:
-
-[github.com/StudioCodeAI/LyaCode-installers/releases](https://github.com/StudioCodeAI/LyaCode-installers/releases)
-
-Quando a release desejada estiver publicada, instale o pacote `.tgz` com:
-
-```bash
-npm install -g https://github.com/StudioCodeAI/LyaCode-installers/releases/download/v<VERSAO>/studiocodeai-lyacode-<VERSAO>.tgz
+```powershell
+irm https://raw.githubusercontent.com/StudioCodeAI/LyaCode-installers/main/quick-install.ps1 | iex
 ```
 
-Exemplo para uma release publicada:
+> Requer Node.js `>=22.0.0`. Baixe em [nodejs.org](https://nodejs.org/dist/latest-v22.x/).
+
+### Via npm (qualquer plataforma)
+
+```bash
+npm install -g @studiocodeai/lyacode@latest
+```
+
+### Windows Portable
+
+Baixe `lyacode-portable-<versao>.zip` em [LyaCode-installers/releases](https://github.com/StudioCodeAI/LyaCode-installers/releases/latest),
+extraia e execute `install.cmd`.
+
+### Windows Installer
+
+Baixe `lyacode-setup-x64-<versao>.exe` em [LyaCode-installers/releases](https://github.com/StudioCodeAI/LyaCode-installers/releases/latest)
+e execute o instalador.
+
+### Versao especifica via tgz
 
 ```bash
 npm install -g https://github.com/StudioCodeAI/LyaCode-installers/releases/download/v1.0.9/studiocodeai-lyacode-1.0.9.tgz
 ```
 
-### Windows Portable
-
-Baixe o arquivo `lyacode-portable-<VERSAO>.zip` da pagina de releases, extraia
-e execute `install.cmd`.
-
-### Windows Installer
-
-Baixe o arquivo `lyacode-setup-x64-<VERSAO>.exe` da pagina de releases e
-execute o instalador.
-
 ---
 
-## Validacao
-
-Depois de instalar, abra um novo terminal e rode:
+## Verificar instalacao
 
 ```bash
 lya --version
@@ -70,28 +74,32 @@ lyacode --version
 lscode --version
 ```
 
-Todos os aliases acima apontam para o mesmo binario `lyacode`.
+Todos os aliases apontam para o mesmo binario. Esperado: `1.0.9 (Lya Code)`.
 
 ---
 
-## Primeiros Passos
+## Primeiros passos
 
 ```bash
 # Iniciar a CLI
 lya
 
 # Dentro da sessao interativa
-/provider
-/lya
-/help
+/provider     # configurar provedor de IA (Anthropic, Ollama, Gemini...)
+/lya          # ativar a persona Lya (engenheira senior Studio CodeAI)
+/help         # listar todos os comandos disponiveis
 ```
 
-`/provider` configura o provedor de IA. Se o Ollama local estiver rodando, ele
-aparece como opcao local-first.
+### Sessoes em segundo plano
 
-`/lya` recarrega a persona Lya explicitamente.
-
-`/help` lista comandos e fluxos disponiveis.
+```bash
+lya --bg "corrija os testes falhando"
+lya --bg --name refactor "refatora o middleware de autenticacao"
+lya ps                      # listar sessoes ativas
+lya logs refactor           # ver saida da sessao
+lya logs refactor -f        # seguir em tempo real
+lya kill refactor           # encerrar a sessao
+```
 
 ---
 
@@ -100,7 +108,7 @@ aparece como opcao local-first.
 Lya e a engenheira de software senior da familia Studio CodeAI. Ela combina
 arquitetura, execucao pratica, revisao e testes dentro do terminal.
 
-Sub-agentes principais:
+Sub-agentes disponiveis (invoke via `/agents` ou `Task(agent=<nome>)`):
 
 | Agente | Papel |
 |--------|-------|
@@ -115,64 +123,47 @@ Sub-agentes principais:
 
 ---
 
-## Provedores
+## Provedores suportados
 
-Lya Code suporta provedores cloud e locais por meio de perfis OpenAI-compatible,
-Anthropic, Gemini, DeepSeek, Ollama, MCP e backends locais.
+Configure com `/provider` ou variaveis de ambiente:
 
-Configure pelo comando:
-
-```text
-/provider
-```
-
-O motor de LLM deve permanecer trocavel por configuracao. Evite fixar modelo no
-codigo quando a escolha puder ser definida por perfil, variavel de ambiente ou
-argumento de execucao.
+| Provedor | Variavel de ambiente |
+|----------|---------------------|
+| Anthropic Claude | `ANTHROPIC_API_KEY` |
+| Google Gemini | `GEMINI_API_KEY` (+ `CLAUDE_CODE_USE_GEMINI=1`) |
+| OpenAI / compativel | `OPENAI_API_KEY` (+ `CLAUDE_CODE_USE_OPENAI=1`) |
+| DeepSeek | `OPENAI_API_KEY` + base URL DeepSeek |
+| Ollama (local) | sem chave — configure o perfil com `/provider` |
+| GitHub Models | `CLAUDE_CODE_USE_GITHUB=1` |
+| OpenRouter, Groq, MiniMax, e outros | via perfil OpenAI-compativel |
 
 ---
 
-## Funcionalidades
+## Desinstalar
 
-- CLI TypeScript com runtime Node.js `>=22.0.0`.
-- Interface terminal com React e Ink.
-- Gerenciamento de arquivos, busca, edicao e shell com fluxo de permissao.
-- Multi-provedor via `/provider`.
-- MCP para integracoes externas.
-- Agentes, tarefas, memoria de sessao e contexto persistente.
-- Extensao VS Code em `vscode-extension/lyacode-vscode`.
-- Politica anti-phone-home para telemetria nao autorizada.
+```bash
+npm uninstall -g @studiocodeai/lyacode
+```
+
+Todos os aliases (`lya`, `lyacode`, `lscode`) sao removidos juntos.
 
 ---
 
 ## Desenvolvimento
 
-Requisitos:
-
-- Node.js `>=22.0.0`
-- Bun
-
-Comandos principais:
+Requisitos: Node.js `>=22.0.0` + [Bun](https://bun.sh)
 
 ```bash
 bun install
 bun run build
-bun run smoke
+bun run smoke        # verifica: node dist/cli.mjs --version
 bun run typecheck
-```
-
-Checks adicionais:
-
-```bash
-bun run check
-bun run typecheck:type-tests
+bun test             # suites completas
 bun run doctor:runtime
-bun run security:pr-scan
 ```
 
 Quando alterar comportamento de provedor, consulte primeiro
-`docs/integrations/overview.md` e o guia correspondente em
-`docs/integrations/how-to/`.
+`docs/integrations/overview.md` e o guia em `docs/integrations/how-to/`.
 
 ---
 
@@ -181,17 +172,15 @@ Quando alterar comportamento de provedor, consulte primeiro
 | Campo | Valor |
 |-------|-------|
 | Produto | **Lya Code** |
-| Familia | Studio CodeAI |
+| Familia | Studio CodeAI (Star 1) |
 | Autor | Luis Cardozo |
 | Email | `studiocoder.ai@gmail.com` |
-| Repositorio | [github.com/StudioCodeAI/LyaCode](https://github.com/StudioCodeAI/LyaCode) |
-| Releases | [github.com/StudioCodeAI/LyaCode-installers](https://github.com/StudioCodeAI/LyaCode-installers) |
-| Pacote | `@studiocodeai/lyacode` |
+| Repositorio (fonte) | [StudioCodeAI/LyaCode](https://github.com/StudioCodeAI/LyaCode) |
+| Releases publicas | [StudioCodeAI/LyaCode-installers](https://github.com/StudioCodeAI/LyaCode-installers) |
+| Pacote npm | `@studiocodeai/lyacode` |
 | Binario canonico | `lyacode` |
 | Aliases | `lya`, `lscode` |
-
-O nome visual oficial e **Lya Code**, em title case. Nao use `LYA CODE` como
-marca principal e nao reintroduza `Lya Cloud` em superficies de produto.
+| Versao atual | **v1.0.9** |
 
 ---
 
@@ -206,5 +195,5 @@ pela Studio CodeAI nas releases publicas.
 ---
 
 <div align="center">
-<sub>Lya Code · Studio CodeAI</sub>
+<sub>Lya Code · Studio CodeAI · Star 1</sub>
 </div>

@@ -1,35 +1,27 @@
 /**
- * Lya Code wordmark — large block letters rendered with ANSI colors
- * and the Studio CodeAI gradient.
+ * Lya Code wordmark — ANSI Shadow block font with box-drawing characters.
+ * Rendered in the Studio CodeAI orange gradient by StartupScreen.ts.
  *
- * The official product wordmark is title case: "Lya Code".
- * Do not replace it with all-caps "LYA CODE" in user-facing surfaces.
+ * Font style: FigFont "ANSI Shadow" (same style as the broader CLI ecosystem).
+ * Characters: full blocks (█) for the letter body, box-drawing chars (╔═╗║╚╝)
+ * for the outline — together they produce the thick-stroke 3D appearance.
  *
- * The startup banner uses a hand-tuned 5-row title-case drawing. The
- * bitmap renderer below remains available for previews and future compact
- * variants.
- *
- * Bitmaps use '#' for filled cells and ' ' for empty. The renderer
- * in StartupScreen converts '#' to ANSI-colored spans.
- *
- * The font is "ANSI Shadow" style (https://en.wikipedia.org/wiki/ANSI_art)
- * because the Studio CodeAI palette is warm/orange and that style
- * reads cleanly in a dark terminal.
- *
- * We keep the bitmaps as a single const so the bundle picks them up
- * via tree-shaking exactly once.
+ * Layout: "LYA CODE" on a single 6-row block (71 chars wide).
+ * Each letter is 6 rows tall with consistent 2-space letter gaps and
+ * 3-space word gap between LYA and CODE.
  */
 
 export const LYACODE_STARTUP_WORDMARK = [
-  '██                             ██████                ██           ',
-  '██      ██   ██   ██████      ██        █████    ██████   █████   ',
-  '██      ██   ██  ██   ██      ██       ██   ██  ██   ██  ███████  ',
-  '███████  ██████   ██████       ██████   █████    ██████   ██████  ',
-  '             ██                                                   ',
+  '██╗       ██╗   ██╗   █████╗     ██████╗   ██████╗   ██████╗   ███████╗',
+  '██║       ╚██╗ ██╔╝  ██╔══██╗   ██╔════╝  ██╔═══██╗  ██╔══██╗  ██╔════╝',
+  '██║        ╚████╔╝   ███████║   ██║       ██║   ██║  ██║  ██║  █████╗  ',
+  '██║         ╚██╔╝    ██╔══██║   ██║       ██║   ██║  ██║  ██║  ██╔══╝  ',
+  '███████╗    ██║      ██║  ██║   ╚██████╗  ╚██████╔╝  ██████╔╝  ███████╗',
+  '╚══════╝    ╚═╝      ╚═╝  ╚═╝    ╚═════╝   ╚═════╝   ╚═════╝   ╚══════╝',
 ] as const
 
-// 7-row × 5-col bitmaps. Each row is a 5-char string where '#'
-// is filled. Letters are joined left-to-right with a 1-col gap.
+// 7-row × 5-col bitmaps — kept for preview scripts and compact variants.
+// '#' = filled cell. Renderer in StartupScreen converts '#' to ANSI-colored spans.
 const FONT_7: Record<string, string[]> = {
   L: ['#    ', '#    ', '#    ', '#    ', '#    ', '#    ', '#####'],
   Y: ['#   #', '#   #', ' # # ', '  #  ', '  #  ', '  #  ', '  #  '],
@@ -39,20 +31,13 @@ const FONT_7: Record<string, string[]> = {
   U: ['#   #', '#   #', '#   #', '#   #', '#   #', '#   #', ' ### '],
   D: ['#### ', '#   #', '#   #', '#   #', '#   #', '#   #', '#### '],
   N: ['#   #', '##  #', '# # #', '# # #', '#  ##', '#   #', '#   #'],
-  // ' ' (space) is a single-column spacer
   ' ': ['     '],
-  // '.' for optional dotted variants, 1-col wide
   '.': [' ', ' ', ' ', ' ', ' ', ' ', '##'],
 }
 
 const ROWS = 7
-const COLS = 5
 const GAP = 1
 
-/**
- * Render text using the 7-row font. Returns an array of ROWS strings,
- * each fully padded to `width` columns. Empty cells are ' '.
- */
 export function renderWordmark7(text: string): string[] {
   const lines: string[][] = Array.from({ length: ROWS }, () => [])
   for (let i = 0; i < text.length; i++) {
