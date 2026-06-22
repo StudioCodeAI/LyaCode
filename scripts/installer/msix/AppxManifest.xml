@@ -16,7 +16,7 @@ xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/re
 
   <Identity
     Name="StudioCodeAI.LyaCode"
-    Publisher="CN=Studio CodeAI"
+    Publisher="CN=01417B77-C5A9-404C-9F0B-FA0F17FBC808"
     Version="1.1.1.0"
     ProcessorArchitecture="x64" />
 
