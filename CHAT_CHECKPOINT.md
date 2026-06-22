@@ -1,30 +1,36 @@
-# CHAT CHECKPOINT — Lya Code (v1.0.8)
+# CHAT CHECKPOINT — Lya Code (v1.1.1)
 
-**Data:** 2026-06-20
-**Status Atual:** Transição de "Lya Cloud" para "Lya Code" concluída no código e nos repositórios GitHub.
+**Data:** 2026-06-21
+**Status Atual:** Hugging Face OAuth implementado e publicado. v1.1.1 no ar.
 
-## O que foi feito nesta sessão:
-1. **Renomeação Massiva (v1.0.5 a v1.0.8):** 
-   - Todo o repositório foi varrido. Referências de `lyacloud` foram alteradas para `lyacode`.
-   - Arquivos, binários, ícones, `.ps1`, `.sed` e `.cmd` foram renomeados.
-   - O nome do projeto agora é **Lya Code**.
-   - O `package.json` foi atualizado para `@studiocodeai/lyacode`.
-2. **Banner de Inicialização:**
-   - Desenhado um banner customizado em 5 linhas usando blocos ANSI sólidos (`█`).
-   - O wordmark foi corrigido para suportar maiúsculas e minúsculas corretas ("Lya Code") mantendo a estética visual 60% menor semelhante ao OpenClaude.
-3. **GitHub Actions:**
-   - O arquivo `.github/workflows/release.yml` foi atualizado para apontar para `LyaCode-installers`.
+## O que foi feito nesta sessão
 
-## Renomeação GitHub Concluída
-Os repositórios foram renomeados no GitHub e o `origin` local foi atualizado.
-- `StudioCodeAI/lyacloud` agora é `StudioCodeAI/LyaCode`.
-- `StudioCodeAI/lyacloud-installers` agora é `StudioCodeAI/LyaCode-installers`.
-- `origin` local agora aponta para `https://github.com/StudioCodeAI/LyaCode.git`.
+1. **Auditoria completa** — typecheck, testes (4635/4636 pass), deadcode, doctor, segurança
+2. **Hugging Face OAuth** — `/onboard-huggingface`, device flow, secure storage, 7 modelos curados
+3. **Reordenação de providers** — Ollama e Hugging Face no topo, Gitlawb Opengateway no fim
+4. **12 correções de teste** — StartupScreen, ProviderManager, compatibility, registry, npmUpdateCheck
+5. **README** — nova seção "Comece gratis" (GitHub + Hugging Face + Ollama)
+6. **Release v1.1.1** — `.tgz` + `.zip` no LyaCode-installers
 
-## Próximos Passos para a Próxima Sessão:
-- [ ] Publicar ou republicar a release `v1.0.8` no repositório `LyaCode-installers`; a API do GitHub ainda mostra `v1.0.7` como release pública mais recente.
-- [ ] Testar a instalação da `v1.0.8` baixando o pacote `.tgz` do novo repositório `LyaCode-installers`.
-- [ ] Retomar o desenvolvimento de novas features no Lya Code de acordo com o roadmap da Studio CodeAI.
+## Pendente para próxima sessão
+
+- [ ] Instalar WiX/MSIX/7-Zip para gerar `.exe` / `.msi` / `.msix`
+- [ ] `bun update` (26 vulnerabilidades — 1 critica shell-quote, 9 high)
+- [ ] Prompt caching Anthropic (cache_control ephemeral)
+- [ ] Auditar memory leaks (listeners/intervals)
+- [ ] Remover stub obsoleto `src/commands/plan/index` do ACCEPTABLE_RUNTIME_STUBS
+- [ ] Feature: node-llama-cpp (IA local embutida, sem Ollama)
+- [ ] Feature: `/onboard-vertex` (Google Cloud OAuth via gcloud)
+
+## Comandos de validação
+```powershell
+cd E:\GitHub\LyaCode
+bun run typecheck && bun run smoke && bun run integrations:check && bun test
+```
+
+## Links
+- Release: https://github.com/StudioCodeAI/LyaCode-installers/releases/tag/v1.1.1
+- Código: https://github.com/StudioCodeAI/LyaCode
 
 ---
-> **Nota para o Agente:** Ao iniciar uma nova sessão, leia este arquivo para entender o contexto exato onde paramos. Não tente desfazer o rename para `lyacode` no pacote/binário; os repositórios canônicos agora são `StudioCodeAI/LyaCode` e `StudioCodeAI/LyaCode-installers`.
+> **Nota para o Agente:** Leia este arquivo e `C:\Gemini\MASTER\PROJETOS\SESSAO_RESUMO.md` ao iniciar. Proveedor livre e principal já está no topo: Ollama → Hugging Face → Anthropic. Não desfaça a reordenação.
