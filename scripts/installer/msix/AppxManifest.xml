@@ -21,7 +21,7 @@ xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/re
     ProcessorArchitecture="x64" />
 
   <Properties>
-    <DisplayName>Lya Code</DisplayName>
+    <DisplayName>LyaCode</DisplayName>
     <PublisherDisplayName>Studio CodeAI</PublisherDisplayName>
     <Description>CLI agentic terminal da Studio CodeAI — Star 1 da familia</Description>
     <Logo>Assets\StoreLogo.png</Logo>
