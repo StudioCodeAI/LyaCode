@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Lya Code — Windows MSI Installer (WiX v3, perUser)
+  Luis Cardozo — Studio CodeAI
+
+  Build:
+    candle.exe scripts\installer\windows\lyacode.wxs -out dist\installer\lyacode.wixobj -arch x64
+    light.exe dist\installer\lyacode.wixobj -ext WixUIExtension -b scripts\installer\windows -b dist\installer\lyacode-portable-1.1.1 -out dist\installer\lyacode-setup-x64-1.1.1.msi -sice:ICE91 -spdb
+-->
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product
+    Id="*"
+    Name="Lya Code"
+    Language="1046"
+    Version="1.1.1.0"
+    Manufacturer="Studio CodeAI"
+    UpgradeCode="3F7C9A2B-E14D-4B88-A035-8D6F1C0E5A23">
+
+    <Package
+      InstallerVersion="301"
+      Compressed="yes"
+      InstallScope="perUser"
+      Description="Lya Code — CLI agentic terminal da Studio CodeAI"
+      Manufacturer="Studio CodeAI"
+      Platform="x64" />
+
+    <MajorUpgrade
+      DowngradeErrorMessage="Uma versao mais nova do Lya Code ja esta instalada." />
+
+    <MediaTemplate EmbedCab="yes" />
+
+    <!-- ================================================================
+         Directory layout: %LOCALAPPDATA%\StudioCodeAI\Lya Code\
+         ================================================================ -->
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="LocalAppDataFolder">
+        <Directory Id="StudioCodeAIDir" Name="StudioCodeAI">
+          <Directory Id="INSTALLFOLDER" Name="Lya Code" />
+        </Directory>
+      </Directory>
+    </Directory>
+
+    <!-- ================================================================
+         Components
+         ICE38: perUser installs to profile must use HKCU registry as KeyPath
+         ICE64: directories in profile need RemoveFile entries
+         ================================================================ -->
+    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+
+      <!-- Main component: uses HKCU registry key as KeyPath (ICE38 fix) -->
+      <Component Id="RegistryEntries" Guid="A1B2C3D4-E5F6-7A8B-9C0D-E1F2A3B4C5D6">
+        <RegistryKey Root="HKCU" Key="Software\StudioCodeAI\LyaCode">
+          <RegistryValue Name="Version" Value="1.1.1" Type="string" KeyPath="yes" />
+          <RegistryValue Name="InstallDir" Value="[INSTALLFOLDER]" Type="string" />
+        </RegistryKey>
+        <!-- Remove directories on uninstall (ICE64 fix) -->
+        <RemoveFolder Id="RemoveInstallFolder" Directory="INSTALLFOLDER" On="uninstall" />
+        <RemoveFolder Id="RemoveStudioDir" Directory="StudioCodeAIDir" On="uninstall" />
+      </Component>
+
+      <Component Id="Tarball" Guid="E5F6A7B8-C9D0-1E2F-3A4B-C5D6E7F8A9B0">
+        <RegistryValue Root="HKCU" Key="Software\StudioCodeAI\LyaCode" Name="Tarball" Value="1" Type="string" KeyPath="yes" />
+        <File Id="TarballFile" Source="studiocodeai-lyacode-1.1.1.tgz" />
+      </Component>
+
+      <Component Id="InstallScript" Guid="F6A7B8C9-D0E1-2F3A-4B5C-D6E7F8A9B0C1">
+        <RegistryValue Root="HKCU" Key="Software\StudioCodeAI\LyaCode" Name="Script" Value="1" Type="string" KeyPath="yes" />
+        <File Id="InstallPS1" Source="install.ps1" />
+      </Component>
+
+      <Component Id="InstallLauncher" Guid="A7B8C9D0-E1F2-3A4B-5C6D-E7F8A9B0C1D2">
+        <RegistryValue Root="HKCU" Key="Software\StudioCodeAI\LyaCode" Name="Launcher" Value="1" Type="string" KeyPath="yes" />
+        <File Id="InstallCmd" Source="install.cmd" />
+      </Component>
+
+      <Component Id="LicenseFile" Guid="B8C9D0E1-F2A3-4B5C-6D7E-F8A9B0C1D2E3">
+        <RegistryValue Root="HKCU" Key="Software\StudioCodeAI\LyaCode" Name="License" Value="1" Type="string" KeyPath="yes" />
+        <File Id="LicenseRtf" Source="LICENSE.rtf" />
+      </Component>
+
+    </ComponentGroup>
+
+    <!-- ================================================================
+         Custom actions — JScript to run install.ps1 after files land
+         JScript kept short to avoid ICE03 column overflow
+         ================================================================ -->
+
+    <!-- Immediate: capture install dir into CustomActionData for deferred action -->
+    <CustomAction Id="SetInstallData"
+                  Property="RunInstallScript"
+                  Value="[INSTALLFOLDER]"
+                  Execute="immediate" />
+
+    <!-- Deferred JScript: read CustomActionData and shell out to powershell -->
+    <CustomAction Id="RunInstallScript"
+                  Script="jscript"
+                  Execute="deferred"
+                  Return="ignore"
+                  Impersonate="yes">
+      <![CDATA[
+var d=Session.Property("CustomActionData");
+if(d.slice(-1)!='\\')d+='\\';
+(new ActiveXObject("WScript.Shell")).Run('powershell.exe -NoProfile -ExecutionPolicy Bypass -File "'+d+'install.ps1" -Tarball "'+d+'studiocodeai-lyacode-1.1.1.tgz"',1,true);
+      ]]>
+    </CustomAction>
+
+    <!-- Uninstall: remove global npm package -->
+    <CustomAction Id="RunUninstallScript"
+                  Script="jscript"
+                  Execute="deferred"
+                  Return="ignore"
+                  Impersonate="yes">
+      <![CDATA[
+(new ActiveXObject("WScript.Shell")).Run('cmd.exe /c npm uninstall -g @studiocodeai/lyacode',0,true);
+      ]]>
+    </CustomAction>
+
+    <!-- ================================================================
+         Sequences
+         ================================================================ -->
+    <InstallExecuteSequence>
+      <Custom Action="SetInstallData" After="InstallInitialize">NOT Installed</Custom>
+      <Custom Action="RunInstallScript" After="InstallFiles">NOT Installed</Custom>
+      <Custom Action="RunUninstallScript" Before="RemoveFiles">REMOVE~="ALL"</Custom>
+    </InstallExecuteSequence>
+
+    <!-- ================================================================
+         Feature + UI
+         ================================================================ -->
+    <Feature Id="ProductFeature" Title="Lya Code" Level="1">
+      <ComponentGroupRef Id="ProductComponents" />
+    </Feature>
+
+    <UI>
+      <UIRef Id="WixUI_Minimal" />
+    </UI>
+    <WixVariable Id="WixUILicenseRtf" Value="LICENSE.rtf" />
+
+  </Product>
+</Wix>

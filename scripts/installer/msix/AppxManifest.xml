@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Lya Code — MSIX Package Manifest
+  Luis Cardozo — Studio CodeAI
+
+  Build:
+    makeappx pack /d dist\installer\msix-staging /p dist\installer\lyacode-1.1.1.msix /nv
+  Sign (requires cert):
+    signtool sign /fd SHA256 /a dist\installer\lyacode-1.1.1.msix
+-->
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
+  IgnorableNamespaces="uap rescap">
+
+  <Identity
+    Name="StudioCodeAI.LyaCode"
+    Publisher="CN=Studio CodeAI"
+    Version="1.1.1.0"
+    ProcessorArchitecture="x64" />
+
+  <Properties>
+    <DisplayName>Lya Code</DisplayName>
+    <PublisherDisplayName>Studio CodeAI</PublisherDisplayName>
+    <Description>CLI agentic terminal da Studio CodeAI — Star 1 da familia</Description>
+    <Logo>Assets\StoreLogo.png</Logo>
+  </Properties>
+
+  <Dependencies>
+    <TargetDeviceFamily
+      Name="Windows.Desktop"
+      MinVersion="10.0.17763.0"
+      MaxVersionTested="10.0.26100.0" />
+  </Dependencies>
+
+  <Resources>
+    <Resource Language="pt-BR" />
+    <Resource Language="en-US" />
+  </Resources>
+
+  <Applications>
+    <Application
+      Id="LyaCodeSetup"
+      Executable="lyacode-setup.exe"
+      EntryPoint="Windows.FullTrustApplication">
+      <uap:VisualElements
+        DisplayName="Lya Code"
+        Description="CLI agentic terminal da Studio CodeAI"
+        BackgroundColor="#0D1117"
+        Square150x150Logo="Assets\Square150x150Logo.png"
+        Square44x44Logo="Assets\Square44x44Logo.png">
+        <uap:DefaultTile
+          Wide310x150Logo="Assets\Wide310x150Logo.png"
+          ShortName="Lya Code" />
+        <uap:SplashScreen Image="Assets\SplashScreen.png" />
+      </uap:VisualElements>
+    </Application>
+  </Applications>
+
+  <Capabilities>
+    <rescap:Capability Name="runFullTrust" />
+  </Capabilities>
+
+</Package>

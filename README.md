@@ -90,20 +90,24 @@ irm https://raw.githubusercontent.com/StudioCodeAI/LyaCode-installers/main/quick
 npm install -g @studiocodeai/lyacode@latest
 ```
 
-### Windows Portable
+### Windows — Instaladores prontos
 
-Baixe `lyacode-portable-<versao>.zip` em [LyaCode-installers/releases](https://github.com/StudioCodeAI/LyaCode-installers/releases/latest),
-extraia e execute `install.cmd`.
+| Formato | Download | Quando usar |
+|---------|----------|-------------|
+| `.exe` | [lyacode-setup-x64-1.1.1.exe](https://github.com/StudioCodeAI/LyaCode-installers/releases/download/v1.1.1/lyacode-setup-x64-1.1.1.exe) | Instalador padrao Windows (recomendado) |
+| `.msi` | [lyacode-setup-x64-1.1.1.msi](https://github.com/StudioCodeAI/LyaCode-installers/releases/download/v1.1.1/lyacode-setup-x64-1.1.1.msi) | Deploy corporativo / GPO / Intune |
+| `.msix` | [lyacode-1.1.1.msix](https://github.com/StudioCodeAI/LyaCode-installers/releases/download/v1.1.1/lyacode-1.1.1.msix) | Microsoft Store / sideload MSIX |
+| `.zip` | [lyacode-portable-1.1.1.zip](https://github.com/StudioCodeAI/LyaCode-installers/releases/download/v1.1.1/lyacode-portable-1.1.1.zip) | Portable — extraia e execute `install.cmd` |
+| `.tgz` | [studiocodeai-lyacode-1.1.1.tgz](https://github.com/StudioCodeAI/LyaCode-installers/releases/download/v1.1.1/studiocodeai-lyacode-1.1.1.tgz) | npm / Linux / macOS |
 
-### Windows Installer
+> Todos os instaladores requerem Node.js `>=22.0.0`. Baixe em [nodejs.org](https://nodejs.org/dist/latest-v22.x/).
 
-Baixe `lyacode-setup-x64-<versao>.exe` em [LyaCode-installers/releases](https://github.com/StudioCodeAI/LyaCode-installers/releases/latest)
-e execute o instalador.
+> O arquivo `.msix` ainda aguarda assinatura Authenticode para submissao na Microsoft Store oficial.
 
 ### Versao especifica via tgz
 
 ```bash
-npm install -g https://github.com/StudioCodeAI/LyaCode-installers/releases/download/v1.1.0/studiocodeai-lyacode-1.1.0.tgz
+npm install -g https://github.com/StudioCodeAI/LyaCode-installers/releases/download/v1.1.1/studiocodeai-lyacode-1.1.1.tgz
 ```
 
 ---
@@ -116,7 +120,7 @@ lyacode --version
 lscode --version
 ```
 
-Todos os aliases apontam para o mesmo binario. Esperado: `1.0.9 (Lya Code)`.
+Todos os aliases apontam para o mesmo binario. Esperado: `1.1.1 (Lya Code)`.
 
 ---
 
