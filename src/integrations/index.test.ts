@@ -66,6 +66,17 @@ describe('loaded registry validation', () => {
       // Virtual model — the gateway's smart router resolves it server-side,
       // so there is no concrete model descriptor to reference.
       'gitlawb-opengateway:opengateway-auto',
+      // Hugging Face Inference Providers router returns its own model list
+      // via OpenAI-compatible /models discovery; the curated entries below
+      // are convenience defaults whose real model ids come from the router,
+      // not from shared brand-level model descriptors.
+      'huggingface:hf-llama-3.3-70b',
+      'huggingface:hf-qwen2.5-coder-32b',
+      'huggingface:hf-qwen2.5-72b',
+      'huggingface:hf-deepseek-v3',
+      'huggingface:hf-mistral-small-3',
+      'huggingface:hf-phi-4',
+      'huggingface:hf-llama-3.1-8b',
     ])
     const missingDescriptors = getAllGateways().flatMap(gateway =>
       (gateway.catalog?.models ?? [])

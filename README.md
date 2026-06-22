@@ -15,7 +15,7 @@ Abra qualquer projeto no terminal e trabalhe com Lya: uma IA que le codigo,
 edita arquivos, executa comandos e apoia tarefas de engenharia do inicio ao fim.
 Suporta provedores cloud e locais por meio de um perfil unificado.
 
-[![Version](https://img.shields.io/badge/source-1.1.0-orange?style=flat-square)](./package.json)
+[![Version](https://img.shields.io/badge/source-1.1.1-orange?style=flat-square)](./package.json)
 [![License](https://img.shields.io/badge/license-Proprietary-red?style=flat-square)](./LICENSE)
 [![Node](https://img.shields.io/badge/node-%3E%3D22.0.0-green?style=flat-square)](https://nodejs.org)
 [![Studio CodeAI](https://img.shields.io/badge/Studio-CodeAI-ff7a1a?style=flat-square)](https://github.com/StudioCodeAI)
@@ -38,6 +38,41 @@ Principais capacidades:
 - **Agentes especializados** — time Lya com 8 sub-agentes (arquiteto, explorador, revisor, testador, recorder, memoria, provedor)
 - **Sessoes em segundo plano** — tarefas longas rodando sem bloquear o terminal
 - **Extensao VS Code** — lancamento e integracao com tema Studio CodeAI
+
+---
+
+## Comece gratis — sem API key, sem cartao
+
+O Lya Code e o unico CLI agentic com **2 provedores gratuitos via login social**:
+
+### GitHub Copilot (21 modelos, OAuth)
+
+```bash
+lya
+/onboard-github
+```
+
+> Faz login com sua conta GitHub no browser, autoriza, e acessa GPT-5.5, Claude Sonnet 4.6,
+> Gemini 3.1 Pro, Grok Code Fast e mais — tudo **zero custo para contas GitHub**.
+
+### Hugging Face (centenas de modelos open-source, OAuth)
+
+```bash
+lya
+/onboard-huggingface
+```
+
+> Login social com Hugging Face. Acesse Llama 3.3 70B, Qwen2.5 Coder 32B, DeepSeek V3,
+> Mistral Small 3.1 e muitos outros modelos via Inference Providers — **free tier de
+> ~1k requisicoes/dia por conta HF**.
+
+### Ou use Ollama local (100% offline, zero login)
+
+```bash
+olla serve          # em outro terminal
+lya
+/provider           # seleciona "Ollama"
+```
 
 ---
 
@@ -92,9 +127,11 @@ Todos os aliases apontam para o mesmo binario. Esperado: `1.0.9 (Lya Code)`.
 lya
 
 # Dentro da sessao interativa
-/provider     # configurar provedor de IA (Anthropic, Ollama, Gemini...)
-/lya          # ativar a persona Lya (engenheira senior Studio CodeAI)
-/help         # listar todos os comandos disponiveis
+/onboard-github       # login com GitHub — 21 modelos gratis
+/onboard-huggingface  # login com Hugging Face — modelos open-source gratis
+/provider             # configurar qualquer provedor de IA
+/lya                  # ativar a persona Lya (engenheira senior Studio CodeAI)
+/help                 # listar todos os comandos disponiveis
 ```
 
 ### Sessoes em segundo plano
@@ -187,7 +224,7 @@ Quando alterar comportamento de provedor, consulte primeiro
 | Pacote npm | `@studiocodeai/lyacode` |
 | Binario canonico | `lyacode` |
 | Aliases | `lya`, `lscode` |
-| Versao atual | **v1.1.0** |
+| Versao atual | **v1.1.1** |
 
 ---
 

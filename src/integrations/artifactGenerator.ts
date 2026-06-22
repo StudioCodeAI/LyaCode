@@ -233,19 +233,31 @@ function compareProviderPresetEntries(
     return 0
   }
 
-  // Pin Gitlawb Opengateway first so the startup-default provider is also
-  // the first guided setup option when users need to add an API key.
-  if (leftPreset === 'gitlawb-opengateway') {
+  // Pin free-tier / OAuth providers at the top so they are the first guided
+  // setup options when users need to pick a provider. Order:
+  //   1. ollama              (100% local, no signup)
+  //   2. huggingface         (OAuth device flow, free inference tier)
+  //   3. github              (OAuth device flow, 21 Copilot models free)
+  //   4. github-enterprise   (OAuth device flow for GHE)
+  //   5. anthropic           (native Claude API)
+  // Remaining presets fall back to description-based collation, with `custom`
+  // and `gitlawb-opengateway` pinned to the very end.
+  const PINNED_TOP: ReadonlyArray<[string, number]> = [
+    ['ollama', 0],
+    ['huggingface', 1],
+    ['github', 2],
+    ['github-enterprise', 3],
+    ['anthropic', 4],
+  ]
+  const leftTopRank = PINNED_TOP.find(([p]) => p === leftPreset)?.[1]
+  const rightTopRank = PINNED_TOP.find(([p]) => p === rightPreset)?.[1]
+  if (leftTopRank !== undefined && rightTopRank !== undefined) {
+    return leftTopRank - rightTopRank
+  }
+  if (leftTopRank !== undefined) {
     return -1
   }
-  if (rightPreset === 'gitlawb-opengateway') {
-    return 1
-  }
-
-  if (leftPreset === 'anthropic') {
-    return -1
-  }
-  if (rightPreset === 'anthropic') {
+  if (rightTopRank !== undefined) {
     return 1
   }
 
@@ -253,6 +265,13 @@ function compareProviderPresetEntries(
     return 1
   }
   if (rightPreset === 'custom') {
+    return -1
+  }
+
+  if (leftPreset === 'gitlawb-opengateway') {
+    return 1
+  }
+  if (rightPreset === 'gitlawb-opengateway') {
     return -1
   }
 

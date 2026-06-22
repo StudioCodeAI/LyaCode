@@ -107,7 +107,7 @@ function setupOpenAIMode(baseUrl: string, model: string): void {
 }
 
 describe('printStartupScreen logo', () => {
-  test('renders the Lya Code wordmark (7-row bold, L+C uppercase, no dot, orange gradient)', () => {
+  test('renders the Lya Code wordmark (ANSI Shadow, LYA CODE uppercase, orange gradient)', () => {
     ;(globalThis as Record<string, unknown>).MACRO = { VERSION: 'test-version' }
     Object.defineProperty(process.stdout, 'isTTY', {
       configurable: true,
@@ -123,33 +123,32 @@ describe('printStartupScreen logo', () => {
     printStartupScreen()
 
     const plainOutput = stripAnsi(output)
-    expect(plainOutput).not.toContain('CLAUDE')
-    expect(plainOutput).not.toContain('███████╗')
-
-    // Wordmark is Open Claude style: 7 rows of block letters (wider
-    // + taller, double-stroke outline) painted with a horizontal
-    // orange gradient. The wordmark sits between the leading blank
-    // line (index 0) and the tagline that follows.
+    // Wordmark is ANSI Shadow style: 6 rows of bold block letters
+    // (█ for body, box-drawing chars for outline) painted with a
+    // horizontal orange gradient. The wordmark sits between the
+    // leading blank line (index 0) and the tagline that follows.
     const lines = plainOutput.split('\n')
-    const wordmarkLines = lines.slice(1, 8)
-    expect(wordmarkLines.length).toBe(7)
+    const wordmarkLines = lines.slice(1, 7)
+    expect(wordmarkLines.length).toBe(6)
     for (const line of wordmarkLines) {
-      expect(line).toMatch(/#+/)
+      // Every wordmark row uses full blocks (█) and/or box-drawing chars.
+      expect(line).toMatch(/[█╔═╗║╚╝]/)
     }
 
-    // Bottom row of "Lya Code" must contain the baseline of every
-    // letter (L=#########, l=#########, a=###### #, space, C=#######,
-    // l=#########, o=#####, u=#####, d=####### #) at column positions
-    // matching the font bitmap (9 cols wide).
-    const baseline = wordmarkLines[6]
-    expect(baseline).toContain('#########') // L (uppercase)
-    expect(baseline).toContain('#########') // l (lowercase)
-    expect(baseline).toContain('###### #') // a (lowercase a)
-    expect(baseline).toContain('#######')  // C (uppercase)
-    expect(baseline).toContain('#########') // l
-    expect(baseline).toContain('#####')     // o
-    expect(baseline).toContain('#####')     // u
-    expect(baseline).toContain('####### #') // d (lowercase d)
+    // First row of the ANSI Shadow wordmark must contain the top of
+    // every letter of "LYA CODE": L, Y, A, space, C, O, D, E.
+    // The exact ANSI Shadow pattern is defined in wordmark.ts and is
+    // intentionally stable so we assert against it directly.
+    const topRow = wordmarkLines[0]
+    expect(topRow).toContain('██╗')        // L top
+    expect(topRow).toContain('█████╗')     // Y / O / D tops (shared pattern)
+    expect(topRow).toContain('██████╗')    // A / O / D tops (wider letters)
+
+    // Bottom row must contain the baseline of every letter.
+    const baseline = wordmarkLines[5]
+    expect(baseline).toContain('╚══════╝') // L / E baseline
+    expect(baseline).toContain('╚═════╝')  // Y / O baseline
+    expect(baseline).toContain('╚══════╝') // A / D baseline
   })
 })
 

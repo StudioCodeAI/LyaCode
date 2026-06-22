@@ -8,6 +8,10 @@ import { createRoot } from '../ink.js'
 import { KeybindingSetup } from '../keybindings/KeybindingProviderSetup.js'
 import { AppStateProvider } from '../state/AppState.js'
 import {
+  ORDERED_PROVIDER_PRESETS,
+  getProviderPresetUiMetadata,
+} from '../integrations/providerUiMetadata.js'
+import {
   acquireSharedMutationLock,
   releaseSharedMutationLock,
 } from '../test/sharedMutationLock.js'
@@ -101,52 +105,43 @@ async function waitForCondition(
   throw new Error('Timed out waiting for ProviderManager test condition')
 }
 
-// Provider list is sorted from generated preset metadata by description, with
-// Gitlawb Opengateway pinned first, Codex OAuth injected after DeepSeek, and
-// Custom always pinned last. Keep the target-by-label indirection here so
-// these tests survive future list edits without hardcoding raw key counts.
+// Provider list is derived from the same generated manifest that
+// ProviderManager.renderPresetSelection() consumes, so these tests
+// survive future preset reorderings without hardcoding raw indices.
 //
-// Order matches ProviderManager.renderPresetSelection() when
-// canUseCodexOAuth === true (default in mocked tests).
-const PRESET_ORDER = [
-  'Gitlawb Opengateway',
-  'Anthropic',
-  'Alibaba Coding Plan (China)',
-  'Alibaba Coding Plan',
-  'Atlas Cloud',
-  'Azure OpenAI',
-  'Bankr',
-  'DeepSeek',
-  'Codex OAuth',
-  'xAI OAuth (Grok)',
-  'Fireworks AI',
-  'Google Gemini',
-  'Groq',
-  'Hicap',
-  'LM Studio',
-  'Atomic Chat',
-  'Ollama',
-  'MiniMax',
-  'Mistral AI',
-  'Moonshot AI - API',
-  'Moonshot AI - Kimi Code',
-  'NEAR AI',
-  'NVIDIA NIM',
-  'OpenAI',
-  'OpenCode Go',
-  'OpenCode Zen',
-  'OpenRouter',
-  'Together AI',
-  'Venice',
-  'xAI',
-  'Xiaomi MiMo',
-  'Z.AI - GLM Coding Plan',
-  'Custom',
-] as const
+// `canUseCodexOAuth` and `canUseXaiOAuth` default to true in mocked
+// tests (non-bare mode), so Codex OAuth is injected after DeepSeek
+// and xAI OAuth directly under it, exactly like the component does.
+const PRESET_ORDER = (() => {
+  const labels: string[] = []
+  for (const preset of ORDERED_PROVIDER_PRESETS) {
+    const metadata = getProviderPresetUiMetadata(preset)
+    const baseLabel = metadata.label ?? metadata.name ?? preset
+    if (metadata.badge) {
+      const badgeText = metadata.badge.text
+      if (badgeText.toLowerCase() === 'recommended') {
+        labels.push(`${baseLabel} ★ Recommended`)
+      } else {
+        labels.push(`${baseLabel} [${badgeText}]`)
+      }
+    } else {
+      labels.push(baseLabel)
+    }
+  }
+
+  // Inject Codex OAuth after DeepSeek (mirrors renderPresetSelection).
+  const deepseekIdx = labels.findIndex((_, i) => ORDERED_PROVIDER_PRESETS[i] === 'deepseek')
+  const oauthInsert = deepseekIdx >= 0 ? deepseekIdx + 1 : labels.length
+  labels.splice(oauthInsert, 0, 'Codex OAuth ★ Recommended')
+  // xAI OAuth directly under Codex OAuth.
+  labels.splice(oauthInsert + 1, 0, 'xAI OAuth (Grok)')
+
+  return labels as readonly string[]
+})()
 
 async function navigateToPreset(
   stdin: { write: (data: string) => void },
-  label: (typeof PRESET_ORDER)[number],
+  label: string,
 ): Promise<void> {
   const index = PRESET_ORDER.indexOf(label)
   if (index < 0) throw new Error(`Unknown preset label: ${label}`)
@@ -1469,7 +1464,7 @@ test('ProviderManager first-run Codex OAuth switches the current session after l
     frame => frame.includes('Set up provider') && frame.includes('Codex OAuth'),
   )
 
-  await navigateToPreset(mounted.stdin, 'Codex OAuth')
+  await navigateToPreset(mounted.stdin, 'Codex OAuth ★ Recommended')
   mounted.stdin.write('\r')
 
   await waitForCondition(() => onDone.mock.calls.length > 0)
@@ -1573,7 +1568,7 @@ test('ProviderManager first-run Codex OAuth surfaces credential storage warnings
     frame => frame.includes('Set up provider') && frame.includes('Codex OAuth'),
   )
 
-  await navigateToPreset(mounted.stdin, 'Codex OAuth')
+  await navigateToPreset(mounted.stdin, 'Codex OAuth ★ Recommended')
   mounted.stdin.write('\r')
 
   await waitForCondition(() => onDone.mock.calls.length > 0)
@@ -1663,7 +1658,7 @@ test('ProviderManager first-run Codex OAuth reports next-startup fallback when s
     frame => frame.includes('Set up provider') && frame.includes('Codex OAuth'),
   )
 
-  await navigateToPreset(mounted.stdin, 'Codex OAuth')
+  await navigateToPreset(mounted.stdin, 'Codex OAuth ★ Recommended')
   mounted.stdin.write('\r')
 
   await waitForCondition(() => onDone.mock.calls.length > 0)
@@ -1769,7 +1764,7 @@ test('ProviderManager does not hijack a manual Codex profile when OAuth credenti
     frame => frame.includes('Set up provider') && frame.includes('Codex OAuth'),
   )
 
-  await navigateToPreset(mounted.stdin, 'Codex OAuth')
+  await navigateToPreset(mounted.stdin, 'Codex OAuth ★ Recommended')
   mounted.stdin.write('\r')
 
   await waitForCondition(() => onDone.mock.calls.length > 0)

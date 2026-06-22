@@ -18,6 +18,7 @@ import { getGlobalConfig, saveGlobalConfig } from './config.js'
 import { isAutoUpdaterDisabled } from './config.js'
 import { ansiRgb, ANSI_RESET } from './terminalAnsi.js'
 import { logForDebugging } from './debug.js'
+import { createCombinedAbortSignal } from './combinedAbortSignal.js'
 
 declare const MACRO: { VERSION: string }
 
@@ -41,9 +42,12 @@ function semverGt(a: string, b: string): boolean {
 }
 
 async function fetchLatestNpmVersion(): Promise<string | null> {
+  const { signal, cleanup } = createCombinedAbortSignal(undefined, {
+    timeoutMs: 4000,
+  })
   try {
     const res = await fetch(NPM_REGISTRY_URL, {
-      signal: AbortSignal.timeout(4000),
+      signal,
       headers: { Accept: 'application/json' },
     })
     if (!res.ok) return null
@@ -51,6 +55,8 @@ async function fetchLatestNpmVersion(): Promise<string | null> {
     return data.version ?? null
   } catch {
     return null
+  } finally {
+    cleanup()
   }
 }
 
@@ -81,11 +87,11 @@ export async function checkNpmUpdateAndPrompt(): Promise<void> {
     logForDebugging('npmUpdateCheck: buscando versao no npm...')
     latestVersion = await fetchLatestNpmVersion()
     if (latestVersion) {
-      saveGlobalConfig({
+      saveGlobalConfig(() => ({
         ...config,
         lastNpmUpdateCheckTs: now,
         lastNpmUpdateVersion: latestVersion,
-      } as Parameters<typeof saveGlobalConfig>[0])
+      }))
     }
   }
 

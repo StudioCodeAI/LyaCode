@@ -27,6 +27,7 @@ import gatewayGithub from '../gateways/github.js'
 import gatewayGitlawbOpengateway from '../gateways/gitlawb-opengateway.js'
 import gatewayGroq from '../gateways/groq.js'
 import gatewayHicap from '../gateways/hicap.js'
+import gatewayHuggingface from '../gateways/huggingface.js'
 import gatewayKimiCode from '../gateways/kimi-code.js'
 import gatewayLmstudio from '../gateways/lmstudio.js'
 import gatewayMistral from '../gateways/mistral.js'
@@ -72,7 +73,7 @@ import modelXai from '../models/xai.js'
 import modelXiaomiMimo from '../models/xiaomi-mimo.js'
 
 export const VENDOR_DESCRIPTORS = [vendorAnthropic, vendorAtlasCloud, vendorBankr, vendorDeepseek, vendorFireworks, vendorGemini, vendorMinimax, vendorMoonshot, vendorNearai, vendorOpenai, vendorVenice, vendorXai, vendorXiaomiMimo, vendorZai] as const satisfies readonly VendorDescriptor[]
-export const GATEWAY_DESCRIPTORS = [gatewayAtomicChat, gatewayAzureOpenai, gatewayBedrock, gatewayCustom, gatewayDashscopeCn, gatewayDashscopeIntl, gatewayGithubEnterprise, gatewayGithub, gatewayGitlawbOpengateway, gatewayGroq, gatewayHicap, gatewayKimiCode, gatewayLmstudio, gatewayMistral, gatewayNvidiaNim, gatewayOllama, gatewayOpencodeGo, gatewayOpencode, gatewayOpenrouter, gatewayTogether, gatewayVertex] as const satisfies readonly GatewayDescriptor[]
+export const GATEWAY_DESCRIPTORS = [gatewayAtomicChat, gatewayAzureOpenai, gatewayBedrock, gatewayCustom, gatewayDashscopeCn, gatewayDashscopeIntl, gatewayGithubEnterprise, gatewayGithub, gatewayGitlawbOpengateway, gatewayGroq, gatewayHicap, gatewayHuggingface, gatewayKimiCode, gatewayLmstudio, gatewayMistral, gatewayNvidiaNim, gatewayOllama, gatewayOpencodeGo, gatewayOpencode, gatewayOpenrouter, gatewayTogether, gatewayVertex] as const satisfies readonly GatewayDescriptor[]
 export const ANTHROPIC_PROXY_DESCRIPTORS = [] as const satisfies readonly AnthropicProxyDescriptor[]
 export const BRAND_DESCRIPTORS = [brandClaude, brandDeepseek, brandFireworks, brandGemini, brandGlm, brandGpt, brandKimi, brandLlama, brandMinimax, brandMistral, brandNearai, brandNemotron, brandOpenaiCompatibleAlias, brandQwen, brandXai, brandXiaomiMimo] as const satisfies readonly BrandDescriptor[]
 export const MODEL_DESCRIPTOR_GROUPS = [modelClaude, modelDeepseek, modelFireworksMerged, modelGemini, modelGlm, modelGpt, modelKimi, modelLlama, modelMinimax, modelMistral, modelNearai, modelNemotron, modelOpenaiCompatibleAlias, modelOpencode, modelQwen, modelXai, modelXiaomiMimo] as const satisfies readonly (readonly ModelDescriptor[])[]
@@ -80,28 +81,28 @@ export const MODEL_DESCRIPTORS = MODEL_DESCRIPTOR_GROUPS.flat() satisfies readon
 
 export const PROVIDER_PRESET_MANIFEST = [
   {
-    "preset": "gitlawb-opengateway",
+    "preset": "ollama",
     "routeKind": "gateway",
-    "routeId": "gitlawb-opengateway",
+    "routeId": "ollama",
     "vendorId": "openai",
-    "gatewayId": "gitlawb-opengateway",
-    "description": "Gitlawb Opengateway - (API key required, signup at https://gitlawb.com/opengateway/keys)",
-    "label": "Gitlawb Opengateway",
-    "name": "Gitlawb Opengateway",
-    "apiKeyEnvVars": [
-      "OPENGATEWAY_API_KEY"
-    ],
-    "baseUrlEnvVars": [
-      "OPENGATEWAY_BASE_URL",
-      "OPENAI_BASE_URL"
-    ],
+    "gatewayId": "ollama",
+    "description": "Local or remote Ollama endpoint",
     "modelEnvVars": [
       "OPENAI_MODEL"
+    ]
+  },
+  {
+    "preset": "huggingface",
+    "routeKind": "gateway",
+    "routeId": "huggingface",
+    "vendorId": "openai",
+    "gatewayId": "huggingface",
+    "description": "Hugging Face Inference Providers router (OpenAI-compatible)",
+    "apiKeyEnvVars": [
+      "HF_TOKEN"
     ],
-    "fallbackBaseUrl": "https://opengateway.gitlawb.com/v1",
-    "fallbackModel": "mimo-v2.5-pro",
     "badge": {
-      "text": "Recommended",
+      "text": "Free",
       "color": "success"
     }
   },
@@ -258,17 +259,6 @@ export const PROVIDER_PRESET_MANIFEST = [
     "vendorId": "openai",
     "gatewayId": "atomic-chat",
     "description": "Local Model Provider",
-    "modelEnvVars": [
-      "OPENAI_MODEL"
-    ]
-  },
-  {
-    "preset": "ollama",
-    "routeKind": "gateway",
-    "routeId": "ollama",
-    "vendorId": "openai",
-    "gatewayId": "ollama",
-    "description": "Local or remote Ollama endpoint",
     "modelEnvVars": [
       "OPENAI_MODEL"
     ]
@@ -462,6 +452,32 @@ export const PROVIDER_PRESET_MANIFEST = [
     ]
   },
   {
+    "preset": "gitlawb-opengateway",
+    "routeKind": "gateway",
+    "routeId": "gitlawb-opengateway",
+    "vendorId": "openai",
+    "gatewayId": "gitlawb-opengateway",
+    "description": "Gitlawb Opengateway - (API key required, signup at https://gitlawb.com/opengateway/keys)",
+    "label": "Gitlawb Opengateway",
+    "name": "Gitlawb Opengateway",
+    "apiKeyEnvVars": [
+      "OPENGATEWAY_API_KEY"
+    ],
+    "baseUrlEnvVars": [
+      "OPENGATEWAY_BASE_URL",
+      "OPENAI_BASE_URL"
+    ],
+    "modelEnvVars": [
+      "OPENAI_MODEL"
+    ],
+    "fallbackBaseUrl": "https://opengateway.gitlawb.com/v1",
+    "fallbackModel": "mimo-v2.5-pro",
+    "badge": {
+      "text": "Recommended",
+      "color": "success"
+    }
+  },
+  {
     "preset": "custom",
     "routeKind": "gateway",
     "routeId": "custom",
@@ -486,6 +502,7 @@ export const PROVIDER_PRESET_MANIFEST = [
 export type ProviderPreset = (typeof PROVIDER_PRESET_MANIFEST)[number]['preset']
 export const ORDERED_PROVIDER_PRESETS = [
   "ollama",
+  "huggingface",
   "anthropic",
   "dashscope-cn",
   "dashscope-intl",
@@ -514,6 +531,6 @@ export const ORDERED_PROVIDER_PRESETS = [
   "xai",
   "xiaomi-mimo",
   "zai",
-  "custom",
-  "gitlawb-opengateway"
+  "gitlawb-opengateway",
+  "custom"
 ] as const

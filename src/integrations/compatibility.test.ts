@@ -19,6 +19,7 @@ const EXPECTED_PRESETS = [
   'atlas-cloud',
   'openai',
   'ollama',
+  'huggingface',
   'kimi-code',
   'moonshotai',
   'deepseek',
