@@ -2,6 +2,27 @@
 
 All notable Lya Code changes will be documented here.
 
+## v1.2.0 — 2026-06-24
+
+### Fixed
+
+- **MSIX self-contained (crash no lançamento)** — o `cli.mjs` externaliza pacotes
+  (`@orama/orama`, `@aws-sdk/*`, `sharp`, `@vscode/ripgrep`, etc.) que não eram embutidos
+  no bundle. O MSIX só levava `node.exe` + `cli.mjs`, sem `node_modules`, causando
+  `ERR_MODULE_NOT_FOUND` no boot interativo e reprovação na Microsoft Store (política
+  10.1.2.10). O build agora empacota o `node_modules` dos externals ao lado do `cli.mjs`.
+- **Thinking automático por modelo (Ollama)** — modelos sem a capability `thinking`
+  (ex.: Gemma) rejeitavam requisições com `reasoning_effort` (`400 "<model>" does not
+  support thinking`). Agora o LyaCode consulta `/api/show` do Ollama, cacheia as
+  capabilities e só envia reasoning quando o modelo suporta. Modelos de raciocínio
+  (deepseek-r1, qwen3, glm) continuam recebendo thinking normalmente.
+
+### Notes
+
+- **Acesso ao Claude por assinatura** — `/login` permite entrar com a conta Anthropic e
+  escolher entre **Claude Pro/Max (assinatura, sem API key)** ou **Anthropic Console
+  (cobrança por API)**. Disponível a qualquer momento, mesmo com Ollama ativo.
+
 ## v1.1.0 — 2026-06-20
 
 ### Added

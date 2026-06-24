@@ -1,29 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  Lya Code — MSIX Package Manifest
-  Luis Cardozo — Studio CodeAI
-
-  Build:
-    makeappx pack /d dist\installer\msix-staging /p dist\installer\lyacode-1.1.1.msix /nv
-  Sign (requires cert):
-    signtool sign /fd SHA256 /a dist\installer\lyacode-1.1.1.msix
--->
 <Package
   xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
-xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
-  IgnorableNamespaces="uap rescap">
+  xmlns:uap5="http://schemas.microsoft.com/appx/manifest/uap/windows10/5"
+  xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
+  IgnorableNamespaces="uap uap5 rescap">
 
   <Identity
     Name="StudioCodeAI.LyaCode"
     Publisher="CN=01417B77-C5A9-404C-9F0B-FA0F17FBC808"
-    Version="1.1.1.0"
+    Version="1.2.0.0"
     ProcessorArchitecture="x64" />
 
   <Properties>
     <DisplayName>LyaCode</DisplayName>
     <PublisherDisplayName>Studio CodeAI</PublisherDisplayName>
-    <Description>CLI agentic terminal da Studio CodeAI — Star 1 da familia</Description>
+    <Description>Terminal agentico de IA da Studio CodeAI — compativel com Claude, Gemini, GPT, Ollama e mais</Description>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
@@ -41,12 +33,12 @@ xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/re
 
   <Applications>
     <Application
-      Id="LyaCodeSetup"
+      Id="LyaCode"
       Executable="lyacode-setup.exe"
       EntryPoint="Windows.FullTrustApplication">
       <uap:VisualElements
         DisplayName="Lya Code"
-        Description="CLI agentic terminal da Studio CodeAI"
+        Description="Terminal agentico de IA da Studio CodeAI"
         BackgroundColor="#0D1117"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png">
@@ -55,6 +47,18 @@ xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/re
           ShortName="Lya Code" />
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
+      <Extensions>
+        <uap5:Extension
+          Category="windows.appExecutionAlias"
+          Executable="lyacode-setup.exe"
+          EntryPoint="Windows.FullTrustApplication">
+          <uap5:AppExecutionAlias>
+            <uap5:ExecutionAlias Alias="lyacode.exe" />
+            <uap5:ExecutionAlias Alias="lya.exe" />
+            <uap5:ExecutionAlias Alias="lscode.exe" />
+          </uap5:AppExecutionAlias>
+        </uap5:Extension>
+      </Extensions>
     </Application>
   </Applications>
 

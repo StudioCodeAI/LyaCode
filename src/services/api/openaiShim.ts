@@ -76,6 +76,7 @@ import {
   shouldAttemptLocalToollessRetry,
   type LocalFastPathConfig,
 } from './providerConfig.js'
+import { ollamaModelSupportsThinking } from '../../utils/model/ollamaCapabilities.js'
 import {
   buildOpenAICompatibilityErrorMessage,
   classifyOpenAIHttpFailure,
@@ -2423,7 +2424,17 @@ class OpenAIShimMessages {
      // or `?reasoning=<level>` query on the model string). OpenAI, Codex, and
      // most OpenAI-compatible endpoints read it from this top-level field.
     if (request.reasoning) {
-      body.reasoning_effort = request.reasoning.effort
+      // Ollama rejects reasoning for models that don't advertise the
+      // "thinking" capability (400 `"<model>" does not support thinking`).
+      // Probe + cache the model's capabilities and only emit reasoning_effort
+      // when the model actually supports it. Non-Ollama providers are
+      // unaffected (keep prior behavior).
+      const reasoningSupported =
+        !isLikelyOllamaEndpoint(request.baseUrl) ||
+        (await ollamaModelSupportsThinking(request.resolvedModel, request.baseUrl))
+      if (reasoningSupported) {
+        body.reasoning_effort = request.reasoning.effort
+      }
     }
     // Convert max_tokens to max_completion_tokens for OpenAI API compatibility.
     // Azure OpenAI requires max_completion_tokens and does not accept max_tokens.

@@ -6,7 +6,7 @@
 
 $ErrorActionPreference = "Stop"
 
-$VERSION       = "1.1.1"
+$VERSION       = "1.2.0"
 $REPO_ROOT     = Resolve-Path "$PSScriptRoot\..\.."
 $OUT_DIR       = "$REPO_ROOT\dist\installer"
 $WIN_DIR       = "$PSScriptRoot\windows"
@@ -127,29 +127,79 @@ if ($light.ExitCode -eq 0 -and (Test-Path $msiOut)) {
 }
 
 # ---------------------------------------------------------------------------
-# 3. Build .msix (makeappx)
+# 3. Build .msix (makeappx) — self-contained: node.exe + cli.mjs bundled
 # ---------------------------------------------------------------------------
-Step "3/4" "Building .msix (makeappx)"
+Step "3/4" "Building .msix (makeappx — self-contained)"
 
-$msixStaging = "$OUT_DIR\msix-staging"
-$msixOut     = "$OUT_DIR\lyacode-$VERSION.msix"
+$msixStaging  = "$OUT_DIR\msix-staging"
+$msixOut      = "$OUT_DIR\lyacode-$VERSION.msix"
+$launcherSrc  = "$MSIX_DIR\launcher.cs"
+$launcherExe  = "$MSIX_DIR\lyacode-setup.exe"
+$csc          = "C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe"
+$nodeExeSrc   = "C:\Program Files\nodejs\node.exe"
+$cliMjsSrc    = "$REPO_ROOT\dist\cli.mjs"
+
+# Validate prerequisites for MSIX build
+if (-not (Test-Path $csc))        { FAIL "csc.exe nao encontrado: $csc" }
+if (-not (Test-Path $nodeExeSrc)) { FAIL "node.exe nao encontrado: $nodeExeSrc" }
+if (-not (Test-Path $cliMjsSrc))  { FAIL "cli.mjs nao encontrado: $cliMjsSrc — rode: bun run build" }
+
+# Compile launcher.cs -> lyacode-setup.exe (launcher limpo, sem bootstrap externo)
+Write-Host "  Compilando launcher.cs..." -ForegroundColor Gray
+$cscResult = Start-Process $csc -ArgumentList @(
+  "/nologo", "/optimize+", "/target:winexe",
+  "/out:`"$launcherExe`"",
+  "`"$launcherSrc`""
+) -Wait -PassThru -NoNewWindow
+if ($cscResult.ExitCode -ne 0) { FAIL "csc.exe falhou (exit=$($cscResult.ExitCode))" }
+OK "launcher.cs compilado -> lyacode-setup.exe"
 
 # Prepare staging folder
 if (Test-Path $msixStaging) { Remove-Item $msixStaging -Recurse -Force }
 New-Item -ItemType Directory -Force -Path $msixStaging | Out-Null
 
 # Copy manifest and assets
-Copy-Item "$MSIX_DIR\AppxManifest.xml" "$msixStaging\"
-Copy-Item "$MSIX_DIR\Assets" "$msixStaging\Assets" -Recurse
+Copy-Item "$MSIX_DIR\AppxManifest.xml"   "$msixStaging\"
+Copy-Item "$MSIX_DIR\Assets"             "$msixStaging\Assets" -Recurse
 
-# Copy payload files
-Copy-Item "$PORTABLE_DIR\install.ps1"  "$msixStaging\"
-Copy-Item "$PORTABLE_DIR\install.cmd"  "$msixStaging\"
-Copy-Item "$PORTABLE_DIR\LICENSE.rtf"  "$msixStaging\"
-Copy-Item "$TARBALL"                   "$msixStaging\studiocodeai-lyacode-$VERSION.tgz"
-Copy-Item "$MSIX_DIR\lyacode-setup.exe" "$msixStaging\"
+# Payload: launcher + runtime (node.exe + cli.mjs) + license
+# Nao copia install.ps1 / install.cmd / .tgz — nao sao mais necessarios no MSIX
+Copy-Item "$launcherExe"  "$msixStaging\lyacode-setup.exe"
+Copy-Item "$nodeExeSrc"   "$msixStaging\node.exe"
+Copy-Item "$cliMjsSrc"    "$msixStaging\cli.mjs"
+Copy-Item "$WIN_DIR\LICENSE.rtf" "$msixStaging\"
 
-OK "Staging folder: $msixStaging"
+# CRITICO: cli.mjs externaliza pacotes (ver scripts/externals.ts COMMON_EXTERNALS)
+# que NAO sao embutidos no bundle. Sem eles no pacote, o cli.mjs crasha no boot
+# com ERR_MODULE_NOT_FOUND (ex: @orama/orama) => Store reprova em 10.1.2.10.
+# Monta o closure de node_modules dos externals e o coloca ao lado do cli.mjs.
+Write-Host "  Montando node_modules dos externals (COMMON_EXTERNALS)..." -ForegroundColor Gray
+$externals = @(
+  "@orama/orama@3.1.18", "@orama/plugin-data-persistence@3.1.18",
+  "@vscode/ripgrep@1.18.0", "sharp@0.34.5", "google-auth-library@9.15.1",
+  "@aws-sdk/client-bedrock@3.1047.0", "@aws-sdk/client-bedrock-runtime@3.1047.0",
+  "@aws-sdk/client-sts@3.1047.0", "@aws-sdk/credential-providers@3.1047.0",
+  "@azure/identity@latest"
+)
+$extDir = "$OUT_DIR\msix-externals"
+if (Test-Path $extDir) { Remove-Item $extDir -Recurse -Force }
+New-Item -ItemType Directory -Force -Path $extDir | Out-Null
+Set-Content "$extDir\package.json" '{ "name":"lya-externals","version":"1.0.0","private":true }'
+Push-Location $extDir
+& npm install --omit=dev --no-audit --no-fund @externals 2>&1 | Out-Null
+Pop-Location
+# @vscode/ripgrep nao baixa o binario via postinstall offline; traz do repo
+$rgRepo = "$REPO_ROOT\node_modules\@vscode\ripgrep-win32-x64"
+if (Test-Path $rgRepo) {
+  Copy-Item $rgRepo "$extDir\node_modules\@vscode\ripgrep-win32-x64" -Recurse -Force
+}
+if (-not (Test-Path "$extDir\node_modules\@vscode\ripgrep-win32-x64\bin\rg.exe")) {
+  FAIL "rg.exe ausente no closure — ripgrep nao resolveria no pacote"
+}
+Copy-Item "$extDir\node_modules" "$msixStaging\node_modules" -Recurse -Force
+
+$stagedFiles = (Get-ChildItem $msixStaging -Recurse -File).Count
+OK "Staging folder: $msixStaging ($stagedFiles arquivos, com node_modules dos externals)"
 
 # Run makeappx
 if (Test-Path $msixOut) { Remove-Item $msixOut -Force }
@@ -157,10 +207,10 @@ $makeArgs = @("pack", "/d", "`"$msixStaging`"", "/p", "`"$msixOut`"", "/nv", "/o
 $makeappxProc = Start-Process $MAKEAPPX -ArgumentList $makeArgs -Wait -PassThru -NoNewWindow
 if ($makeappxProc.ExitCode -eq 0 -and (Test-Path $msixOut)) {
   $size = [math]::Round((Get-Item $msixOut).Length / 1MB, 1)
-  OK "lyacode-$VERSION.msix ($size MB)"
-  WARN "MSIX is unsigned. Sign with signtool before submitting to the Store."
+  OK "lyacode-$VERSION.msix ($size MB) — self-contained (node.exe + cli.mjs bundled)"
+  WARN "MSIX nao assinado. Use signtool antes de submeter a Store."
 } else {
-  FAIL "makeappx failed (exit=$($makeappxProc.ExitCode))"
+  FAIL "makeappx falhou (exit=$($makeappxProc.ExitCode))"
 }
 
 # ---------------------------------------------------------------------------
